@@ -2,8 +2,9 @@ const router = require('express').Router()
 const { models: {
   User
 } } = require('../db')
+const bcrypt = require('bcrypt')
 
-// fetch all users
+// fetch all users - route works
 router.get('/', async (req, res, next) => {
   try {
     const users = await User.findAll({
@@ -18,36 +19,56 @@ router.get('/', async (req, res, next) => {
   }
 })
 
-// fetch single user
+// fetch single user - route works
 router.get('/:id', async (req, res, next) => {
   try {
-    const user = await User.findByPk(req.params.id)
-    res.json(user)
+    const user = await User.findByPk(req.params.id);
+    res.json(user);
   } catch (err) {
     next(err)
   }
 })
 
 // create user
-router.post('/', async (req, res, next) => {
+// router.post('/', async (req, res, next) => {
+//   try {
+//     const { username, password, firstName, lastName, email, isAdmin } = req.body;
+
+//     //hash the password
+//     const saltRounds = 10;
+//     const hashedPassword = await bcrypt.hash(password, saltRounds);
+
+//     const newUser = await User.create({
+//       username,
+//       password: hashedPassword,
+//       firstName,
+//       lastName,
+//       email,
+//       isAdmin
+//     });
+
+//     res.json(newUser);
+
+//   } catch (err) {
+//     next(err)
+//   }
+// })
+
+
+// update user
+router.put("/:id", async (req, res, next) => {
   try {
-    const user = await User.create(req.body)
-    res.json(user)
+    const user = await User.findByPk(req.params.id);
+    if (user) {
+      res.json(await user.update(req.body));
+    } else {
+      res.sendStatus(404);
+    }
   } catch (err) {
-    next(err)
+    next(err);
   }
 })
 
-// update user
-router.put('/:id', async (req, res, next) => {
-  try {
-    const user = await User.findByPk(req.params.id);
-    const updatedUser = await user.update(req.body);
-    res.json(updatedUser);
-  } catch (err) {
-    next(err)
-  }
-})
 
 // delete user
 router.delete('/:id', async (req, res, next) => {
