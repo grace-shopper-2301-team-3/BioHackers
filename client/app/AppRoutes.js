@@ -1,21 +1,22 @@
-import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { Route, Routes } from 'react-router-dom';
-import AuthForm from '../features/auth/AuthForm';
-import Home from '../features/home/Home';
-import { me } from './store';
+import React, { useEffect } from "react"
+import { useSelector, useDispatch } from "react-redux"
+import { Route, Routes } from "react-router-dom"
+import AuthForm from "../features/auth/AuthForm"
+import Home from "../features/home/Home"
+import AdminLayout from "../features/admin/AdminLayout"
+import { me } from "./store"
 
 /**
  * COMPONENT
  */
 
 const AppRoutes = () => {
-  const isLoggedIn = useSelector((state) => !!state.auth.me.id);
-  const dispatch = useDispatch();
+  const isLoggedIn = useSelector((state) => !!state.auth.me.id)
+  const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(me());
-  }, []);
+    dispatch(me())
+  }, [])
 
   return (
     <div>
@@ -38,10 +39,14 @@ const AppRoutes = () => {
             path="/signup"
             element={<AuthForm name="signup" displayName="Sign Up" />}
           />
+          <Route 
+            path="/admin" 
+            element={<AdminLayout name="admin" displayName="Admin" />}
+          />
         </Routes>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default AppRoutes;
+export default AppRoutes
