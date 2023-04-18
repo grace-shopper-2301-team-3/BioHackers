@@ -1,24 +1,24 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import { makeStyles } from '@material-ui/core/styles'
-import Drawer from '@material-ui/core/Drawer'
-import List from '@material-ui/core/List'
-import ListItem from '@material-ui/core/ListItem'
-import ListItemIcon from '@material-ui/core/ListItemIcon'
-import ListItemText from '@material-ui/core/ListItemText'
-import HomeRoundedIcon from '@mui/icons-material/HomeRounded'
-import InsightsRoundedIcon from '@mui/icons-material/InsightsRounded'
-import MonetizationOnRoundedIcon from '@mui/icons-material/MonetizationOnRounded'
-import Inventory2RoundedIcon from '@mui/icons-material/Inventory2Rounded'
-import AccountCircleRoundedIcon from '@mui/icons-material/AccountCircleRounded'
-import CreditCardRoundedIcon from '@mui/icons-material/CreditCardRounded'
-import DiscountRoundedIcon from '@mui/icons-material/DiscountRounded'
+import React from "react";
+import { Link } from "react-router-dom";
+import { makeStyles } from "@material-ui/core/styles";
+import Drawer from "@material-ui/core/Drawer";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import ListItemText from "@material-ui/core/ListItemText";
+import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
+import InsightsRoundedIcon from "@mui/icons-material/InsightsRounded";
+import MonetizationOnRoundedIcon from "@mui/icons-material/MonetizationOnRounded";
+import Inventory2RoundedIcon from "@mui/icons-material/Inventory2Rounded";
+import AccountCircleRoundedIcon from "@mui/icons-material/AccountCircleRounded";
+import CreditCardRoundedIcon from "@mui/icons-material/CreditCardRounded";
+import DiscountRoundedIcon from "@mui/icons-material/DiscountRounded";
 
-const drawerWidth = 240
+const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    display: 'flex',
+    display: "flex",
   },
   drawer: {
     width: drawerWidth,
@@ -32,10 +32,10 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     padding: theme.spacing(3),
   },
-}))
+}));
 
 const AdminSidebar = () => {
-  const classes = useStyles()
+  const classes = useStyles();
 
   return (
     <Drawer
@@ -78,11 +78,11 @@ const AdminSidebar = () => {
         </ListItem>
       </List>
     </Drawer>
-  )
-}
+  );
+};
 
 const AdminLayout = ({ children }) => {
-  const classes = useStyles()
+  const classes = useStyles();
 
   return (
     <div className={classes.root}>
@@ -92,7 +92,7 @@ const AdminLayout = ({ children }) => {
         {children}
       </main>
     </div>
-  )
-}
+  );
+};
 
-export default AdminLayout
+export default AdminLayout;
