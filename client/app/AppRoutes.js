@@ -10,7 +10,6 @@ import Cart from '../features/cart/Cart';
 import AllUsers from '../features/users/AllUsers';
 import SingleUser from '../features/users/SingleUser';
 import Login from '../features/login/Login';
-import AdminLayout from "../features/admin/AdminLayout"
 // import AdminLayout from "../features/admin/AdminLayout"
 
 
@@ -36,13 +35,12 @@ const AppRoutes = () => {
           <Route path="/*" element={<Home />} />
           <Route to="/home" element={<Home />} />
           <Route path="/users/:id" element={<SingleUser />} />
+          <Route path='/cart' element={<Cart name='cart' displayName='Cart' />} />
           {isAdmin && (
             <>
               <Route to="/" element={<Home />} />
               <Route to="/home" element={<Home />} />
               <Route path="/users" element={<AllUsers />} />
-              {/* <Route path="/admin" element={<AdminLayout name="admin" displayName="Admin" />} */}
-          {/* /> */}
             </>
           )}
         </Routes>
@@ -61,14 +59,14 @@ const AppRoutes = () => {
             element={<AuthForm name="signup" displayName="Sign Up" />}
           />
 
-          <Route
+          {/* <Route
             path='/cart'
             element={<Cart name='cart' displayName='Cart' /> }
 
           <Route 
             path="/admin" 
             element={<AdminLayout name="admin" displayName="Admin" />}
-          />
+          /> */}
         </Routes>
       )}
     </div>
