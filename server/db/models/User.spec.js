@@ -23,7 +23,11 @@ describe('User model', () => {
       let user;
       beforeEach(async()=> user = await User.create({
         username: 'lucy',
-        password: 'loo'
+        password: 'loo',
+        firstName: 'Lucy',
+        lastName: 'Loo',
+        email: 'lucyloo@gmail.com',
+        isAdmin: true,
       }));
       describe('with correct credentials', ()=> {
         it('returns a token', async() => {
