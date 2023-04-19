@@ -2,11 +2,13 @@ import { configureStore } from '@reduxjs/toolkit'
 import logger from 'redux-logger'
 import authReducer from '../features/auth/authSlice'
 import adminReducer from '../features/admin/adminSlice'
+import userSliceReducer from '../features/users/userSlice';
 
 const store = configureStore({
   reducer: { 
     auth: authReducer,
-    admin: adminReducer
+    admin: adminReducer,
+    users: userSliceReducer,
    },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
 })

@@ -1,6 +1,6 @@
 'use strict'
 
-const {db, models: {User} } = require('../server/db')
+const { db, models: { User } } = require('../server/db')
 
 /**
  * seed - this function clears the database, updates tables to
@@ -11,9 +11,48 @@ async function seed() {
   console.log('db synced!')
 
   // Creating Users
+  // Dummy Data created here to not break auth code. 
   const users = await Promise.all([
-    User.create({ username: 'cody', password: '123' }),
-    User.create({ username: 'murphy', password: '123' }),
+    User.create({
+      username: 'cody',
+      password: '0123',
+      firstName: 'Cody',
+      lastName: 'Codes',
+      email: 'codycodes@gmail.com',
+      isAdmin: true,
+    }),
+    User.create({
+      username: 'grace',
+      password: '0456',
+      firstName: 'Grace',
+      lastName: 'Hopper',
+      email: 'gracehopper@gmail.com',
+      isAdmin: true,
+    
+    }),
+    User.create({
+      username: 'murphy',
+      password: '0789',
+      firstName: 'Murphy',
+      lastName: 'Murphs',
+      email: 'murphymurphs@gmail.com',
+      isAdmin: false,
+    }),
+    User.create({
+      username: 'bobby',
+      password: '1011',
+      firstName: 'Bobby',
+      lastName: 'Bobs',
+      email: 'bobbybobs@gmail.com',
+    }), 
+    User.create({
+      username: 'jane',
+      password: '1415',
+      firstName: 'Jane',
+      lastName: 'Jones',
+      email: 'janejones@gmail.com',
+      isAdmin: false,
+    }),   
   ])
 
   console.log(`seeded ${users.length} users`)
