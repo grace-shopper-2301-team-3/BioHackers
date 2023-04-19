@@ -4,11 +4,13 @@ import { Route, Routes } from 'react-router-dom';
 import AuthForm from '../features/auth/AuthForm';
 import Home from '../features/home/Home';
 import { me } from './store';
+
+import Cart from '../features/cart/Cart';
+
 import AllUsers from '../features/users/AllUsers';
 import SingleUser from '../features/users/SingleUser';
 import Login from '../features/login/Login';
 import AdminLayout from "../features/admin/AdminLayout"
-
 
 /**
  * COMPONENT
@@ -54,6 +56,11 @@ const AppRoutes = () => {
             path="/signup"
             element={<AuthForm name="signup" displayName="Sign Up" />}
           />
+
+          <Route
+            path='/cart'
+            element={<Cart name='cart' displayName='Cart' /> }
+
           <Route 
             path="/admin" 
             element={<AdminLayout name="admin" displayName="Admin" />}
