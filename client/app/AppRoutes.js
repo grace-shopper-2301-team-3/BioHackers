@@ -7,6 +7,8 @@ import { me } from './store';
 import AllUsers from '../features/users/AllUsers';
 import SingleUser from '../features/users/SingleUser';
 import Login from '../features/login/Login';
+import AdminLayout from "../features/admin/AdminLayout"
+
 
 /**
  * COMPONENT
@@ -19,10 +21,9 @@ const AppRoutes = () => {
 
   const dispatch = useDispatch();
 
-
   useEffect(() => {
-    dispatch(me());
-  }, []);
+    dispatch(me())
+  }, [])
 
   return (
     <div>
@@ -53,10 +54,14 @@ const AppRoutes = () => {
             path="/signup"
             element={<AuthForm name="signup" displayName="Sign Up" />}
           />
+          <Route 
+            path="/admin" 
+            element={<AdminLayout name="admin" displayName="Admin" />}
+          />
         </Routes>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default AppRoutes;
+export default AppRoutes
