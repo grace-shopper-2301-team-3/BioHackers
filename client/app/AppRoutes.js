@@ -11,6 +11,8 @@ import AllUsers from '../features/users/AllUsers';
 import SingleUser from '../features/users/SingleUser';
 import Login from '../features/login/Login';
 import AdminLayout from "../features/admin/AdminLayout"
+// import AdminLayout from "../features/admin/AdminLayout"
+
 
 /**
  * COMPONENT
@@ -39,6 +41,8 @@ const AppRoutes = () => {
               <Route to="/" element={<Home />} />
               <Route to="/home" element={<Home />} />
               <Route path="/users" element={<AllUsers />} />
+              {/* <Route path="/admin" element={<AdminLayout name="admin" displayName="Admin" />} */}
+          {/* /> */}
             </>
           )}
         </Routes>
