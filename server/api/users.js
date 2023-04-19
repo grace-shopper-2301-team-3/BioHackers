@@ -29,30 +29,15 @@ router.get('/:id', async (req, res, next) => {
   }
 })
 
-// create user
-// router.post('/', async (req, res, next) => {
-//   try {
-//     const { username, password, firstName, lastName, email, isAdmin } = req.body;
-
-//     //hash the password
-//     const saltRounds = 10;
-//     const hashedPassword = await bcrypt.hash(password, saltRounds);
-
-//     const newUser = await User.create({
-//       username,
-//       password: hashedPassword,
-//       firstName,
-//       lastName,
-//       email,
-//       isAdmin
-//     });
-
-//     res.json(newUser);
-
-//   } catch (err) {
-//     next(err)
-//   }
-// })
+//create new user
+router.post("/", async (req, res, next) => {
+  try {
+    const user = await User.create(req.body);
+    res.json(user);
+  } catch (error) {
+    next(error);
+  }
+});
 
 
 // update user

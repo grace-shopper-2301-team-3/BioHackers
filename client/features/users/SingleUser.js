@@ -13,7 +13,7 @@ const SingleUser = () => {
     const navigate = useNavigate();
 
     const id = useSelector((state) => state.auth.me.id);
-    const { firstName, lastName } = useSelector((state) => state.auth.me);
+    const { firstName, lastName, email, isAdmin, username, password } = useSelector((state) => state.auth.me);
 
     useEffect(() => {
         dispatch(fetchSingleUser(id));
@@ -28,9 +28,17 @@ const SingleUser = () => {
     return (
         <div>
             <div>
-                <h1>
-                    Hello, {firstName} {lastName}!
-                </h1>
+                <h3>
+                    User Profile
+                </h3>
+                <ul>
+                    <li>First Name: {firstName}</li>
+                    <li>Last Name: {lastName}</li>
+                    <li>Username: {username}</li>
+                    <li>Email: {email}</li>
+                    {/* order h/o component? */}
+                </ul>
+                {/* eventually create edit button and editUser component */}
                 <button
                     type="button"
                     onClick={logoutAndRedirectHome}

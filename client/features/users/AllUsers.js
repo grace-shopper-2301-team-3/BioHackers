@@ -18,7 +18,7 @@ const AllUsers = () => {
 
     return (
         <div>
-            <h2>Users</h2>
+            <h2>All Users</h2>
             <ul>
                 {users.map((user) => {
                     return (
@@ -26,8 +26,6 @@ const AllUsers = () => {
                             <Link to={`/users/${user.id}`}>
                                 <p>{user.username}</p>
                             </Link>
-                            <p>{user.firstName} {user.lastName}</p>
-                            <p>{user.email}</p>
                             {/* add order number here? */}
                             {/* add delete user button here? */}
                         </div>
