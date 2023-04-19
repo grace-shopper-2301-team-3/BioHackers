@@ -3,8 +3,9 @@ import axios from "axios";
 
 
 
-export const getAllProductss = createAsyncThunk('products/getAll', async () => {
+export const getAllProducts = createAsyncThunk('products/getAll', async () => {
   try {
+    console.log("ALL PRODUCTS AXIOS WORKING")
     const { data } = await axios.get(`/api/products`);
     return data;
   } catch (error) {
@@ -12,7 +13,7 @@ export const getAllProductss = createAsyncThunk('products/getAll', async () => {
   }
 });
 
-export const allStudentsSlice = createSlice({
+export const allProductsSlice = createSlice({
     name: "products",
     initialState: {
         allProducts: [],
@@ -31,7 +32,7 @@ export const allStudentsSlice = createSlice({
             })
         }
   });
-export const selectProducts = (state) => {
+export const selectProduct = (state) => {
   return state.products;
 } 
 

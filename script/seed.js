@@ -1,7 +1,8 @@
 'use strict'
 
-const {db} = require('../server/db')
-const Product = require('../server/db/models/Product')
+const {db} = require('../server/db');
+const Product = require('../server/db/models/Product');
+const Category = require('../server/db/models/Category');
 /**
  * seed - this function clears the database, updates tables to
  *      match the models, and populates the database.
@@ -118,14 +119,31 @@ async function seed() {
     }),
   ])
 
+   // Creating categories
+   const categories = await Promise.all([
+    Category.create({ 
+      name: 'Neural Augments',
+      imageUrl: '',
+      id: 1,
+      description: 'Devices implanted in the brain to enhance performance and living experience for users.' 
+    }),
+    Category.create({ 
+      name: 'Supplements',
+      imageUrl: '',
+      id: 3,
+      description: 'Consumables taken on a regular schedule to reach new heights of human performance.' 
+    }),
+    Category.create({ 
+      name: 'Physical Augments',
+      imageUrl: '',
+      id: 2,
+      description: 'Devices worn by user or infused in muscularskeletal system to enhance physical attributes.' 
+    })
+   ])
+
   console.log(`seeded ${products.length} products`)
+  console.log(`seeded ${categories.length} categories`)
   console.log(`seeded successfully`)
-  return {
-    products: {
-      cody: products[0],
-      murphy: products[1]
-    }
-  }
 }
 
 /*

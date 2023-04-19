@@ -1,32 +1,25 @@
 const Sequelize = require('sequelize');
 const db = require('../db');
 
-const Product = db.define('product', {
-  productName: {
+const Category = db.define('category', {
+  name: {
     type: Sequelize.STRING,
     unique: true,
     allowNull: false
-  },
-  productPrice: {
-    allowNull: false,
-    type: Sequelize.INTEGER
   },
   imageUrl: {
     allowNull: false,
     type: Sequelize.STRING,
     defaultValue: "default"
   },
-  productId: {
+  id: {
+    primaryKey: true,
     allowNull: false,
     type: Sequelize.INTEGER
   },
   description: {
     type: Sequelize.TEXT
-  },
-  category: {
-    type: Sequelize.STRING,
-    allowNull: false
   }
 });
 
-module.exports = Product;
+module.exports = Category;
