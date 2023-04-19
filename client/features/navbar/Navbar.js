@@ -2,12 +2,7 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { logout } from '../../app/store';
-<<<<<<< HEAD
 import Cart from '../cart/Cart';
-=======
-import Cart from '../cart/Cart'
-
->>>>>>> 847273e8dd3ee7e55da2032e947abe797b184ceb
 
 const Navbar = () => {
   const isLoggedIn = useSelector((state) => !!state.auth.me.id);

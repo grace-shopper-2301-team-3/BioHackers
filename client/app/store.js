@@ -18,8 +18,4 @@ const store = configureStore({
 
 export default store;
 export * from '../features/auth/authSlice';
-<<<<<<< HEAD
 // export * from '../features/cart/cartSlice';
-=======
-export * from '../features/cart/cartSlice';
->>>>>>> 847273e8dd3ee7e55da2032e947abe797b184ceb
