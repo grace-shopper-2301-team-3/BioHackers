@@ -60,6 +60,10 @@ const AppRoutes = () => {
             path="/signup"
             element={<AuthForm name="signup" displayName="Sign Up" />}
           />
+          <Route
+            path='/cart'
+            element={<Cart name='cart' displayName='Cart' />}
+          />
 
         </Routes>
       )}
