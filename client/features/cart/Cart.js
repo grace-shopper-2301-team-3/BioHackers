@@ -1,21 +1,21 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { addItem, removeItem, clearCart } from './cartslice';
+import { addItemAsync, removeItemAsync, clearCartAsync } from './cartSlice';
 
 function Cart() {
   const cart = useSelector(state => state.cart);
   const dispatch = useDispatch();
 
-  const handleAddItem = item => {
-    dispatch(addItem(item));
-  };
+  // const handleAddItem = item => {
+  //   dispatch(addItemAsync(item));
+  // };
 
-  const handleRemoveItem = item => {
-    dispatch(removeItem(item));
-  };
+  // const handleRemoveItem = item => {
+  //   dispatch(removeItemAsync(item));
+  // };
 
   const handleClearCart = () => {
-    dispatch(clearCart());
+    dispatch(clearCartAsync());
   };
 
   return (
@@ -26,15 +26,15 @@ function Cart() {
       ) : (
         <>
           <ul>
-            {cart.items.map(item => (
-              <li key={item.id}>
-                <span>{item.name}</span>
-                <span>Quantity: {item.quantity}</span>
-                <span>Price: ${item.price}</span>
-                <button onClick={() => handleRemoveItem(item)}>Remove</button>
-                <button onClick={() => handleAddItem(item)}>Add</button>
-              </li>
-            ))}
+            {/* {cart.items.map(item => (
+              // <li key={item.id}>
+              //   <span>{item.name}</span>
+              //   <span>Quantity: {item.quantity}</span>
+              //   <span>Price: ${item.price}</span>
+              //   <button onClick={() => handleRemoveItem(item)}>Remove</button>
+              //   <button onClick={() => handleAddItem(item)}>Add</button>
+              // </li>
+            ))} */}
           </ul>
           <p>Total Price: ${cart.totalPrice}</p>
           <button onClick={handleClearCart}>Clear Cart</button>
