@@ -11,6 +11,7 @@ import SingleUser from '../features/users/SingleUser';
 import Login from '../features/login/Login';
 // import AdminLayout from "../features/admin/AdminLayout"
 
+
 /**
  * COMPONENT
  */
@@ -33,7 +34,7 @@ const AppRoutes = () => {
           <Route path="/*" element={<Home />} />
           <Route to="/home" element={<Home />} />
           <Route path="/users/:id" element={<SingleUser />} />
-          <Route path='/cart' element={<Cart name='cart' displayName='Cart' /> } />
+          <Route path='/cart' element={<Cart name='cart' displayName='Cart' />} />
           {isAdmin && (
             <>
               <Route to="/" element={<Home />} />
@@ -62,6 +63,10 @@ const AppRoutes = () => {
           {/* <Route
             path='/cart'
             element={<Cart name='cart' displayName='Cart' /> }
+
+          <Route
+            path="/admin"
+            element={<AdminLayout name="admin" displayName="Admin" />}
           /> */}
         </Routes>
       )}
