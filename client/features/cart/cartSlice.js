@@ -8,7 +8,7 @@ const loadState = () => {
     if (serializedState === null) {
       return {
         items: [],
-        total: 0,
+        totalPrice: 0,
       }
     }
     return JSON.parse(serializedState);
