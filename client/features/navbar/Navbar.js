@@ -28,6 +28,7 @@ const Navbar = () => {
         ) : (
           <div>
             {/* The navbar will show these links before you log in */}
+            <Link to='/'>Home</Link>
             <Link to= '/products'>Products</Link>
             <Link to= '/categories'>Categories</Link>
             <Link to="/login">Login</Link>

@@ -13,19 +13,20 @@ const Product = db.define('product', {
   },
   imageUrl: {
     allowNull: false,
-    type: Sequelize.STRING,
+    type: Sequelize.TEXT,
     defaultValue: "default"
   },
   productId: {
+    primaryKey: true,
     allowNull: false,
     type: Sequelize.INTEGER
   },
   description: {
     type: Sequelize.TEXT
   },
-  category: {
-    type: Sequelize.STRING,
-    allowNull: false
+  categoryId: {
+    type: Sequelize.INTEGER,
+    allowNull:false
   }
 });
 

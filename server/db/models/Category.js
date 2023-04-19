@@ -12,9 +12,7 @@ const Category = db.define('category', {
     type: Sequelize.STRING,
     defaultValue: "default"
   },
-  id: {
-    primaryKey: true,
-    allowNull: false,
+  categoryId: {
     type: Sequelize.INTEGER
   },
   description: {

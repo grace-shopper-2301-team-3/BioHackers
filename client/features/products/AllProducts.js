@@ -15,18 +15,18 @@ const AllProducts = () => {
             <ul>
                 {products.map((product) => {
                     return (
-                        <li key={product.productId}>
-                            <Link to={`/Products/${product.productId}`}>
+                        <div key={product.productId}>
+                            <Link to={`/products/${product.productId}`}>
                                 <h2>{product.productName}</h2>
                                 <img src={product.imageUrl} />
                             </Link>
                             <p><b>Price: $</b> {product.productPrice}</p>
-                            <p><b></b> {product.category}</p>
                             <p>
                                 <b>Category: </b>
                                 <br />
+                                {product.category}
                             </p>
-                        </li>
+                        </div>
                     );
                 })}
             </ul>

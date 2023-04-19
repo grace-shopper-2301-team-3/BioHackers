@@ -14,17 +14,15 @@ const AllCategories = () => {
             <ul>
                 {categories.map((category) => {
                     return (
-                        <li key={category.id}>
-                            <Link to={`/categories/${category.id}`}>
+                        <li key={category.categoryId}>
+                            <Link to={`/categories/${category.categoryId}`}>
                                 <h2>{category.name}</h2>
                                 <img src={category.imageUrl} />
                             </Link>
                             <p>
                                 <b>Description: </b>
                                 <br />
-                                    <p>
-                                        {category.description}
-                                    </p>
+                                {category.description}
                             </p>
                         </li>
                     );

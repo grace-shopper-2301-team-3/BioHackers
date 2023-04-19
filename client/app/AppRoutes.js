@@ -8,6 +8,9 @@ import { getAllProducts } from '../features/products/allProductsSlice';
 import AllProducts from '../features/products/AllProducts';
 import { getAllCategories } from '../features/categories/allCategoriesSlice';
 import AllCategories from '../features/categories/AllCategories'
+import SingleProduct from '../features/products/SingleProduct';
+import SingleCategory from '../features/categories/SingleCategory';
+
 /**
  * COMPONENT
  */
@@ -52,6 +55,14 @@ const AppRoutes = () => {
           <Route 
             path="/categories" 
             element={<AllCategories />} 
+          />
+          <Route 
+            path="/products/:productId" 
+            element={<SingleProduct />} 
+          />
+          <Route 
+            path="/categories/:categoryId" 
+            element={<SingleCategory />} 
           />
         </Routes>
       )}
