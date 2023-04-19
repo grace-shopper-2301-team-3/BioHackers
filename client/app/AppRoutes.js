@@ -40,7 +40,7 @@ const AppRoutes = () => {
           />
           <Route
             path='/cart'
-            element={<Cart name='cart' displayName='cart' /> }
+            element={<Cart name='cart' displayName='Cart' /> }
           />
         </Routes>
       )}

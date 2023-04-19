@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 const CART_STORAGE_KEY = 'cart';
 
@@ -32,43 +32,65 @@ const saveState = state => {
 
 const initialState = loadState();
 
+export const addItemAsync = createAsyncThunk(
+  'cart/addItem',
+  async (newItem, { getState }) => {
+    const existingItem = getState().cart.items.find(item => item.id === newItem.id)
+    if (existingItem) {
+      existingItem.quantity++
+    } else {
+      newItem.quantity = 1
+      getState().cart.items.push(newItem)
+    }
+    getState().cart.totalPrice += newItem.price
+    saveState(getState().cart)
+    return getState().cart
+  }
+)
+
+export const removeItemAsync = createAsyncThunk(
+  'cart/removeItem',
+  async (itemToRemove, { getState }) => {
+    const existingItem = getState().cart.items.find(item => item.id === itemToRemove.id)
+    if (existingItem) {
+      if (existingItem.quantity > 1) {
+        existingItem.quantity--
+      } else {
+        getState().cart.items = getState().cart.items.filter(item => item.id !== itemToRemove.id)
+      }
+      getState().cart.totalPrice -= itemToRemove.price
+      saveState(getState().cart)
+    }
+    return getState().cart
+  }
+)
+
+export const clearCartAsync = createAsyncThunk(
+  'cart/clearCart',
+  async (_, { getState }) => {
+    getState().cart.items = []
+    getState().cart.totalPrice = 0
+    saveState(getState().cart)
+    return getState().cart
+  }
+)
+
 const cartSlice = createSlice({
   name: 'cart',
   initialState,
-  reducers: {
-    addItem: (state, action) => {
-      const newItem = action.payload
-      const existingItem = state.items.find(item => item.id === newItem.id)
-      if (existingItem) {
-        existingItem.quantity++
-      } else {
-        newItem.quantity = 1
-        state.items.push(newItem)
-      }
-      state.totalPrice += newItem.price
-      saveState(state)
-    },
-    removeItem: (state, action) => {
-      const itemToRemove = action.payload
-      const existingItem = state.items.find(item => item.id === itemToRemove.id)
-      if (existingItem) {
-        if (existingItem.quantity > 1) {
-          existingItem.quantity--
-        } else {
-          state.items = state.items.filter(item => item.id !== itemToRemove.id)
-        }
-        state.totalPrice -= itemToRemove.price
-        saveState(state)
-      }
-    },
-    clearCart: state => {
-      state.items = []
-      state.totalPrice = 0
-      saveState(state)
-    },
+  reducers: {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(addItemAsync.fulfilled, (state, action) => {
+        return action.payload
+      })
+      .addCase(removeItemAsync.fulfilled, (state, action) => {
+        return action.payload
+      })
+      .addCase(clearCartAsync.fulfilled, (state, action) => {
+        return action.payload
+      })
   },
 });
-
-export const { addItem, removeItem, clearCart } = cartSlice.actions;
 
 export default cartSlice.reducer;
