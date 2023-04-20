@@ -1,84 +1,89 @@
-// import React, { useState, useEffect } from 'react';
-// import { useParams, useNavigate } from 'react-router-dom';
-// import { useDispatch } from 'react-redux';
-// import { fetchSingleUser, updateUser } from './userSlice';
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { updateUser } from "../auth/authSlice";
+import { useNavigate } from "react-router-dom";
+import { fetchSingleUser } from "./userSlice";
 
-// const EditUser = () => {
+const EditUser = () => {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const { me } = useSelector((state) => state.auth);
 
-//     const dispatch = useDispatch();
-//     const navigate = useNavigate();
-//     // const { userId } = useParams();
+    const handleEdit = (event) => {
+        event.preventDefault();
+        const { username, firstName, lastName, email } = event.target;
+        dispatch(updateUser({
+            id: me.id,
+            username: username.value,
+            firstName: firstName.value,
+            lastName: lastName.value,
+            email: email.value,
+        }))
+        // .then(() => {
+        //     dispatch(fetchSingleUser(me.id))
+        //     navigate(`/users/${me.id}`);
+        // })
+        window.location.reload();
+    };
 
-//     ////
-//     //seems like problem updating the User due to auth need to figure out!!!!!!!!
-//     const id = useSelector((state) => state.auth.me.id);
-//     const { firstName, lastName, email, isAdmin, username, password } = useSelector((state) => state.auth.me);
+    return (
+        <>
+            <div>
+                <div>
+                    <h2>User Profile</h2>
+                    <span>
+                        <h4>Username:</h4>
+                        <p>{me.username}</p>
+                    </span>
+                    <span>
+                        <h4>First Name:</h4>
+                        <p>{me.firstName}</p>
+                    </span>
+                    <span>
+                        <h4>Last Name:</h4>
+                        <p>{me.lastName}</p>
+                    </span>
+                    <span>
+                        <h4>E-mail:</h4>
+                        <p>{me.email}</p>
+                    </span>
+                </div>
 
+                <hr />
 
-//     useEffect(() => {
-//         dispatch(fetchSingleUser(userId));
-//     }, [dispatch]);
+                <div>
+                    <h2>Edit Information</h2>
+                    <form onSubmit={handleEdit}>
 
-//     const [firstName, setFirstName] = useState('');
-//     const [lastName, setLastName] = useState('');
-//     const [email, setEmail] = useState('');
+                        <label htmlFor="username">
+                            <small>Username:</small>
+                        </label>
+                        <input type="text" name="username" />
 
-//     const handleSubmit = (event) => {
-//         event.preventDefault();
-//         dispatch(updateUser({ id: userId, firstName: firstName, lastName: lastName, email: email }))
-//             .then(() => {
-//                 handleReset();
-//                 dispatch(fetchUser(userId));
-//                 navigate(`/users/${userId}`);
-//             })
-//     };
+                        <label htmlFor="firstName">
+                            <small>First Name:</small>
+                        </label>
+                        <input type="text" name="firstName" />
 
-//     const handleReset = () => {
-//         setFirstName('');
-//         setLastName('');
-//         setEmail('');
-//     };
+                        <label htmlFor="lastName">
+                            <small>Last Name:</small>
+                        </label>
+                        <input type="text" name="lastName" />
 
-//     return (
-//             <div>
-//                 <h3>Edit Usert</h3>
-//                 <form onSubmit={handleSubmit}>
-//                     <div>
-//                         <label htmlFor="firstName">
-//                             <small>First Name:</small>
-//                         </label>
-//                         <input name="firstName" type="text" />
-//                     </div>
-//                     <div>
-//                         <label htmlFor="lastName">
-//                             <small>Last Name:</small>
-//                         </label>
-//                         <input name="lastName" type="text" />
-//                     </div>
-//                     <div>
-//                         <label htmlFor="email">
-//                             <small>Email:</small>
-//                         </label>
-//                         <input name="email" type="email" />
-//                     </div>
-//                     <div>
-//                         <label htmlFor="username">
-//                             <small>Username</small>
-//                         </label>
-//                         <input name="username" type="text" />
-//                     </div>
-//                     <div>
-//                         <label htmlFor="password">
-//                             <small>Password</small>
-//                         </label>
-//                         <input name="password" type="password" />
-//                     </div>
-//                     <div>
-//                         <button type="submit">Submit</button>
-//                     </div>
-//                 </form>
-//             </div>
-//     );
-// };
+                        <label htmlFor="email">
+                            <small>E-mail:</small>
+                        </label>
+                        <input type="email" name="email" />
 
-// export default EditUser;
+                        <br />
+                        <br />
+
+                        <button type="submit">Save</button>
+                    </form>
+                </div>
+            </div>
+        </>
+    );
+};
+
+export default EditUser;

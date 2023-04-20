@@ -55,6 +55,22 @@ export const authenticate = createAsyncThunk(
   }
 );
 
+//adding in an update user thunk here instead of userSlice 
+export const updateUser = createAsyncThunk('users/update', async ({ id, username, password, firstName, lastName, email,}) => {
+  try {
+      const { data } = await axios.put(`/api/users/${id}`, {
+          username,
+          firstName,
+          lastName,
+          email,
+      });
+      return data;
+  }
+  catch (err) {
+      return err.message;
+  }
+});
+
 /*
   SLICE
 */
