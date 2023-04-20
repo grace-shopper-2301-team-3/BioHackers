@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, Link } from "react-router-dom";
 import AuthForm from '../features/auth/AuthForm';
 import Home from '../features/home/Home';
 import { me } from './store';
@@ -10,13 +10,11 @@ import { getAllCategories } from '../features/categories/allCategoriesSlice';
 import AllCategories from '../features/categories/AllCategories'
 import SingleProduct from '../features/products/SingleProduct';
 import SingleCategory from '../features/categories/SingleCategory';
-
+import AllUsers from "../features/users/AllUsers";
+import SingleUser from "../features/users/SingleUser";
+import Login from "../features/login/Login";
+import StyleGuide from "../features/style/StyleGuide";
 import Cart from '../features/cart/Cart';
-
-import AllUsers from '../features/users/AllUsers';
-import SingleUser from '../features/users/SingleUser';
-import Login from '../features/login/Login';
-// import AdminLayout from "../features/admin/AdminLayout"
 import EditUser from '../features/users/EditUser';
 
 
@@ -37,8 +35,6 @@ const AppRoutes = () => {
     dispatch(getAllCategories())
   }, []);
 
-
-
   return (
     <div>
       {isLoggedIn ? (
@@ -55,6 +51,7 @@ const AppRoutes = () => {
               <Route path="/users" element={<AllUsers />} />
             </>
           )}
+          <Route path="/styleguide" element={<StyleGuide />} />
         </Routes>
       ) : (
         <Routes>
@@ -70,7 +67,9 @@ const AppRoutes = () => {
             path="/signup"
             element={<AuthForm name="signup" displayName="Sign Up" />}
           />
-
+          <Route
+            path="/styleguide"
+            element={<StyleGuide name="styleguide" displayName="Style Guide" />}
           <Route 
             path="/products" 
             element={<AllProducts />} 
@@ -90,7 +89,7 @@ const AppRoutes = () => {
         </Routes>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default AppRoutes
+export default AppRoutes;
