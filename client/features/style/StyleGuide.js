@@ -198,14 +198,12 @@ const HeroButton = styled(Button)(({ theme }) => ({
   borderTopRightRadius: 0,
   textTransform: "uppercase",
   boxShadow: "0 0px 20px #7F00FF",
-  variant: "contained"
 }));
 
 const PrimaryButton = styled(Button)(({ theme }) => ({
   margin: 8,
   textTransform: "capitalize",
   boxShadow: "0 0px 15px #7F00FF",
-  variant: "contained"
 }));
 
 const SecondaryButton = styled(Button)(({ theme }) => ({
@@ -281,8 +279,8 @@ const ColorBoxContainer = styled(Container)(({ theme }) => ({
 }));
 
 const ColorBox = styled(Box)(({ theme }) => ({
-  width: 48,
-  height: 48,
+  width: 80,
+  height: 80,
   padding: 8,
   margin: 4,
   borderRadius: 4,
@@ -294,7 +292,22 @@ const ColorTypography = styled(Typography)(({ theme }) => ({
   color: theme.palette.primary.contrastText,
 }));
 
-export { MainContainer, StyledTextField, ErrorTextField, DisabledTextField, CardOne, CardTwo, CornerButton, ProductName, ProductDescription, Price, PrimaryButton, SecondaryButton, TertiaryButton, NoBorderButton}
+export {
+  MainContainer,
+  StyledTextField,
+  ErrorTextField,
+  DisabledTextField,
+  CardOne,
+  CardTwo,
+  CornerButton,
+  ProductName,
+  ProductDescription,
+  Price,
+  PrimaryButton,
+  SecondaryButton,
+  TertiaryButton,
+  NoBorderButton,
+};
 
 const StyleGuide = () => {
   return (
@@ -335,11 +348,11 @@ const StyleGuide = () => {
             </ColorBox>
 
             <ColorBox sx={{ bgcolor: "secondary.dark" }}>
-              <ColorTypography variant="caption">#0000f9</ColorTypography>
+              <ColorTypography variant="caption">#ff00ff</ColorTypography>
             </ColorBox>
 
             <ColorBox sx={{ bgcolor: "secondary.light" }}>
-              <ColorTypography variant="caption">#5013ff</ColorTypography>
+              <ColorTypography variant="caption">#00bfff</ColorTypography>
             </ColorBox>
           </ColorBoxContainer>
 
