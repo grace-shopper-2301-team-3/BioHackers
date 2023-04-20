@@ -33,7 +33,7 @@
     "morgan": "^1.10.0",
     "pg": "^8.8.0",
     "stripe": "^12.1.1",
-    "volleyball": "^1.5.1"
+    "volleyball": "^1.5.1",
     "sequelize": "^6.31.0"
   },
   "devDependencies": {

@@ -1,21 +1,21 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { addItem, removeItem, clearCart } from './cartslice';
+import { addItemAsync, removeItemAsync, clearCartAsync } from './cartSlice';
 
 function Cart() {
   const cart = useSelector(state => state.cart);
   const dispatch = useDispatch();
 
   const handleAddItem = item => {
-    dispatch(addItem(item));
+    dispatch(addItemAsync(item));
   };
 
   const handleRemoveItem = item => {
-    dispatch(removeItem(item));
+    dispatch(removeItemAsync(item));
   };
 
   const handleClearCart = () => {
-    dispatch(clearCart());
+    dispatch(clearCartAsync());
   };
 
   return (
