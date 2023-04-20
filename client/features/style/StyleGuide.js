@@ -8,7 +8,7 @@ import {
   Box,
   TextField,
   Button,
-  Card,
+  Card
 } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 
@@ -303,6 +303,13 @@ const StyleGuide = () => {
   return (
     <ThemeProvider theme={biohackersTheme}>
       <MainContainer>
+        {/* Logo */}
+        <Box sx={{ textTransform: "uppercase", m: "1rem" }}>
+          <Typography variant="overline">Logo</Typography>
+        </Box>
+
+        <img src="./Biohacker-Logo-transparent.png" alt="Logo"/>
+
         {/* Color Palette */}
 
         <Box sx={{ textTransform: "uppercase", m: "1rem" }}>
@@ -460,7 +467,7 @@ const StyleGuide = () => {
           <Typography variant="overline">Cards</Typography>
         </Box>
 
-        <Container sx={{ display:"flex", justifyContent: "space-between" }}>
+        <Container sx={{ display: "flex", justifyContent: "space-between" }}>
           <CardOne>
             <CornerButton variant="contained" color="primary">
               <AddShoppingCartRoundedIcon />
