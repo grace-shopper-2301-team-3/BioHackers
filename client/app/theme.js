@@ -27,6 +27,15 @@ let biohackersTheme = createTheme({
     },
   },
   components: {
+    MuiDataGrid: {
+      styleOverrides: {
+        root: {
+          ".MuiDataGrid-root": {
+            color: "#7F00FF",
+          },
+        },
+      },
+    },
     MuiButton: {
       styleOverrides: {
         root: {

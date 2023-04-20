@@ -8,9 +8,9 @@ import {
   Box,
   TextField,
   Button,
-  Card
+  Card,
 } from "@mui/material";
-import { DataGrid } from "@mui/x-data-grid";
+import { DataGrid, gridColumnMenuSelector } from "@mui/x-data-grid";
 
 import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 import SendIcon from "@mui/icons-material/Send";
@@ -244,12 +244,7 @@ const StyleGuide = () => {
     { field: "id", headerName: "ID", width: 70 },
     { field: "firstName", headerName: "First name", width: 130 },
     { field: "lastName", headerName: "Last name", width: 130 },
-    {
-      field: "age",
-      headerName: "Age",
-      type: "number",
-      width: 90,
-    },
+    { field: "age", headerName: "Age", type: "number", width: 90 },
     {
       field: "fullName",
       headerName: "Full name",
@@ -308,7 +303,7 @@ const StyleGuide = () => {
           <Typography variant="overline">Logo</Typography>
         </Box>
 
-        <img src="./Biohacker-Logo-transparent.png" alt="Logo"/>
+        <img src="./Biohacker-Logo-transparent.png" alt="Logo" />
 
         {/* Color Palette */}
 
@@ -779,27 +774,31 @@ const StyleGuide = () => {
           <Typography variant="overline">Tables</Typography>
         </Box>
 
-        <Box
-          sx={{
-            height: 400,
-            width: "100%",
-            backgroundColor: "#FFFFFF",
-            color: "#000000",
-          }}
-        >
+        <Box>
+          <Typography variant="h3">DataGrid</Typography>
+          <Typography variant="body1">
+            Datagrid already has filter, sorting, pagination, selection, editing
+            set up but may be more difficult to use
+          </Typography>
           <DataGrid
+            sx={{
+              m: 4,
+              border: "none",
+              backgroundColor: "#200040",
+              color: "#7F00FF",
+            }}
             rows={rows}
             columns={columns}
+            autoHeight={true}
+            autoWidth={true}
             initialState={{
               pagination: {
                 paginationModel: {
-                  pageSize: 5,
-                },
+                  pageSize: 5                },
               },
             }}
             pageSizeOptions={[5]}
             checkboxSelection
-            disableRowSelectionOnClick
           />
         </Box>
       </MainContainer>
