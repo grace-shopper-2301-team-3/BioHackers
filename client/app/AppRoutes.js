@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, Navigate } from "react-router-dom";
 import AuthForm from "../features/auth/AuthForm";
 import Home from "../features/home/Home";
 import { me } from "./store";
@@ -17,7 +17,8 @@ import StyleGuide from "../features/style/StyleGuide";
 import Cart from "../features/cart/Cart";
 import EditUser from "../features/users/EditUser";
 import AdminLayout from "../features/admin/AdminLayout";
-import AdminSidebar from "../features/admin/AdminSidebar";
+import AdminSidebar from "../features/admin/AdminHeaderbar";
+import NotFound from "../features/notfound/NotFound";
 
 /**
  * COMPONENT
@@ -38,6 +39,7 @@ const AppRoutes = () => {
 
   return (
     <div>
+<<<<<<< HEAD
       {isLoggedIn ? (
         <Routes>
           <Route path="/*" element={<Home />} />
@@ -98,6 +100,49 @@ const AppRoutes = () => {
           <Route path="/admin" element={<AdminLayout />} />
         </Routes>
       )}
+=======
+      <Routes>
+        <Route path="/*" element={<Home />} />
+        {isLoggedIn ? (
+          <>
+            <Route to="/home" element={<Home />} />
+            <Route path="/users/:id" element={<SingleUser />} />
+            <Route path="/users/:id/edit" element={<EditUser />} />
+            <Route
+              path="/cart"
+              element={<Cart name="cart" displayName="Cart" />}
+            />
+            {isAdmin && (
+              <>
+                <Route to="/" element={<Home />} />
+                <Route to="/home" element={<Home />} />
+                <Route path="/users" element={<AllUsers />} />
+              </>
+            )}
+          </>
+        ) : (
+          <>
+            <Route path="/login" element={<Login name="login" displayName="Login" />} />
+            <Route path="/signup" element={<AuthForm name="signup" displayName="Sign Up" />} />
+            <Route
+              path="/cart"
+              element={<Cart name="cart" displayName="Cart" />}
+            />
+            <Route
+              path="/styleguide"
+              element={<StyleGuide name="styleguide" displayName="Style Guide" />}
+            />
+            <Route path="/products" element={<AllProducts />} />
+            <Route path="/categories" element={<AllCategories />} />
+            <Route path="/products/:productId" element={<SingleProduct />} />
+            <Route path="/categories/:categoryId" element={<SingleCategory />} />
+          </>
+        )}
+        {/* Fallback route for non-existing pages */}
+        <Route path="*" element={<Navigate to="/notfound" />} />
+        <Route path="/notfound" element={<NotFound />} />
+      </Routes>
+>>>>>>> 05f8cd7 (updating admin layouts, added not found page  and styling navbar)
     </div>
   );
 };

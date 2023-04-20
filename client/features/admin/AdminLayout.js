@@ -1,14 +1,14 @@
 import React from "react";
 import biohackersTheme from "../../app/theme";
 import { ThemeProvider } from "@mui/material"
-import { MainContainer, StyledTextField } from "../style/StyleGuide"
+import { MainContainer } from "../style/StyleGuide"
+import AdminHeaderbar from "./AdminHeaderbar";
 
 const AdminLayout = () => {
   return (
     <ThemeProvider theme={biohackersTheme}>
       <MainContainer>
-      Hello!
-      <StyledTextField />
+      <AdminHeaderbar/>
       </MainContainer>
     </ThemeProvider>
   );

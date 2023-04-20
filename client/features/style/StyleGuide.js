@@ -198,12 +198,14 @@ const HeroButton = styled(Button)(({ theme }) => ({
   borderTopRightRadius: 0,
   textTransform: "uppercase",
   boxShadow: "0 0px 20px #7F00FF",
+  variant: "contained"
 }));
 
 const PrimaryButton = styled(Button)(({ theme }) => ({
   margin: 8,
   textTransform: "capitalize",
   boxShadow: "0 0px 15px #7F00FF",
+  variant: "contained"
 }));
 
 const SecondaryButton = styled(Button)(({ theme }) => ({

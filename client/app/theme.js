@@ -27,6 +27,28 @@ let biohackersTheme = createTheme({
     },
   },
   components: {
+    MuiLink: {
+      styleOverrides: {
+        root: {
+          textDecoration: "none",
+          "&:hover": {
+            textDecoration: "none",
+          },
+          "&:active": {
+            textDecoration: "none",
+          },
+          "&:visited": {
+            textDecoration: "none",
+          },
+          "&:focus": {
+            textDecoration: "none",
+          },
+          "&:hover, &:active, &:focus": {
+            outline: "none",
+          },
+        },
+      },
+    },
     MuiDataGrid: {
       styleOverrides: {
         root: {
@@ -41,6 +63,7 @@ let biohackersTheme = createTheme({
         root: {
           margin: 4,
           textTransform: "capitalize",
+          textDecoration: "none"
         },
       },
     },
