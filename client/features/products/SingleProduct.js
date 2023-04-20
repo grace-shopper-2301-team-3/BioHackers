@@ -18,8 +18,7 @@ const SingleProduct = () => {
 
     return (
         <>
-            <div>
-                <li key={productId}>
+            <div key={productId}>
                     <h2>{product.productName}</h2>
                     <img src={product.imageUrl} />
                     <p><b>Price: $</b> {product.productPrice}</p>
@@ -28,15 +27,8 @@ const SingleProduct = () => {
                         <b>Category: </b>
                         <br />
                             <Link to={`/categories/${product.categoryId}`}>
-                            {categories.filter((category) => category.categoryId === product.categoryId)
-                                        .length
-                                        ? categories.filter(
-                                            (category) => category.categoryId === product.categoryId
-                                        ).name
-                                        : "N/A"}
                             </Link>
                     </p>
-                </li>
             </div>
         </>
     );
