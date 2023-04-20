@@ -8,7 +8,32 @@ import {
   Box,
   TextField,
   Button,
+  Card,
+  CardMedia,
+  CardActionArea,
+  CardContent,
+  CardActions,
 } from "@mui/material";
+
+import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
+import SendIcon from "@mui/icons-material/Send";
+import ThumbUpIcon from "@mui/icons-material/ThumbUp";
+import ReportGmailerrorredIcon from "@mui/icons-material/ReportGmailerrorred";
+import AccountCircleRoundedIcon from "@mui/icons-material/AccountCircleRounded";
+import ShoppingCartRoundedIcon from "@mui/icons-material/ShoppingCartRounded";
+import AddShoppingCartRoundedIcon from "@mui/icons-material/AddShoppingCartRounded";
+import LocalPhoneRoundedIcon from "@mui/icons-material/LocalPhoneRounded";
+import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
+import FilterAltRoundedIcon from "@mui/icons-material/FilterAltRounded";
+import StarBorderRoundedIcon from "@mui/icons-material/StarBorderRounded";
+import StarRoundedIcon from "@mui/icons-material/StarRounded";
+import LocationOnRoundedIcon from "@mui/icons-material/LocationOnRounded";
+import ModeEditOutlineRoundedIcon from "@mui/icons-material/ModeEditOutlineRounded";
+import LockRoundedIcon from "@mui/icons-material/LockRounded";
+import LeaderboardRoundedIcon from "@mui/icons-material/LeaderboardRounded";
+import InsightsRoundedIcon from "@mui/icons-material/InsightsRounded";
+import AddPhotoAlternateRoundedIcon from "@mui/icons-material/AddPhotoAlternateRounded";
+import SearchRoundedIcon from "@mui/icons-material/SearchRounded";
 
 // The goal of this file is to make it easier to understand how to leverage Material UI
 // I've made everything into themes so you should be able to import most of these functions into the components
@@ -18,6 +43,7 @@ const StyleGuide = () => {
     width: "100%",
     backgroundColor: theme.palette.background.default,
     color: theme.palette.text.primary,
+    padding: 4,
   }));
 
   const ColorBoxContainer = styled(Container)(({ theme }) => ({
@@ -51,9 +77,11 @@ const StyleGuide = () => {
     "& .MuiOutlinedInput-root": {
       "& fieldset": {
         borderColor: theme.palette.primary.main,
+        boxShadow: "0 0px 20px #7F00FF",
       },
       "&:hover fieldset": {
         borderColor: theme.palette.primary.dark,
+        boxShadow: "0 0px 20px #7F00FF",
       },
     },
     "& .MuiFormHelperText-root": {
@@ -63,17 +91,121 @@ const StyleGuide = () => {
     },
   }));
 
-  const HeroButton = styled(Button)(({ theme }) => ({
+  const ErrorTextField = styled(TextField)(({ theme }) => ({
     margin: 4,
-    padding: 20,
-    borderRadius: "50px",
+    "& .MuiInputBase-input": {
+      color: theme.palette.error.main,
+    },
+    "& .MuiInputBase-input::placeholder": {
+      color: theme.palette.error.main,
+    },
+    "& .MuiOutlinedInput-root": {
+      "& fieldset": {
+        borderColor: theme.palette.error.main,
+        boxShadow: "0 0px 20px #EA0000",
+      },
+      "&:hover fieldset": {
+        borderColor: theme.palette.error.main,
+        boxShadow: "0 0px 20px #EA0000",
+      },
+    },
+    "& .MuiFormHelperText-root": {
+      color: "#EA0000",
+      fontSize: "0.75rem",
+      letterSpacing: "0.03333em",
+    },
+  }));
+
+  const DisabledTextField = styled(TextField)(({ theme }) => ({
+    margin: 4,
+    "& .MuiInputBase-input": {
+      color: theme.palette.secondary.dark,
+    },
+    "& .MuiInputBase-input::placeholder": {
+      color: theme.palette.secondary.dark,
+    },
+    "& .MuiOutlinedInput-root": {
+      "& fieldset": {
+        borderColor: theme.palette.secondary.dark,
+        boxShadow: "0 0px 20px #0000f9",
+      },
+      "&:hover fieldset": {
+        borderColor: theme.palette.secondary.dark,
+        boxShadow: "0 0px 20px #0000f9",
+      },
+    },
+    "& .MuiFormHelperText-root": {
+      color: "#0000f9",
+      fontSize: "0.75rem",
+      letterSpacing: "0.03333em",
+    },
+  }));
+
+  const PrimaryCard = styled(Card)(({ theme }) => ({
+    boxShadow: "0 0px 15px #7F00FF",
+    border: "0.75px solid",
+    borderImage: "linear-gradient(to right, #7F00FF, #0000FF)",
+    borderImageSlice: 1,
+    background: "transparent"
+  }));
+
+  const HeroButton = styled(Button)(({ theme }) => ({
+    margin: 10,
+    padding: "12px 30px",
+    borderRadius: 40,
     borderBottomLeftRadius: 0,
     borderTopRightRadius: 0,
+    textTransform: "uppercase",
+    boxShadow: "0 0px 20px #7F00FF",
+  }));
+
+  const PrimaryButton = styled(Button)(({ theme }) => ({
+    margin: 8,
+    textTransform: "capitalize",
+    boxShadow: "0 0px 15px #7F00FF",
+  }));
+
+  const SecondaryButton = styled(Button)(({ theme }) => ({
+    margin: 5,
+    borderRadius: 40,
+    boxShadow: "0 0px 15px #7F00FF",
+  }));
+
+  const TertiaryButton = styled(Button)(({ theme }) => ({
+    margin: 5,
+    boxShadow: "0 0px 15px #7F00FF",
+    border: "0.75px solid",
+    borderImage: "linear-gradient(to right, #7F00FF, #0000FF)",
+    borderImageSlice: 1,
+  }));
+
+  const NoBorderButton = styled(Button)(({ theme }) => ({
+    border: "none",
+    boxShadow: "none",
+    borderImage: "none",
+    borderImageSlice: "0",
+    transition: "all 0.3s ease-in-out",
+    "&:hover": {
+      boxShadow: "0 0px 15px #7F00FF",
+      border: "0.75px solid",
+      borderImage: "linear-gradient(to right, #7F00FF, #0000FF)",
+      borderImageSlice: "1",
+    },
+  }));
+
+  const IconBox = styled(Box)(({ theme }) => ({
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    margin: 4,
   }));
 
   return (
     <ThemeProvider theme={biohackersTheme}>
       <MainContainer>
+        {/* Color Palette */}
+
         <Box sx={{ textTransform: "uppercase", m: "1rem" }}>
           <Typography variant="overline">Colors (First Row Primary)</Typography>
         </Box>
@@ -83,25 +215,31 @@ const StyleGuide = () => {
             <ColorBox sx={{ bgcolor: "primary.main" }}>
               <ColorTypography variant="caption">#7F00FF</ColorTypography>
             </ColorBox>
+
             <ColorBox sx={{ bgcolor: "primary.dark" }}>
               <ColorTypography variant="caption">#6100f0</ColorTypography>
             </ColorBox>
+
             <ColorBox sx={{ bgcolor: "primary.light" }}>
               <ColorTypography variant="caption">#ac6cff</ColorTypography>
             </ColorBox>
           </ColorBoxContainer>
+
           <Typography variant="body2">Secondary</Typography>
           <ColorBoxContainer>
             <ColorBox sx={{ bgcolor: "secondary.main" }}>
               <ColorTypography variant="caption">#0000FF</ColorTypography>
             </ColorBox>
+
             <ColorBox sx={{ bgcolor: "secondary.dark" }}>
               <ColorTypography variant="caption">#0000f9</ColorTypography>
             </ColorBox>
+
             <ColorBox sx={{ bgcolor: "secondary.light" }}>
               <ColorTypography variant="caption">#5013ff</ColorTypography>
             </ColorBox>
           </ColorBoxContainer>
+
           <Typography variant="body2">Error</Typography>
           <ColorBoxContainer>
             <ColorBox sx={{ bgcolor: "error.main" }}>
@@ -109,6 +247,9 @@ const StyleGuide = () => {
             </ColorBox>
           </ColorBoxContainer>
         </Container>
+
+        {/* Font Options */}
+
         <Box sx={{ textTransform: "uppercase", m: "1rem" }}>
           <Typography variant="overline">Fonts (Responsive)</Typography>
         </Box>
@@ -188,56 +329,357 @@ const StyleGuide = () => {
           </Box>
         </Container>
         <Container sx={{ m: "1rem", alignContent: "center" }}>
-          <Box sx={{ textTransform: "capitalize" }}>
+          <Box>
             <Typography variant="overline">
               Overline: Lorem ipsum dolor sit amet, consectetur adipiscing elit,
               sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
             </Typography>
           </Box>
         </Container>
+
+        {/* Form Options */}
+
         <Box sx={{ textTransform: "uppercase", m: "1rem" }}>
           <Typography variant="overline">Forms</Typography>
         </Box>
         <Container>
           <StyledTextField helperText="Required Input" label="Name" required />
+
           <StyledTextField helperText="No Required Sample" label="Input" />
-          <StyledTextField helperText="Error Sample" label="Error" error />
-          <StyledTextField helperText="Filled Sample" label="Filled" filled />
-          <StyledTextField
+
+          <ErrorTextField helperText="Error Sample" label="Error" error />
+
+          <DisabledTextField
             helperText="Disabled Sample"
             label="Disabled"
             disabled
           />
         </Container>
+
+        {/* Card Options */}
+        <Box sx={{ textTransform: "uppercase", m: "1rem" }}>
+          <Typography variant="overline">Cards</Typography>
+        </Box>
+
+        <PrimaryCard
+  sx={{
+    backgroundImage: "url(https://picsum.photos/300)",
+    width: 250,
+    height: 450,
+    display: "flex",
+    flexDirection: "column",
+    backgroundRepeat: "no-repeat",
+    justifyContent: "flex-end",
+    padding: 2,
+    boxShadow: "0 8px 16px rgba(0, 0, 0, 0.3)",
+    position: "relative",
+  }}
+>
+  <Button
+    sx={{
+      position: "absolute",
+      top: 0,
+      right: 0,
+      margin: 1,
+    }}
+    variant="contained"
+    color="primary"
+  >
+    <AddShoppingCartRoundedIcon/>
+  </Button>
+  <Typography gutterBottom variant="h6">
+    Price $$
+  </Typography>
+  <Typography variant="h3">
+    Product Name
+  </Typography>
+  <Typography variant="body1">
+    Product Description
+  </Typography>
+</PrimaryCard>
+
+
+
+
+        {/* Button Options */}
+
         <Box sx={{ textTransform: "uppercase", m: "1rem" }}>
           <Typography variant="overline">Buttons</Typography>
         </Box>
         <Container>
-          <HeroButton
-            variant="contained"
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "space-around",
+              alignItems: "center",
+            }}
           >
-            <Typography variant="h4">Hero CTA</Typography>
-          </HeroButton>
-          <Button variant="contained" size="medium">
-            Primary
-          </Button>
-          <Button variant="contained" size="medium">
-            Secondary
-          </Button>
-          <Button variant="outlined" size="medium">
-            Tertiary
-          </Button>
-          <Button variant="contained" color="success">
-            Success
-          </Button>
-          <Button variant="contained" color="error">
-            Danger/Error
-          </Button>
-          <Button size="medium">Link</Button>
+            <HeroButton variant="contained">
+              <Typography variant="h4">Hero CTA</Typography>
+            </HeroButton>
+            <HeroButton variant="contained" startIcon={<HomeRoundedIcon />}>
+              <Typography variant="h4">Hero CTA</Typography>
+            </HeroButton>
+          </Box>
+
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "space-around",
+              alignItems: "center",
+            }}
+          >
+            <PrimaryButton variant="contained" size="medium">
+              Primary
+            </PrimaryButton>
+            <PrimaryButton
+              variant="contained"
+              size="medium"
+              startIcon={<AddPhotoAlternateRoundedIcon />}
+            >
+              Primary
+            </PrimaryButton>
+          </Box>
+
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "space-around",
+              alignItems: "center",
+            }}
+          >
+            <SecondaryButton variant="contained" size="medium">
+              Secondary
+            </SecondaryButton>
+            <SecondaryButton
+              variant="contained"
+              size="medium"
+              endIcon={<SendIcon />}
+            >
+              Secondary
+            </SecondaryButton>
+          </Box>
+
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "space-around",
+              alignItems: "center",
+            }}
+          >
+            <TertiaryButton variant="outlined" size="medium">
+              Tertiary
+            </TertiaryButton>
+            <TertiaryButton
+              variant="outlined"
+              size="medium"
+              startIcon={<AddPhotoAlternateRoundedIcon />}
+            >
+              Tertiary
+            </TertiaryButton>
+          </Box>
+
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "space-around",
+              alignItems: "center",
+            }}
+          >
+            <Button
+              variant="contained"
+              color="success"
+              style={{
+                boxShadow: "0 0px 15px #2E7D32",
+              }}
+            >
+              Success
+            </Button>
+            <Button
+              variant="contained"
+              color="success"
+              style={{
+                boxShadow: "0 0px 15px #2E7D32",
+              }}
+              endIcon={<ThumbUpIcon />}
+            >
+              Success
+            </Button>
+          </Box>
+
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "space-around",
+              alignItems: "center",
+            }}
+          >
+            <Button
+              variant="contained"
+              color="error"
+              style={{
+                boxShadow: "0 0px 15px #EA0000",
+              }}
+            >
+              Danger/Error
+            </Button>
+            <Button
+              variant="contained"
+              color="error"
+              style={{
+                boxShadow: "0 0px 15px #EA0000",
+              }}
+              startIcon={<ReportGmailerrorredIcon />}
+            >
+              Danger/Error
+            </Button>
+          </Box>
+
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "space-around",
+              alignItems: "center",
+            }}
+          >
+            <NoBorderButton size="medium">Link</NoBorderButton>
+            <NoBorderButton
+              size="medium"
+              startIcon={<AddPhotoAlternateRoundedIcon />}
+            >
+              Link
+            </NoBorderButton>
+          </Box>
         </Container>
+
+        {/* Icons */}
+
         <Box sx={{ textTransform: "uppercase", m: "1rem" }}>
           <Typography variant="overline">Icons</Typography>
         </Box>
+        <Container>
+          <Box sx={{ display: "flex" }}>
+            <IconBox>
+              <AccountCircleRoundedIcon />
+              <Typography variant="overline" sx={{ fontSize: "0.5rem" }}>
+                Account
+              </Typography>
+            </IconBox>
+
+            <IconBox>
+              <ShoppingCartRoundedIcon />
+              <Typography variant="overline" sx={{ fontSize: "0.5rem" }}>
+                Cart
+              </Typography>
+            </IconBox>
+
+            <IconBox>
+              <AddShoppingCartRoundedIcon />
+              <Typography variant="overline" sx={{ fontSize: "0.5rem" }}>
+                Add to Cart
+              </Typography>
+            </IconBox>
+
+            <IconBox>
+              <HomeRoundedIcon />
+              <Typography variant="overline" sx={{ fontSize: "0.5rem" }}>
+                Home
+              </Typography>
+            </IconBox>
+
+            <IconBox>
+              <LocalPhoneRoundedIcon />
+              <Typography variant="overline" sx={{ fontSize: "0.5rem" }}>
+                Phone
+              </Typography>
+            </IconBox>
+
+            <IconBox>
+              <MenuRoundedIcon />
+              <Typography variant="overline" sx={{ fontSize: "0.5rem" }}>
+                Menu
+              </Typography>
+            </IconBox>
+
+            <IconBox>
+              <FilterAltRoundedIcon />
+              <Typography variant="overline" sx={{ fontSize: "0.5rem" }}>
+                Filter
+              </Typography>
+            </IconBox>
+
+            <IconBox>
+              <StarBorderRoundedIcon />
+              <Typography variant="overline" sx={{ fontSize: "0.5rem" }}>
+                Empty Star
+              </Typography>
+            </IconBox>
+
+            <IconBox>
+              <StarRoundedIcon />
+              <Typography variant="overline" sx={{ fontSize: "0.5rem" }}>
+                Star
+              </Typography>
+            </IconBox>
+
+            <IconBox>
+              <LocationOnRoundedIcon />
+              <Typography variant="overline" sx={{ fontSize: "0.5rem" }}>
+                Location
+              </Typography>
+            </IconBox>
+
+            <IconBox>
+              <ModeEditOutlineRoundedIcon />
+              <Typography variant="overline" sx={{ fontSize: "0.5rem" }}>
+                Edit
+              </Typography>
+            </IconBox>
+
+            <IconBox>
+              <LockRoundedIcon />
+
+              <Typography variant="overline" sx={{ fontSize: "0.5rem" }}>
+                Lock
+              </Typography>
+            </IconBox>
+
+            <IconBox>
+              <LeaderboardRoundedIcon />
+
+              <Typography variant="overline" sx={{ fontSize: "0.5rem" }}>
+                Graph
+              </Typography>
+            </IconBox>
+
+            <IconBox>
+              <InsightsRoundedIcon />
+
+              <Typography variant="overline" sx={{ fontSize: "0.5rem" }}>
+                Insights
+              </Typography>
+            </IconBox>
+
+            <IconBox>
+              <AddPhotoAlternateRoundedIcon />
+
+              <Typography variant="overline" sx={{ fontSize: "0.5rem" }}>
+                Add Photo
+              </Typography>
+            </IconBox>
+
+            <IconBox>
+              <SearchRoundedIcon />
+
+              <Typography variant="overline" sx={{ fontSize: "0.5rem" }}>
+                Search
+              </Typography>
+            </IconBox>
+          </Box>
+        </Container>
+
+        {/* Logo Options */}
+
         <Box sx={{ textTransform: "uppercase", m: "1rem" }}>
           <Typography variant="overline">Logos</Typography>
         </Box>
