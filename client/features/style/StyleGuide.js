@@ -9,11 +9,8 @@ import {
   TextField,
   Button,
   Card,
-  CardMedia,
-  CardActionArea,
-  CardContent,
-  CardActions,
 } from "@mui/material";
+import { DataGrid } from "@mui/x-data-grid";
 
 import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 import SendIcon from "@mui/icons-material/Send";
@@ -39,32 +36,7 @@ import SearchRoundedIcon from "@mui/icons-material/SearchRounded";
 // I've made everything into themes so you should be able to import most of these functions into the components
 
 const StyleGuide = () => {
-  const MainContainer = styled(Container)(({ theme }) => ({
-    width: "100%",
-    backgroundColor: theme.palette.background.default,
-    color: theme.palette.text.primary,
-    padding: 4,
-  }));
-
-  const ColorBoxContainer = styled(Container)(({ theme }) => ({
-    display: "flex",
-    margin: 4,
-    alignItems: "center",
-  }));
-
-  const ColorBox = styled(Box)(({ theme }) => ({
-    width: 48,
-    height: 48,
-    padding: 8,
-    margin: 4,
-    borderRadius: 4,
-    color: theme.palette.primary.contrastText,
-  }));
-
-  const ColorTypography = styled(Typography)(({ theme }) => ({
-    textTransform: "uppercase",
-    color: theme.palette.primary.contrastText,
-  }));
+  // TextField Design
 
   const StyledTextField = styled(TextField)(({ theme }) => ({
     margin: 4,
@@ -141,13 +113,52 @@ const StyleGuide = () => {
     },
   }));
 
+  // Card Design
+
   const PrimaryCard = styled(Card)(({ theme }) => ({
+    width: 300,
+    height: 300,
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "flex-end",
+    padding: 2,
+    position: "relative",
+    backgroundImage: "url(https://picsum.photos/300)",
+    backgroundRepeat: "no-repeat",
+    backgroundSize: "cover",
     boxShadow: "0 0px 15px #7F00FF",
     border: "0.75px solid",
     borderImage: "linear-gradient(to right, #7F00FF, #0000FF)",
     borderImageSlice: 1,
-    background: "transparent"
+    padding: 20,
+    margin: 4,
   }));
+
+  const CornerButton = styled(Button)(({ theme }) => ({
+    position: "absolute",
+    top: theme.spacing(1),
+    right: theme.spacing(1),
+    margin: theme.spacing(1),
+    borderRadius: 40,
+    boxShadow: "0 0px 15px #7F00FF",
+  }));
+
+  const ProductName = styled(Typography)(({ theme }) => ({
+    color: theme.palette.text.primary,
+    fontSize: "2rem",
+    fontWeight: 500,
+  }));
+
+  const ProductDescription = styled(Typography)(({ theme }) => ({
+    color: theme.palette.text.primary,
+  }));
+
+  const Price = styled(Typography)(({ theme }) => ({
+    color: theme.palette.text.primary,
+    marginBottom: theme.spacing(2),
+  }));
+
+  // Button Design
 
   const HeroButton = styled(Button)(({ theme }) => ({
     margin: 10,
@@ -193,12 +204,74 @@ const StyleGuide = () => {
     },
   }));
 
+  // Other
+
   const IconBox = styled(Box)(({ theme }) => ({
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
     margin: 4,
+  }));
+
+  const columns = [
+    { field: "id", headerName: "ID", width: 70 },
+    { field: "firstName", headerName: "First name", width: 130 },
+    { field: "lastName", headerName: "Last name", width: 130 },
+    {
+      field: "age",
+      headerName: "Age",
+      type: "number",
+      width: 90,
+    },
+    {
+      field: "fullName",
+      headerName: "Full name",
+      description: "This column has a value getter and is not sortable.",
+      sortable: false,
+      width: 160,
+      valueGetter: (params) =>
+        `${params.row.firstName || ""} ${params.row.lastName || ""}`,
+    },
+  ];
+
+  const rows = [
+    { id: 1, lastName: "Snow", firstName: "Jon", age: 35 },
+    { id: 2, lastName: "Lannister", firstName: "Cersei", age: 42 },
+    { id: 3, lastName: "Lannister", firstName: "Jaime", age: 45 },
+    { id: 4, lastName: "Stark", firstName: "Arya", age: 16 },
+    { id: 5, lastName: "Targaryen", firstName: "Daenerys", age: null },
+    { id: 6, lastName: "Melisandre", firstName: null, age: 150 },
+    { id: 7, lastName: "Clifford", firstName: "Ferrara", age: 44 },
+    { id: 8, lastName: "Frances", firstName: "Rossini", age: 36 },
+    { id: 9, lastName: "Roxie", firstName: "Harvey", age: 65 },
+  ];
+
+  const MainContainer = styled(Container)(({ theme }) => ({
+    width: "100%",
+    backgroundColor: theme.palette.background.default,
+    color: theme.palette.text.primary,
+    padding: 4,
+  }));
+
+  const ColorBoxContainer = styled(Container)(({ theme }) => ({
+    display: "flex",
+    margin: 4,
+    alignItems: "center",
+  }));
+
+  const ColorBox = styled(Box)(({ theme }) => ({
+    width: 48,
+    height: 48,
+    padding: 8,
+    margin: 4,
+    borderRadius: 4,
+    color: theme.palette.primary.contrastText,
+  }));
+
+  const ColorTypography = styled(Typography)(({ theme }) => ({
+    textTransform: "uppercase",
+    color: theme.palette.primary.contrastText,
   }));
 
   return (
@@ -361,45 +434,18 @@ const StyleGuide = () => {
           <Typography variant="overline">Cards</Typography>
         </Box>
 
-        <PrimaryCard
-  sx={{
-    backgroundImage: "url(https://picsum.photos/300)",
-    width: 250,
-    height: 450,
-    display: "flex",
-    flexDirection: "column",
-    backgroundRepeat: "no-repeat",
-    justifyContent: "flex-end",
-    padding: 2,
-    boxShadow: "0 8px 16px rgba(0, 0, 0, 0.3)",
-    position: "relative",
-  }}
->
-  <Button
-    sx={{
-      position: "absolute",
-      top: 0,
-      right: 0,
-      margin: 1,
-    }}
-    variant="contained"
-    color="primary"
-  >
-    <AddShoppingCartRoundedIcon/>
-  </Button>
-  <Typography gutterBottom variant="h6">
-    Price $$
-  </Typography>
-  <Typography variant="h3">
-    Product Name
-  </Typography>
-  <Typography variant="body1">
-    Product Description
-  </Typography>
-</PrimaryCard>
-
-
-
+        <PrimaryCard>
+          <CornerButton variant="contained" color="primary">
+            <AddShoppingCartRoundedIcon />
+          </CornerButton>
+          <Price gutterBottom variant="h6">
+            Price $$
+          </Price>
+          <ProductName variant="h3">Product Name</ProductName>
+          <ProductDescription variant="body1">
+            Product Description
+          </ProductDescription>
+        </PrimaryCard>
 
         {/* Button Options */}
 
@@ -678,10 +724,34 @@ const StyleGuide = () => {
           </Box>
         </Container>
 
-        {/* Logo Options */}
+        {/* Tables Options */}
 
         <Box sx={{ textTransform: "uppercase", m: "1rem" }}>
-          <Typography variant="overline">Logos</Typography>
+          <Typography variant="overline">Tables</Typography>
+        </Box>
+
+        <Box
+          sx={{
+            height: 400,
+            width: "100%",
+            backgroundColor: "#FFFFFF",
+            color: "#000000",
+          }}
+        >
+          <DataGrid
+            rows={rows}
+            columns={columns}
+            initialState={{
+              pagination: {
+                paginationModel: {
+                  pageSize: 5,
+                },
+              },
+            }}
+            pageSizeOptions={[5]}
+            checkboxSelection
+            disableRowSelectionOnClick
+          />
         </Box>
       </MainContainer>
     </ThemeProvider>
