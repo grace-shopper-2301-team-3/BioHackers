@@ -4,8 +4,6 @@ const db = require('./db')
 const Category = require('./models/Category')
 const Product = require('./models/Product')
 const User = require('./models/User')
-const AdminType = require('./models/AdminType')
-const AdminUser = require('./models/AdminUser')
 
 //associations could go here!
 // Product.belongsTo(Category)
@@ -22,16 +20,12 @@ const AdminUser = require('./models/AdminUser')
 // Ref: "order_items"."order_id" > "order_details"."id"
 // Ref: "users"."id" < "order_details"."user_id"
 // Ref: "order_details"."payment_id" - "payment_details"."id"
-// Ref: "admin_type"."id" - "admin_user"."type_id"
-// Ref: "users"."admin_id" - "admin_user"."id"
 
 module.exports = {
   db,
   models: {
     User,
     Product,
-    Category,
-    AdminType,
-    AdminUser
+    Category
   },
 }

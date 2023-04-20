@@ -4,8 +4,6 @@ const { db } = require("../server/db");
 const Product = require("../server/db/models/Product");
 const Category = require("../server/db/models/Category");
 const User = require("../server/db/models/User");
-const AdminType = require("../server/db/models/AdminType");
-const AdminUser = require("../server/db/models/AdminUser");
 
 async function seed() {
   await db.sync({ force: true }); // clears db and matches models to tables
@@ -212,70 +210,11 @@ async function seed() {
         "Devices worn by user or infused in muscularskeletal system to enhance physical attributes.",
     }),
   ]);
-
-  const adminTypes = await Promise.all([
-    AdminType.create({
-      adminType: "Super Admin",
-      permissions: {
-        canEditUsers: true,
-        canDeleteUsers: true,
-        canEditProducts: true,
-        canDeleteProducts: true,
-      },
-    }),
-    AdminType.create({
-      adminType: "Admin",
-      permissions: {
-        canEditUsers: true,
-        canDeleteUsers: false,
-        canEditProducts: true,
-        canDeleteProducts: false,
-      },
-    }),
-    AdminType.create({
-      adminType: "Analyst",
-      permissions: {
-        canEditUsers: false,
-        canDeleteUsers: false,
-        canEditProducts: false,
-        canDeleteProducts: false,
-      },
-    }),
-  ]);
-
-  const adminUsers = await Promise.all([
-    AdminUser.create({
-      username: "john_doe",
-      password: "password123",
-      firstname: "John",
-      lastname: "Doe",
-      lastlogin: new Date(),
-      adminTypeId: 1,
-    }),
-    AdminUser.create({
-      username: "jane_smith",
-      password: "password456",
-      firstname: "Jane",
-      lastname: "Smith",
-      lastlogin: new Date(),
-      adminTypeId: 2,
-    }),
-    AdminUser.create({
-      username: "bob_johnson",
-      password: "password789",
-      firstname: "Bob",
-      lastname: "Johnson",
-      lastlogin: new Date(),
-      adminTypeId: 3,
-    }),
-  ]);
   
 
   console.log(`seeded ${users.length} users`);
   console.log(`seeded ${products.length} products`);
   console.log(`seeded ${categories.length} categories`);
-  console.log(`seeded ${adminTypes.length} admin types`);
-  console.log(`seeded ${adminUsers.length} admins`);
   console.log(`seeded successfully`);
 }
 
