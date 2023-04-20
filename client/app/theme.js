@@ -10,8 +10,8 @@ let biohackersTheme = createTheme({
     },
     secondary: {
       main: "#0000ff",
-      dark: "#0000f9",
-      light: "#5013ff",
+      light: "#00bfff",
+      dark: "#ff00ff",
       contrastText: "#FFFFFF",
     },
     text: {
