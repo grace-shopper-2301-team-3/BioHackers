@@ -39,6 +39,9 @@ const SingleUser = () => {
                     {/* order h/o component? */}
                 </ul>
                 {/* eventually create edit button and editUser component */}
+                
+                {/* <Link to={`/users/${id}/edit`}><button>Edit Profile</button></Link> */}
+
                 <button
                     type="button"
                     onClick={logoutAndRedirectHome}

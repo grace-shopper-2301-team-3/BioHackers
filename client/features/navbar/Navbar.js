@@ -1,7 +1,9 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
+import {  Link, useNavigate } from 'react-router-dom';
 import { logout } from '../../app/store';
+import Cart from '../cart/Cart'
+
 
 
 const Navbar = () => {
@@ -27,6 +29,8 @@ const Navbar = () => {
             {/* The navbar will show these links after you log in */}
             <Link to="/home">Home</Link>
             <Link to={`/users/${id}`}>Profile</Link>
+            <Link to='/cart' element={<Cart name='cart' displayName='Cart' />}> Cart </Link>
+
             {isAdmin && (
               <>
                 <Link to="/users">Users</Link>
@@ -39,6 +43,9 @@ const Navbar = () => {
         ) : (
           <div>
             {/* The navbar will show these links before you log in */}
+            <Link to='/'>Home</Link>
+            <Link to= '/products'>Products</Link>
+            <Link to= '/categories'>Categories</Link>
             <Link to="/login">Login</Link>
             <Link to="/signup">Sign Up</Link>
           </div>
