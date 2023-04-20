@@ -10,7 +10,7 @@ import {
   Button,
   Card,
 } from "@mui/material";
-import { DataGrid, gridColumnMenuSelector } from "@mui/x-data-grid";
+import { DataGrid } from "@mui/x-data-grid";
 
 import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 import SendIcon from "@mui/icons-material/Send";
@@ -458,6 +458,7 @@ const StyleGuide = () => {
         </Container>
 
         {/* Card Options */}
+        
         <Box sx={{ textTransform: "uppercase", m: "1rem" }}>
           <Typography variant="overline">Cards</Typography>
         </Box>
