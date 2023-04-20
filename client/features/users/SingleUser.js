@@ -19,36 +19,40 @@ const SingleUser = () => {
         dispatch(fetchSingleUser(id));
     }, [dispatch]);
 
-    //logout functionality for logout button in single user page
     const logoutAndRedirectHome = () => {
         dispatch(logout());
         navigate("/");
     };
 
+    console.log('This is the id #', id);
+
     return (
         <div>
-            <div>
-                <h3>
-                    User Profile
-                </h3>
-                <ul>
-                    <li>First Name: {firstName}</li>
-                    <li>Last Name: {lastName}</li>
-                    <li>Username: {username}</li>
-                    <li>Email: {email}</li>
-                    {/* order h/o component? */}
-                </ul>
-                {/* eventually create edit button and editUser component */}
-                
-                {/* <Link to={`/users/${id}/edit`}><button>Edit Profile</button></Link> */}
+            <h2>User Profile</h2>
+            <span>
+                <h4>Username:</h4>
+                <p>{username}</p>
+            </span>
+            <span>
+                <h4>First Name:</h4>
+                <p>{firstName}</p>
+            </span>
+            <span>
+                <h4>Last Name:</h4>
+                <p>{lastName}</p>
+            </span>
+            <span>
+                <h4>E-mail:</h4>
+                <p>{email}</p>
+            </span>
+            <span>
+                <Link to={`/users/${id}/edit`}><button>Edit Profile</button></Link>
 
-                <button
-                    type="button"
-                    onClick={logoutAndRedirectHome}
-                >
-                    Logout
-                </button>
-            </div>
+                <br />
+                <br />
+
+                <button type="button" onClick={logoutAndRedirectHome}>Logout</button>
+            </span>
         </div>
     );
 }

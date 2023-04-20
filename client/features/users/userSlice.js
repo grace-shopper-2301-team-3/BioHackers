@@ -23,12 +23,7 @@ export const fetchSingleUser = createAsyncThunk('users/fetchSingle', async (id) 
     }
 });
 
-/* There is no POST route to create user bc this is done in authSlice 
-- (had to disable allowNull for User Model bc sign up only has username and password)
-    1) either we can include firstName, lastName, email in Sign Up form. 
-    2)or we can update the user info from Single User profile page.
-*/
-//technically this code is not needed but keeping it in for now
+//create user
 export const createUser = createAsyncThunk(
     "createUser",
     async ({ firstName, lastName, username, password }) => {
@@ -47,7 +42,6 @@ export const updateUser = createAsyncThunk('users/update', async ({ id, username
     try {
         const { data } = await axios.put(`/api/users/${id}`, {
             username,
-            password,
             firstName,
             lastName,
             email,
@@ -91,7 +85,7 @@ export const userSlice = createSlice({
             state.allUsers.push(action.payload);
         });
         builder.addCase(updateUser.fulfilled, (state, action) => {
-            state.singleUser.push(action.payload);
+            state.singleUser = action.payload;
         });
         builder.addCase(deleteUser.fulfilled, (state, action) => {
             state.allUsers = state.allUsers.filter(user => user.id!== action.payload);
