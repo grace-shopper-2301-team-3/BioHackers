@@ -10,6 +10,7 @@ import {
   Button,
   Card,
 } from "@mui/material";
+
 import { DataGrid } from "@mui/x-data-grid";
 
 import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
@@ -32,269 +33,268 @@ import InsightsRoundedIcon from "@mui/icons-material/InsightsRounded";
 import AddPhotoAlternateRoundedIcon from "@mui/icons-material/AddPhotoAlternateRounded";
 import SearchRoundedIcon from "@mui/icons-material/SearchRounded";
 
-// The goal of this file is to make it easier to understand how to leverage Material UI
-// I've made everything into themes so you should be able to import most of these functions into the components
+const MainContainer = styled(Container)(({ theme }) => ({
+  width: "100%",
+  backgroundColor: theme.palette.background.default,
+  color: theme.palette.text.primary,
+  padding: 4,
+}));
+
+// TextField Design
+
+const StyledTextField = styled(TextField)(({ theme }) => ({
+  margin: 4,
+  "& .MuiInputBase-input": {
+    color: theme.palette.text.primary,
+  },
+  "& .MuiInputBase-input::placeholder": {
+    color: "#7f00ff",
+  },
+  "& .MuiOutlinedInput-root": {
+    "& fieldset": {
+      borderColor: theme.palette.primary.main,
+      boxShadow: "0 0px 20px #7F00FF",
+    },
+    "&:hover fieldset": {
+      borderColor: theme.palette.primary.dark,
+      boxShadow: "0 0px 20px #7F00FF",
+    },
+  },
+  "& .MuiFormHelperText-root": {
+    color: "#7f00ff",
+    fontSize: "0.75rem",
+    letterSpacing: "0.03333em",
+  },
+}));
+
+const ErrorTextField = styled(TextField)(({ theme }) => ({
+  margin: 4,
+  "& .MuiInputBase-input": {
+    color: theme.palette.error.main,
+  },
+  "& .MuiInputBase-input::placeholder": {
+    color: theme.palette.error.main,
+  },
+  "& .MuiOutlinedInput-root": {
+    "& fieldset": {
+      borderColor: theme.palette.error.main,
+      boxShadow: "0 0px 20px #EA0000",
+    },
+    "&:hover fieldset": {
+      borderColor: theme.palette.error.main,
+      boxShadow: "0 0px 20px #EA0000",
+    },
+  },
+  "& .MuiFormHelperText-root": {
+    color: "#EA0000",
+    fontSize: "0.75rem",
+    letterSpacing: "0.03333em",
+  },
+}));
+
+const DisabledTextField = styled(TextField)(({ theme }) => ({
+  margin: 4,
+  "& .MuiInputBase-input": {
+    color: theme.palette.secondary.dark,
+  },
+  "& .MuiInputBase-input::placeholder": {
+    color: theme.palette.secondary.dark,
+  },
+  "& .MuiOutlinedInput-root": {
+    "& fieldset": {
+      borderColor: theme.palette.secondary.dark,
+      boxShadow: "0 0px 20px #0000f9",
+    },
+    "&:hover fieldset": {
+      borderColor: theme.palette.secondary.dark,
+      boxShadow: "0 0px 20px #0000f9",
+    },
+  },
+  "& .MuiFormHelperText-root": {
+    color: "#0000f9",
+    fontSize: "0.75rem",
+    letterSpacing: "0.03333em",
+  },
+}));
+
+// Card Design
+
+const CardOne = styled(Card)(({ theme }) => ({
+  width: 300,
+  height: 300,
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "flex-end",
+  padding: 2,
+  position: "relative",
+  backgroundImage: "url(https://picsum.photos/300)",
+  backgroundRepeat: "no-repeat",
+  backgroundSize: "cover",
+  boxShadow: "0 0px 15px #7F00FF",
+  border: "0.75px solid",
+  borderImage: "linear-gradient(to right, #7F00FF, #0000FF)",
+  borderImageSlice: 1,
+  padding: 20,
+  margin: 4,
+}));
+
+const CornerButton = styled(Button)(({ theme }) => ({
+  position: "absolute",
+  top: theme.spacing(1),
+  right: theme.spacing(1),
+  margin: theme.spacing(1),
+  borderRadius: 40,
+  boxShadow: "0 0px 15px #7F00FF",
+}));
+
+const ProductName = styled(Typography)(({ theme }) => ({
+  color: theme.palette.text.primary,
+  fontSize: "2rem",
+  fontWeight: 500,
+}));
+
+const ProductDescription = styled(Typography)(({ theme }) => ({
+  color: theme.palette.text.primary,
+}));
+
+const Price = styled(Typography)(({ theme }) => ({
+  color: theme.palette.text.primary,
+  marginBottom: theme.spacing(2),
+}));
+
+const CardTwo = styled(Card)(({ theme }) => ({
+  width: 300,
+  height: 300,
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "flex-end",
+  padding: 2,
+  position: "relative",
+  boxShadow: "0 0px 15px #7F00FF",
+  border: "0.75px solid",
+  borderImage: "linear-gradient(to right, #7F00FF, #0000FF)",
+  borderImageSlice: 1,
+  background: "transparent",
+  padding: 20,
+  margin: 4,
+}));
+
+const ImageBox = styled(Box)(({ theme }) => ({
+  width: "100%",
+  height: 200,
+  marginBottom: theme.spacing(2),
+  backgroundImage: "url(https://picsum.photos/300)",
+  backgroundRepeat: "no-repeat",
+  backgroundSize: "cover",
+}));
+
+// Button Design
+
+const HeroButton = styled(Button)(({ theme }) => ({
+  margin: 10,
+  padding: "12px 30px",
+  borderRadius: 40,
+  borderBottomLeftRadius: 0,
+  borderTopRightRadius: 0,
+  textTransform: "uppercase",
+  boxShadow: "0 0px 20px #7F00FF",
+}));
+
+const PrimaryButton = styled(Button)(({ theme }) => ({
+  margin: 8,
+  textTransform: "capitalize",
+  boxShadow: "0 0px 15px #7F00FF",
+}));
+
+const SecondaryButton = styled(Button)(({ theme }) => ({
+  margin: 5,
+  borderRadius: 40,
+  boxShadow: "0 0px 15px #7F00FF",
+}));
+
+const TertiaryButton = styled(Button)(({ theme }) => ({
+  margin: 5,
+  boxShadow: "0 0px 15px #7F00FF",
+  border: "0.75px solid",
+  borderImage: "linear-gradient(to right, #7F00FF, #0000FF)",
+  borderImageSlice: 1,
+}));
+
+const NoBorderButton = styled(Button)(({ theme }) => ({
+  border: "none",
+  boxShadow: "none",
+  borderImage: "none",
+  borderImageSlice: "0",
+  transition: "all 0.3s ease-in-out",
+  "&:hover": {
+    boxShadow: "0 0px 15px #7F00FF",
+    border: "0.75px solid",
+    borderImage: "linear-gradient(to right, #7F00FF, #0000FF)",
+    borderImageSlice: "1",
+  },
+}));
+
+// Other
+
+const IconBox = styled(Box)(({ theme }) => ({
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "center",
+  alignItems: "center",
+  margin: 4,
+}));
+
+const columns = [
+  { field: "id", headerName: "ID", width: 70 },
+  { field: "firstName", headerName: "First name", width: 130 },
+  { field: "lastName", headerName: "Last name", width: 130 },
+  { field: "age", headerName: "Age", type: "number", width: 90 },
+  {
+    field: "fullName",
+    headerName: "Full name",
+    description: "This column has a value getter and is not sortable.",
+    sortable: false,
+    width: 160,
+    valueGetter: (params) =>
+      `${params.row.firstName || ""} ${params.row.lastName || ""}`,
+  },
+];
+
+const rows = [
+  { id: 1, lastName: "Snow", firstName: "Jon", age: 35 },
+  { id: 2, lastName: "Lannister", firstName: "Cersei", age: 42 },
+  { id: 3, lastName: "Lannister", firstName: "Jaime", age: 45 },
+  { id: 4, lastName: "Stark", firstName: "Arya", age: 16 },
+  { id: 5, lastName: "Targaryen", firstName: "Daenerys", age: null },
+  { id: 6, lastName: "Melisandre", firstName: null, age: 150 },
+  { id: 7, lastName: "Clifford", firstName: "Ferrara", age: 44 },
+  { id: 8, lastName: "Frances", firstName: "Rossini", age: 36 },
+  { id: 9, lastName: "Roxie", firstName: "Harvey", age: 65 },
+];
+
+const ColorBoxContainer = styled(Container)(({ theme }) => ({
+  display: "flex",
+  margin: 4,
+  alignItems: "center",
+}));
+
+const ColorBox = styled(Box)(({ theme }) => ({
+  width: 48,
+  height: 48,
+  padding: 8,
+  margin: 4,
+  borderRadius: 4,
+  color: theme.palette.primary.contrastText,
+}));
+
+const ColorTypography = styled(Typography)(({ theme }) => ({
+  textTransform: "uppercase",
+  color: theme.palette.primary.contrastText,
+}));
+
+export { MainContainer, StyledTextField, ErrorTextField, DisabledTextField, CardOne, CardTwo, CornerButton, ProductName, ProductDescription, Price, PrimaryButton, SecondaryButton, TertiaryButton, NoBorderButton}
 
 const StyleGuide = () => {
-  // TextField Design
-
-  const StyledTextField = styled(TextField)(({ theme }) => ({
-    margin: 4,
-    "& .MuiInputBase-input": {
-      color: theme.palette.text.primary,
-    },
-    "& .MuiInputBase-input::placeholder": {
-      color: "#7f00ff",
-    },
-    "& .MuiOutlinedInput-root": {
-      "& fieldset": {
-        borderColor: theme.palette.primary.main,
-        boxShadow: "0 0px 20px #7F00FF",
-      },
-      "&:hover fieldset": {
-        borderColor: theme.palette.primary.dark,
-        boxShadow: "0 0px 20px #7F00FF",
-      },
-    },
-    "& .MuiFormHelperText-root": {
-      color: "#7f00ff",
-      fontSize: "0.75rem",
-      letterSpacing: "0.03333em",
-    },
-  }));
-
-  const ErrorTextField = styled(TextField)(({ theme }) => ({
-    margin: 4,
-    "& .MuiInputBase-input": {
-      color: theme.palette.error.main,
-    },
-    "& .MuiInputBase-input::placeholder": {
-      color: theme.palette.error.main,
-    },
-    "& .MuiOutlinedInput-root": {
-      "& fieldset": {
-        borderColor: theme.palette.error.main,
-        boxShadow: "0 0px 20px #EA0000",
-      },
-      "&:hover fieldset": {
-        borderColor: theme.palette.error.main,
-        boxShadow: "0 0px 20px #EA0000",
-      },
-    },
-    "& .MuiFormHelperText-root": {
-      color: "#EA0000",
-      fontSize: "0.75rem",
-      letterSpacing: "0.03333em",
-    },
-  }));
-
-  const DisabledTextField = styled(TextField)(({ theme }) => ({
-    margin: 4,
-    "& .MuiInputBase-input": {
-      color: theme.palette.secondary.dark,
-    },
-    "& .MuiInputBase-input::placeholder": {
-      color: theme.palette.secondary.dark,
-    },
-    "& .MuiOutlinedInput-root": {
-      "& fieldset": {
-        borderColor: theme.palette.secondary.dark,
-        boxShadow: "0 0px 20px #0000f9",
-      },
-      "&:hover fieldset": {
-        borderColor: theme.palette.secondary.dark,
-        boxShadow: "0 0px 20px #0000f9",
-      },
-    },
-    "& .MuiFormHelperText-root": {
-      color: "#0000f9",
-      fontSize: "0.75rem",
-      letterSpacing: "0.03333em",
-    },
-  }));
-
-  // Card Design
-
-  const CardOne = styled(Card)(({ theme }) => ({
-    width: 300,
-    height: 300,
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "flex-end",
-    padding: 2,
-    position: "relative",
-    backgroundImage: "url(https://picsum.photos/300)",
-    backgroundRepeat: "no-repeat",
-    backgroundSize: "cover",
-    boxShadow: "0 0px 15px #7F00FF",
-    border: "0.75px solid",
-    borderImage: "linear-gradient(to right, #7F00FF, #0000FF)",
-    borderImageSlice: 1,
-    padding: 20,
-    margin: 4,
-  }));
-
-  const CornerButton = styled(Button)(({ theme }) => ({
-    position: "absolute",
-    top: theme.spacing(1),
-    right: theme.spacing(1),
-    margin: theme.spacing(1),
-    borderRadius: 40,
-    boxShadow: "0 0px 15px #7F00FF",
-  }));
-
-  const ProductName = styled(Typography)(({ theme }) => ({
-    color: theme.palette.text.primary,
-    fontSize: "2rem",
-    fontWeight: 500,
-  }));
-
-  const ProductDescription = styled(Typography)(({ theme }) => ({
-    color: theme.palette.text.primary,
-  }));
-
-  const Price = styled(Typography)(({ theme }) => ({
-    color: theme.palette.text.primary,
-    marginBottom: theme.spacing(2),
-  }));
-
-  const CardTwo = styled(Card)(({ theme }) => ({
-    width: 300,
-    height: 300,
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "flex-end",
-    padding: 2,
-    position: "relative",
-    boxShadow: "0 0px 15px #7F00FF",
-    border: "0.75px solid",
-    borderImage: "linear-gradient(to right, #7F00FF, #0000FF)",
-    borderImageSlice: 1,
-    background: "transparent",
-    padding: 20,
-    margin: 4,
-  }));
-
-  const ImageBox = styled(Box)(({ theme }) => ({
-    width: "100%",
-    height: 200,
-    marginBottom: theme.spacing(2),
-    backgroundImage: "url(https://picsum.photos/300)",
-    backgroundRepeat: "no-repeat",
-    backgroundSize: "cover",
-  }));
-
-  // Button Design
-
-  const HeroButton = styled(Button)(({ theme }) => ({
-    margin: 10,
-    padding: "12px 30px",
-    borderRadius: 40,
-    borderBottomLeftRadius: 0,
-    borderTopRightRadius: 0,
-    textTransform: "uppercase",
-    boxShadow: "0 0px 20px #7F00FF",
-  }));
-
-  const PrimaryButton = styled(Button)(({ theme }) => ({
-    margin: 8,
-    textTransform: "capitalize",
-    boxShadow: "0 0px 15px #7F00FF",
-  }));
-
-  const SecondaryButton = styled(Button)(({ theme }) => ({
-    margin: 5,
-    borderRadius: 40,
-    boxShadow: "0 0px 15px #7F00FF",
-  }));
-
-  const TertiaryButton = styled(Button)(({ theme }) => ({
-    margin: 5,
-    boxShadow: "0 0px 15px #7F00FF",
-    border: "0.75px solid",
-    borderImage: "linear-gradient(to right, #7F00FF, #0000FF)",
-    borderImageSlice: 1,
-  }));
-
-  const NoBorderButton = styled(Button)(({ theme }) => ({
-    border: "none",
-    boxShadow: "none",
-    borderImage: "none",
-    borderImageSlice: "0",
-    transition: "all 0.3s ease-in-out",
-    "&:hover": {
-      boxShadow: "0 0px 15px #7F00FF",
-      border: "0.75px solid",
-      borderImage: "linear-gradient(to right, #7F00FF, #0000FF)",
-      borderImageSlice: "1",
-    },
-  }));
-
-  // Other
-
-  const IconBox = styled(Box)(({ theme }) => ({
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
-    margin: 4,
-  }));
-
-  const columns = [
-    { field: "id", headerName: "ID", width: 70 },
-    { field: "firstName", headerName: "First name", width: 130 },
-    { field: "lastName", headerName: "Last name", width: 130 },
-    { field: "age", headerName: "Age", type: "number", width: 90 },
-    {
-      field: "fullName",
-      headerName: "Full name",
-      description: "This column has a value getter and is not sortable.",
-      sortable: false,
-      width: 160,
-      valueGetter: (params) =>
-        `${params.row.firstName || ""} ${params.row.lastName || ""}`,
-    },
-  ];
-
-  const rows = [
-    { id: 1, lastName: "Snow", firstName: "Jon", age: 35 },
-    { id: 2, lastName: "Lannister", firstName: "Cersei", age: 42 },
-    { id: 3, lastName: "Lannister", firstName: "Jaime", age: 45 },
-    { id: 4, lastName: "Stark", firstName: "Arya", age: 16 },
-    { id: 5, lastName: "Targaryen", firstName: "Daenerys", age: null },
-    { id: 6, lastName: "Melisandre", firstName: null, age: 150 },
-    { id: 7, lastName: "Clifford", firstName: "Ferrara", age: 44 },
-    { id: 8, lastName: "Frances", firstName: "Rossini", age: 36 },
-    { id: 9, lastName: "Roxie", firstName: "Harvey", age: 65 },
-  ];
-
-  const MainContainer = styled(Container)(({ theme }) => ({
-    width: "100%",
-    backgroundColor: theme.palette.background.default,
-    color: theme.palette.text.primary,
-    padding: 4,
-  }));
-
-  const ColorBoxContainer = styled(Container)(({ theme }) => ({
-    display: "flex",
-    margin: 4,
-    alignItems: "center",
-  }));
-
-  const ColorBox = styled(Box)(({ theme }) => ({
-    width: 48,
-    height: 48,
-    padding: 8,
-    margin: 4,
-    borderRadius: 4,
-    color: theme.palette.primary.contrastText,
-  }));
-
-  const ColorTypography = styled(Typography)(({ theme }) => ({
-    textTransform: "uppercase",
-    color: theme.palette.primary.contrastText,
-  }));
-
   return (
     <ThemeProvider theme={biohackersTheme}>
       <MainContainer>
@@ -458,7 +458,7 @@ const StyleGuide = () => {
         </Container>
 
         {/* Card Options */}
-        
+
         <Box sx={{ textTransform: "uppercase", m: "1rem" }}>
           <Typography variant="overline">Cards</Typography>
         </Box>
@@ -795,7 +795,8 @@ const StyleGuide = () => {
             initialState={{
               pagination: {
                 paginationModel: {
-                  pageSize: 5                },
+                  pageSize: 5,
+                },
               },
             }}
             pageSizeOptions={[5]}

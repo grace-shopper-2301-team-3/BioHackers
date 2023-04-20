@@ -2,7 +2,24 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updateUser } from "../auth/authSlice";
 import { useNavigate } from "react-router-dom";
-import { fetchSingleUser } from "./userSlice";
+import biohackersTheme from "../../app/theme";
+import { styled } from "@mui/material/styles";
+import {
+    ThemeProvider,
+    Container,
+    Typography,
+    Box,
+    TextField,
+    Button,
+    Card,
+} from "@mui/material";
+
+import { 
+    StyledTextField, 
+    PrimaryButton,
+    MainContainer,
+} from "../style/StyleGuide";
+
 
 const EditUser = () => {
     const dispatch = useDispatch();
@@ -27,62 +44,50 @@ const EditUser = () => {
     };
 
     return (
-        <>
-            <div>
-                <div>
-                    <h2>User Profile</h2>
-                    <span>
-                        <h4>Username:</h4>
-                        <p>{me.username}</p>
-                    </span>
-                    <span>
-                        <h4>First Name:</h4>
-                        <p>{me.firstName}</p>
-                    </span>
-                    <span>
-                        <h4>Last Name:</h4>
-                        <p>{me.lastName}</p>
-                    </span>
-                    <span>
-                        <h4>E-mail:</h4>
-                        <p>{me.email}</p>
-                    </span>
-                </div>
-
-                <hr />
-
-                <div>
-                    <h2>Edit Information</h2>
-                    <form onSubmit={handleEdit}>
-
-                        <label htmlFor="username">
-                            <small>Username:</small>
-                        </label>
-                        <input type="text" name="username" />
-
-                        <label htmlFor="firstName">
-                            <small>First Name:</small>
-                        </label>
-                        <input type="text" name="firstName" />
-
-                        <label htmlFor="lastName">
-                            <small>Last Name:</small>
-                        </label>
-                        <input type="text" name="lastName" />
-
-                        <label htmlFor="email">
-                            <small>E-mail:</small>
-                        </label>
-                        <input type="email" name="email" />
-
+    
+            <ThemeProvider theme={biohackersTheme}>
+                
+                    <MainContainer>
+                    <Container>
+                        <Typography variant="h2">User Profile</Typography>
+                        <span>
+                            <Typography variant="h5">Username:</Typography>
+                            <Typography variant="subtitle1">{me.username}</Typography>
+                        </span>
+                        <span>
+                            <Typography variant="h5">First Name:</Typography>
+                            <Typography variant="subtitle1">{me.firstName}</Typography>
+                        </span>
+                        <span>
+                            <Typography variant="h5">Last Name:</Typography>
+                            <Typography variant="subtitle1">{me.lastName}</Typography>
+                        </span>
+                        <span>
+                            <Typography variant="h5">E-mail:</Typography>
+                            <Typography variant="subtitle1">{me.email}</Typography>
+                        </span>
+                        </Container>
                         <br />
-                        <br />
-
-                        <button type="submit">Save</button>
-                    </form>
-                </div>
-            </div>
-        </>
+                        
+                        <Container>
+                        <Typography variant="h2">Edit Information</Typography>
+                        <form onSubmit={handleEdit}>
+                            <StyledTextField type="text" helperText="Required Input" label="Username" name="username" required />
+                            <br />
+                            <StyledTextField type="text" helperText="Required Input" label="First Name" name="firstName" required />
+                            <br />
+                            <StyledTextField type="text" helperText="Required Input" label="Last Name" name="lastName" required />
+                            <br />
+                            <StyledTextField type="email" helperText="Required Input" label="Email" name="email" required />
+                            <br />
+                            <PrimaryButton variant="contained" size="medium" type="submit">Save</PrimaryButton>
+                        </form>
+                        </Container>
+                    </MainContainer>
+                
+                
+            </ThemeProvider>
+        
     );
 };
 
