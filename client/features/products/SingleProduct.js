@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { getAllCategories, selectCategory } from "../categories/allCategoriesSlice";
 import { getSingleProduct, selectSingleProduct } from "./singleProductSlice";
+import { addItemAsync } from "../cart/cartSlice";
 
 const SingleProduct = () => {
     const dispatch = useDispatch();
@@ -14,6 +15,10 @@ const SingleProduct = () => {
     useEffect(() => {
         dispatch(getSingleProduct(productId))
     }, [dispatch])
+
+    // const handleAddToCart = product => {
+    //     dispatch(addItemAsync(product))
+    // }
 
 
     return (
@@ -36,6 +41,7 @@ const SingleProduct = () => {
                                         : "N/A"}
                             </Link>
                     </p>
+                    {/* <button onClick={() => handleAddToCart(product)}>Add to cart</button> */}
                 </li>
             </div>
         </>

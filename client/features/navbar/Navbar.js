@@ -48,6 +48,7 @@ const Navbar = () => {
             <Link to= '/categories'>Categories</Link>
             <Link to="/login">Login</Link>
             <Link to="/signup">Sign Up</Link>
+            <Link to='/cart' element={<Cart name='cart' displayName='Cart' />}> Cart </Link>
           </div>
         )}
       </nav>

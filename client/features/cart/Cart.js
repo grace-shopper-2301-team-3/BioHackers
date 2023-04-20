@@ -1,47 +1,19 @@
-import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { addItem, removeItem, clearCart } from './cartslice';
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { useParams } from 'react-router-dom'
+import CartItem from "./CartItem";
 
-function Cart() {
-  const cart = useSelector(state => state.cart);
-  const dispatch = useDispatch();
-
-  const handleAddItem = item => {
-    dispatch(addItem(item));
-  };
-
-  const handleRemoveItem = item => {
-    dispatch(removeItem(item));
-  };
-
-  const handleClearCart = () => {
-    dispatch(clearCart());
-  };
+const Cart = () => {
+  // const cart = useSelector()
 
   return (
-    <div className="cart">
-      <h2>Shopping Cart</h2>
-      {cart.items.length === 0 ? (
-        <p>Your cart is empty</p>
-      ) : (
-        <>
-          <ul>
-            {cart.items.map(item => (
-              <li key={item.id}>
-                <span>{item.name}</span>
-                <span>Quantity: {item.quantity}</span>
-                <span>Price: ${item.price}</span>
-                <button onClick={() => handleRemoveItem(item)}>Remove</button>
-                <button onClick={() => handleAddItem(item)}>Add</button>
-              </li>
-            ))}
-          </ul>
-          <p>Total Price: ${cart.totalPrice}</p>
-          <button onClick={handleClearCart}>Clear Cart</button>
-        </>
-      )}
+    <div className='cartContainer'>
+      <h1>Your Cart</h1>
+      <CartItem />
+
+      {}
     </div>
-  );
+  )
 }
 
-export default Cart;
+export default Cart

@@ -6,6 +6,8 @@ import { getAllProducts, selectProduct } from "./allProductsSlice";
 const AllProducts = () => {
     const dispatch = useDispatch();
     const products = useSelector(selectProduct);
+
+
     // const categories = useSelector(selectCategory);
 
 
