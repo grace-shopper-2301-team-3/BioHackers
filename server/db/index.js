@@ -6,6 +6,8 @@ const CartItem = require('./models/CartItem')
 const Category = require('./models/Category')
 const Product = require('./models/Product')
 const User = require('./models/User')
+const AdminType = require('./models/AdminType')
+const AdminUser = require('./models/AdminUser')
 
 //associations could go here!
 Category.hasMany(Product)
