@@ -115,7 +115,7 @@ const StyleGuide = () => {
 
   // Card Design
 
-  const PrimaryCard = styled(Card)(({ theme }) => ({
+  const CardOne = styled(Card)(({ theme }) => ({
     width: 300,
     height: 300,
     display: "flex",
@@ -156,6 +156,32 @@ const StyleGuide = () => {
   const Price = styled(Typography)(({ theme }) => ({
     color: theme.palette.text.primary,
     marginBottom: theme.spacing(2),
+  }));
+
+  const CardTwo = styled(Card)(({ theme }) => ({
+    width: 300,
+    height: 300,
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "flex-end",
+    padding: 2,
+    position: "relative",
+    boxShadow: "0 0px 15px #7F00FF",
+    border: "0.75px solid",
+    borderImage: "linear-gradient(to right, #7F00FF, #0000FF)",
+    borderImageSlice: 1,
+    background: "transparent",
+    padding: 20,
+    margin: 4,
+  }));
+
+  const ImageBox = styled(Box)(({ theme }) => ({
+    width: "100%",
+    height: 200,
+    marginBottom: theme.spacing(2),
+    backgroundImage: "url(https://picsum.photos/300)",
+    backgroundRepeat: "no-repeat",
+    backgroundSize: "cover",
   }));
 
   // Button Design
@@ -434,18 +460,34 @@ const StyleGuide = () => {
           <Typography variant="overline">Cards</Typography>
         </Box>
 
-        <PrimaryCard>
-          <CornerButton variant="contained" color="primary">
-            <AddShoppingCartRoundedIcon />
-          </CornerButton>
-          <Price gutterBottom variant="h6">
-            Price $$
-          </Price>
-          <ProductName variant="h3">Product Name</ProductName>
-          <ProductDescription variant="body1">
-            Product Description
-          </ProductDescription>
-        </PrimaryCard>
+        <Container sx={{ display:"flex", justifyContent: "space-between" }}>
+          <CardOne>
+            <CornerButton variant="contained" color="primary">
+              <AddShoppingCartRoundedIcon />
+            </CornerButton>
+            <Price gutterBottom variant="h6">
+              Price $$
+            </Price>
+            <ProductName variant="h3">Product Name</ProductName>
+            <ProductDescription variant="body1">
+              Product Description
+            </ProductDescription>
+          </CardOne>
+
+          <CardTwo>
+            <CornerButton variant="contained" color="primary">
+              <AddShoppingCartRoundedIcon />
+            </CornerButton>
+            <ImageBox />
+            <Price gutterBottom variant="h6">
+              Price $$
+            </Price>
+            <ProductName variant="h3">Product Name</ProductName>
+            <ProductDescription variant="body1">
+              Product Description
+            </ProductDescription>
+          </CardTwo>
+        </Container>
 
         {/* Button Options */}
 
