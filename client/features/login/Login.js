@@ -17,34 +17,13 @@ const AuthForm = ({ name, displayName }) => {
     const formName = evt.target.name;
     const username = evt.target.username.value;
     const password = evt.target.password.value;
-    const firstName = evt.target.firstName.value;
-    const lastName = evt.target.lastName.value;
-    const email = evt.target.email.value;
 
-    dispatch(authenticate({ username, password, firstName, lastName, email, method: formName }));
+    dispatch(authenticate({ username, password, method: formName }));
   };
 
   return (
     <div>
       <form onSubmit={handleSubmit} name={name}>
-      <div>
-          <label htmlFor="firstName">
-            <small>First Name:</small>
-          </label>
-          <input name="firstName" type="text" />
-        </div>
-        <div>
-          <label htmlFor="lastName">
-            <small>Last Name:</small>
-          </label>
-          <input name="lastName" type="text" />
-        </div>
-        <div>
-          <label htmlFor="email">
-            <small>Email:</small>
-          </label>
-          <input name="email" type="email" />
-        </div>
         <div>
           <label htmlFor="username">
             <small>Username</small>

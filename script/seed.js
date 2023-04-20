@@ -1,9 +1,12 @@
 'use strict'
 
+
 const {db} = require('../server/db');
 const Product = require('../server/db/models/Product');
 const Category = require('../server/db/models/Category');
 const User= require('../server/db/models/User')
+
+
 /**
  * seed - this function clears the database, updates tables to
  *      match the models, and populates the database.
@@ -12,7 +15,8 @@ async function seed() {
   await db.sync({ force: true }) // clears db and matches models to tables
   console.log('db synced!')
 
-  //Creating users
+  // Creating Users
+  // Dummy Data created here to not break auth code. 
   const users = await Promise.all([
     User.create({
       username: 'cody',
@@ -22,7 +26,7 @@ async function seed() {
       email: 'codycodes@gmail.com',
       isAdmin: true,
     }),
-    User.create({
+    User.create(
       username: 'grace',
       password: '0456',
       firstName: 'Grace',
