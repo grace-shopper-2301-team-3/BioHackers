@@ -37,32 +37,14 @@ const AdminProducts = () => {
             <TableHead>
               <TableRow>
                 <TableCell
-                  padding="checkbox"
                   variant="head"
                   sx={{
-                    textAlign: "center",
+                    textAlign: "left",
                     textTransform: "uppercase",
                     fontWeight: "bold",
                   }}
                 >
-                  Edit
-                  <Checkbox
-                    sx={{ color: "primary.main", alignItems: "center" }}
-                  />
-                </TableCell>
-                <TableCell
-                  padding="checkbox"
-                  variant="head"
-                  sx={{
-                    textAlign: "center",
-                    textTransform: "uppercase",
-                    fontWeight: "bold",
-                  }}
-                >
-                  Delete
-                  <Checkbox
-                    sx={{ color: "primary.main", alignItems: "center" }}
-                  />
+                  Product ID
                 </TableCell>
                 <TableCell
                   variant="head"
@@ -72,7 +54,27 @@ const AdminProducts = () => {
                     fontWeight: "bold",
                   }}
                 >
-                  Product ID
+                  Edit
+                </TableCell>
+                <TableCell
+                  variant="head"
+                  sx={{
+                    textAlign: "left",
+                    textTransform: "uppercase",
+                    fontWeight: "bold",
+                  }}
+                >
+                  Delete
+                </TableCell>
+                <TableCell
+                  variant="head"
+                  sx={{
+                    textAlign: "left",
+                    textTransform: "uppercase",
+                    fontWeight: "bold",
+                  }}
+                >
+                  Inventory
                 </TableCell>
                 <TableCell
                   variant="head"
@@ -124,18 +126,22 @@ const AdminProducts = () => {
                       key={product.productId}
                       sx={{ borderBottomColor: "1px solid primary.main" }}
                     >
-                      <TableCell>
-                        <Checkbox
-                          sx={{ color: "primary.main", alignItems: "center" }}
-                        />
-                      </TableCell>
-                      <TableCell>
-                        <Checkbox
-                          sx={{ color: "primary.main", alignItems: "center" }}
-                        />
-                      </TableCell>
                       <TableCell variant="head" sx={{ textAlign: "center" }}>
                         {product.productId}
+                      </TableCell>
+                      <TableCell>
+                        <Checkbox
+                          sx={{ color: "primary.main", alignItems: "center" }}
+                        />
+                      </TableCell>
+                      <TableCell>
+                        <Checkbox
+                          sx={{ color: "primary.main", alignItems: "center" }}
+                        />
+                      </TableCell>
+                      
+                      <TableCell variant="head" sx={{ textAlign: "center" }}>
+                        (placeholder)
                       </TableCell>
                       <TableCell variant="head" sx={{ textAlign: "center" }}>
                         <img
@@ -155,7 +161,7 @@ const AdminProducts = () => {
                         })}
                       </TableCell>
                       <TableCell variant="head" sx={{ textAlign: "center" }}>
-                        {product.category}
+                        (placeholder)
                       </TableCell>
                     </TableRow>
                   );

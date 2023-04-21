@@ -20,7 +20,7 @@ const AdminUsers = () => {
   const dispatch = useDispatch();
   const users = useSelector(selectAllUsers);
 
-  console.log("users:", users)
+  console.log("users:", users);
   useEffect(() => {
     dispatch(fetchAllUsers());
   }, [dispatch]);
@@ -38,94 +38,102 @@ const AdminUsers = () => {
         <Container style={{ height: 400, width: "100%", height: "100%" }}>
           <Table sx={{ backgroundColor: "#212121", my: "30px" }}>
             <TableHead>
-            <TableRow>
-                <TableCell
-                  padding="checkbox"
-                  variant="head"
-                  sx={{
-                    textAlign: "center",
-                    textTransform: "uppercase",
-                    fontWeight: "bold",
-                  }}
-                >
-                  Edit
-                  <Checkbox
-                    sx={{ color: "primary.main", alignItems: "center" }}
-                  />
+              <TableRow>
+                <TableCell variant="head">
+                  <Typography
+                    variant="body1"
+                    sx={{
+                      textAlign: "left",
+                      textTransform: "uppercase",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    User ID
+                  </Typography>
                 </TableCell>
-                <TableCell
-                  padding="checkbox"
-                  variant="head"
-                  sx={{
-                    textAlign: "center",
-                    textTransform: "uppercase",
-                    fontWeight: "bold",
-                  }}
-                >
-                  Delete
-                  <Checkbox
-                    sx={{ color: "primary.main", alignItems: "center" }}
-                  />
+                <TableCell variant="head">
+                  <Typography
+                    variant="body1"
+                    sx={{
+                      textAlign: "left",
+                      textTransform: "uppercase",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    Edit
+                  </Typography>
                 </TableCell>
-                <TableCell
-                  variant="head"
-                  sx={{
-                    textAlign: "left",
-                    textTransform: "uppercase",
-                    fontWeight: "bold",
-                  }}
-                >
-                  User ID
+                <TableCell variant="head">
+                  <Typography
+                    variant="body1"
+                    sx={{
+                      textAlign: "left",
+                      textTransform: "uppercase",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    Delete
+                  </Typography>
                 </TableCell>
-                <TableCell
-                  variant="head"
-                  sx={{
-                    textAlign: "left",
-                    textTransform: "uppercase",
-                    fontWeight: "bold",
-                  }}
-                >
-                  Username
+                <TableCell variant="head">
+                  <Typography
+                    variant="body1"
+                    sx={{
+                      textAlign: "left",
+                      textTransform: "uppercase",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    Username
+                  </Typography>
                 </TableCell>
-                <TableCell
-                  variant="head"
-                  sx={{
-                    textAlign: "left",
-                    textTransform: "uppercase",
-                    fontWeight: "bold",
-                  }}
-                >
-                  First Name
+                <TableCell variant="head">
+                  <Typography
+                    variant="body1"
+                    sx={{
+                      textAlign: "left",
+                      textTransform: "uppercase",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    First Name
+                  </Typography>
                 </TableCell>
-                <TableCell
-                  variant="head"
-                  sx={{
-                    textAlign: "left",
-                    textTransform: "uppercase",
-                    fontWeight: "bold",
-                  }}
-                >
-                  Last Name
+                <TableCell variant="head">
+                  <Typography
+                    variant="body1"
+                    sx={{
+                      textAlign: "left",
+                      textTransform: "uppercase",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    Last Name
+                  </Typography>
                 </TableCell>
-                <TableCell
-                  variant="head"
-                  sx={{
-                    textAlign: "left",
-                    textTransform: "uppercase",
-                    fontWeight: "bold",
-                  }}
-                >
-                  Email
+                <TableCell variant="head">
+                  <Typography
+                    variant="body1"
+                    sx={{
+                      textAlign: "left",
+                      textTransform: "uppercase",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    Email
+                  </Typography>
                 </TableCell>
-                <TableCell
-                  variant="head"
-                  sx={{
-                    textAlign: "left",
-                    textTransform: "uppercase",
-                    fontWeight: "bold",
-                  }}
-                >
-                  Role
+                <TableCell variant="head">
+                  <Typography
+                    variant="body1"
+                    sx={{
+                      textAlign: "left",
+                      textTransform: "uppercase",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    Role
+                  </Typography>
                 </TableCell>
               </TableRow>
             </TableHead>
@@ -135,18 +143,18 @@ const AdminUsers = () => {
                   key={user.id}
                   sx={{ borderBottomColor: "1px solid primary.main" }}
                 >
-                  <TableCell>
-                    <Checkbox
-                      sx={{ color: "primary.main", alignItems: "center" }}
-                    />
-                  </TableCell>
-                  <TableCell>
-                    <Checkbox
-                      sx={{ color: "primary.main", alignItems: "center" }}
-                    />
-                  </TableCell>
                   <TableCell variant="head" sx={{ textAlign: "center" }}>
                     {user.id}
+                  </TableCell>
+                  <TableCell>
+                    <Checkbox
+                      sx={{ color: "primary.main", alignItems: "center" }}
+                    />
+                  </TableCell>
+                  <TableCell>
+                    <Checkbox
+                      sx={{ color: "primary.main", alignItems: "center" }}
+                    />
                   </TableCell>
                   <TableCell variant="head" sx={{ textAlign: "center" }}>
                     {user.username}
@@ -167,7 +175,7 @@ const AdminUsers = () => {
               ))}
             </TableBody>
           </Table>
-          </Container>
+        </Container>
       </MainContainer>
     </ThemeProvider>
   );
