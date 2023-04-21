@@ -6,19 +6,19 @@ import { getSingleProduct, selectSingleProduct } from "./singleProductSlice";
 
 const SingleProduct = () => {
     const dispatch = useDispatch();
-    const { productId } = useParams();
-    console.log(productId)
+    const { id } = useParams();
+    console.log(id)
     const categories = useSelector(selectCategory);
     const product = useSelector(selectSingleProduct);
 
     useEffect(() => {
-        dispatch(getSingleProduct(productId))
+        dispatch(getSingleProduct(id))
     }, [dispatch])
 
 
     return (
         <>
-            <div key={productId}>
+            <div key={id}>
                     <h2>{product.productName}</h2>
                     <img src={product.imageUrl} />
                     <p><b>Price: $</b> {product.productPrice}</p>

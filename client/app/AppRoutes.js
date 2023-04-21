@@ -84,7 +84,7 @@ const AppRoutes = () => {
             element={<AllCategories />} 
           />
           <Route 
-            path="/products/:productId" 
+            path="/products/:id" 
             element={<SingleProduct />} 
           />
           <Route 
