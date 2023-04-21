@@ -1,84 +1,176 @@
 import React from "react";
-import { DataGrid } from "@material-ui/data-grid";
-import { makeStyles } from "@material-ui/core/styles";
+import { useDispatch, useSelector } from "react-redux";
+import biohackersTheme from "../../app/theme";
+import {
+  ThemeProvider,
+  Typography,
+  Container,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableRow,
+  Checkbox,
+} from "@mui/material";
 
-const columns = [
-  { field: "id", headerName: "ID", width: 50 },
-  { field: "imageUrl", headerName: "Image", width: 110 },
-  { field: "productName", headerName: "Name", width: 150 },
-  { field: "productPrice", headerName: "Price", width: 150 },
-  { field: "description", headerName: "Description", width: 250 },
-  { field: "category", headerName: "Category", width: 150 },
-  { field: "stock", headerName: "Stock", width: 150 },
-];
+import { getAllProducts, selectProduct } from "../products/allProductsSlice";
 
-const rows = [
-  {
-    id: 1,
-    imageUrl: "https://picsum.photos/100",
-    productName: "Brain",
-    productPrice: "$19.99",
-    description: "Brain +",
-    category: "Augmentation",
-    stock: "50",
-  },
-  {
-    id: 2,
-    imageUrl: "https://picsum.photos/100",
-    productName: "Brain Pill",
-    productPrice: "$49.99",
-    description: "Brain Pill",
-    category: "Supplement",
-    stock: "20",
-  },
-  {
-    id: 3,
-    imageUrl: "https://picsum.photos/100",
-    productName: "Hand ++",
-    productPrice: "$69.99",
-    description: "Hand ++",
-    category: "Enhancement",
-    stock: "30",
-  },
-  {
-    id: 4,
-    imageUrl: "https://picsum.photos/100",
-    productName: "Eye +",
-    productPrice: "$39.99",
-    description: "Eye +",
-    category: "Augmentation",
-    stock: "10",
-  },
-];
-
-const useStyles = makeStyles({
-  root: {
-    "& .MuiDataGrid-columnHeader, .MuiDataGrid-cell": {
-      borderRight: "1px solid #E0E0E0",
-    },
-    "& .MuiDataGrid-columnHeader": {
-      backgroundColor: "#F2F2F2",
-    },
-    "& .MuiDataGrid-row": {
-      backgroundColor: "#FFFFFF",
-    },
-    "& .Mui-selected": {
-      backgroundColor: "#000000",
-    },
-    "& .MuiDataGrid-columnsContainer": {
-      backgroundColor: "#F2F2F2",
-    },
-  },
-});
+import { MainContainer } from "../style/StyleGuide";
+import AdminHeaderbar from "./AdminHeaderbar";
 
 const AdminProducts = () => {
-  const classes = useStyles();
+  const dispatch = useDispatch();
+  const products = useSelector(selectProduct);
+
+  const mainContainerStyle = {
+    marginBottom: "60px",
+  };
 
   return (
-    <div className={classes.root} style={{ height: 400, width: "100%" }}>
-      <h2>All Products</h2>
-      <DataGrid rows={rows} columns={columns} pageSize={5} checkboxSelection />
-    </div>
+    <ThemeProvider theme={biohackersTheme}>
+      <AdminHeaderbar />
+      <MainContainer style={mainContainerStyle}>
+        <Typography variant="h5">Products</Typography>
+
+        <Container style={{ height: 400, width: "100%", height: "100%" }}>
+          <Table sx={{ backgroundColor: "#212121", my: "30px" }}>
+            <TableHead>
+              <TableRow>
+                <TableCell
+                  variant="head"
+                  sx={{
+                    textAlign: "left",
+                    textTransform: "uppercase",
+                    fontWeight: "bold",
+                  }}
+                >
+                  Product ID
+                </TableCell>
+                <TableCell
+                  variant="head"
+                  sx={{
+                    textAlign: "left",
+                    textTransform: "uppercase",
+                    fontWeight: "bold",
+                  }}
+                >
+                  Edit
+                </TableCell>
+                <TableCell
+                  variant="head"
+                  sx={{
+                    textAlign: "left",
+                    textTransform: "uppercase",
+                    fontWeight: "bold",
+                  }}
+                >
+                  Delete
+                </TableCell>
+                <TableCell
+                  variant="head"
+                  sx={{
+                    textAlign: "left",
+                    textTransform: "uppercase",
+                    fontWeight: "bold",
+                  }}
+                >
+                  Inventory
+                </TableCell>
+                <TableCell
+                  variant="head"
+                  sx={{
+                    textAlign: "center",
+                    textTransform: "uppercase",
+                    fontWeight: "bold",
+                  }}
+                >
+                  Image
+                </TableCell>
+                <TableCell
+                  variant="head"
+                  sx={{
+                    textAlign: "left",
+                    textTransform: "uppercase",
+                    fontWeight: "bold",
+                  }}
+                >
+                  Product Name
+                </TableCell>
+                <TableCell
+                  variant="head"
+                  sx={{
+                    textAlign: "center",
+                    textTransform: "uppercase",
+                    fontWeight: "bold",
+                  }}
+                >
+                  Price
+                </TableCell>
+                <TableCell
+                  variant="head"
+                  sx={{
+                    textAlign: "center",
+                    textTransform: "uppercase",
+                    fontWeight: "bold",
+                  }}
+                >
+                  Category
+                </TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {Array.isArray(products) &&
+                products.map((product) => {
+                  return (
+                    <TableRow
+                      key={product.productId}
+                      sx={{ borderBottomColor: "1px solid primary.main" }}
+                    >
+                      <TableCell variant="head" sx={{ textAlign: "center" }}>
+                        {product.productId}
+                      </TableCell>
+                      <TableCell>
+                        <Checkbox
+                          sx={{ color: "primary.main", alignItems: "center" }}
+                        />
+                      </TableCell>
+                      <TableCell>
+                        <Checkbox
+                          sx={{ color: "primary.main", alignItems: "center" }}
+                        />
+                      </TableCell>
+                      
+                      <TableCell variant="head" sx={{ textAlign: "center" }}>
+                        (placeholder)
+                      </TableCell>
+                      <TableCell variant="head" sx={{ textAlign: "center" }}>
+                        <img
+                          src={product.imageUrl}
+                          alt={product.productName}
+                          width="100px"
+                        />
+                      </TableCell>
+                      <TableCell variant="head" sx={{ textAlign: "left" }}>
+                        {product.productName}
+                      </TableCell>
+                      <TableCell variant="head" sx={{ textAlign: "center" }}>
+                        USD{" "}
+                        {product.productPrice.toLocaleString("en-US", {
+                          style: "currency",
+                          currency: "USD",
+                        })}
+                      </TableCell>
+                      <TableCell variant="head" sx={{ textAlign: "center" }}>
+                        (placeholder)
+                      </TableCell>
+                    </TableRow>
+                  );
+                })}
+            </TableBody>
+          </Table>
+        </Container>
+      </MainContainer>
+    </ThemeProvider>
   );
 };
 

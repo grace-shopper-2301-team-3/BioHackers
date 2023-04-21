@@ -1,46 +1,43 @@
-'use strict'
+"use strict";
 
 
 const { db } = require('../server/db');
 const Product = require('../server/db/models/Product');
 const Category = require('../server/db/models/Category');
-const User = require('../server/db/models/User')
+const User= require('../server/db/models/User')
+const Cart = require('../server/db/models/Cart')
+const CartItem = require('../server/db/models/CartItem')
 
-
-/**
- * seed - this function clears the database, updates tables to
- *      match the models, and populates the database.
- */
 async function seed() {
-  await db.sync({ force: true }) // clears db and matches models to tables
-  console.log('db synced!')
+  await db.sync({ force: true }); // clears db and matches models to tables
+  console.log("db synced!");
 
   // Creating Users
-  // Dummy Data created here to not break auth code. 
+  // Dummy Data created here to not break auth code.
   const users = await Promise.all([
     User.create({
-      username: 'cody',
-      password: '0123',
-      firstName: 'Cody',
-      lastName: 'Codes',
-      email: 'codycodes@gmail.com',
+      username: "cody",
+      password: "0123",
+      firstName: "Cody",
+      lastName: "Codes",
+      email: "codycodes@gmail.com",
       isAdmin: true,
     }),
     User.create({
-      username: 'grace',
-      password: '0456',
-      firstName: 'Grace',
-      lastName: 'Hopper',
-      email: 'gracehopper@gmail.com',
+      username: "grace",
+      password: "0456",
+      firstName: "Grace",
+      lastName: "Hopper",
+      email: "gracehopper@gmail.com",
       isAdmin: true,
-
+      cartId: 1,
     }),
     User.create({
-      username: 'murphy',
-      password: '0789',
-      firstName: 'Murphy',
-      lastName: 'Murphs',
-      email: 'murphymurphs@gmail.com',
+      username: "murphy",
+      password: "0789",
+      firstName: "Murphy",
+      lastName: "Murphs",
+      email: "murphymurphs@gmail.com",
       isAdmin: false,
     }),
     User.create({
@@ -51,11 +48,11 @@ async function seed() {
       email: 'bobbybobs@gmail.com',
     }),
     User.create({
-      username: 'jane',
-      password: '1415',
-      firstName: 'Jane',
-      lastName: 'Jones',
-      email: 'janejones@gmail.com',
+      username: "jane",
+      password: "1415",
+      firstName: "Jane",
+      lastName: "Jones",
+      email: "janejones@gmail.com",
       isAdmin: false,
     }),
   ])
@@ -64,7 +61,7 @@ async function seed() {
       name: 'Neural Augments',
       imageUrl: '',
       description: 'Devices implanted in the brain to enhance performance and living experience for users.',
-      categoryId: 1 
+      categoryId: 1
     }),
     Category.create({
       name: 'Physical Augments',
@@ -80,11 +77,10 @@ async function seed() {
       }),
     ])
 
-
   // Creating products
   const products = await Promise.all([
     Product.create({
-      productName: 'Subject Mastery Implant',
+      productName: "Subject Mastery Implant",
       productPrice: 50000,
       imageUrl: 'https://t4.ftcdn.net/jpg/05/46/00/47/360_F_546004711_mhXwat1NdyNvEhPDEigFH11YRPndCUvj.jpg',
       description: 'This chip would augment your knowledge on the selected subject and turn you into an expert in the field of your choice.',
@@ -174,12 +170,13 @@ async function seed() {
       description: 'These supplements improve mood, reduce stress and anxiety, and help alleviate symptoms of mental health disorders such as depression and anxiety throught synapctic actiavtion of key neurotransmitters, such as serotonin and dopamine.',
       categoryId: 3
     }),
-  ])
+  ]);
 
-  // Creating categories
-  
+
+
   console.log(`seeded ${products.length} products`)
   console.log(`seeded ${categories.length} categories`)
+  console.log(`seeded cart ${Cart}`)
   console.log(`seeded successfully`)
 }
 
@@ -188,17 +185,18 @@ async function seed() {
  This way we can isolate the error handling and exit trapping.
  The `seed` function is concerned only with modifying the database.
 */
+
 async function runSeed() {
-  console.log('seeding...')
+  console.log("seeding...");
   try {
-    await seed()
+    await seed();
   } catch (err) {
-    console.error(err)
-    process.exitCode = 1
+    console.error(err);
+    process.exitCode = 1;
   } finally {
-    console.log('closing db connection')
-    await db.close()
-    console.log('db connection closed')
+    console.log("closing db connection");
+    await db.close();
+    console.log("db connection closed");
   }
 }
 
@@ -207,9 +205,10 @@ async function runSeed() {
   `Async` functions always return a promise, so we can use `catch` to handle
   any errors that might occur inside of `seed`.
 */
+
 if (module === require.main) {
-  runSeed()
+  runSeed();
 }
 
 // we export the seed function for testing purposes (see `./seed.spec.js`)
-module.exports = seed
+module.exports = seed;

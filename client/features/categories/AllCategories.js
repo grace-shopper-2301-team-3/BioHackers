@@ -7,12 +7,11 @@ const AllCategories = () => {
     const dispatch = useDispatch();
     const categories = useSelector(selectCategory);
 
-
     return (
         <div>
             <h2>Categories</h2>
             <ul>
-                 {Array.isArray(categories) && categories.map((category) => {
+                {Array.isArray(categories) && categories.map((category) => {
                     return (
                         <li key={category.categoryId}>
                             <Link to={`/categories/${category.categoryId}`}>

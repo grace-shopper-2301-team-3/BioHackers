@@ -12,9 +12,6 @@ const Category = db.define('category', {
     type: Sequelize.STRING,
     defaultValue: "default"
   },
-  categoryId: {
-    type: Sequelize.INTEGER
-  },
   description: {
     type: Sequelize.TEXT
   }
