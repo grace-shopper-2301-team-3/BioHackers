@@ -37,7 +37,7 @@ const Cart = () => {
         <p>Your cart is empty</p>}
         {cart.length ?
           <div key={cart.id} className='checkoutContainer'>
-            <p>total: ${totalPrice}</p>
+            <p>total: USD ${totalPrice}</p>
             <button>Check Out</button>
           </div>
         : <></>}

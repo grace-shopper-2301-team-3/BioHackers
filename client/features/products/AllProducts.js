@@ -30,8 +30,8 @@ const AllProducts = () => {
             <ul>
                 {products.map((product) => {
                     return (
-                        <div key={product.productId}>
-                            <Link to={`/products/${product.productId}`}>
+                        <div key={product.id}>
+                            <Link to={`/products/${product.id}`}>
                                 <h2>{product.productName}</h2>
                                 <img src={product.imageUrl} />
                             </Link>
@@ -41,7 +41,7 @@ const AllProducts = () => {
                                 <br />
                                 {product.category}
                             </p>
-                            <button onClick={() => handleAddToCart(product.productId)}>Add to cart</button>
+                            <button onClick={() => handleAddToCart(product.id)}>Add to cart</button>
                         </div>
                     );
                 })}
