@@ -11,27 +11,27 @@ const AllProducts = () => {
 
     return (
         <div>
-            <h2>Products</h2>
-            <ul>
-                {products.map((product) => {
-                    return (
-                        <div key={product.productId}>
-                            <Link to={`/products/${product.productId}`}>
-                                <h2>{product.productName}</h2>
-                                <img src={product.imageUrl} />
-                            </Link>
-                            <p><b>Price: $</b> {product.productPrice}</p>
-                            <p>
-                                <b>Category: </b>
-                                <br />
-                                {product.category}
-                            </p>
-                        </div>
-                    );
-                })}
-            </ul>
+          <h2>Products</h2>
+          <ul>
+            {Array.isArray(products) && products.map((product) => {
+              return (
+                <div key={product.productId}>
+                  <Link to={`/products/${product.productId}`}>
+                    <h2>{product.productName}</h2>
+                    <img src={product.imageUrl} />
+                  </Link>
+                  <p><b>Price: $</b> {product.productPrice}</p>
+                  <p>
+                    <b>Category: </b>
+                    <br />
+                    {product.category}
+                  </p>
+                </div>
+              );
+            })}
+          </ul>
         </div>
-    )
+      );
 };
 
 export default AllProducts;
