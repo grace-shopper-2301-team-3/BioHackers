@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Route, Routes, Navigate } from "react-router-dom";
+import { me } from "./store";
 import AuthForm from "../features/auth/AuthForm";
 import Home from "../features/home/Home";
-import { me } from "./store";
 import { getAllProducts } from "../features/products/allProductsSlice";
-import AllProducts from "../features/products/AllProducts";
 import { getAllCategories } from "../features/categories/allCategoriesSlice";
+import AllProducts from "../features/products/AllProducts";
 import AllCategories from "../features/categories/AllCategories";
 import SingleProduct from "../features/products/SingleProduct";
 import SingleCategory from "../features/categories/SingleCategory";
@@ -16,7 +16,12 @@ import Login from "../features/login/Login";
 import StyleGuide from "../features/style/StyleGuide";
 import Cart from "../features/cart/Cart";
 import EditUser from "../features/users/EditUser";
-import AdminLayout from "../features/admin/AdminLayout";
+import Admin from "../features/admin/Admin";
+import AdminDiscounts from "../features/admin/AdminDiscounts";
+import AdminOrders from "../features/admin/AdminOrders";
+import AdminPayments from "../features/admin/AdminPayments";
+import AdminProducts from "../features/admin/AdminProducts";
+import AdminUsers from "../features/admin/AdminUsers";
 import NotFound from "../features/notfound/NotFound";
 
 /**
@@ -39,7 +44,7 @@ const AppRoutes = () => {
   return (
     <div>
       <Routes>
-      <Route path="/" element={<Home />} />
+        <Route path="/" element={<Home />} />
         <Route path="/home" element={<Home />} />
 
         {isLoggedIn ? (
@@ -81,7 +86,7 @@ const AppRoutes = () => {
             />
             <Route
               path="/admin"
-              element={<AdminLayout name="admin" displayName="Admin" />}
+              element={<Admin name="admin" displayName="Admin" />}
             />
             <Route path="/products" element={<AllProducts />} />
             <Route path="/categories" element={<AllCategories />} />
@@ -90,6 +95,13 @@ const AppRoutes = () => {
               path="/categories/:categoryId"
               element={<SingleCategory />}
             />
+            <Route path="/" element={<Admin />} />
+            <Route path="/admin/discounts" element={<AdminDiscounts />} />
+            <Route path="/admin/orders" element={<AdminOrders />} />
+            <Route path="/admin/payments" element={<AdminPayments />} />
+            <Route path="/admin/products" element={<AdminProducts />} />
+            <Route path="/admin/users" element={<AdminUsers />} />
+            <Route path="/admin/*" element={<Admin />} />
           </>
         )}
 
