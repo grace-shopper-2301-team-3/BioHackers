@@ -14,8 +14,9 @@ const App = () => {
       <MainContainer>
         <Navbar />
         <AppRoutes />
+        <Footer />
       </MainContainer>
-      <Footer />
+      
     </ThemeProvider>
   );
 };
