@@ -1,25 +1,38 @@
 const router = require('express').Router()
-const { models: { Cart }} = require('../db')
-const { models: { User }} = require('../db')
+const Cart = require('../db/models/Cart');
+const User = require('../db/models/User')
+const CartItem = require('../db/models/CartItem')
 
 router.get('/', async (req, res, next) => {
   try {
-    console.log('req.body:' , req.body)
-    const userId = req.user.id;
-    const user = await User.findById(userId);
-    if (!user) {
-      return res.status(404).json({ message: 'User not found' });
-    }
-    const cart = await Cart.findOne({ user: userId });
-    if (!cart) {
-      return res.status(404).json({ message: 'Cart not found' });
-    }
-    res.json(cart);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'Internal server error' });
-  }
-});
+    console.log('api/cart was hit')
+    const cart = await CartItem.findAll()
+    res.json(cart)
+  } catch (error) { next(error) }
+})
 
+router.get('/:cartId', async (req, res, next) => {
+  try {
+    const cartInParams = req.params
+    const cart = await Cart.findByPk(cartInParams.cartId)
+    res.json(cart)
+  } catch (error) { next(error) }
+})
+
+router.delete('/:cartItemId', async (req, res, next) => {
+  try {
+    const cartItem = await CartItem.findByPk(req.params.cartItemId)
+    await cartItem.destroy()
+    res.sendStatus(204)
+  } catch (error) { next(error) }
+})
+
+router.post('/', async (req, res, next) => {
+  try {
+    const { itemName, itemPrice, itemImageUrl } = req.body;
+    const cartItem = await CartItem.create({ itemName, itemPrice, itemImageUrl });
+    res.status(201).json(cartItem);
+  } catch (error) { next(error) }
+})
 
 module.exports = router

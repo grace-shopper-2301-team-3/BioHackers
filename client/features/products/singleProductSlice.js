@@ -14,13 +14,13 @@ export const getSingleProduct = createAsyncThunk('/singleProduct', async (id) =>
 
 export const addProductAsync = createAsyncThunk(
   "singleProduct",
-  async ({ productName, productPrice, imageUrl, productId, description, category }) => {
+  async ({ productName, productPrice, imageUrl, description, category }) => {
     try {
       const { data } = await axios.post(`/products`, {
         productName,
         productPrice,
         imageUrl,
-        productId,
+        // productId,
         description,
         category
       });

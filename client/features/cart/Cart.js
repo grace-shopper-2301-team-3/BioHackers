@@ -1,47 +1,48 @@
-import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { addItemAsync, removeItemAsync, clearCartAsync } from './cartSlice';
+import React, { useEffect, useState } from "react"
+import { useParams } from 'react-router-dom'
+import { useDispatch, useSelector } from "react-redux"
+import { Link } from "react-router-dom"
+import CartItem from "./CartItem"
+import { fetchCart } from "./cartSlice"
 
-function Cart() {
-  const cart = useSelector(state => state.cart);
+const Cart = () => {
   const dispatch = useDispatch();
+  const cart = useSelector((state) => state.cart);
+  const [totalPrice, setTotalPrice] = useState(0);
+  const [cartUpdated, setCartUpdated] = useState(false);
 
-  const handleAddItem = item => {
-    dispatch(addItemAsync(item));
-  };
+  useEffect(() => {
+    dispatch(fetchCart());
+  }, [dispatch]);
 
-  const handleRemoveItem = item => {
-    dispatch(removeItemAsync(item));
-  };
+  useEffect(() => {
+    if (cart.length) {
+      const total = cart.reduce((acc, curr) => acc + curr.itemPrice, 0);
+      setTotalPrice(total)
+    } else {
+      setTotalPrice(0);
+    }
+  }, [cart, cartUpdated]);
 
-  const handleClearCart = () => {
-    dispatch(clearCartAsync());
-  };
 
   return (
-    <div className="cart">
-      <h2>Shopping Cart</h2>
-      {cart.items.length === 0 ? (
-        <p>Your cart is empty</p>
-      ) : (
-        <>
-          <ul>
-            {cart.items.map(item => (
-              <li key={item.id}>
-                <span>{item.name}</span>
-                <span>Quantity: {item.quantity}</span>
-                <span>Price: ${item.price}</span>
-                <button onClick={() => handleRemoveItem(item)}>Remove</button>
-                <button onClick={() => handleAddItem(item)}>Add</button>
-              </li>
-            ))}
-          </ul>
-          <p>Total Price: ${cart.totalPrice}</p>
-          <button onClick={handleClearCart}>Clear Cart</button>
-        </>
-      )}
+    <div className='cartContainer'>
+      <p>Your Shopping Cart</p>
+        {cart.length ? cart.map((cartItem) => (
+          <div key={cartItem.id}>
+            <CartItem cartItem={cartItem} />
+          </div>
+        ))
+        :
+        <p>Your cart is empty</p>}
+        {cart.length ?
+          <div key={cart.id} className='checkoutContainer'>
+            <p>total: USD ${totalPrice}</p>
+            <button>Check Out</button>
+          </div>
+        : <></>}
     </div>
-  );
+  )
 }
 
-export default Cart;
+export default Cart

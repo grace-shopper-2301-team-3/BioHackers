@@ -1,79 +1,48 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import axios from 'axios'
 
-const CART_STORAGE_KEY = 'cart';
+const initialState = {
+  cartItems: [],
+  totalQuantity: 0,
+  totalPrice: 0,
+}
 
-const loadState = () => {
+export const fetchCart = createAsyncThunk('fetchCart', async () => {
   try {
-    const serializedState = localStorage.getItem(CART_STORAGE_KEY)
-    if (serializedState === null) {
-      return {
-        items: [],
-        totalPrice: 0,
-      }
-    }
-    return JSON.parse(serializedState);
+    const { data } = await axios.get(`/api/cart`)
+    return data
   } catch (err) {
-    console.error('Error loading cart state from storage', err)
-    return {
-      items: [],
-      totalPrice: 0,
-    }
+    console.log('fetchcartitem err', err)
   }
-};
+})
 
-const saveState = state => {
+export const addToCartAsync = createAsyncThunk('addToCartAsync', async (product) => {
   try {
-    const serializedState = JSON.stringify(state)
-    localStorage.setItem(CART_STORAGE_KEY, serializedState)
+    const response = await axios.post('/api/cart', { itemName: product.productName, itemPrice: product.productPrice, itemImageUrl: product.imageUrl})
+    return response.data
   } catch (err) {
-    console.error('error saving cart state to storage', err)
+    console.log('addtocart err', err)
   }
-};
+})
 
-const initialState = loadState();
-
-export const addItemAsync = createAsyncThunk(
-  'cart/addItem',
-  async (newItem, { getState }) => {
-    const existingItem = getState().cart.items.find(item => item.id === newItem.id)
-    if (existingItem) {
-      existingItem.quantity++
-    } else {
-      newItem.quantity = 1
-      getState().cart.items.push(newItem)
-    }
-    getState().cart.totalPrice += newItem.price
-    saveState(getState().cart)
-    return getState().cart
+export const incrementQuantityAsync = createAsyncThunk('cartItem/incrementQuantity', async () => {
+  try {
+    const response = await axios.post('/api/cart', { itemName: product.productName, itemPrice: product.productPrice, itemImageUrl: product.imageUrl})
+    return response.data
+  } catch (err) {
+    console.log('err in incrementquantity', err)
   }
-)
+})
 
-export const removeItemAsync = createAsyncThunk(
-  'cart/removeItem',
-  async (itemToRemove, { getState }) => {
-    const existingItem = getState().cart.items.find(item => item.id === itemToRemove.id)
-    if (existingItem) {
-      if (existingItem.quantity > 1) {
-        existingItem.quantity--
-      } else {
-        getState().cart.items = getState().cart.items.filter(item => item.id !== itemToRemove.id)
-      }
-      getState().cart.totalPrice -= itemToRemove.price
-      saveState(getState().cart)
-    }
-    return getState().cart
+export const removeFromCartAsync = createAsyncThunk('cartItem/removeFromCart', async (itemId) => {
+  try {
+    await axios.delete( `/api/cart/${itemId}`)
+    return itemId
+  } catch (err) {
+    console.log('err in removeFromCartAsync', err)
   }
-)
+})
 
-export const clearCartAsync = createAsyncThunk(
-  'cart/clearCart',
-  async (_, { getState }) => {
-    getState().cart.items = []
-    getState().cart.totalPrice = 0
-    saveState(getState().cart)
-    return getState().cart
-  }
-)
 
 const cartSlice = createSlice({
   name: 'cart',
@@ -81,16 +50,19 @@ const cartSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(addItemAsync.fulfilled, (state, action) => {
+      .addCase(fetchCart.fulfilled, (state, action) => {
         return action.payload
       })
-      .addCase(removeItemAsync.fulfilled, (state, action) => {
+      .addCase(addToCartAsync.fulfilled, (state, action) => {
         return action.payload
       })
-      .addCase(clearCartAsync.fulfilled, (state, action) => {
+      .addCase(incrementQuantityAsync, (state, action) => {
         return action.payload
       })
-  },
+      .addCase(removeFromCartAsync.fulfilled, (state, action) => {
+        return action.payload
+      })
+   }
 });
 
-export default cartSlice.reducer;
+export default cartSlice.reducer
