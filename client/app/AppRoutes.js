@@ -30,7 +30,7 @@ const AppRoutes = () => {
 
   useEffect(() => {
     dispatch(me());
-    console.log("initial dispatch on APP is running")  
+    console.log("initial dispatch on APP is running")
     dispatch(getAllProducts())
     dispatch(getAllCategories())
   }, []);
@@ -44,6 +44,22 @@ const AppRoutes = () => {
           <Route path="/users/:id" element={<SingleUser />} />
           <Route path="/users/:id/edit" element={<EditUser />} />
           <Route path='/cart' element={<Cart name='cart' displayName='Cart' />} />
+          <Route
+            path="/products"
+            element={<AllProducts />}
+          />
+          <Route
+            path="/categories"
+            element={<AllCategories />}
+          />
+          <Route
+            path="/products/:productId"
+            element={<SingleProduct />}
+          />
+          <Route
+            path="/categories/:categoryId"
+            element={<SingleCategory />}
+          />
           {isAdmin && (
             <>
               <Route to="/" element={<Home />} />
@@ -75,21 +91,21 @@ const AppRoutes = () => {
             path="/styleguide"
             element={<StyleGuide name="styleguide" displayName="Style Guide" />}
           />
-          <Route 
-            path="/products" 
-            element={<AllProducts />} 
+          <Route
+            path="/products"
+            element={<AllProducts />}
           />
-          <Route 
-            path="/categories" 
-            element={<AllCategories />} 
+          <Route
+            path="/categories"
+            element={<AllCategories />}
           />
-          <Route 
-            path="/products/:productId" 
-            element={<SingleProduct />} 
+          <Route
+            path="/products/:productId"
+            element={<SingleProduct />}
           />
-          <Route 
-            path="/categories/:categoryId" 
-            element={<SingleCategory />} 
+          <Route
+            path="/categories/:categoryId"
+            element={<SingleCategory />}
           />
         </Routes>
       )}

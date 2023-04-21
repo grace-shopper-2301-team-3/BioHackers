@@ -30,7 +30,8 @@ const Navbar = () => {
             <Link to="/home">Home</Link>
             <Link to={`/users/${id}`}>Profile</Link>
             <Link to='/cart' element={<Cart name='cart' displayName='Cart' />}> Cart </Link>
-
+            <Link to= '/products'>Products</Link>
+            <Link to= '/categories'>Categories</Link>
             {isAdmin && (
               <>
                 <Link to="/users">Users</Link>
@@ -48,6 +49,7 @@ const Navbar = () => {
             <Link to= '/categories'>Categories</Link>
             <Link to="/login">Login</Link>
             <Link to="/signup">Sign Up</Link>
+            <Link to='/cart' element={<Cart name='cart' displayName='Cart' />}> Cart </Link>
           </div>
         )}
       </nav>

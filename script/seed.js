@@ -4,8 +4,9 @@
 const { db } = require('../server/db');
 const Product = require('../server/db/models/Product');
 const Category = require('../server/db/models/Category');
-const User = require('../server/db/models/User')
-
+const User= require('../server/db/models/User')
+const Cart = require('../server/db/models/Cart')
+const CartItem = require('../server/db/models/CartItem')
 
 /**
  * seed - this function clears the database, updates tables to
@@ -16,7 +17,7 @@ async function seed() {
   console.log('db synced!')
 
   // Creating Users
-  // Dummy Data created here to not break auth code. 
+  // Dummy Data created here to not break auth code.
   const users = await Promise.all([
     User.create({
       username: 'cody',
@@ -33,7 +34,7 @@ async function seed() {
       lastName: 'Hopper',
       email: 'gracehopper@gmail.com',
       isAdmin: true,
-
+      cartId: 1,
     }),
     User.create({
       username: 'murphy',
@@ -64,7 +65,7 @@ async function seed() {
       name: 'Neural Augments',
       imageUrl: '',
       description: 'Devices implanted in the brain to enhance performance and living experience for users.',
-      categoryId: 1 
+      categoryId: 1
     }),
     Category.create({
       name: 'Physical Augments',
@@ -79,7 +80,6 @@ async function seed() {
         categoryId: 3
       }),
     ])
-
 
   // Creating products
   const products = await Promise.all([
@@ -176,10 +176,11 @@ async function seed() {
     }),
   ])
 
-  // Creating categories
-  
+
+
   console.log(`seeded ${products.length} products`)
   console.log(`seeded ${categories.length} categories`)
+  console.log(`seeded cart ${Cart}`)
   console.log(`seeded successfully`)
 }
 
