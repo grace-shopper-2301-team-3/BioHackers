@@ -52,7 +52,10 @@ const AuthForm = ({ name, displayName }) => {
           my: 2,
         }}
       >
-        <Typography variant="h4" sx={{ textAlign: "center", my: 4 }}>
+        <Typography variant="h4" sx={{ textAlign: "center", my: 4, background:
+                "-webkit-linear-gradient(45deg, #7F00FF, #ff00ff, #00bfff)",
+              "-webkit-background-clip": "text",
+              "-webkit-text-fill-color": "transparent", }}>
           Create Your Account
         </Typography>
         <form
