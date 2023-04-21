@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import biohackersTheme from "../../app/theme";
 import {
@@ -38,7 +37,7 @@ const AdminProducts = () => {
             <TableHead>
               <TableRow>
                 <TableCell
-                  padding="select"
+                  padding="checkbox"
                   variant="head"
                   sx={{
                     textAlign: "center",
@@ -52,10 +51,9 @@ const AdminProducts = () => {
                   />
                 </TableCell>
                 <TableCell
-                  padding="select"
+                  padding="checkbox"
                   variant="head"
                   sx={{
-                    display: "flex",
                     textAlign: "center",
                     textTransform: "uppercase",
                     fontWeight: "bold",
