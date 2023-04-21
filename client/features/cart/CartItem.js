@@ -8,6 +8,7 @@ import { removeFromCartAsync, fetchCart } from "./cartSlice"
 const CartItem = ({ cartItem }) => {
   const dispatch = useDispatch()
 
+// ------------------WORK ON THIS PART --------------------
   const handleIncrementQuantity = async (item) => {
     try {
     const action = await dispatch(getSingleProduct(id))
@@ -18,14 +19,13 @@ const CartItem = ({ cartItem }) => {
     } catch (err) {
         console.log('error adding to cart in single product', err)
     }
-
+// ------------------WORK ON THIS PART --------------------
 }
 
   const handleRemove = async (itemId) => {
     try {
       await dispatch(removeFromCartAsync(itemId))
       dispatch(fetchCart())
-      setCartUpdated(!cartUpdated);
     } catch (err) {
       console.log('error removing item from cart', err)
     }
