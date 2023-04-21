@@ -1,15 +1,19 @@
 import React from "react";
 import biohackersTheme from "../../app/theme";
-import { ThemeProvider } from "@mui/material"
-import { MainContainer } from "../style/StyleGuide"
-import AdminHeaderbar from "./AdminHeaderbar"
+import { ThemeProvider, Typography } from "@mui/material";
+import { MainContainer } from "../style/StyleGuide";
+import AdminHeaderbar from "./AdminHeaderbar";
 
 const AdminDiscounts = () => {
+  const mainContainerStyle = {
+    marginBottom: "60px",
+  };
+
   return (
     <ThemeProvider theme={biohackersTheme}>
-       <AdminHeaderbar />
-      <MainContainer>
-      Hello Discounts
+      <AdminHeaderbar />
+      <MainContainer style={mainContainerStyle}>
+      <Typography variant="h5">Discounts</Typography>
       </MainContainer>
     </ThemeProvider>
   );
