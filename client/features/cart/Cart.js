@@ -35,8 +35,12 @@ const Cart = () => {
         ))
         :
         <p>Your cart is empty</p>}
-        <p>total: ${totalPrice}</p>
-        <button>Check Out</button>
+        {cart.length ?
+          <div key={cart.id} className='checkoutContainer'>
+            <p>total: ${totalPrice}</p>
+            <button>Check Out</button>
+          </div>
+        : <></>}
     </div>
   )
 }
