@@ -63,18 +63,19 @@ const Navbar = () => {
             ) : (
               <>
                 {/* The navbar will show these links before you log in */}
+                <Link to="/login">
+                  <NoBorderButton>Login</NoBorderButton>
+                </Link>
                 <Link
                   to="/cart"
                   element={<Cart name="cart" displayName="Cart" />}
                 >
                   <NoBorderButton>Cart</NoBorderButton>
                 </Link>
-                <Link to="/login">
-                  <NoBorderButton>Login</NoBorderButton>
-                </Link>
+{/*                 
                 <Link to="/signup">
                   <NoBorderButton>Sign Up</NoBorderButton>
-                </Link>
+                </Link> */}
               </>
             )}
           </Box>
