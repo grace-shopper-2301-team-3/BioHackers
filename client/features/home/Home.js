@@ -10,16 +10,8 @@ import {
   CardMedia,
   CardContent,
 } from "@mui/material";
-import {
-  getAllCategories,
-  selectCategory,
-} from "../categories/allCategoriesSlice";
-import { useDispatch, useSelector } from "react-redux";
 
 const Home = () => {
-  const dispatch = useDispatch();
-  const categories = useSelector(selectCategory);
-
   return (
     <ThemeProvider theme={biohackersTheme}>
       <MainContainer sx={{ position: "relative" }}>
@@ -47,7 +39,26 @@ const Home = () => {
             Biohackers
           </Typography>
         </Container>
-
+        <Container sx={{ my: 10 }}>
+            <Typography variant="h4" sx={{ textAlign: "center", background:
+                "-webkit-linear-gradient(45deg, #7F00FF, #ff00ff, #00bfff)",
+              "-webkit-background-clip": "text",
+              "-webkit-text-fill-color": "transparent", my: 4 }}>
+            Biohacking Your Way to Better Health
+          </Typography>
+          <Typography variant="body1" sx={{ textAlign: "center", background:
+                "-webkit-linear-gradient(45deg, #7F00FF, #ff00ff, #00bfff)",
+              "-webkit-background-clip": "text",
+              "-webkit-text-fill-color": "transparent" }}>
+            At Biohacker, we believe that optimal health is within reach. Our
+            products are designed to help you biohack your way to better health,
+            with cutting-edge brain enhancements, supplements, and physical
+            enhancements that can help you achieve your goals. Whether you're a
+            fitness fanatic or a busy professional, Biohacker has something to
+            help you achieve peak performance.
+          </Typography>
+        </Container>
+        
         {/* Categories Section */}
 
         <Container sx={{ py: 4 }}>
@@ -72,30 +83,6 @@ const Home = () => {
               margin: "20px",
             }}
           >
-            {/* {Array.isArray(categories) &&
-              categories.map((category) => {
-                return (
-                  <div key={category.categoryId}>
-                    <Link to={`/categories/${category.categoryId}`}>
-                      <Card sx={{ maxWidth: 500 }}>
-                        <CardMedia
-                          component={category.name}
-                          src={category.imageUrl}
-                        />
-                        <CardContent>
-                          <Typography gutterBottom variant="h5" component="div">
-                            {category.name}
-                          </Typography>
-                          <Typography variant="body2" color="text.secondary">
-                            {category.description}
-                          </Typography>
-                        </CardContent>
-                      </Card>
-                    </Link>
-                  </div>
-                );
-              })} */}
-
             <Card sx={{ maxWidth: 500 }}>
               <CardMedia component="img" image="https://picsum.photos/500" />
               <CardContent>

@@ -1,7 +1,14 @@
-import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { authenticate } from '../../app/store';
-import { SecondaryButton } from "../style/StyleGuide"
+import React from "react";
+import biohackersTheme from "../../app/theme";
+import {
+  MainContainer,
+  SecondaryButton,
+  StyledTextField,
+} from "../style/StyleGuide";
+import { useSelector, useDispatch } from "react-redux";
+import { authenticate } from "../../app/store";
+import { ThemeProvider, Box, Typography, Divider } from "@mui/material";
+import { Link } from "react-router-dom";
 
 /**
   The AuthForm component can be used for Login or Sign Up.
@@ -23,26 +30,76 @@ const AuthForm = ({ name, displayName }) => {
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit} name={name}>
-        <div>
-          <label htmlFor="username">
-            <small>Username</small>
-          </label>
-          <input name="username" type="text" />
-        </div>
-        <div>
-          <label htmlFor="password">
-            <small>Password</small>
-          </label>
-          <input name="password" type="password" />
-        </div>
-        <div>
-          <SecondaryButton variant="contained" size="medium" type="submit">{displayName}</SecondaryButton>
-        </div>
-        {error && <div> {error.message} </div>}
-      </form>
-    </div>
+    <ThemeProvider theme={biohackersTheme}>
+      <MainContainer
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+          my: 2,
+        }}
+      >
+        <Typography variant="h4" sx={{ textAlign: "center", my: 4 }}>
+          Unlock Your Inner Superhero
+        </Typography>
+        <Typography variant="body1" sx={{ textAlign: "center", my: 2 }}>
+          Your Account
+        </Typography>
+        <form
+          onSubmit={handleSubmit}
+          name={name}
+          sx={{ maxWidth: "400px", width: "100%" }}
+        >
+          <Box>
+            <StyledTextField
+              name="username"
+              label="Username"
+              variant="outlined"
+              sx={{ marginBottom: "16px" }}
+            />
+          </Box>
+          <Box>
+            <StyledTextField
+              name="password"
+              label="Password"
+              type="password"
+              variant="outlined"
+              sx={{ marginBottom: "16px" }}
+            />
+          </Box>
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <SecondaryButton variant="contained" size="medium" type="submit">
+              {displayName}
+            </SecondaryButton>
+          </Box>
+          {error && <Box>{error.message}</Box>}
+        </form>
+        <Divider />
+        <Typography variant="overline" sx={{ textAlign: "center", my: 4 }}>
+          - or -
+        </Typography>
+        <Typography variant="h6" sx={{ textAlign: "center", my: 2 }}>
+          Create An Account
+        </Typography>
+        <Link to="/signup">
+          <SecondaryButton
+            variant="contained"
+            size="medium"
+            type="submit"
+            sx={{ backgroundColor: "#AC6CFF" }}
+          >
+            Sign Up
+          </SecondaryButton>
+        </Link>
+      </MainContainer>
+    </ThemeProvider>
   );
 };
 
