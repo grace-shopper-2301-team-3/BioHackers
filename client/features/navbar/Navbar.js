@@ -25,14 +25,7 @@ const Navbar = () => {
 
   return (
     <ThemeProvider theme={biohackersTheme}>
-      <MainContainer
-        sx={{
-          paddingTop: 4,
-          paddingBottom: 0,
-          paddingLeft: 0,
-          paddingRight: 0,
-        }}
-      >
+      <MainContainer sx={{ py: 4 }}>
         <Container sx={{ display: "flex", justifyContent: "space-between" }}>
           <Box sx={{ display: "flex", justifyContent: "space-between" }}>
             <Link to="/home">
