@@ -12,7 +12,7 @@ const AllCategories = () => {
         <div>
             <h2>Categories</h2>
             <ul>
-                {categories.map((category) => {
+                 {Array.isArray(categories) && categories.map((category) => {
                     return (
                         <li key={category.categoryId}>
                             <Link to={`/categories/${category.categoryId}`}>

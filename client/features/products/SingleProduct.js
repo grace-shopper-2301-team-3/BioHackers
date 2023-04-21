@@ -8,13 +8,12 @@ import axios from "axios";
 
 const SingleProduct = () => {
     const dispatch = useDispatch();
-    const { productId } = useParams();
-    console.log(productId)
+    const { id } = useParams();
     const categories = useSelector(selectCategory);
     const product = useSelector(selectSingleProduct);
 
     useEffect(() => {
-        dispatch(getSingleProduct(productId))
+        dispatch(getSingleProduct(id))
     }, [dispatch])
 
     const handleAddToCart = async (id) => {
@@ -32,8 +31,7 @@ const SingleProduct = () => {
 
     return (
         <>
-            <div>
-                <li key={productId}>
+            <div key={id}>
                     <h2>{product.productName}</h2>
                     <img src={product.imageUrl} />
                     <p><b>Price: $</b> {product.productPrice}</p>
@@ -42,16 +40,10 @@ const SingleProduct = () => {
                         <b>Category: </b>
                         <br />
                             <Link to={`/categories/${product.categoryId}`}>
-                            {categories.filter((category) => category.categoryId === product.categoryId)
-                                        .length
-                                        ? categories.filter(
-                                            (category) => category.categoryId === product.categoryId
-                                        ).name
-                                        : "N/A"}
                             </Link>
                     </p>
-                    <button onClick={() => handleAddToCart(productId)}>Add to cart</button>
-                </li>
+
+                    <button onClick={() => handleAddToCart(id)}>Add to cart</button>
             </div>
         </>
     );

@@ -28,7 +28,7 @@ const AllProducts = () => {
         <div>
             <h2>Products</h2>
             <ul>
-                {products.map((product) => {
+                {Array.isArray(products) && products.map((product) => {
                     return (
                         <div key={product.id}>
                             <Link to={`/products/${product.id}`}>
@@ -47,7 +47,7 @@ const AllProducts = () => {
                 })}
             </ul>
         </div>
-    )
+      );
 };
 
 export default AllProducts;
