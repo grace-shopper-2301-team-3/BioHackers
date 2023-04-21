@@ -27,8 +27,8 @@ const SingleCategory = () => {
                     <br />
                     {Array.isArray(products) && products.map((product) => {
                         return (
-                            <div key={product.productId}>
-                                <Link to={`/products/${product.productId}`}>
+                            <div key={product.id}>
+                                <Link to={`/products/${product.id}`}>
                                     <ul>
                                     <li>{product.productName}</li>
 

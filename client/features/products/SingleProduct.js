@@ -9,6 +9,7 @@ import axios from "axios";
 const SingleProduct = () => {
     const dispatch = useDispatch();
     const { id } = useParams();
+    console.log(id)
     const categories = useSelector(selectCategory);
     const product = useSelector(selectSingleProduct);
 

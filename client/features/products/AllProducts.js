@@ -27,7 +27,6 @@ const AllProducts = () => {
     return (
         <div>
             <h2>Products</h2>
-            <ul>
                 {Array.isArray(products) && products.map((product) => {
                     return (
                         <div key={product.id}>
@@ -45,8 +44,7 @@ const AllProducts = () => {
                         </div>
                     );
                 })}
-            </ul>
-        </div>
+              </div>
       );
 };
 
