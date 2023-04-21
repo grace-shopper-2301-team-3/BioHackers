@@ -10,13 +10,21 @@ import {
   CardMedia,
   CardContent,
 } from "@mui/material";
+import {
+  getAllCategories,
+  selectCategory,
+} from "../categories/allCategoriesSlice";
+import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
 const Home = () => {
+  const dispatch = useDispatch();
+  const categories = useSelector(selectCategory);
+
   return (
     <ThemeProvider theme={biohackersTheme}>
       <MainContainer sx={{ position: "relative" }}>
-
-{/* Main Heading for Homepage */}
+        {/* Main Heading for Homepage */}
 
         <Container sx={{ position: "relative", overflow: "hidden" }}>
           <img
@@ -41,7 +49,7 @@ const Home = () => {
           </Typography>
         </Container>
 
-{/* Categories Section */}
+        {/* Categories Section */}
 
         <Container sx={{ py: 4 }}>
           <Typography
@@ -65,11 +73,35 @@ const Home = () => {
               margin: "20px",
             }}
           >
+            {/* {Array.isArray(categories) &&
+              categories.map((category) => {
+                return (
+                  <div key={category.categoryId}>
+                    <Link to={`/categories/${category.categoryId}`}>
+                      <Card sx={{ maxWidth: 500 }}>
+                        <CardMedia
+                          component={category.name}
+                          src={category.imageUrl}
+                        />
+                        <CardContent>
+                          <Typography gutterBottom variant="h5" component="div">
+                            {category.name}
+                          </Typography>
+                          <Typography variant="body2" color="text.secondary">
+                            {category.description}
+                          </Typography>
+                        </CardContent>
+                      </Card>
+                    </Link>
+                  </div>
+                );
+              })} */}
+
             <Card sx={{ maxWidth: 500 }}>
               <CardMedia component="img" image="https://picsum.photos/500" />
               <CardContent>
                 <Typography gutterBottom variant="h5" component="div">
-                  Category 1
+                  Category
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
                   Some description
@@ -80,7 +112,7 @@ const Home = () => {
               <CardMedia component="img" image="https://picsum.photos/500" />
               <CardContent>
                 <Typography gutterBottom variant="h5" component="div">
-                  Category 1
+                  Category
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
                   Some description
@@ -91,7 +123,7 @@ const Home = () => {
               <CardMedia component="img" image="https://picsum.photos/500" />
               <CardContent>
                 <Typography gutterBottom variant="h5" component="div">
-                  Category 1
+                  Category
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
                   Some description
@@ -101,7 +133,7 @@ const Home = () => {
           </Box>
         </Container>
 
-{/* Top Sellers Section */}
+        {/* Top Sellers Section */}
 
         <Container sx={{ py: 4 }}>
           <Typography
@@ -129,7 +161,7 @@ const Home = () => {
               <CardMedia component="img" image="https://picsum.photos/150" />
               <CardContent>
                 <Typography gutterBottom variant="h5" component="div">
-                  Category 1
+                  Product
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
                   Some description
@@ -140,7 +172,7 @@ const Home = () => {
               <CardMedia component="img" image="https://picsum.photos/150" />
               <CardContent>
                 <Typography gutterBottom variant="h5" component="div">
-                  Category 1
+                  Product
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
                   Some description
@@ -151,7 +183,7 @@ const Home = () => {
               <CardMedia component="img" image="https://picsum.photos/150" />
               <CardContent>
                 <Typography gutterBottom variant="h5" component="div">
-                  Category 1
+                  Product
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
                   Some description
@@ -162,7 +194,7 @@ const Home = () => {
               <CardMedia component="img" image="https://picsum.photos/150" />
               <CardContent>
                 <Typography gutterBottom variant="h5" component="div">
-                  Category 1
+                  Product
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
                   Some description
@@ -173,7 +205,7 @@ const Home = () => {
               <CardMedia component="img" image="https://picsum.photos/150" />
               <CardContent>
                 <Typography gutterBottom variant="h5" component="div">
-                  Category 1
+                  Product
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
                   Some description
@@ -184,7 +216,7 @@ const Home = () => {
               <CardMedia component="img" image="https://picsum.photos/150" />
               <CardContent>
                 <Typography gutterBottom variant="h5" component="div">
-                  Category 1
+                  Product
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
                   Some description

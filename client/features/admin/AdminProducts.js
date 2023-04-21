@@ -2,7 +2,18 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import biohackersTheme from "../../app/theme";
-import { ThemeProvider, Typography, Container, Box } from "@mui/material";
+import {
+  ThemeProvider,
+  Typography,
+  Container,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableRow,
+  Checkbox,
+} from "@mui/material";
+
 import { getAllProducts, selectProduct } from "../products/allProductsSlice";
 
 import { MainContainer } from "../style/StyleGuide";
@@ -12,7 +23,6 @@ const AdminProducts = () => {
   const dispatch = useDispatch();
   const products = useSelector(selectProduct);
 
-  console.log("products:", products);
   const mainContainerStyle = {
     marginBottom: "60px",
   };
@@ -22,36 +32,138 @@ const AdminProducts = () => {
       <AdminHeaderbar />
       <MainContainer style={mainContainerStyle}>
         <Typography variant="h5">Products</Typography>
+
         <Container style={{ height: 400, width: "100%", height: "100%" }}>
-          <table>
-            <thead>
-              <tr>
-                <th>Product Name</th>
-                <th>Image</th>
-                <th>Price</th>
-                <th>Category</th>
-              </tr>
-            </thead>
-            <tbody>
+          <Table sx={{ backgroundColor: "#212121", my: "30px" }}>
+            <TableHead>
+              <TableRow>
+                <TableCell
+                  padding="select"
+                  variant="head"
+                  sx={{
+                    textAlign: "center",
+                    textTransform: "uppercase",
+                    fontWeight: "bold",
+                  }}
+                >
+                  Edit
+                  <Checkbox
+                    sx={{ color: "primary.main", alignItems: "center" }}
+                  />
+                </TableCell>
+                <TableCell
+                  padding="select"
+                  variant="head"
+                  sx={{
+                    display: "flex",
+                    textAlign: "center",
+                    textTransform: "uppercase",
+                    fontWeight: "bold",
+                  }}
+                >
+                  Delete
+                  <Checkbox
+                    sx={{ color: "primary.main", alignItems: "center" }}
+                  />
+                </TableCell>
+                <TableCell
+                  variant="head"
+                  sx={{
+                    textAlign: "left",
+                    textTransform: "uppercase",
+                    fontWeight: "bold",
+                  }}
+                >
+                  Product ID
+                </TableCell>
+                <TableCell
+                  variant="head"
+                  sx={{
+                    textAlign: "center",
+                    textTransform: "uppercase",
+                    fontWeight: "bold",
+                  }}
+                >
+                  Image
+                </TableCell>
+                <TableCell
+                  variant="head"
+                  sx={{
+                    textAlign: "left",
+                    textTransform: "uppercase",
+                    fontWeight: "bold",
+                  }}
+                >
+                  Product Name
+                </TableCell>
+                <TableCell
+                  variant="head"
+                  sx={{
+                    textAlign: "center",
+                    textTransform: "uppercase",
+                    fontWeight: "bold",
+                  }}
+                >
+                  Price
+                </TableCell>
+                <TableCell
+                  variant="head"
+                  sx={{
+                    textAlign: "center",
+                    textTransform: "uppercase",
+                    fontWeight: "bold",
+                  }}
+                >
+                  Category
+                </TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
               {Array.isArray(products) &&
                 products.map((product) => {
                   return (
-                    <tr key={product.productId}>
-                      <td>
-                        <Link to={`/products/${product.productId}`}>
-                          {product.productName}
-                        </Link>
-                      </td>
-                      <td>
-                        <img src={product.imageUrl} alt={product.productName} width="100px" />
-                      </td>
-                      <td>${product.productPrice}</td>
-                      <td>{product.category}</td>
-                    </tr>
+                    <TableRow
+                      key={product.productId}
+                      sx={{ borderBottomColor: "1px solid primary.main" }}
+                    >
+                      <TableCell>
+                        <Checkbox
+                          sx={{ color: "primary.main", alignItems: "center" }}
+                        />
+                      </TableCell>
+                      <TableCell>
+                        <Checkbox
+                          sx={{ color: "primary.main", alignItems: "center" }}
+                        />
+                      </TableCell>
+                      <TableCell variant="head" sx={{ textAlign: "center" }}>
+                        {product.productId}
+                      </TableCell>
+                      <TableCell variant="head" sx={{ textAlign: "center" }}>
+                        <img
+                          src={product.imageUrl}
+                          alt={product.productName}
+                          width="100px"
+                        />
+                      </TableCell>
+                      <TableCell variant="head" sx={{ textAlign: "left" }}>
+                        {product.productName}
+                      </TableCell>
+                      <TableCell variant="head" sx={{ textAlign: "center" }}>
+                        USD{" "}
+                        {product.productPrice.toLocaleString("en-US", {
+                          style: "currency",
+                          currency: "USD",
+                        })}
+                      </TableCell>
+                      <TableCell variant="head" sx={{ textAlign: "center" }}>
+                        {product.category}
+                      </TableCell>
+                    </TableRow>
                   );
                 })}
-            </tbody>
-          </table>
+            </TableBody>
+          </Table>
         </Container>
       </MainContainer>
     </ThemeProvider>
