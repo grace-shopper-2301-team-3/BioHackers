@@ -16,11 +16,6 @@ const Product = db.define('product', {
     type: Sequelize.TEXT,
     defaultValue: "default"
   },
-  productId: {
-    primaryKey: true,
-    allowNull: false,
-    type: Sequelize.INTEGER
-  },
   description: {
     type: Sequelize.TEXT
   },
