@@ -4,6 +4,7 @@ import { useParams, Link } from "react-router-dom";
 import { getAllCategories, selectCategory } from "../categories/allCategoriesSlice";
 import { getSingleProduct, selectSingleProduct } from "./singleProductSlice";
 import { addToCartAsync } from "../cart/cartSlice";
+import axios from "axios";
 
 const SingleProduct = () => {
     const dispatch = useDispatch();
@@ -16,14 +17,13 @@ const SingleProduct = () => {
         dispatch(getSingleProduct(productId))
     }, [dispatch])
 
-    const handleAddToCart = async () => {
+    const handleAddToCart = async (id) => {
         try {
-        const action = await dispatch(getSingleProduct(productId))
+        const action = await dispatch(getSingleProduct(id))
         const product = action.payload
-
-
-        // dispatch(addToCartAsync(product))
-
+        const addToCartAction = await dispatch(addToCartAsync(product))
+        const updatedCart = addToCartAction.payload;
+        console.log("updatedCart", updatedCart);
         } catch (err) {
             console.log('error adding to cart in single product', err)
         }

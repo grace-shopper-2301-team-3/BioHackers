@@ -6,6 +6,7 @@ const Product = require('../server/db/models/Product');
 const Category = require('../server/db/models/Category');
 const User= require('../server/db/models/User')
 const Cart = require('../server/db/models/Cart')
+const CartItem = require('../server/db/models/CartItem')
 
 /**
  * seed - this function clears the database, updates tables to
@@ -59,16 +60,6 @@ async function seed() {
       isAdmin: false,
     }),
   ])
-
-    //dummy data for cart
-    const cart = await Promise.all([
-      Cart.create({
-        cartItems: [{dummy: 'fake cart item here'}],
-        totalQuantity: 2,
-        totalPrice: 20,
-        userId: 2
-      })
-    ])
 
   // Creating products
   const products = await Promise.all([

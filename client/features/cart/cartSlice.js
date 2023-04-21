@@ -1,27 +1,27 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from 'axios'
-import { getSingleProduct } from '../products/singleProductSlice'
 
 const initialState = {
   cartItems: [],
   totalQuantity: 0,
-  totalPrice: 0
+  totalPrice: 0,
 }
 
-export const fetchCartAsync = createAsyncThunk('cart', async () => {
+export const fetchCart = createAsyncThunk('fetchCart', async () => {
   try {
-    const { data } = await axios.get('/api/cart')
+    const { data } = await axios.get(`/api/cart`)
     return data
   } catch (err) {
-    console.log('fetchcart error', err)
+    console.log('fetchcartitem err', err)
   }
 })
 
-export const addToCartAsync = createAsyncThunk('cart/addToCart', async (product) => { //work on this
+export const addToCartAsync = createAsyncThunk('addToCartAsync', async (product) => {
   try {
-    return product
+    const response = await axios.post('/api/cart', { itemName: product.productName, itemPrice: product.productPrice, itemImageUrl: product.imageUrl})
+    return response.data
   } catch (err) {
-    console.log('addtocart error', err)
+    console.log('addtocart err', err)
   }
 })
 
@@ -31,20 +31,13 @@ const cartSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(fetchCartAsync.fulfilled, (state, action) => {
+      .addCase(fetchCart.fulfilled, (state, action) => {
         return action.payload
       })
       .addCase(addToCartAsync.fulfilled, (state, action) => {
-        state.cartItems.push(action.payload);
-        state.totalQuantity++;
-        state.totalPrice += action.payload.productPrice;
+        return action.payload
       })
-  }
-})
-
-export const selectCart = (state) => {
-  return state.cart
-}
+   }
+});
 
 export default cartSlice.reducer
-

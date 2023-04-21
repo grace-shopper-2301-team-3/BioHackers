@@ -4,12 +4,13 @@ import { useDispatch, useSelector } from "react-redux"
 import { Link } from "react-router-dom"
 import cartItemSlice from "./cartItemSlice"
 
-const CartItem = () => {
-  const dispatch = useDispatch()
+const CartItem = ({ cartItem }) => {
 
   return (
     <div className='cartItemContainer'>
-      <p>hello from cartitem</p>
+      <p>{cartItem.itemName}</p>
+      <p>${cartItem.itemPrice}</p>
+      <p>{cartItem.itemImageUrl}</p>
     </div>
   )
 }

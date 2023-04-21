@@ -10,31 +10,38 @@ const initialState = {
 }
 
 //
+export const fetchCartItem = createAsyncThunk('cartItem', async (id) => {
+  try {
+    const { data } = await axios.get(`/api/cart/${id}`)
+    return data
+  } catch (err) {
+    console.log('fetchcartitem err', err)
+  }
+})
+
+export const addCartItemAsync = createAsyncThunk('cartItem/addCartItem', async () => {
+  try {
+    // const response = await axios.post('/api/cart', ) work on this
+  } catch (err) {
+    console.log('err in addcartitem', err)
+  }
+})
 
 const cartItemSlice = createSlice({
   name: 'cartItem',
   initialState,
-  reducers: {
-    // increment the quantity by 1
-    addToQuantity(state) {
-      state.quantity += 1;
-    },
-    // decrement the quantity by 1
-    removeFromQuantity(state) {
-      state.quantity -= 1;
-    },
-    // set the quantity to a specific value
-    setQuantity(state, action) {
-      state.quantity = action.payload;
-    }
-  },
-  // extraReducers: (builder) => {
-  //   builder
-  //     .addCase()
-  // }
+  reducers: {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchCartItem.fulfilled, (state, action) => {
+        return action.payload
+      })
+  }
 });
 
-export const { addToQuantity, removeFromQuantity, setQuantity } = cartItemSlice.actions;
+export const selectCartItem = (state) => {
+  return state.cartItem
+}
 
 export default cartItemSlice.reducer;
 
