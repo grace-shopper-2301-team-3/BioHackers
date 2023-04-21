@@ -8,24 +8,31 @@ import { fetchCart } from "./cartSlice"
 const Cart = () => {
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
+  const [totalPrice, setTotalPrice] = useState(0);
 
   useEffect(() => {
     dispatch(fetchCart());
   }, [dispatch]);
 
-  // console.log({cart})
+  useEffect(() => {
+    if (cart.length) {
+      const total = cart.reduce((acc, curr) => acc + curr.itemPrice, 0);
+      setTotalPrice(total)
+    }
+  }, [cart]);
 
   return (
     <div className='cartContainer'>
-      <p>your shopping cart</p>
+      <p>Your Shopping Cart</p>
         {cart.length ? cart.map((cartItem) => (
           <div key={cartItem.id}>
             <CartItem cartItem={cartItem} />
           </div>
         ))
         :
-        <p>your cart is empty</p>}
-      {/* <CartItem /> */}
+        <p>Your cart is empty</p>}
+        <p>total: ${totalPrice}</p>
+        <button>Check Out</button>
     </div>
   )
 }

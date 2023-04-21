@@ -19,11 +19,11 @@ export const fetchCartItem = createAsyncThunk('cartItem', async (id) => {
   }
 })
 
-export const addCartItemAsync = createAsyncThunk('cartItem/addCartItem', async () => {
+export const incrementQuantityAsync = createAsyncThunk('cartItem/incrementQuantity', async () => {
   try {
-    // const response = await axios.post('/api/cart', ) work on this
+
   } catch (err) {
-    console.log('err in addcartitem', err)
+    console.log('err in incrementquantity', err)
   }
 })
 
@@ -34,6 +34,9 @@ const cartItemSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchCartItem.fulfilled, (state, action) => {
+        return action.payload
+      })
+      .addCase(incrementQuantityAsync, (state, action) => {
         return action.payload
       })
   }

@@ -2,6 +2,8 @@ import { useDispatch, useSelector } from "react-redux";
 import React, { useEffect } from "react";
 import { Routes, Route, Link } from "react-router-dom";
 import { getAllProducts, selectProduct } from "./allProductsSlice";
+import { getSingleProduct } from "./singleProductSlice";
+import { addToCartAsync } from "../cart/cartSlice";
 
 const AllProducts = () => {
     const dispatch = useDispatch();
@@ -9,7 +11,18 @@ const AllProducts = () => {
 
 
     // const categories = useSelector(selectCategory);
+    const handleAddToCart = async (id) => {
+        try {
+        const action = await dispatch(getSingleProduct(id))
+        const product = action.payload
+        const addToCartAction = await dispatch(addToCartAsync(product))
+        const updatedCart = addToCartAction.payload;
+        console.log("updatedCart", updatedCart);
+        } catch (err) {
+            console.log('error adding to cart in single product', err)
+        }
 
+    }
 
     return (
         <div>
@@ -28,6 +41,7 @@ const AllProducts = () => {
                                 <br />
                                 {product.category}
                             </p>
+                            <button onClick={() => handleAddToCart(product.productId)}>Add to cart</button>
                         </div>
                     );
                 })}

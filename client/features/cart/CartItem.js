@@ -8,9 +8,12 @@ const CartItem = ({ cartItem }) => {
 
   return (
     <div className='cartItemContainer'>
-      <p>{cartItem.itemName}</p>
+      <img src={cartItem.itemImageUrl} />
       <p>${cartItem.itemPrice}</p>
-      <p>{cartItem.itemImageUrl}</p>
+      <span>{cartItem.itemName}</span>
+      <button className='decrementQuantityButton' >-</button>
+      <span>{cartItem.quantity}</span>
+      <button className='incrementQuantityButton'>+</button>
     </div>
   )
 }
