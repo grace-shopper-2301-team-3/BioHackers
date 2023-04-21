@@ -36,10 +36,6 @@ const EditUser = () => {
             lastName: lastName.value,
             email: email.value,
         }))
-        // .then(() => {
-        //     dispatch(fetchSingleUser(me.id))
-        //     navigate(`/users/${me.id}`);
-        // })
         window.location.reload();
     };
 
