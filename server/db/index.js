@@ -14,12 +14,18 @@ const User = require('./models/User')
 Cart.hasMany(CartItem, { as: 'cart-items' })
 CartItem.belongsTo(Cart)
 
+User.hasOne(Cart)
+Cart.belongsTo(User)
+
+CartItem.hasOne(Product)
 
 module.exports = {
   db,
   models: {
     User,
     Product,
-    Category
+    Category,
+    Cart,
+    CartItem
   },
 }
