@@ -27,7 +27,6 @@ const SingleProduct = () => {
         } catch (err) {
             console.log('error adding to cart in single product', err)
         }
-
     }
 
 

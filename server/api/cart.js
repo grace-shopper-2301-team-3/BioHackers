@@ -19,6 +19,14 @@ router.get('/:cartId', async (req, res, next) => {
   } catch (error) { next(error) }
 })
 
+router.delete('/:cartItemId', async (req, res, next) => {
+  try {
+    const cartItem = await CartItem.findByPk(req.params.cartItemId)
+    await cartItem.destroy()
+    res.sendStatus(204)
+  } catch (error) { next(error) }
+})
+
 router.post('/', async (req, res, next) => {
   try {
     const { itemName, itemPrice, itemImageUrl } = req.body;

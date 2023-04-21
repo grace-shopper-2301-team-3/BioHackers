@@ -19,14 +19,6 @@ export const fetchCartItem = createAsyncThunk('cartItem', async (id) => {
   }
 })
 
-export const incrementQuantityAsync = createAsyncThunk('cartItem/incrementQuantity', async () => {
-  try {
-
-  } catch (err) {
-    console.log('err in incrementquantity', err)
-  }
-})
-
 const cartItemSlice = createSlice({
   name: 'cartItem',
   initialState,
@@ -34,9 +26,6 @@ const cartItemSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchCartItem.fulfilled, (state, action) => {
-        return action.payload
-      })
-      .addCase(incrementQuantityAsync, (state, action) => {
         return action.payload
       })
   }

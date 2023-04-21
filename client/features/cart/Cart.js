@@ -9,6 +9,7 @@ const Cart = () => {
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
   const [totalPrice, setTotalPrice] = useState(0);
+  const [cartUpdated, setCartUpdated] = useState(false);
 
   useEffect(() => {
     dispatch(fetchCart());
@@ -18,8 +19,11 @@ const Cart = () => {
     if (cart.length) {
       const total = cart.reduce((acc, curr) => acc + curr.itemPrice, 0);
       setTotalPrice(total)
+    } else {
+      setTotalPrice(0);
     }
-  }, [cart]);
+  }, [cart, cartUpdated]);
+
 
   return (
     <div className='cartContainer'>
