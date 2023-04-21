@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { authenticate } from '../../app/store';
+import { SecondaryButton } from "../style/StyleGuide"
 
 /**
   The AuthForm component can be used for Login or Sign Up.
@@ -37,7 +38,7 @@ const AuthForm = ({ name, displayName }) => {
           <input name="password" type="password" />
         </div>
         <div>
-          <button type="submit">{displayName}</button>
+          <SecondaryButton variant="contained" size="medium" type="submit">{displayName}</SecondaryButton>
         </div>
         {error && <div> {error.message} </div>}
       </form>
