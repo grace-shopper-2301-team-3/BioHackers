@@ -1,90 +1,93 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { updateUser } from "../auth/authSlice";
 import {
   Dialog,
   DialogTitle,
   DialogContent,
   DialogActions,
   TextField,
+  Button,
 } from "@mui/material";
-import { SecondaryButton, TertiaryButton } from "../style/StyleGuide";
 
-const AdminUsersModal = ({ user, open, onClose, onSave }) => {
-  const [username, setUsername] = useState(user.username);
-  const [firstName, setFirstName] = useState(user.firstName);
-  const [lastName, setLastName] = useState(user.lastName);
-  const [email, setEmail] = useState(user.email);
-  const [role, setRole] = useState(user.isAdmin);
+const AdminUsersModal = ({ open, onClose }) => {
+  const dispatch = useDispatch();
+  const [username, setUsername] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [isAdmin, setIsAdmin] = useState(false);
 
-  const handleUserNameChange = (event) => {
-    setUsername(event.target.value);
-  };
-
-  const handleFirstNameChange = (event) => {
-    setFirstName(event.target.value);
-  };
-
-  const handleLastNameChange = (event) => {
-    setLastName(event.target.value);
-  };
-
-  const handleEmailChange = (event) => {
-    setEmail(event.target.value);
-  };
-
-  const handleRoleChange = (event) => {
-    setRole(event.target.value);
-  };
-
-  const handleSubmit = (event) => {
+  const handleEdit = (event) => {
     event.preventDefault();
-    onSave({ ...user, username, firstName, lastName, email, role });
+    const updatedUser = {
+      username,
+      firstName,
+      lastName,
+      email,
+      isAdmin,
+    };
+    dispatch(updateUser(updatedUser));
     onClose();
-  };
+  };  
 
   return (
-    <ThemeProvider theme={biohackersTheme}>
     <Dialog open={open} onClose={onClose}>
       <DialogTitle>Edit User</DialogTitle>
       <DialogContent>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleEdit}>
           <TextField
             label="User Name"
             value={username}
-            onChange={handleUserNameChange}
+            onChange={(e) => setUsername(e.target.value)}
             fullWidth
           />
           <TextField
             label="First Name"
             value={firstName}
-            onChange={handleFirstNameChange}
+            onChange={(e) => setFirstName(e.target.value)}
             fullWidth
           />
           <TextField
             label="Last Name"
             value={lastName}
-            onChange={handleLastNameChange}
+            onChange={(e) => setLastName(e.target.value)}
             fullWidth
           />
           <TextField
             label="Email"
             value={email}
-            onChange={handleEmailChange}
+            onChange={(e) => setEmail(e.target.value)}
             fullWidth
           />
           <TextField
             label="Role"
             value={isAdmin}
-            onChange={handleRoleChange}
+            onChange={(e) => setIsAdmin(e.target.value)}
             fullWidth
           />
         </form>
       </DialogContent>
       <DialogActions>
-        <TertiaryButton variant="outlined" onClick={onClose}>Cancel</TertiaryButton>
-        <SecondaryButton variant="contained" onClick={handleSubmit}>Save</SecondaryButton>
+        <Button
+          variant="outlined"
+          size="small"
+          onClick={() => {
+            onClose();
+          }}
+        >
+          Cancel
+        </Button>
+        <Button
+          variant="contained"
+          size="small"
+          autoFocus
+          onClick={handleEdit}
+        >
+          Update
+        </Button>
       </DialogActions>
     </Dialog>
-    </ThemeProvider>
   );
 };
 

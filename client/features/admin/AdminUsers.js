@@ -14,36 +14,60 @@ import {
   DialogContent,
   DialogContentText,
   DialogTitle,
-  Button
+  Button,
+  TextField,
 } from "@mui/material";
 import EditRoundedIcon from "@mui/icons-material/EditRounded";
 import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded";
 import PersonAddAlt1Icon from "@mui/icons-material/PersonAddAlt1";
-import { MainContainer, PrimaryButton, SecondaryButton, TertiaryButton } from "../style/StyleGuide";
+import { MainContainer, PrimaryButton } from "../style/StyleGuide";
 import AdminHeaderbar from "./AdminHeaderbar";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchAllUsers, selectAllUsers, deleteUser } from "../users/userSlice";
+import {
+  fetchAllUsers,
+  selectAllUsers,
+  deleteUser,
+  updateUser,
+} from "../users/userSlice";
 
 const AdminUsers = () => {
   const dispatch = useDispatch();
   const users = useSelector(selectAllUsers);
 
-  const [open, setOpen] = useState(false);
+  const [deleteOpen, setDeleteOpen] = useState(false);
+  const [editOpen, setEditOpen] = useState(false);
   const [userToDelete, setUserToDelete] = useState(null);
+  const [userToEdit, setUserToEdit] = useState(null);
 
   const handleDeleteClick = (user) => {
     setUserToDelete(user);
-    setOpen(true);
+    setDeleteOpen(true);
+  };
+
+  const handleEditClick = (user) => {
+    setUserToEdit(user);
+    setEditOpen(true);
   };
 
   const handleDeleteUser = async () => {
     try {
       await dispatch(deleteUser(userToDelete.id));
-      setOpen(false);
+      setDeleteOpen(false);
       setUserToDelete(null);
       await dispatch(fetchAllUsers());
     } catch (err) {
-      console.log('error removing user', err)
+      console.log("error removing user", err);
+    }
+  };
+
+  const handleEditUser = async () => {
+    try {
+      await dispatch(updateUser(userToEdit));
+      setEditOpen(false);
+      setUserToEdit({ ...userToEdit });
+      await dispatch(fetchAllUsers());
+    } catch (err) {
+      console.log("error updating user", err);
     }
   };
 
@@ -179,7 +203,10 @@ const AdminUsers = () => {
                 >
                   <TableCell sx={{ textAlign: "center" }}>{user.id}</TableCell>
                   <TableCell sx={{ textAlign: "center" }}>
-                    <EditRoundedIcon/>
+                    <EditRoundedIcon
+                      onClick={() => handleEditClick(user)}
+                      sx={{ cursor: "pointer", marginRight: 2 }}
+                    />
                   </TableCell>
                   <TableCell sx={{ textAlign: "center" }}>
                     {user.username}
@@ -194,53 +221,136 @@ const AdminUsers = () => {
                     {user.email}
                   </TableCell>
                   <TableCell sx={{ textAlign: "center" }}>
-            {user.isAdmin ? "Admin" : "Customer"}
-          </TableCell>
-          <TableCell sx={{ textAlign: "center" }}>
-            <Dialog
-              open={open}
-              onClose={() => setOpen(false)}
-              aria-labelledby="alert-dialog-title"
-              aria-describedby="alert-dialog-description"
-            >
-              <DialogTitle id="alert-dialog-title">{"Are You Sure?"}</DialogTitle>
-              <DialogContent>
-                <DialogContentText id="alert-dialog-description">
-                  Delete User: <b>{userToDelete && userToDelete.username}</b>
-                </DialogContentText>
-              </DialogContent>
-              <DialogActions>
-                <Button
-                  variant="outlined"
-                  size="small"
-                  onClick={() => {
-                    setOpen(false);
-                    setUserToDelete(null);
-                  }}
-                >
-                  Cancel
-                </Button>
-                <Button
-                  variant="contained"
-                  size="small"
-                  onClick={() => handleDeleteUser()}
-                  autoFocus
-                >
-                  Delete
-                </Button>
-              </DialogActions>
-            </Dialog>
-            <DeleteRoundedIcon
-              onClick={() => handleDeleteClick(user)}
-              sx={{ cursor: "pointer" }}
-            />
-          </TableCell>
+                    {user.isAdmin ? "Admin" : "Customer"}
+                  </TableCell>
+                  <TableCell sx={{ textAlign: "center" }}>
+                    <DeleteRoundedIcon
+                      onClick={() => handleDeleteClick(user)}
+                      sx={{ cursor: "pointer" }}
+                    />
+                  </TableCell>
+
+                  {/* Dialog Management */}
+
+                  {/* Delete Dialog */}
+                  <Dialog
+                    open={deleteOpen}
+                    onClose={() => setDeleteOpen(false)}
+                    aria-labelledby="alert-dialog-title"
+                    aria-describedby="alert-dialog-description"
+                  >
+                    <DialogTitle id="alert-dialog-title">
+                      {"Are You Sure?"}
+                    </DialogTitle>
+                    <DialogContent>
+                      <DialogContentText id="alert-dialog-description">
+                        Delete User:{" "}
+                        <b>{userToDelete && userToDelete.username}</b>
+                      </DialogContentText>
+                    </DialogContent>
+                    <DialogActions>
+                      <Button
+                        variant="outlined"
+                        size="small"
+                        onClick={() => {
+                          deleteOpen(false);
+                          setUserToDelete(null);
+                        }}
+                      >
+                        Cancel
+                      </Button>
+                      <Button
+                        variant="contained"
+                        size="small"
+                        onClick={() => handleDeleteUser()}
+                        autoFocus
+                      >
+                        Delete
+                      </Button>
+                    </DialogActions>
+                  </Dialog>
+
+                  {/* Edit Dialog */}
+
+                  <Dialog
+                    open={editOpen}
+                    onClose={() => setEditOpen(false)}
+                    aria-labelledby="form-dialog-title"
+                  >
+                    <DialogTitle id="form-dialog-title">Edit User</DialogTitle>
+                    <DialogContent>
+                      <TextField
+                        autoFocus
+                        margin="dense"
+                        id="username"
+                        label="Username"
+                        type="text"
+                        value={userToEdit && userToEdit.username}
+                        onChange={(e) =>
+                          setUserToEdit({
+                            ...userToEdit,
+                            username: e.target.value,
+                          })
+                        }
+                        fullWidth
+                      />
+                      <TextField
+                        margin="dense"
+                        id="email"
+                        label="Email Address"
+                        type="email"
+                        value={userToEdit && userToEdit.email}
+                        onChange={(e) =>
+                          setUserToEdit({
+                            ...userToEdit,
+                            email: e.target.value,
+                          })
+                        }
+                        fullWidth
+                      />
+                      <TextField
+                        margin="dense"
+                        id="password"
+                        label="Password"
+                        type="password"
+                        value={userToEdit && userToEdit.password}
+                        onChange={(e) =>
+                          setUserToEdit({
+                            ...userToEdit,
+                            password: e.target.value,
+                          })
+                        }
+                        fullWidth
+                      />
+                    </DialogContent>
+                    <DialogActions>
+                      <Button
+                        variant="outlined"
+                        size="small"
+                        onClick={() => {
+                          setEditOpen(false);
+                          setUserToEdit(null);
+                        }}
+                      >
+                        Cancel
+                      </Button>
+                      <Button
+                        variant="contained"
+                        size="small"
+                        onClick={() => handleEditUser()}
+                        autoFocus
+                      >
+                        Save
+                      </Button>
+                    </DialogActions>
+                  </Dialog>
+
+                  {/* End of Dialogs */}
                 </TableRow>
               ))}
             </TableBody>
           </Table>
         </Container>
-
       </MainContainer>
     </ThemeProvider>
   );
