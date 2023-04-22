@@ -28,6 +28,7 @@ import {
   selectAllUsers,
   deleteUser,
   updateUser,
+  createUser,
 } from "../users/userSlice";
 
 const AdminUsers = () => {
@@ -36,8 +37,10 @@ const AdminUsers = () => {
 
   const [deleteOpen, setDeleteOpen] = useState(false);
   const [editOpen, setEditOpen] = useState(false);
+  const [addOpen, setAddOpen] = useState(false);
   const [userToDelete, setUserToDelete] = useState(null);
   const [userToEdit, setUserToEdit] = useState(null);
+  const [userToAdd, setUserToAdd] = useState(null);
 
   const handleDeleteClick = (user) => {
     setUserToDelete(user);
@@ -47,6 +50,11 @@ const AdminUsers = () => {
   const handleEditClick = (user) => {
     setUserToEdit(user);
     setEditOpen(true);
+  };
+
+  const handleAddClick = (user) => {
+    setUserToAdd(user);
+    setAddOpen(true);
   };
 
   const handleDeleteUser = async () => {
@@ -71,6 +79,21 @@ const AdminUsers = () => {
     }
   };
 
+  const handleAddUser = async () => {
+    try {
+      await dispatch(createUser(userToAdd));
+      setAddOpen(false);
+      setUserToAdd({ ...userToAdd });
+      await dispatch(fetchAllUsers());
+    } catch (err) {
+      console.log("error adding user", err);
+    }
+  };
+
+  const backdropProps = {
+    style: { backgroundColor: "rgba(0, 0, 0, 0.2)" },
+  };
+
   const mainContainerStyle = {
     marginBottom: "60px",
   };
@@ -87,7 +110,12 @@ const AdminUsers = () => {
           }}
         >
           <Typography variant="h5">Users</Typography>
-          <PrimaryButton variant="contained" size="medium">
+          <PrimaryButton
+            variant="contained"
+            size="medium"
+            onClick={() => handleAddClick()}
+            sx={{ cursor: "pointer", marginRight: 2 }}
+          >
             <PersonAddAlt1Icon sx={{ mr: 1 }} />
             <Typography variant="body2">Add User</Typography>
           </PrimaryButton>
@@ -238,14 +266,14 @@ const AdminUsers = () => {
                     onClose={() => setDeleteOpen(false)}
                     aria-labelledby="alert-dialog-title"
                     aria-describedby="alert-dialog-description"
+                    BackdropProps={backdropProps}
                   >
                     <DialogTitle id="alert-dialog-title">
                       {"Are You Sure?"}
                     </DialogTitle>
                     <DialogContent>
                       <DialogContentText id="alert-dialog-description">
-                        Delete User:{" "}
-                        <b>{userToDelete && userToDelete.username}</b>
+                        <b>{userToDelete && userToDelete.username}</b> will be removed
                       </DialogContentText>
                     </DialogContent>
                     <DialogActions>
@@ -253,7 +281,7 @@ const AdminUsers = () => {
                         variant="outlined"
                         size="small"
                         onClick={() => {
-                          deleteOpen(false);
+                          setDeleteOpen(false);
                           setUserToDelete(null);
                         }}
                       >
@@ -276,6 +304,7 @@ const AdminUsers = () => {
                     open={editOpen}
                     onClose={() => setEditOpen(false)}
                     aria-labelledby="form-dialog-title"
+                    BackdropProps={backdropProps}
                   >
                     <DialogTitle id="form-dialog-title">Edit User</DialogTitle>
                     <DialogContent>
@@ -296,6 +325,34 @@ const AdminUsers = () => {
                       />
                       <TextField
                         margin="dense"
+                        id="firstName"
+                        label="First Name"
+                        type="text"
+                        value={userToEdit && userToEdit.firstName}
+                        onChange={(e) =>
+                          setUserToEdit({
+                            ...userToEdit,
+                            password: e.target.value,
+                          })
+                        }
+                        fullWidth
+                      />
+                      <TextField
+                        margin="dense"
+                        id="lastName"
+                        label="Last Name"
+                        type="text"
+                        value={userToEdit && userToEdit.lastName}
+                        onChange={(e) =>
+                          setUserToEdit({
+                            ...userToEdit,
+                            password: e.target.value,
+                          })
+                        }
+                        fullWidth
+                      />
+                      <TextField
+                        margin="dense"
                         id="email"
                         label="Email Address"
                         type="email"
@@ -304,20 +361,6 @@ const AdminUsers = () => {
                           setUserToEdit({
                             ...userToEdit,
                             email: e.target.value,
-                          })
-                        }
-                        fullWidth
-                      />
-                      <TextField
-                        margin="dense"
-                        id="password"
-                        label="Password"
-                        type="password"
-                        value={userToEdit && userToEdit.password}
-                        onChange={(e) =>
-                          setUserToEdit({
-                            ...userToEdit,
-                            password: e.target.value,
                           })
                         }
                         fullWidth
@@ -340,9 +383,97 @@ const AdminUsers = () => {
                         onClick={() => handleEditUser()}
                         autoFocus
                       >
-                        Save
+                        Save Changes
                       </Button>
                     </DialogActions>
+                  </Dialog>
+
+                  {/* Add Dialog */}
+                  <Dialog
+                    open={addOpen}
+                    onClose={() => setAddOpen(false)}
+                    BackdropProps={backdropProps}
+                  >
+                    <DialogTitle id="form-dialog-title">Edit User</DialogTitle>
+                    <DialogContent>
+                      <TextField
+                        autoFocus
+                        margin="dense"
+                        id="username"
+                        label="Username"
+                        type="text"
+                        value={userToEdit && userToEdit.username}
+                        onChange={(e) =>
+                          setUserToEdit({
+                            ...userToEdit,
+                            username: e.target.value,
+                          })
+                        }
+                        fullWidth
+                      />
+                      <TextField
+                        margin="dense"
+                        id="firstName"
+                        label="First Name"
+                        type="text"
+                        value={userToEdit && userToEdit.firstName}
+                        onChange={(e) =>
+                          setUserToEdit({
+                            ...userToEdit,
+                            password: e.target.value,
+                          })
+                        }
+                        fullWidth
+                      />
+                      <TextField
+                        margin="dense"
+                        id="lastName"
+                        label="Last Name"
+                        type="text"
+                        value={userToEdit && userToEdit.lastName}
+                        onChange={(e) =>
+                          setUserToEdit({
+                            ...userToEdit,
+                            password: e.target.value,
+                          })
+                        }
+                        fullWidth
+                      />
+                      <TextField
+                        margin="dense"
+                        id="email"
+                        label="Email Address"
+                        type="email"
+                        value={userToEdit && userToEdit.email}
+                        onChange={(e) =>
+                          setUserToEdit({
+                            ...userToEdit,
+                            email: e.target.value,
+                          })
+                        }
+                        fullWidth
+                      />
+                    </DialogContent>
+                    <DialogActions>
+                      <Button
+                        variant="outlined"
+                        size="small"
+                        onClick={() => {
+                          setEditOpen(false);
+                          setUserToEdit(null);
+                        }}
+                      >
+                        Cancel
+                      </Button>
+                      <Button
+                        variant="contained"
+                        size="small"
+                        onClick={() => handleEditUser()}
+                        autoFocus
+                      >
+                        Add User
+                      </Button>
+                      </DialogActions>
                   </Dialog>
 
                   {/* End of Dialogs */}
