@@ -402,10 +402,10 @@ const AdminUsers = () => {
                         id="username"
                         label="Username"
                         type="text"
-                        value={userToEdit && userToEdit.username}
+                        value={userToAdd && userToAdd.username}
                         onChange={(e) =>
-                          setUserToEdit({
-                            ...userToEdit,
+                          setUserToAdd({
+                            ...userToAdd,
                             username: e.target.value,
                           })
                         }
@@ -416,10 +416,10 @@ const AdminUsers = () => {
                         id="firstName"
                         label="First Name"
                         type="text"
-                        value={userToEdit && userToEdit.firstName}
+                        value={userToAdd && userToAdd.firstName}
                         onChange={(e) =>
-                          setUserToEdit({
-                            ...userToEdit,
+                          setUserToAdd({
+                            ...userToAdd,
                             password: e.target.value,
                           })
                         }
@@ -430,10 +430,10 @@ const AdminUsers = () => {
                         id="lastName"
                         label="Last Name"
                         type="text"
-                        value={userToEdit && userToEdit.lastName}
+                        value={userToAdd && userToAdd.lastName}
                         onChange={(e) =>
-                          setUserToEdit({
-                            ...userToEdit,
+                          setUserToAdd({
+                            ...userToAdd,
                             password: e.target.value,
                           })
                         }
