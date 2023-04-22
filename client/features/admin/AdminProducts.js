@@ -10,16 +10,17 @@ import {
   TableCell,
   TableHead,
   TableRow,
-  Checkbox,
 } from "@mui/material";
-
+import AdminHeaderbar from "./AdminHeaderbar";
+import EditRoundedIcon from "@mui/icons-material/EditRounded";
+import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded";
+import AddCircleRoundedIcon from '@mui/icons-material/AddCircleRounded';import { MainContainer, PrimaryButton } from "../style/StyleGuide";
 import { getAllProducts, selectProduct } from "../products/allProductsSlice";
 import {
   getAllCategories,
   selectCategory,
 } from "../categories/allCategoriesSlice";
-import { MainContainer } from "../style/StyleGuide";
-import AdminHeaderbar from "./AdminHeaderbar";
+
 
 const AdminProducts = () => {
   const dispatch = useDispatch();
@@ -34,7 +35,19 @@ const AdminProducts = () => {
     <ThemeProvider theme={biohackersTheme}>
       <AdminHeaderbar />
       <MainContainer style={mainContainerStyle}>
-        <Typography variant="h5">Products</Typography>
+        <Container
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+          }}
+        >
+          <Typography variant="h5">Products</Typography>
+          <PrimaryButton variant="contained" size="medium">
+            <AddCircleRoundedIcon sx={{ mr: 1 }} />
+            <Typography variant="body2">Add Product</Typography>
+          </PrimaryButton>
+        </Container>
 
         <Container style={{ height: 400, width: "100%", height: "100%" }}>
           <Table sx={{ backgroundColor: "#200040", my: "30px" }}>
@@ -59,16 +72,6 @@ const AdminProducts = () => {
                   }}
                 >
                   Edit
-                </TableCell>
-                <TableCell
-                  variant="head"
-                  sx={{
-                    textAlign: "left",
-                    textTransform: "uppercase",
-                    fontWeight: "bold",
-                  }}
-                >
-                  Delete
                 </TableCell>
                 <TableCell
                   variant="head"
@@ -120,6 +123,16 @@ const AdminProducts = () => {
                 >
                   Category
                 </TableCell>
+                <TableCell
+                  variant="head"
+                  sx={{
+                    textAlign: "left",
+                    textTransform: "uppercase",
+                    fontWeight: "bold",
+                  }}
+                >
+                  Delete
+                </TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -137,42 +150,37 @@ const AdminProducts = () => {
                       key={product.id}
                       sx={{ borderBottomColor: "1px solid primary.main" }}
                     >
-                      <TableCell variant="head" sx={{ textAlign: "center" }}>
+                      <TableCell sx={{ textAlign: "center" }}>
                         {product.id}
                       </TableCell>
                       <TableCell>
-                        <Checkbox
-                          sx={{ color: "primary.main", alignItems: "center" }}
-                        />
+                        <EditRoundedIcon />
                       </TableCell>
-                      <TableCell>
-                        <Checkbox
-                          sx={{ color: "primary.main", alignItems: "center" }}
-                        />
-                      </TableCell>
-
-                      <TableCell variant="head" sx={{ textAlign: "center" }}>
+                      <TableCell sx={{ textAlign: "center" }}>
                         (placeholder)
                       </TableCell>
-                      <TableCell variant="head" sx={{ textAlign: "center" }}>
+                      <TableCell sx={{ textAlign: "center" }}>
                         <img
                           src={product.imageUrl}
                           alt={product.productName}
                           width="100px"
                         />
                       </TableCell>
-                      <TableCell variant="head" sx={{ textAlign: "left" }}>
+                      <TableCell sx={{ textAlign: "left" }}>
                         {product.productName}
                       </TableCell>
-                      <TableCell variant="head" sx={{ textAlign: "center" }}>
+                      <TableCell sx={{ textAlign: "center" }}>
                         USD{" "}
                         {product.productPrice.toLocaleString("en-US", {
                           style: "currency",
                           currency: "USD",
                         })}
                       </TableCell>
-                      <TableCell variant="head" sx={{ textAlign: "center" }}>
+                      <TableCell sx={{ textAlign: "center" }}>
                         {getProductCategoryName(product.categoryId)}
+                      </TableCell>
+                      <TableCell sx={{ textAlign: "center" }}>
+                        <DeleteRoundedIcon />
                       </TableCell>
                     </TableRow>
                   );

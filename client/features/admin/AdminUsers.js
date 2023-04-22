@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import biohackersTheme from "../../app/theme";
 import {
   ThemeProvider,
@@ -9,10 +9,11 @@ import {
   TableCell,
   TableHead,
   TableRow,
-  Checkbox,
 } from "@mui/material";
-import { MainContainer, PrimaryButton } from "../style/StyleGuide";
+import EditRoundedIcon from "@mui/icons-material/EditRounded";
+import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded";
 import PersonAddAlt1Icon from "@mui/icons-material/PersonAddAlt1";
+import { MainContainer, PrimaryButton } from "../style/StyleGuide";
 import AdminHeaderbar from "./AdminHeaderbar";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAllUsers, selectAllUsers } from "../users/userSlice";
@@ -20,10 +21,6 @@ import { fetchAllUsers, selectAllUsers } from "../users/userSlice";
 const AdminUsers = () => {
   const dispatch = useDispatch();
   const users = useSelector(selectAllUsers);
-
-  useEffect(() => {
-    dispatch(fetchAllUsers());
-  }, [dispatch]);
 
   const mainContainerStyle = {
     marginBottom: "60px",
@@ -73,18 +70,6 @@ const AdminUsers = () => {
                     }}
                   >
                     Edit
-                  </Typography>
-                </TableCell>
-                <TableCell variant="head">
-                  <Typography
-                    variant="body1"
-                    sx={{
-                      textAlign: "left",
-                      textTransform: "uppercase",
-                      fontWeight: "bold",
-                    }}
-                  >
-                    Delete
                   </Typography>
                 </TableCell>
                 <TableCell variant="head">
@@ -147,6 +132,18 @@ const AdminUsers = () => {
                     Role
                   </Typography>
                 </TableCell>
+                <TableCell variant="head">
+                  <Typography
+                    variant="body1"
+                    sx={{
+                      textAlign: "left",
+                      textTransform: "uppercase",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    Delete
+                  </Typography>
+                </TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -155,33 +152,27 @@ const AdminUsers = () => {
                   key={user.id}
                   sx={{ borderBottomColor: "1px solid primary.main" }}
                 >
-                  <TableCell variant="head" sx={{ textAlign: "center" }}>
-                    {user.id}
-                  </TableCell>
-                  <TableCell>
-                    <Checkbox
-                      sx={{ color: "primary.main", alignItems: "center" }}
-                    />
-                  </TableCell>
-                  <TableCell>
-                    <Checkbox
-                      sx={{ color: "primary.main", alignItems: "center" }}
-                    />
-                  </TableCell>
-                  <TableCell variant="head" sx={{ textAlign: "center" }}>
+                  <TableCell sx={{ textAlign: "center" }}>{user.id}</TableCell>
+                  <TableCell sx={{ textAlign: "center" }}>
+                  <EditRoundedIcon onClick={() => handleEditUserClick(user)} />
+                </TableCell>
+                  <TableCell sx={{ textAlign: "center" }}>
                     {user.username}
                   </TableCell>
-                  <TableCell variant="head" sx={{ textAlign: "center" }}>
+                  <TableCell sx={{ textAlign: "center" }}>
                     {user.firstName}
                   </TableCell>
-                  <TableCell variant="head" sx={{ textAlign: "center" }}>
+                  <TableCell sx={{ textAlign: "center" }}>
                     {user.lastName}
                   </TableCell>
-                  <TableCell variant="head" sx={{ textAlign: "center" }}>
+                  <TableCell sx={{ textAlign: "center" }}>
                     {user.email}
                   </TableCell>
-                  <TableCell variant="head" sx={{ textAlign: "center" }}>
+                  <TableCell sx={{ textAlign: "center" }}>
                     {user.isAdmin ? "Admin" : "Customer"}
+                  </TableCell>
+                  <TableCell sx={{ textAlign: "center" }}>
+                    <DeleteRoundedIcon />
                   </TableCell>
                 </TableRow>
               ))}

@@ -1,7 +1,11 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { MainContainer, NoBorderButton, TertiaryButton } from "../style/StyleGuide";
+import {
+  MainContainer,
+  NoBorderButton,
+  TertiaryButton,
+} from "../style/StyleGuide";
 import { ThemeProvider, Container, Box } from "@mui/material";
 import biohackersTheme from "../../app/theme";
 import { logout } from "../../app/store";
@@ -37,29 +41,33 @@ const Navbar = () => {
           <Box>
             {isLoggedIn ? (
               <>
-                {/* The navbar will show these links after you log in */}
-                <Link to={`/users/${id}`}>
-                  <NoBorderButton>Account</NoBorderButton>
-                </Link>
-                <Link to="/cart" element={<Cart name="cart" displayName="Cart" />}>
-                  <NoBorderButton>Cart (#)</NoBorderButton>
-                </Link>
                 {isAdmin && (
                   <Link to="/admin">
                     <TertiaryButton>Admin</TertiaryButton>
                   </Link>
                 )}
+                <Link to={`/users/${id}`}>
+                  <NoBorderButton>Account</NoBorderButton>
+                </Link>
                 <NoBorderButton type="button" onClick={logoutAndRedirectHome}>
                   Logout
                 </NoBorderButton>
+                <Link
+                  to="/cart"
+                  element={<Cart name="cart" displayName="Cart" />}
+                >
+                  <NoBorderButton>Cart (#)</NoBorderButton>
+                </Link>
               </>
             ) : (
               <>
-                {/* The navbar will show these links before you log in */}
                 <Link to="/login">
                   <NoBorderButton>Login</NoBorderButton>
                 </Link>
-                <Link to="/cart" element={<Cart name="cart" displayName="Cart" />}>
+                <Link
+                  to="/cart"
+                  element={<Cart name="cart" displayName="Cart" />}
+                >
                   <NoBorderButton>Cart (#)</NoBorderButton>
                 </Link>
               </>
