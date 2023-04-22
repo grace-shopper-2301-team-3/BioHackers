@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import biohackersTheme from "../../app/theme";
 import {
   ThemeProvider,
@@ -9,18 +9,43 @@ import {
   TableCell,
   TableHead,
   TableRow,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  Button
 } from "@mui/material";
 import EditRoundedIcon from "@mui/icons-material/EditRounded";
 import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded";
 import PersonAddAlt1Icon from "@mui/icons-material/PersonAddAlt1";
-import { MainContainer, PrimaryButton } from "../style/StyleGuide";
+import { MainContainer, PrimaryButton, SecondaryButton, TertiaryButton } from "../style/StyleGuide";
 import AdminHeaderbar from "./AdminHeaderbar";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchAllUsers, selectAllUsers } from "../users/userSlice";
+import { fetchAllUsers, selectAllUsers, deleteUser } from "../users/userSlice";
 
 const AdminUsers = () => {
   const dispatch = useDispatch();
   const users = useSelector(selectAllUsers);
+
+  const [open, setOpen] = useState(false);
+  const [userToDelete, setUserToDelete] = useState(null);
+
+  const handleDeleteClick = (user) => {
+    setUserToDelete(user);
+    setOpen(true);
+  };
+
+  const handleDeleteUser = async () => {
+    try {
+      await dispatch(deleteUser(userToDelete.id));
+      setOpen(false);
+      setUserToDelete(null);
+      await dispatch(fetchAllUsers());
+    } catch (err) {
+      console.log('error removing user', err)
+    }
+  };
 
   const mainContainerStyle = {
     marginBottom: "60px",
@@ -154,8 +179,8 @@ const AdminUsers = () => {
                 >
                   <TableCell sx={{ textAlign: "center" }}>{user.id}</TableCell>
                   <TableCell sx={{ textAlign: "center" }}>
-                  <EditRoundedIcon onClick={() => handleEditUserClick(user)} />
-                </TableCell>
+                    <EditRoundedIcon/>
+                  </TableCell>
                   <TableCell sx={{ textAlign: "center" }}>
                     {user.username}
                   </TableCell>
@@ -169,16 +194,53 @@ const AdminUsers = () => {
                     {user.email}
                   </TableCell>
                   <TableCell sx={{ textAlign: "center" }}>
-                    {user.isAdmin ? "Admin" : "Customer"}
-                  </TableCell>
-                  <TableCell sx={{ textAlign: "center" }}>
-                    <DeleteRoundedIcon />
-                  </TableCell>
+            {user.isAdmin ? "Admin" : "Customer"}
+          </TableCell>
+          <TableCell sx={{ textAlign: "center" }}>
+            <Dialog
+              open={open}
+              onClose={() => setOpen(false)}
+              aria-labelledby="alert-dialog-title"
+              aria-describedby="alert-dialog-description"
+            >
+              <DialogTitle id="alert-dialog-title">{"Are You Sure?"}</DialogTitle>
+              <DialogContent>
+                <DialogContentText id="alert-dialog-description">
+                  Delete User: <b>{userToDelete && userToDelete.username}</b>
+                </DialogContentText>
+              </DialogContent>
+              <DialogActions>
+                <Button
+                  variant="outlined"
+                  size="small"
+                  onClick={() => {
+                    setOpen(false);
+                    setUserToDelete(null);
+                  }}
+                >
+                  Cancel
+                </Button>
+                <Button
+                  variant="contained"
+                  size="small"
+                  onClick={() => handleDeleteUser()}
+                  autoFocus
+                >
+                  Delete
+                </Button>
+              </DialogActions>
+            </Dialog>
+            <DeleteRoundedIcon
+              onClick={() => handleDeleteClick(user)}
+              sx={{ cursor: "pointer" }}
+            />
+          </TableCell>
                 </TableRow>
               ))}
             </TableBody>
           </Table>
         </Container>
+
       </MainContainer>
     </ThemeProvider>
   );
