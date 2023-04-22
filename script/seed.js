@@ -176,7 +176,6 @@ async function seed() {
 
   console.log(`seeded ${products.length} products`)
   console.log(`seeded ${categories.length} categories`)
-  console.log(`seeded cart ${Cart}`)
   console.log(`seeded successfully`)
 }
 

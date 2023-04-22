@@ -332,7 +332,7 @@ const AdminUsers = () => {
                         onChange={(e) =>
                           setUserToEdit({
                             ...userToEdit,
-                            password: e.target.value,
+                            firstName: e.target.value,
                           })
                         }
                         fullWidth
@@ -346,7 +346,7 @@ const AdminUsers = () => {
                         onChange={(e) =>
                           setUserToEdit({
                             ...userToEdit,
-                            password: e.target.value,
+                            lastName: e.target.value,
                           })
                         }
                         fullWidth
@@ -394,7 +394,7 @@ const AdminUsers = () => {
                     onClose={() => setAddOpen(false)}
                     BackdropProps={backdropProps}
                   >
-                    <DialogTitle id="form-dialog-title">Edit User</DialogTitle>
+                    <DialogTitle id="form-dialog-title">Add User</DialogTitle>
                     <DialogContent>
                       <TextField
                         autoFocus
@@ -420,7 +420,7 @@ const AdminUsers = () => {
                         onChange={(e) =>
                           setUserToAdd({
                             ...userToAdd,
-                            password: e.target.value,
+                            firstName: e.target.value,
                           })
                         }
                         fullWidth
@@ -434,7 +434,7 @@ const AdminUsers = () => {
                         onChange={(e) =>
                           setUserToAdd({
                             ...userToAdd,
-                            password: e.target.value,
+                            lastName: e.target.value,
                           })
                         }
                         fullWidth
@@ -444,10 +444,10 @@ const AdminUsers = () => {
                         id="email"
                         label="Email Address"
                         type="email"
-                        value={userToEdit && userToEdit.email}
+                        value={userToAdd && userToAdd.email}
                         onChange={(e) =>
-                          setUserToEdit({
-                            ...userToEdit,
+                          setUserToAdd({
+                            ...userToAdd,
                             email: e.target.value,
                           })
                         }
@@ -459,8 +459,8 @@ const AdminUsers = () => {
                         variant="outlined"
                         size="small"
                         onClick={() => {
-                          setEditOpen(false);
-                          setUserToEdit(null);
+                          setAddOpen(false);
+                          setUserToAdd(null);
                         }}
                       >
                         Cancel
@@ -468,7 +468,7 @@ const AdminUsers = () => {
                       <Button
                         variant="contained"
                         size="small"
-                        onClick={() => handleEditUser()}
+                        onClick={() => handleAddUser()}
                         autoFocus
                       >
                         Add User
