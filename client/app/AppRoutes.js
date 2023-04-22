@@ -26,7 +26,7 @@ import AdminPaymentsEdit from "../features/admin/AdminPaymentsEdit";
 import AdminProducts from "../features/admin/AdminProducts";
 import AdminProductsEdit from "../features/admin/AdminProductsEdit";
 import AdminUsers from "../features/admin/AdminUsers";
-import AdminUsersEdit from "../features/admin/AdminUsersEdit";
+import AdminUsersModal from "../features/admin/AdminUsersModal";
 import NotFound from "../features/notfound/NotFound";
 
 /**
@@ -101,7 +101,7 @@ const AppRoutes = () => {
                   element={<AdminProductsEdit />}
                 />
                 <Route path="/admin/users" element={<AdminUsers />} />
-                <Route path="/admin/users/edit" element={<AdminUsersEdit />} />
+                <Route path="/admin/users/edit" element={<AdminUsersModal />} />
               </>
             )}
           </>

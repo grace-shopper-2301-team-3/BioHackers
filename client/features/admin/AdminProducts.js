@@ -14,13 +14,17 @@ import {
 } from "@mui/material";
 
 import { getAllProducts, selectProduct } from "../products/allProductsSlice";
-
+import {
+  getAllCategories,
+  selectCategory,
+} from "../categories/allCategoriesSlice";
 import { MainContainer } from "../style/StyleGuide";
 import AdminHeaderbar from "./AdminHeaderbar";
 
 const AdminProducts = () => {
   const dispatch = useDispatch();
   const products = useSelector(selectProduct);
+  const categories = useSelector(selectCategory);
 
   const mainContainerStyle = {
     marginBottom: "60px",
@@ -33,7 +37,7 @@ const AdminProducts = () => {
         <Typography variant="h5">Products</Typography>
 
         <Container style={{ height: 400, width: "100%", height: "100%" }}>
-          <Table sx={{ backgroundColor: "#212121", my: "30px" }}>
+          <Table sx={{ backgroundColor: "#200040", my: "30px" }}>
             <TableHead>
               <TableRow>
                 <TableCell
@@ -121,13 +125,20 @@ const AdminProducts = () => {
             <TableBody>
               {Array.isArray(products) &&
                 products.map((product) => {
+                  const category = categories.find(
+                    (category) => category.id === product.categoryId
+                  );
+                  const getProductCategoryName = () => {
+                    return category ? category.name : "";
+                  };
+
                   return (
                     <TableRow
-                      key={product.productId}
+                      key={product.id}
                       sx={{ borderBottomColor: "1px solid primary.main" }}
                     >
                       <TableCell variant="head" sx={{ textAlign: "center" }}>
-                        {product.productId}
+                        {product.id}
                       </TableCell>
                       <TableCell>
                         <Checkbox
@@ -139,7 +150,7 @@ const AdminProducts = () => {
                           sx={{ color: "primary.main", alignItems: "center" }}
                         />
                       </TableCell>
-                      
+
                       <TableCell variant="head" sx={{ textAlign: "center" }}>
                         (placeholder)
                       </TableCell>
@@ -161,7 +172,7 @@ const AdminProducts = () => {
                         })}
                       </TableCell>
                       <TableCell variant="head" sx={{ textAlign: "center" }}>
-                        (placeholder)
+                        {getProductCategoryName(product.categoryId)}
                       </TableCell>
                     </TableRow>
                   );

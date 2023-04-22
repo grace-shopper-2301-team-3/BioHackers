@@ -11,7 +11,8 @@ import {
   TableRow,
   Checkbox,
 } from "@mui/material";
-import { MainContainer } from "../style/StyleGuide";
+import { MainContainer, PrimaryButton } from "../style/StyleGuide";
+import PersonAddAlt1Icon from "@mui/icons-material/PersonAddAlt1";
 import AdminHeaderbar from "./AdminHeaderbar";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAllUsers, selectAllUsers } from "../users/userSlice";
@@ -20,7 +21,6 @@ const AdminUsers = () => {
   const dispatch = useDispatch();
   const users = useSelector(selectAllUsers);
 
-  console.log("users:", users);
   useEffect(() => {
     dispatch(fetchAllUsers());
   }, [dispatch]);
@@ -33,10 +33,22 @@ const AdminUsers = () => {
     <ThemeProvider theme={biohackersTheme}>
       <AdminHeaderbar />
       <MainContainer style={mainContainerStyle}>
-        <Typography variant="h5">Users</Typography>
+        <Container
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+          }}
+        >
+          <Typography variant="h5">Users</Typography>
+          <PrimaryButton variant="contained" size="medium">
+            <PersonAddAlt1Icon sx={{ mr: 1 }} />
+            <Typography variant="body2">Add User</Typography>
+          </PrimaryButton>
+        </Container>
 
         <Container style={{ height: 400, width: "100%", height: "100%" }}>
-          <Table sx={{ backgroundColor: "#212121", my: "30px" }}>
+          <Table sx={{ backgroundColor: "#200040", my: "30px" }}>
             <TableHead>
               <TableRow>
                 <TableCell variant="head">
@@ -169,7 +181,7 @@ const AdminUsers = () => {
                     {user.email}
                   </TableCell>
                   <TableCell variant="head" sx={{ textAlign: "center" }}>
-                    {user.isAdmin}
+                    {user.isAdmin ? "Admin" : "Customer"}
                   </TableCell>
                 </TableRow>
               ))}
