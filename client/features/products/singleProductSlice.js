@@ -62,7 +62,7 @@ export const deleteProduct = createAsyncThunk('/deleteProduct', async (id) => {
 export const singleProductSlice = createSlice({
     name: "singleProduct",
     initialState: {
-        Product: [],
+        data: [],
         error: null,
         status: 'idle'
     },
@@ -77,18 +77,18 @@ export const singleProductSlice = createSlice({
                 state.error = action.error.message;
       })
       .addCase(createProduct.fulfilled, (state, action) => {
-        state.push(action.payload);
+        state.data.push(action.payload);
       })
       .addCase(updateProduct.fulfilled, (state, action) => {
-        const index = state.findIndex((product) => product.id === action.payload.id);
+        const index = state.data.findIndex((product) => product.id === action.payload.id);
         if (index !== -1) {
-          state[index] = action.payload;
+          state.data[index] = action.payload;
         }
       })
       .addCase(deleteProduct.fulfilled, (state, action) => {
-        const index = state.findIndex((product) => product.id === action.payload.id);
+        const index = state.data.findIndex((product) => product.id === action.payload.id);
         if (index !== -1) {
-          state.splice(index, 1);
+          state.data.splice(index, 1);
         }
       })
       .addCase(createProduct.rejected, (state, action) => {
