@@ -24,8 +24,7 @@ const Product = db.define('product', {
     allowNull:false
   },
   quantity: {
-    type: Sequelize.INTEGER,
-    defaultValue: 0
+    type: Sequelize.INTEGER
   }
 });
 

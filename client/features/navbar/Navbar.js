@@ -56,6 +56,11 @@ const Navbar = () => {
                     <NoBorderButton>Users</NoBorderButton>
                   </Link>
                 )}
+                {isAdmin && (
+                  <Link to="/inventory">
+                    <NoBorderButton>Inventory</NoBorderButton>
+                  </Link>
+                )}
                 <NoBorderButton type="button" onClick={logoutAndRedirectHome}>
                   Logout
                 </NoBorderButton>

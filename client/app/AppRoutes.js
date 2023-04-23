@@ -28,7 +28,7 @@ import AdminProductsEdit from "../features/admin/AdminProductsEdit";
 import AdminUsers from "../features/admin/AdminUsers";
 import AdminUsersEdit from "../features/admin/AdminUsersEdit";
 import NotFound from "../features/notfound/NotFound";
-
+import Inventory from "../features/inventory/Inventory";
 /**
  * COMPONENT
  */
@@ -66,6 +66,7 @@ const AppRoutes = () => {
                 <Route to="/" element={<Home />} />
                 <Route to="/home" element={<Home />} />
                 <Route path="/users" element={<AllUsers />} />
+                <Route path="/inventory" element={<Inventory />} />
               </>
             )}
           </>
