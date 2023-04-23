@@ -30,8 +30,6 @@ import { getAllProducts, selectProduct } from "../products/allProductsSlice";
 import { addToCartAsync } from "../cart/cartSlice";
 import { getSingleProduct } from "../products/singleProductSlice";
 
-
-
 const Home = () => {
   const dispatch = useDispatch();
   const categories = useSelector(selectCategory);
