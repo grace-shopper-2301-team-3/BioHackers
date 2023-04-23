@@ -16,6 +16,11 @@ import {
   DialogTitle,
   Button,
   TextField,
+  FormControl,
+  FormControlLabel,
+  FormLabel,
+  Radio,
+  RadioGroup
 } from "@mui/material";
 import EditRoundedIcon from "@mui/icons-material/EditRounded";
 import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded";
@@ -289,10 +294,10 @@ const AdminUsers = () => {
                         Cancel
                       </Button>
                       <Button
+                        autoFocus
                         variant="contained"
                         size="small"
                         onClick={() => handleDeleteUser()}
-                        autoFocus
                       >
                         Delete
                       </Button>
@@ -311,6 +316,7 @@ const AdminUsers = () => {
                     <DialogContent>
                       <TextField
                         required
+                        fullWidth
                         autoFocus
                         margin="dense"
                         id="username"
@@ -323,10 +329,10 @@ const AdminUsers = () => {
                             username: e.target.value,
                           })
                         }
-                        fullWidth
                       />
                       <TextField
                         required
+                        fullWidth
                         margin="dense"
                         id="firstName"
                         label="First Name"
@@ -338,10 +344,10 @@ const AdminUsers = () => {
                             firstName: e.target.value,
                           })
                         }
-                        fullWidth
                       />
                       <TextField
                         required
+                        fullWidth
                         margin="dense"
                         id="lastName"
                         label="Last Name"
@@ -353,10 +359,10 @@ const AdminUsers = () => {
                             lastName: e.target.value,
                           })
                         }
-                        fullWidth
                       />
                       <TextField
                         required
+                        fullWidth
                         margin="dense"
                         id="email"
                         label="Email Address"
@@ -368,7 +374,6 @@ const AdminUsers = () => {
                             email: e.target.value,
                           })
                         }
-                        fullWidth
                       />
                     </DialogContent>
                     <DialogActions>
@@ -403,76 +408,121 @@ const AdminUsers = () => {
                     <DialogContent>
                       <TextField
                         autoFocus
+                        fullWidth
                         margin="dense"
                         id="username"
                         label="Username"
                         type="text"
                         value={userToAdd && userToAdd.username}
+                        helperText={
+                          !userToAdd?.username && "Username is required"
+                        }
                         onChange={(e) =>
                           setUserToAdd({
                             ...userToAdd,
                             username: e.target.value,
                           })
                         }
-                        fullWidth
                       />
                       <TextField
                         autoFocus
+                        fullWidth
                         margin="dense"
                         id="password"
                         label="Password"
                         type="password"
                         value={userToAdd && userToAdd.password}
+                        helperText={
+                          !userToAdd?.password && "Password is required"
+                        }
                         onChange={(e) =>
                           setUserToAdd({
                             ...userToAdd,
                             password: e.target.value,
                           })
                         }
-                        fullWidth
                       />
                       <TextField
+                        fullWidth
                         margin="dense"
                         id="firstName"
                         label="First Name"
                         type="text"
                         value={userToAdd && userToAdd.firstName}
+                        helperText={
+                          !userToAdd?.firstName && "First Name is required"
+                        }
                         onChange={(e) =>
                           setUserToAdd({
                             ...userToAdd,
                             firstName: e.target.value,
                           })
                         }
-                        fullWidth
                       />
                       <TextField
+                        fullWidth
                         margin="dense"
                         id="lastName"
                         label="Last Name"
                         type="text"
                         value={userToAdd && userToAdd.lastName}
+                        helperText={
+                          !userToAdd?.lastName && "Last Name is required"
+                        }
                         onChange={(e) =>
                           setUserToAdd({
                             ...userToAdd,
                             lastName: e.target.value,
                           })
                         }
-                        fullWidth
                       />
                       <TextField
+                        fullWidth
                         margin="dense"
                         id="email"
                         label="Email Address"
                         type="email"
                         value={userToAdd && userToAdd.email}
+                        helperText={
+                          !userToAdd?.email && "Email is required"
+                        }
                         onChange={(e) =>
                           setUserToAdd({
                             ...userToAdd,
                             email: e.target.value,
                           })
                         }
-                        fullWidth
+                        error={
+                          !!(
+                            userToAdd?.email &&
+                            !/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g.test(
+                              userToAdd?.email
+                            )
+                          )
+                        }
                       />
+                      <FormControl component="fieldset">
+      <FormLabel component="legend">Is Admin?</FormLabel>
+      <RadioGroup
+        aria-label="isAdmin"
+        name="isAdmin"
+        value={userToAdd?.isAdmin || false}
+        onChange={(e) =>
+          setUserToAdd({ ...userToAdd, isAdmin: e.target.value === "true" })
+        }
+      >
+        <FormControlLabel
+          value={true}
+          control={<Radio />}
+          label="Yes"
+        />
+        <FormControlLabel
+          value={false}
+          control={<Radio />}
+          label="No"
+        />
+      </RadioGroup>
+    </FormControl>
                     </DialogContent>
                     <DialogActions>
                       <Button
@@ -486,7 +536,13 @@ const AdminUsers = () => {
                         Cancel
                       </Button>
                       <Button
-                      disabled={!(userToAdd?.username && userToAdd?.password && userToAdd?.email)}
+                        disabled={
+                          !(
+                            userToAdd?.username &&
+                            userToAdd?.password &&
+                            userToAdd?.email
+                          )
+                        }
                         variant="contained"
                         size="small"
                         onClick={() => handleAddUser()}
