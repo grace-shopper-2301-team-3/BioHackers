@@ -20,7 +20,7 @@ import {
   FormControlLabel,
   FormLabel,
   Radio,
-  RadioGroup
+  RadioGroup,
 } from "@mui/material";
 import EditRoundedIcon from "@mui/icons-material/EditRounded";
 import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded";
@@ -483,9 +483,7 @@ const AdminUsers = () => {
                         label="Email Address"
                         type="email"
                         value={userToAdd && userToAdd.email}
-                        helperText={
-                          !userToAdd?.email && "Email is required"
-                        }
+                        helperText={!userToAdd?.email && "Email is required"}
                         onChange={(e) =>
                           setUserToAdd({
                             ...userToAdd,
@@ -501,28 +499,39 @@ const AdminUsers = () => {
                           )
                         }
                       />
-                      <FormControl component="fieldset">
-      <FormLabel component="legend">Is Admin?</FormLabel>
-      <RadioGroup
-        aria-label="isAdmin"
-        name="isAdmin"
-        value={userToAdd?.isAdmin || false}
-        onChange={(e) =>
-          setUserToAdd({ ...userToAdd, isAdmin: e.target.value === "true" })
-        }
-      >
-        <FormControlLabel
-          value={true}
-          control={<Radio />}
-          label="Yes"
-        />
-        <FormControlLabel
-          value={false}
-          control={<Radio />}
-          label="No"
-        />
-      </RadioGroup>
-    </FormControl>
+                      <FormControl component="fieldset" sx={{ my: 2 }}>
+                        {" "}
+                        <FormLabel
+                          component="legend"
+                          sx={{ color: "primary.main" }}
+                        >
+                          Is Admin?
+                        </FormLabel>
+                        <RadioGroup
+                          aria-label="isAdmin"
+                          name="isAdmin"
+                          value={userToAdd?.isAdmin || false}
+                          onChange={(e) =>
+                            setUserToAdd({
+                              ...userToAdd,
+                              isAdmin: e.target.value === "true",
+                            })
+                          }
+                        >
+                          <FormControlLabel
+                            value={true}
+                            control={<Radio />}
+                            label="Yes"
+                            sx={{ mx: 2}}
+                          />
+                          <FormControlLabel
+                            value={false}
+                            control={<Radio />}
+                            label="No"
+                            sx={{ mx: 2}}
+                          />
+                        </RadioGroup>
+                      </FormControl>
                     </DialogContent>
                     <DialogActions>
                       <Button
