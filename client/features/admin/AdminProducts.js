@@ -142,7 +142,8 @@ const AdminProducts = () => {
                   const category = categories.find(
                     (category) => category.id === product.categoryId
                   );
-                  const getProductCategoryName = () => {
+                  const getProductCategoryName = (categoryId) => {
+                    const category = categories.find((category) => category.id === categoryId);
                     return category ? category.name : "";
                   };
 

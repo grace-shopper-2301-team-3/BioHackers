@@ -18,13 +18,9 @@ import Cart from "../features/cart/Cart";
 import EditUser from "../features/users/EditUser";
 import Admin from "../features/admin/Admin";
 import AdminDiscounts from "../features/admin/AdminDiscounts";
-import AdminDiscountsEdit from "../features/admin/AdminDiscountsEdit";
 import AdminOrders from "../features/admin/AdminOrders";
-import AdminOrdersEdit from "../features/admin/AdminOrdersEdit";
 import AdminPayments from "../features/admin/AdminPayments";
-import AdminPaymentsEdit from "../features/admin/AdminPaymentsEdit";
 import AdminProducts from "../features/admin/AdminProducts";
-import AdminProductsEdit from "../features/admin/AdminProductsEdit";
 import AdminUsers from "../features/admin/AdminUsers";
 import NotFound from "../features/notfound/NotFound";
 
@@ -33,6 +29,7 @@ import NotFound from "../features/notfound/NotFound";
  */
 
 const AppRoutes = () => {
+
   const isLoggedIn = useSelector((state) => !!state.auth.me.id);
   const isAdmin = useSelector((state) => state.auth.me.isAdmin);
 
@@ -80,25 +77,9 @@ const AppRoutes = () => {
                   element={<Admin name="admin" displayName="Admin" />}
                 />
                 <Route path="/admin/discounts" element={<AdminDiscounts />} />
-                <Route
-                  path="/admin/discounts/edit"
-                  element={<AdminDiscountsEdit />}
-                />
                 <Route path="/admin/orders" element={<AdminOrders />} />
-                <Route
-                  path="/admin/orders/edit"
-                  element={<AdminOrdersEdit />}
-                />
                 <Route path="/admin/payments" element={<AdminPayments />} />
-                <Route
-                  path="/admin/payments/edit"
-                  element={<AdminPaymentsEdit />}
-                />
                 <Route path="/admin/products" element={<AdminProducts />} />
-                <Route
-                  path="/admin/products/edit"
-                  element={<AdminProductsEdit />}
-                />
                 <Route path="/admin/users" element={<AdminUsers />} />
               </>
             )}
@@ -129,7 +110,7 @@ const AppRoutes = () => {
         )}
 
         {/* Fallback route for non-existing pages */}
-        <Route path="*" element={<Navigate to="/notfound" />} />
+        {/* <Route path="*" element={<Navigate to="/notfound" />} /> */}
         <Route path="/notfound" element={<NotFound />} />
         <Route
           path="/styleguide"

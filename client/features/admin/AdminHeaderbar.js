@@ -37,14 +37,8 @@ const AdminSidebar = () => {
       <MainContainer sx={{ py: 4 }}>
         <Container sx={{ py: 4 }}>
           <Typography variant="h1">Administrator View</Typography>{" "}
-          <Typography variant="h5">
-            Welcome,&nbsp;
-            <Typography
-              variant="h4"
-              sx={{ fontWeight: "bold", color: "#AC6CFF", display: "inline" }}
-            >
-              {username}
-            </Typography>
+          <Typography variant="h4">
+            Welcome, <b>{username} </b>
           </Typography>
         </Container>
         <Container
