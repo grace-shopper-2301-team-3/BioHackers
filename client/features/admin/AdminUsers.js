@@ -40,7 +40,7 @@ const AdminUsers = () => {
   const [addOpen, setAddOpen] = useState(false);
   const [userToDelete, setUserToDelete] = useState(null);
   const [userToEdit, setUserToEdit] = useState(null);
-  const [userToAdd, setUserToAdd] = useState(null);
+  const [userToAdd, setUserToAdd] = useState("");
 
   const handleDeleteClick = (user) => {
     setUserToDelete(user);
@@ -310,6 +310,7 @@ const AdminUsers = () => {
                     <DialogTitle id="form-dialog-title">Edit User</DialogTitle>
                     <DialogContent>
                       <TextField
+                        required
                         autoFocus
                         margin="dense"
                         id="username"
@@ -325,6 +326,7 @@ const AdminUsers = () => {
                         fullWidth
                       />
                       <TextField
+                        required
                         margin="dense"
                         id="firstName"
                         label="First Name"
@@ -339,6 +341,7 @@ const AdminUsers = () => {
                         fullWidth
                       />
                       <TextField
+                        required
                         margin="dense"
                         id="lastName"
                         label="Last Name"
@@ -353,6 +356,7 @@ const AdminUsers = () => {
                         fullWidth
                       />
                       <TextField
+                        required
                         margin="dense"
                         id="email"
                         label="Email Address"
@@ -413,6 +417,21 @@ const AdminUsers = () => {
                         fullWidth
                       />
                       <TextField
+                        autoFocus
+                        margin="dense"
+                        id="password"
+                        label="Password"
+                        type="password"
+                        value={userToAdd && userToAdd.password}
+                        onChange={(e) =>
+                          setUserToAdd({
+                            ...userToAdd,
+                            password: e.target.value,
+                          })
+                        }
+                        fullWidth
+                      />
+                      <TextField
                         margin="dense"
                         id="firstName"
                         label="First Name"
@@ -467,6 +486,7 @@ const AdminUsers = () => {
                         Cancel
                       </Button>
                       <Button
+                      disabled={!(userToAdd?.username && userToAdd?.password && userToAdd?.email)}
                         variant="contained"
                         size="small"
                         onClick={() => handleAddUser()}

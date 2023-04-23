@@ -32,6 +32,33 @@ export const getSingleProduct = createAsyncThunk('/singleProduct', async (id) =>
 //   }
 // );
 
+export const createProduct = createAsyncThunk('/createProduct', async (product) => {
+  try {
+    const { data } = await axios.post(`/api/products`, product);
+    return data;
+  } catch (error) {
+    return error.message;
+  }
+});
+
+export const updateProduct = createAsyncThunk('/updateProduct', async (product) => {
+  try {
+    const { data } = await axios.put(`/api/products/${product.id}`, product);
+    return data;
+  } catch (error) {
+    return error.message;
+  }
+});
+
+export const deleteProduct = createAsyncThunk('/deleteProduct', async (id) => {
+  try {
+    const { data } = await axios.delete(`/api/products/${id}`);
+    return data;
+  } catch (error) {
+    return error.message;
+  }
+});
+
 export const singleProductSlice = createSlice({
     name: "singleProduct",
     initialState: {
@@ -49,6 +76,30 @@ export const singleProductSlice = createSlice({
                 state.status = 'failed';
                 state.error = action.error.message;
       })
+      .addCase(createProduct.fulfilled, (state, action) => {
+        state.push(action.payload);
+      })
+      .addCase(updateProduct.fulfilled, (state, action) => {
+        const index = state.findIndex((product) => product.id === action.payload.id);
+        if (index !== -1) {
+          state[index] = action.payload;
+        }
+      })
+      .addCase(deleteProduct.fulfilled, (state, action) => {
+        const index = state.findIndex((product) => product.id === action.payload.id);
+        if (index !== -1) {
+          state.splice(index, 1);
+        }
+      })
+      .addCase(createProduct.rejected, (state, action) => {
+        state.error = action.error.message;
+      })
+      .addCase(updateProduct.rejected, (state, action) => {
+        state.error = action.error.message;
+      })
+      .addCase(deleteProduct.rejected, (state, action) => {
+        state.error = action.error.message;
+      });
     }
   });
 export const selectSingleProduct = (state) => state.singleProduct;
