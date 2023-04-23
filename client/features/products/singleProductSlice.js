@@ -21,8 +21,9 @@ export const addProductAsync = createAsyncThunk(
         productPrice,
         imageUrl,
         // productId,
+        categoryId,
         description,
-        category
+        quantity
       });
       return data;
     } catch (err) {
