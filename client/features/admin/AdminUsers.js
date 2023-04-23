@@ -273,7 +273,8 @@ const AdminUsers = () => {
                     </DialogTitle>
                     <DialogContent>
                       <DialogContentText id="alert-dialog-description">
-                        <b>{userToDelete && userToDelete.username}</b> will be removed
+                        <b>{userToDelete && userToDelete.username}</b> will be
+                        removed
                       </DialogContentText>
                     </DialogContent>
                     <DialogActions>
@@ -473,7 +474,7 @@ const AdminUsers = () => {
                       >
                         Add User
                       </Button>
-                      </DialogActions>
+                    </DialogActions>
                   </Dialog>
 
                   {/* End of Dialogs */}
