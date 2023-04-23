@@ -18,9 +18,10 @@ import {
   DialogActions,
   Button,
   FormControl,
+  FormLabel,
   FormControlLabel,
   Radio,
-  RadioGroup
+  RadioGroup,
 } from "@mui/material";
 import AdminHeaderbar from "./AdminHeaderbar";
 import EditRoundedIcon from "@mui/icons-material/EditRounded";
@@ -230,7 +231,10 @@ const AdminProducts = () => {
                       {product.id}
                     </TableCell>
                     <TableCell>
-                      <EditRoundedIcon />
+                      <EditRoundedIcon
+                        onClick={() => handleEditClick(product)}
+                        sx={{ cursor: "pointer", marginRight: 2 }}
+                      />
                     </TableCell>
                     <TableCell sx={{ textAlign: "center" }}>
                       (placeholder)
@@ -261,53 +265,165 @@ const AdminProducts = () => {
                         )}
                     </TableCell>
                     <TableCell sx={{ textAlign: "center" }}>
-                    <DeleteRoundedIcon
-                      onClick={() => handleDeleteClick(product)}
-                      sx={{ cursor: "pointer" }}
-                    />
+                      <DeleteRoundedIcon
+                        onClick={() => handleDeleteClick(product)}
+                        sx={{ cursor: "pointer" }}
+                      />
                     </TableCell>
 
                     {/* Dialog Management */}
 
                     {/* Delete Dialog */}
                     <Dialog
-                    open={deleteOpen}
-                    onClose={() => setDeleteOpen(false)}
-                    aria-labelledby="alert-dialog-title"
-                    aria-describedby="alert-dialog-description"
-                    BackdropProps={backdropProps}
-                  >
-                    <DialogTitle id="alert-dialog-title">
-                      {"Are You Sure?"}
-                    </DialogTitle>
-                    <DialogContent>
-                      <DialogContentText id="alert-dialog-description">
-                        <b>{productToDelete && productToDelete.productName}</b> will be
-                        removed
-                      </DialogContentText>
-                    </DialogContent>
-                    <DialogActions>
-                      <Button
-                        variant="outlined"
-                        size="small"
-                        onClick={() => {
-                          setDeleteOpen(false);
-                          setProductToDelete(null);
-                        }}
-                      >
-                        Cancel
-                      </Button>
-                      <Button
-                        autoFocus
-                        variant="contained"
-                        size="small"
-                        onClick={() => handleDeleteProduct()}
-                      >
-                        Delete
-                      </Button>
-                    </DialogActions>
-                  </Dialog>
+                      open={deleteOpen}
+                      onClose={() => setDeleteOpen(false)}
+                      aria-labelledby="alert-dialog-title"
+                      aria-describedby="alert-dialog-description"
+                      BackdropProps={backdropProps}
+                    >
+                      <DialogTitle id="alert-dialog-title">
+                        {"Are You Sure?"}
+                      </DialogTitle>
+                      <DialogContent>
+                        <DialogContentText id="alert-dialog-description">
+                          <b>
+                            {productToDelete && productToDelete.productName}
+                          </b>{" "}
+                          will be removed
+                        </DialogContentText>
+                      </DialogContent>
+                      <DialogActions>
+                        <Button
+                          variant="outlined"
+                          size="small"
+                          onClick={() => {
+                            setDeleteOpen(false);
+                            setProductToDelete(null);
+                          }}
+                        >
+                          Cancel
+                        </Button>
+                        <Button
+                          autoFocus
+                          variant="contained"
+                          size="small"
+                          onClick={() => handleDeleteProduct()}
+                        >
+                          Delete
+                        </Button>
+                      </DialogActions>
+                    </Dialog>
 
+                    {/* Edit Dialog */}
+
+                    <Dialog
+                      open={editOpen}
+                      onClose={() => setEditOpen(false)}
+                      aria-labelledby="form-dialog-title"
+                      BackdropProps={backdropProps}
+                    >
+                      <DialogTitle id="form-dialog-title">
+                        Edit User
+                      </DialogTitle>
+                      <DialogContent>
+                        <TextField
+                          required
+                          fullWidth
+                          autoFocus
+                          margin="dense"
+                          id="productName"
+                          label="Product Name"
+                          type="text"
+                          value={productToEdit && productToEdit.productName}
+                          onChange={(e) =>
+                            setProductToEdit({
+                              ...productToEdit,
+                              productName: e.target.value,
+                            })
+                          }
+                        />
+                        <TextField
+                          required
+                          fullWidth
+                          margin="dense"
+                          id="price"
+                          label="Price"
+                          type="number"
+                          value={productToEdit && productToEdit.productPrice}
+                          onChange={(e) =>
+                            setProductToEdit({
+                              ...productToEdit,
+                              productPrice: e.target.value,
+                            })
+                          }
+                        />
+                        <TextField
+                          required
+                          fullWidth
+                          margin="dense"
+                          id="imageUrl"
+                          label="Image URL"
+                          type="url"
+                          value={productToEdit && productToEdit.imageUrl}
+                          onChange={(e) =>
+                            setProductToEdit({
+                              ...productToEdit,
+                              imageUrl: e.target.value,
+                            })
+                          }
+                        />
+                        <FormControl component="fieldset"  sx={{ my: 2 }}>
+                        <FormLabel
+                          component="legend"
+                          sx={{ color: "primary.main" }}
+                        >
+                          Product Category:
+                        </FormLabel>
+                          <RadioGroup
+                            aria-label="category"
+                            name="category"
+                            value={productToEdit && productToEdit.categoryId}
+                            onChange={(e) =>
+                              setProductToEdit({
+                                ...productToEdit,
+                                categoryId: e.target.value,
+                              })
+                            }
+                          >
+                            {Array.isArray(categories) &&
+                              categories.map((category) => (
+                                <FormControlLabel
+                                  key={category.id}
+                                  value={category.id}
+                                  control={<Radio />}
+                                  label={category.name}
+                                  sx={{ mx: 2}}
+                                />
+                              ))}
+                          </RadioGroup>
+                        </FormControl>
+                      </DialogContent>
+                      <DialogActions>
+                        <Button
+                          variant="outlined"
+                          size="small"
+                          onClick={() => {
+                            setEditOpen(false);
+                            setProductToEdit(null);
+                          }}
+                        >
+                          Cancel
+                        </Button>
+                        <Button
+                          variant="contained"
+                          size="small"
+                          onClick={() => handleEditProduct()}
+                          autoFocus
+                        >
+                          Save Changes
+                        </Button>
+                      </DialogActions>
+                    </Dialog>
                   </TableRow>
                 ))}
             </TableBody>
