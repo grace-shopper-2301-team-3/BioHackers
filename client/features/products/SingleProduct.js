@@ -9,45 +9,44 @@ import axios from "axios";
 const SingleProduct = () => {
     const dispatch = useDispatch();
     const { id } = useParams();
-    console.log(id)
-    const categories = useSelector(selectCategory);
+
     const product = useSelector(selectSingleProduct);
+    const categoryId = product && product.categoryId;
+    const categories = useSelector((state) => state.categories.allCategories);
+    const category = categories.find((item) => item.id === categoryId);
 
     useEffect(() => {
-        dispatch(getSingleProduct(id))
-    }, [dispatch])
+        dispatch(getSingleProduct(id));
+    }, [dispatch]);
 
-    const handleAddToCart = async (id) => {
+    const handleAddToCart = async () => {
         try {
-        const action = await dispatch(getSingleProduct(id))
-        const product = action.payload
-        const addToCartAction = await dispatch(addToCartAsync(product))
-        const updatedCart = addToCartAction.payload;
-        console.log("updatedCart", updatedCart);
+            const addToCartAction = await dispatch(addToCartAsync(product));
+            const updatedCart = addToCartAction.payload;
+            console.log("updatedCart", updatedCart);
         } catch (err) {
-            console.log('error adding to cart in single product', err)
+            console.log("error adding to cart in single product", err);
         }
-    }
-
+    };
 
     return (
-        <>
-            <div key={id}>
-                    <h2>{product.productName}</h2>
-                    <img src={product.imageUrl} />
-                    <p><b>Price: $</b> {product.productPrice}</p>
-                    <p><b>Description: </b> {product.description}</p>
-                    <p>
-                        <b>Category: </b>
-                        <br />
-                            <Link to={`/categories/${product.categoryId}`}>
-                            </Link>
-                    </p>
-
-                    <button onClick={() => handleAddToCart(id)}>Add to cart</button>
-            </div>
-        </>
+        <div>
+            <h2>{product && product.productName}</h2>
+            <img src={product.imageUrl} />
+            <p>Price: ${product && product.productPrice}</p>
+            <p>
+                <b>Description: </b>
+                <br/> {product.description}
+            </p>
+            <p>
+                Category:{" "}
+                {category && (
+                    <Link to={`/categories/${category.id}`}>{category.name}</Link>
+                )}
+            </p>
+            <button onClick={handleAddToCart}>Add to cart</button>
+        </div>
     );
-}
+};
 
 export default SingleProduct;

@@ -6,41 +6,50 @@ import { getAllCategories, selectCategory } from "./allCategoriesSlice";
 import { getAllProducts, selectProduct } from "../products/allProductsSlice";
 
 const SingleCategory = () => {
-    const dispatch = useDispatch();
-    const { categoryId } = useParams();
-    console.log(categoryId)
-    const products = useSelector(selectProduct);
-    const category = useSelector(selectSingleCategory);
+  const dispatch = useDispatch();
+  const { categoryId } = useParams();
+  const products = useSelector(selectProduct);
+  const category = useSelector(selectSingleCategory);
 
-    useEffect(() => {
-        dispatch(getSingleCategory(categoryId))
-    }, [dispatch])
+  useEffect(() => {
+    dispatch(getSingleCategory(categoryId));
+    dispatch(getAllProducts());
+  }, [dispatch, categoryId]);
 
-    return (
-        <>
-            <div key={categoryId}>
-                <h2>{category.name}</h2>
-                <img src={category.imageUrl} />
-                <p><b>Description: </b> {category.description}</p>
-                <p>
-                    <b>Products: </b>
-                    <br />
-                    {Array.isArray(products) && products.map((product) => {
-                        return (
-                            <div key={product.id}>
-                                <Link to={`/products/${product.id}`}>
-                                    <ul>
-                                    <li>{product.productName}</li>
+  console.log("Products:", products);
 
-                                    </ul>
-                                </Link>
-                            </div>
-                        );
-                    })}
-                </p>
-            </div>
-        </>
-    )
+  const categoryProducts = products.length > 0
+    ? products.filter((product) => product.categoryId == categoryId)
+    : [];
+
+  console.log("Category products:", categoryProducts);
+
+  return (
+    <>
+      <div key={categoryId}>
+        <h2>{category.name}</h2>
+        <img src={category.imageUrl} />
+        <p>
+          <b>Description: </b> {category.description}
+        </p>
+        <p>
+          <b>Products: </b>
+          {Array.isArray(categoryProducts) &&
+            categoryProducts.map((product) => {
+              return (
+                <div key={product.id}>
+                  <Link to={`/products/${product.id}`}>
+                    <ul>
+                      <li>{product.productName}</li>
+                    </ul>
+                  </Link>
+                </div>
+              );
+            })}
+        </p>
+      </div>
+    </>
+  );
 };
 
 export default SingleCategory;

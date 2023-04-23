@@ -59,19 +59,19 @@ async function seed() {
   const categories = await Promise.all([
     Category.create({
       name: 'Neural Augments',
-      imageUrl: '',
+      imageUrl: 'https://assets.newatlas.com/dims4/default/c478776/2147483647/strip/true/crop/1999x1333+0+0/resize/720x480!/quality/90/?url=http%3A%2F%2Fnewatlas-brightspot.s3.amazonaws.com%2Fe7%2F0b%2F5c982a3d445e99e3841fbea58ce2%2Fdepositphotos-205044790-l-2015.jpg',
       description: 'Devices implanted in the brain to enhance performance and living experience for users.',
       categoryId: 1
     }),
     Category.create({
       name: 'Physical Augments',
-      imageUrl: '',
+      imageUrl: 'https://assets.iflscience.com/assets/articleNo/67765/aImg/66111/transhumanism-o.webp',
       description: 'Devices worn by user or infused in muscularskeletal system to enhance physical attributes.',
       categoryId: 2
     }),
       Category.create({
         name: 'Supplements',
-        imageUrl: '',
+        imageUrl: 'https://img.theepochtimes.com/assets/uploads/2021/02/22/digital-pills.jpg',
         description: 'Consumables taken on a regular schedule to reach new heights of human performance.',
         categoryId: 3
       }),
