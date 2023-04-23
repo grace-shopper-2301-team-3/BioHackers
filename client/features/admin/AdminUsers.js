@@ -229,7 +229,7 @@ const AdminUsers = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {users.map((user) => (
+              {Array.isArray(users) && users.map((user) => (
                 <TableRow
                   key={user.id}
                   sx={{ borderBottomColor: "1px solid primary.main" }}
