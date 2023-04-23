@@ -146,7 +146,7 @@ const AdminProducts = () => {
                     fontWeight: "bold",
                   }}
                 >
-                  Product ID
+                  ID
                 </TableCell>
                 <TableCell
                   variant="head"
@@ -372,13 +372,13 @@ const AdminProducts = () => {
                             })
                           }
                         />
-                        <FormControl component="fieldset"  sx={{ my: 2 }}>
-                        <FormLabel
-                          component="legend"
-                          sx={{ color: "primary.main" }}
-                        >
-                          Product Category:
-                        </FormLabel>
+                        <FormControl component="fieldset" sx={{ my: 2 }}>
+                          <FormLabel
+                            component="legend"
+                            sx={{ color: "primary.main" }}
+                          >
+                            Product Category:
+                          </FormLabel>
                           <RadioGroup
                             aria-label="category"
                             name="category"
@@ -397,7 +397,7 @@ const AdminProducts = () => {
                                   value={category.id}
                                   control={<Radio />}
                                   label={category.name}
-                                  sx={{ mx: 2}}
+                                  sx={{ mx: 2 }}
                                 />
                               ))}
                           </RadioGroup>

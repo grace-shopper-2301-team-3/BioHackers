@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import biohackersTheme from "../../app/theme";
 import { ThemeProvider, Typography, Container, Box } from "@mui/material";
-import { MainContainer } from "../style/StyleGuide";
+import { MainContainer, PrimaryButton } from "../style/StyleGuide";
 import AdminHeaderbar from "./AdminHeaderbar";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAllUsers, selectAllUsers } from "../users/userSlice";
@@ -14,7 +14,7 @@ const Admin = () => {
     dispatch(fetchAllUsers());
   }, [dispatch]);
 
-  console.log("users:",users)
+  console.log("users:", users);
 
   const containerStyle = {
     display: "flex",
@@ -22,13 +22,13 @@ const Admin = () => {
     gap: "20px",
   };
 
-  const boxStyle ={
+  const boxStyle = {
     width: "100%",
     borderRadius: "20px",
     padding: "70px 55px",
     color: "white",
-    textAlign: "center"
-  }
+    textAlign: "center",
+  };
 
   const mainContainerStyle = {
     marginBottom: "60px",
@@ -38,8 +38,20 @@ const Admin = () => {
     <ThemeProvider theme={biohackersTheme}>
       <AdminHeaderbar />
       <MainContainer style={mainContainerStyle}>
-        <Typography variant="h5">Dashboard</Typography>
-        <Container style={containerStyle} sx={{ my: "35px"}}>
+        <Container
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+          }}
+        >
+          <Typography variant="h5">Dashboard</Typography>
+          <Typography variant="body2">
+            Snapshot of BioHacker's Performance
+          </Typography>
+        </Container>
+
+        <Container style={containerStyle} sx={{ my: "35px" }}>
           <Box sx={{ backgroundColor: "#7F00FF" }} style={boxStyle}>
             <Typography variant="body2">Total Orders</Typography>
             <Typography variant="h2">1234</Typography>
