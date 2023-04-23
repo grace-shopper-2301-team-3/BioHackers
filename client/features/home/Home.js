@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import biohackersTheme from "../../app/theme";
-import { MainContainer, HeroButton } from "../style/StyleGuide";
+import {
+  MainContainer,
+  HeroButton,
+  SecondaryButton,
+} from "../style/StyleGuide";
 import {
   ThemeProvider,
   Typography,
@@ -12,6 +16,7 @@ import {
   Avatar,
 } from "@mui/material";
 import FormatQuoteIcon from "@mui/icons-material/FormatQuote";
+import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import AccountCircleRoundedIcon from "@mui/icons-material/AccountCircleRounded";
 import LocalOfferRoundedIcon from "@mui/icons-material/LocalOfferRounded";
 import TravelExploreRoundedIcon from "@mui/icons-material/TravelExploreRounded";
@@ -22,11 +27,27 @@ import {
   selectCategory,
 } from "../categories/allCategoriesSlice";
 import { getAllProducts, selectProduct } from "../products/allProductsSlice";
+import { addToCartAsync } from "../cart/cartSlice";
+import { getSingleProduct } from "../products/singleProductSlice";
+
+
 
 const Home = () => {
   const dispatch = useDispatch();
   const categories = useSelector(selectCategory);
   const products = useSelector(selectProduct);
+
+  const handleAddToCart = async (id) => {
+    try {
+      const action = await dispatch(getSingleProduct(id));
+      const product = action.payload;
+      const addToCartAction = await dispatch(addToCartAsync(product));
+      const updatedCart = addToCartAction.payload;
+      console.log("updatedCart", updatedCart);
+    } catch (err) {
+      console.log("error adding to cart in single product", err);
+    }
+  };
 
   const randomColors = ["#6100F0", "#AC6CFF", "#0000ff", "#00bfff", "#1565C0"];
 
@@ -136,36 +157,36 @@ const Home = () => {
           </Typography>
         </Container>
         <Container sx={{ my: 10 }}>
-  <Typography
-    variant="h4"
-    sx={{
-      textAlign: "center",
-      background: "linear-gradient(250deg, #7F00FF, #ff00ff, #00bfff)",
-      "-webkit-background-clip": "text",
-      "-webkit-text-fill-color": "transparent",
-      mx: "auto",
-      maxWidth: "80%"
-    }}
-  >
-    Biohacking Your Way to Better Health
-  </Typography>
-  <Typography
-    variant="body1"
-    sx={{
-      textAlign: "center",
-      width: "50%",
-      mx: "auto",
-      my: 2
-    }}
-  >
-    At Biohacker, we believe that optimal health is within reach. Our products
-    are designed to help you biohack your way to better health, with cutting-edge
-    brain enhancements, supplements, and physical enhancements that can help you
-    achieve your goals. Whether you're a fitness fanatic or a busy professional,
-    Biohacker has something to help you achieve peak performance.
-  </Typography>
-</Container>
-
+          <Typography
+            variant="h4"
+            sx={{
+              textAlign: "center",
+              background: "linear-gradient(250deg, #7F00FF, #ff00ff, #00bfff)",
+              "-webkit-background-clip": "text",
+              "-webkit-text-fill-color": "transparent",
+              mx: "auto",
+              maxWidth: "80%",
+            }}
+          >
+            Biohacking Your Way to Better Health
+          </Typography>
+          <Typography
+            variant="body1"
+            sx={{
+              textAlign: "center",
+              width: "50%",
+              mx: "auto",
+              my: 2,
+            }}
+          >
+            At Biohacker, we believe that optimal health is within reach. Our
+            products are designed to help you biohack your way to better health,
+            with cutting-edge brain enhancements, supplements, and physical
+            enhancements that can help you achieve your goals. Whether you're a
+            fitness fanatic or a busy professional, Biohacker has something to
+            help you achieve peak performance.
+          </Typography>
+        </Container>
 
         {/* Categories Section */}
 
@@ -269,10 +290,13 @@ const Home = () => {
         {/* Testimonials */}
 
         <Container sx={{ my: 6 }}>
-          <Container sx={{ my: 3}}>
+          <Container sx={{ my: 3 }}>
             <Typography
               variant="h4"
-              sx={{ textTransform: "capitalize", textAlign: "center", background:
+              sx={{
+                textTransform: "capitalize",
+                textAlign: "center",
+                background:
                   "-webkit-linear-gradient(250deg, #7F00FF, #ff00ff, #00bfff)",
                 "-webkit-background-clip": "text",
                 "-webkit-text-fill-color": "transparent",
@@ -282,39 +306,65 @@ const Home = () => {
             </Typography>
           </Container>
           <Container
-  sx={{
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    flexDirection: "row",
-    backgroundImage:
-      "url(https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExOGY2YjA4ZGNhMzcwZjM1ZDg2ZTdhYjY1OGNjZmRjMmEyZGYyZTc0ZSZlcD12MV9pbnRlcm5hbF9naWZzX2dpZklkJmN0PWc/WmiRpz0Kz0nzewi9mm/giphy.gif)",
-    backgroundPosition: "center",
-    backgroundSize: "cover"
-  }}
->
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              flexDirection: "row",
+              backgroundImage:
+                "url(https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExOGY2YjA4ZGNhMzcwZjM1ZDg2ZTdhYjY1OGNjZmRjMmEyZGYyZTc0ZSZlcD12MV9pbnRlcm5hbF9naWZzX2dpZklkJmN0PWc/WmiRpz0Kz0nzewi9mm/giphy.gif)",
+              backgroundPosition: "center",
+              backgroundSize: "cover",
+            }}
+          >
             {testimonials.map((testimonial) => (
               <Box
                 key={testimonial.name}
                 sx={{
                   width: "100%",
-                  my: 4
+                  my: 4,
                 }}
               >
-                <Card sx={{ my: 1, mx: 1, border: "3px solid", p: 2, backgroundColor: "transparent", borderColor: getRandomColor(), color: "primary.contrastText" }}>
-  <CardContent sx={{display: "flex", flexDirection: "column" }}>
-    <FormatQuoteIcon fontSize="large" sx={{ alignContent: "right" }} />
-    <Typography variant="body2">
-      {testimonial.testimonial}
-    </Typography>
-    <Typography variant="caption" sx={{ py: 2, textAlign: "center", display: "flex", alignItems: "center", justifyContent: "center" }}>
-      {testimonial.name}
-      <Avatar alt={testimonial.name} src={testimonial.avatar} sx={{ ml: 1 }} />
-    </Typography>
-  </CardContent>
-</Card>
-
-
+                <Card
+                  sx={{
+                    my: 1,
+                    mx: 1,
+                    border: "3px solid",
+                    p: 2,
+                    backgroundColor: "transparent",
+                    borderColor: getRandomColor(),
+                    color: "primary.contrastText",
+                  }}
+                >
+                  <CardContent
+                    sx={{ display: "flex", flexDirection: "column" }}
+                  >
+                    <FormatQuoteIcon
+                      fontSize="large"
+                      sx={{ alignContent: "right" }}
+                    />
+                    <Typography variant="body2">
+                      {testimonial.testimonial}
+                    </Typography>
+                    <Typography
+                      variant="caption"
+                      sx={{
+                        py: 2,
+                        textAlign: "center",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                      }}
+                    >
+                      {testimonial.name}
+                      <Avatar
+                        alt={testimonial.name}
+                        src={testimonial.avatar}
+                        sx={{ ml: 1 }}
+                      />
+                    </Typography>
+                  </CardContent>
+                </Card>
               </Box>
             ))}
           </Container>
@@ -358,6 +408,7 @@ const Home = () => {
                       margin: "5px",
                       height: "100%",
                       flex: 1,
+                      position: "relative",
                     }}
                     key={product.id}
                   >
@@ -383,7 +434,7 @@ const Home = () => {
                           sx={{ height: 200, objectFit: "cover" }}
                         />
                         <CardContent
-                          sx={{ backgroundColor: "#200040", height: 150 }}
+                          sx={{ backgroundColor: "#200040", height: 100 }}
                         >
                           <Typography
                             gutterBottom
@@ -403,6 +454,18 @@ const Home = () => {
                         </CardContent>
                       </Card>
                     </Link>
+                    <SecondaryButton
+                      variant="contained"
+                      size="small"
+                      sx={{
+                        position: "absolute",
+                        top: "10px",
+                        right: "10px",
+                      }}
+                      onClick={() => handleAddToCart(product.id)}
+                    >
+                      <AddShoppingCartIcon />
+                    </SecondaryButton>
                   </Box>
                 );
               })}
@@ -433,11 +496,14 @@ const Home = () => {
           <Container sx={{ my: 10 }}>
             <Typography
               variant="h4"
-              sx={{ textTransform: "capitalize", background:
-              "-webkit-linear-gradient(245deg, #7F00FF, #ff00ff, #00bfff)",
-            "-webkit-background-clip": "text",
-            "-webkit-text-fill-color": "transparent",
-            textAlign: "center" }}
+              sx={{
+                textTransform: "capitalize",
+                background:
+                  "-webkit-linear-gradient(245deg, #7F00FF, #ff00ff, #00bfff)",
+                "-webkit-background-clip": "text",
+                "-webkit-text-fill-color": "transparent",
+                textAlign: "center",
+              }}
             >
               you'll love shopping with us
             </Typography>
