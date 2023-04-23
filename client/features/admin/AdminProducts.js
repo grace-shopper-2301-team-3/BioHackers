@@ -14,7 +14,8 @@ import {
 import AdminHeaderbar from "./AdminHeaderbar";
 import EditRoundedIcon from "@mui/icons-material/EditRounded";
 import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded";
-import AddCircleRoundedIcon from '@mui/icons-material/AddCircleRounded';import { MainContainer, PrimaryButton } from "../style/StyleGuide";
+import AddCircleRoundedIcon from '@mui/icons-material/AddCircleRounded';
+import { MainContainer, PrimaryButton } from "../style/StyleGuide";
 import { getAllProducts, selectProduct } from "../products/allProductsSlice";
 import {
   getAllCategories,
