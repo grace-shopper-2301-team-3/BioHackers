@@ -22,10 +22,7 @@ import LocalOfferRoundedIcon from "@mui/icons-material/LocalOfferRounded";
 import TravelExploreRoundedIcon from "@mui/icons-material/TravelExploreRounded";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import {
-  getAllCategories,
-  selectCategory,
-} from "../categories/allCategoriesSlice";
+import { getAllCategories, selectCategory } from "../categories/allCategoriesSlice";
 import { getAllProducts, selectProduct } from "../products/allProductsSlice";
 import { addToCartAsync } from "../cart/cartSlice";
 import { getSingleProduct } from "../products/singleProductSlice";
@@ -100,19 +97,15 @@ const Home = () => {
       ),
       title: "Manage Account",
       description: "Edit your info, track orders, & more.",
-      bg: "linear-gradient(to bottom, #1A237E, #6100F0, #B388FF, #E8EAF6)",
-      color: "primary.contrastText",
     },
     {
       icon: (
         <LocalOfferRoundedIcon
-          sx={{ fontSize: 64, color: "secondary.light" }}
+          sx={{ fontSize: 64, color: "primary.contrastText" }}
         />
       ),
       title: "Get Discounts",
       description: "Exclusive deals and offers just for you.",
-      bg: "linear-gradient(to bottom, #000000, #0000FF)",
-      color: "secondary.light",
     },
     {
       icon: (
@@ -122,8 +115,6 @@ const Home = () => {
       ),
       title: "Explore Benefits",
       description: "Discover more ways to optimize your health.",
-      bg: "linear-gradient(to bottom, #4a148c, #7b1fa2, #9c27b0, #ba68c8)",
-      color: "primary.contrastText",
     },
   ];
 
@@ -134,7 +125,7 @@ const Home = () => {
 
         <Container sx={{ position: "relative", overflow: "hidden" }}>
           <img
-            src="https://media0.giphy.com/media/4knozU8q9AXvpod9qy/giphy.gif?cid=ecf05e479xiha122z06g45ujmxa7rc8xx3f47wwrdj1hrj64&rid=giphy.gif&ct=g"
+            src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExOGY2YjA4ZGNhMzcwZjM1ZDg2ZTdhYjY1OGNjZmRjMmEyZGYyZTc0ZSZlcD12MV9pbnRlcm5hbF9naWZzX2dpZklkJmN0PWc/WmiRpz0Kz0nzewi9mm/giphy.gif"
             style={{ width: "100%" }}
           />
           <Typography
@@ -332,6 +323,7 @@ const Home = () => {
                     backgroundColor: "transparent",
                     borderColor: getRandomColor(),
                     color: "primary.contrastText",
+                    borderRadius: "25px"
                   }}
                 >
                   <CardContent
@@ -501,6 +493,7 @@ const Home = () => {
                 "-webkit-background-clip": "text",
                 "-webkit-text-fill-color": "transparent",
                 textAlign: "center",
+                py: 2
               }}
             >
               you'll love shopping with us
@@ -522,20 +515,19 @@ const Home = () => {
                   <Box
                     sx={{
                       width: "300px",
+                      height: "300px",
                       display: "flex",
                       flexDirection: "column",
                       alignItems: "center",
                       justifyContent: "center",
-                      borderRadius: "10px",
-                      p: "30px",
-                      color: link.color,
-                      border: "3px solid transparent",
-                      backgroundImage: link.bg,
-                      backgroundClip: "padding-box",
-                      transition: "all 0.3s ease",
-                      boxShadow: "0 0 5px #000000",
+                      backgroundImage:
+                "url(https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExOGY2YjA4ZGNhMzcwZjM1ZDg2ZTdhYjY1OGNjZmRjMmEyZGYyZTc0ZSZlcD12MV9pbnRlcm5hbF9naWZzX2dpZklkJmN0PWc/WmiRpz0Kz0nzewi9mm/giphy.gif)",
+              backgroundPosition: "center",
+              backgroundSize: "cover",
+              color: "primary.contrastText",
+              borderRadius: "25px",
                       "&:hover": {
-                        boxShadow: "0 0 15px #000000",
+                        boxShadow: "0 0 15px primary.main",
                         transform: "scale(1.02)",
                       },
                     }}
