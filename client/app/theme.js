@@ -1,6 +1,95 @@
 import { createTheme, responsiveFontSizes } from "@mui/material/styles";
+import '../../public/style.css'
 
 let biohackersTheme = createTheme({
+  typography: {
+    fontFamily: ["Audiowide","Orbitron", "Press Start 2P", "VT323"].join(","),
+    h1: {
+      fontWeight: 700,
+      fontSize: "3.5rem",
+      lineHeight: 1.2,
+      letterSpacing: "-0.01562em",
+      margin: "1.5rem 0",
+    },
+    h2: {
+      fontWeight: 700,
+      fontSize: "2.5rem",
+      lineHeight: 1.2,
+      letterSpacing: "-0.00833em",
+      margin: "1.5rem 0",
+    },
+    h3: {
+      fontWeight: 700,
+      fontSize: "2rem",
+      lineHeight: 1.2,
+      letterSpacing: "0em",
+      margin: "1.5rem 0",
+    },
+    h4: {
+      fontWeight: 700,
+      fontSize: "1.5rem",
+      lineHeight: 1.2,
+      letterSpacing: "0.00735em",
+      margin: "1.5rem 0",
+    },
+    h5: {
+      fontWeight: 700,
+      fontSize: "1.25rem",
+      lineHeight: 1.2,
+      letterSpacing: "0em",
+      margin: "1.5rem 0",
+    },
+    h6: {
+      fontWeight: 700,
+      fontSize: "1rem",
+      lineHeight: 1.2,
+      letterSpacing: "0.0075em",
+      margin: "1.5rem 0",
+    },
+    subtitle1: {
+      fontSize: "1rem",
+      fontWeight: 600,
+      lineHeight: 1.5,
+      letterSpacing: "0.00938em",
+    },
+    subtitle2: {
+      fontSize: "0.875rem",
+      fontWeight: 600,
+      lineHeight: 1.5,
+      letterSpacing: "0.00714em",
+    },
+    body1: {
+      fontFamily: ["Orbitron", "Press Start 2P", "VT323"].join(","),
+      fontSize: "1rem",
+      lineHeight: 1.5,
+      letterSpacing: "0.00938em",
+    },
+    body2: {
+      fontFamily: ["Orbitron", "Press Start 2P", "VT323"].join(","),
+      fontSize: "0.875rem",
+      lineHeight: 1.5,
+      letterSpacing: "0.01071em",
+    },
+    button: {
+      fontFamily: ["Orbitron", "Press Start 2P", "VT323"].join(","),
+      textTransform: "none",
+      fontWeight: 700,
+    },
+    caption: {
+      fontFamily: ["Orbitron", "Press Start 2P", "VT323"].join(","),
+      fontSize: "0.75rem",
+      lineHeight: 1.5,
+      letterSpacing: "0.03333em",
+    },
+    overline: {
+      fontFamily: ["Orbitron", "Press Start 2P", "VT323"].join(","),
+      fontSize: "0.75rem",
+      fontWeight: 600,
+      lineHeight: 0.5,
+      letterSpacing: "0.08333em",
+      textTransform: "uppercase",
+    },
+  },
   palette: {
     primary: {
       main: "#7F00FF",
@@ -27,31 +116,40 @@ let biohackersTheme = createTheme({
     },
   },
   components: {
+    MuiContainer: {
+      root:{
+        styleOverrides: {
+          fontFamily: ["Orbitron", "Press Start 2P", "VT323"].join(","),
+        }
+      }
+    },
     MuiLink: {
       styleOverrides: {
         root: {
-          textDecoration: "none",
-          "&:hover": {
-            textDecoration: "none",
-          },
-          "&:active": {
-            textDecoration: "none",
-          },
-          "&:visited": {
-            textDecoration: "none",
-          },
-          "&:focus": {
-            textDecoration: "none",
-          },
-          "&:hover, &:active, &:focus": {
-            outline: "none",
-          },
+          fontFamily: ["Orbitron", "Press Start 2P", "VT323"].join(","),
+          // ,
+          // "&:hover": {
+          //   ,
+          // },
+          // "&:active": {
+          //   ,
+          // },
+          // "&:visited": {
+          //   ,
+          // },
+          // "&:focus": {
+          //   ,
+          // },
+          // "&:hover, &:active, &:focus": {
+          //   outline: "none",
+          // },
         },
       },
     },
     MuiDataGrid: {
       styleOverrides: {
         root: {
+          fontFamily: ["Orbitron", "Press Start 2P", "VT323"].join(","),
           ".MuiDataGrid-root": {
             color: "#7F00FF",
           },
@@ -61,14 +159,16 @@ let biohackersTheme = createTheme({
     MuiButton: {
       styleOverrides: {
         root: {
+          fontFamily: ["Orbitron", "Press Start 2P", "VT323"].join(","),
           margin: 4,
           textTransform: "capitalize",
-          textDecoration: "none"
+          
         },
       },
     },
     MuiTextField: {
       defaultProps: {
+        fontFamily: ["Orbitron", "Press Start 2P", "VT323"].join(","),
         variant: "outlined",
         margin: "dense",
         size: "small",
@@ -76,11 +176,14 @@ let biohackersTheme = createTheme({
       styleOverrides: {
         root: {
           "& .MuiOutlinedInput-root": {
+            fontFamily: ["Orbitron", "Press Start 2P", "VT323"].join(","),
             "&:hover fieldset": {
               borderColor: "#7F00FF",
+              fontFamily: ["Orbitron", "Press Start 2P", "VT323"].join(",")
             },
             "&.Mui-focused fieldset": {
               borderColor: "#7F00FF",
+              fontFamily: ["Orbitron", "Press Start 2P", "VT323"].join(",")
             },
           },
           "& .MuiOutlinedInput-input": {
@@ -93,89 +196,6 @@ let biohackersTheme = createTheme({
             color: "#7f00ff",
           },
         },
-      },
-    },
-    typography: {
-      fontFamily: ["Roboto", "Helvetica", "Arial", "sans-serif"].join(","),
-      h1: {
-        fontWeight: 700,
-        fontSize: "3.5rem",
-        lineHeight: 1.2,
-        letterSpacing: "-0.01562em",
-        margin: "1.5rem 0",
-      },
-      h2: {
-        fontWeight: 700,
-        fontSize: "2.5rem",
-        lineHeight: 1.2,
-        letterSpacing: "-0.00833em",
-        margin: "1.5rem 0",
-      },
-      h3: {
-        fontWeight: 700,
-        fontSize: "2rem",
-        lineHeight: 1.2,
-        letterSpacing: "0em",
-        margin: "1.5rem 0",
-      },
-      h4: {
-        fontWeight: 700,
-        fontSize: "1.5rem",
-        lineHeight: 1.2,
-        letterSpacing: "0.00735em",
-        margin: "1.5rem 0",
-      },
-      h5: {
-        fontWeight: 700,
-        fontSize: "1.25rem",
-        lineHeight: 1.2,
-        letterSpacing: "0em",
-        margin: "1.5rem 0",
-      },
-      h6: {
-        fontWeight: 700,
-        fontSize: "1rem",
-        lineHeight: 1.2,
-        letterSpacing: "0.0075em",
-        margin: "1.5rem 0",
-      },
-      subtitle1: {
-        fontSize: "1rem",
-        fontWeight: 600,
-        lineHeight: 1.5,
-        letterSpacing: "0.00938em",
-      },
-      subtitle2: {
-        fontSize: "0.875rem",
-        fontWeight: 600,
-        lineHeight: 1.5,
-        letterSpacing: "0.00714em",
-      },
-      body1: {
-        fontSize: "1rem",
-        lineHeight: 1.5,
-        letterSpacing: "0.00938em",
-      },
-      body2: {
-        fontSize: "0.875rem",
-        lineHeight: 1.5,
-        letterSpacing: "0.01071em",
-      },
-      button: {
-        textTransform: "none",
-        fontWeight: 700,
-      },
-      caption: {
-        fontSize: "0.75rem",
-        lineHeight: 1.5,
-        letterSpacing: "0.03333em",
-      },
-      overline: {
-        fontSize: "0.75rem",
-        fontWeight: 600,
-        lineHeight: 0.5,
-        letterSpacing: "0.08333em",
-        textTransform: "uppercase",
       },
     },
   },

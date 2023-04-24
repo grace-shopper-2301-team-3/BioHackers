@@ -1,5 +1,5 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { MainContainer } from "../style/StyleGuide";
 import biohackersTheme from "../../app/theme";
 import {
@@ -18,13 +18,28 @@ import ShoppingBagRoundedIcon from "@mui/icons-material/ShoppingBagRounded";
 import PaymentRoundedIcon from "@mui/icons-material/PaymentRounded";
 import DiscountRoundedIcon from "@mui/icons-material/DiscountRounded";
 
+import { useSelector, useDispatch } from "react-redux";
+import { logout } from "../../app/store";
+import { fetchSingleUser, selectSingleUser } from "../users/userSlice";
+
 const AdminSidebar = () => {
+  const dispatch = useDispatch();
+
+  const id = useSelector((state) => state.auth.me.id);
+  const { username } = useSelector((state) => state.auth.me);
+
+  useEffect(() => {
+    dispatch(fetchSingleUser(id));
+  }, [dispatch]);
+
   return (
     <ThemeProvider theme={biohackersTheme}>
       <MainContainer sx={{ py: 4 }}>
         <Container sx={{ py: 4 }}>
           <Typography variant="h1">Administrator View</Typography>{" "}
-          <Typography variant="h5">Welcome, X</Typography>{" "}
+          <Typography variant="h4">
+            Welcome, <b>{username} </b>
+          </Typography>
         </Container>
         <Container
           sx={{

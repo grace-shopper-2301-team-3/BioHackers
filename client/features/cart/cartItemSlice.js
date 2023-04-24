@@ -31,6 +31,8 @@ const cartItemSlice = createSlice({
   }
 });
 
+
+
 export const selectCartItem = (state) => {
   return state.cartItem
 }

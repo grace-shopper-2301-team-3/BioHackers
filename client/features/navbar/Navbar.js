@@ -1,22 +1,22 @@
 import React from "react";
-import biohackersTheme from "../../app/theme";
-import { MainContainer, NoBorderButton } from "../style/StyleGuide";
-import { ThemeProvider, Container, Box } from "@mui/material";
-
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-
+import {
+  MainContainer,
+  NoBorderButton,
+  TertiaryButton,
+} from "../style/StyleGuide";
+import { ThemeProvider, Container, Box } from "@mui/material";
+import biohackersTheme from "../../app/theme";
 import { logout } from "../../app/store";
 import Cart from "../cart/Cart";
 
 const Navbar = () => {
+  const dispatch = useDispatch();
   const isLoggedIn = useSelector((state) => !!state.auth.me.id);
   const isAdmin = useSelector((state) => state.auth.me.isAdmin);
-
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-
   const id = useSelector((state) => state.auth.me.id);
+  const navigate = useNavigate();
 
   const logoutAndRedirectHome = () => {
     dispatch(logout());
@@ -42,30 +42,33 @@ const Navbar = () => {
             {isLoggedIn ? (
               <>
                 {/* The navbar will show these links after you log in */}
+                {isAdmin && (
+                  <Link to="/admin">
+                    <TertiaryButton>Admin</TertiaryButton>
+                  </Link>
+                )}
+                {isAdmin && (
+                  <Link to="/inventory">
+                    <NoBorderButton>Inventory</NoBorderButton>
+                  </Link>
+                )}
                 <Link to={`/users/profile`}>
-                  <NoBorderButton>Profile</NoBorderButton>
+                  <NoBorderButton>Account</NoBorderButton>
                 </Link>
+                <NoBorderButton type="button" onClick={logoutAndRedirectHome}>
+                  Logout
+                </NoBorderButton>
                 <Link
                   to="/cart"
                   element={<Cart name="cart" displayName="Cart" />}
                 >
-                  <NoBorderButton>Cart</NoBorderButton>
+                  <NoBorderButton>Cart (#)</NoBorderButton>
                 </Link>
-                {isAdmin && (
-                  <Link to="/users">
-                    <NoBorderButton>Users</NoBorderButton>
-                  </Link>
-                )}
-                <NoBorderButton type="button" onClick={logoutAndRedirectHome}>
-                  Logout
-                </NoBorderButton>
               </>
             ) : (
               <>
                 {/* The navbar will show these links before you log in */}
-                <Link to="/signup">
-                  <NoBorderButton>Sign Up</NoBorderButton>
-                </Link>
+
                 <Link to="/login">
                   <NoBorderButton>Login</NoBorderButton>
                 </Link>
@@ -73,7 +76,7 @@ const Navbar = () => {
                   to="/cart"
                   element={<Cart name="cart" displayName="Cart" />}
                 >
-                  <NoBorderButton>Cart</NoBorderButton>
+                  <NoBorderButton>Cart (#)</NoBorderButton>
                 </Link>
               </>
             )}
