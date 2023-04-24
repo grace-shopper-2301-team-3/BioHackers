@@ -28,6 +28,7 @@ import AdminProductsEdit from "../features/admin/AdminProductsEdit";
 import AdminUsers from "../features/admin/AdminUsers";
 import AdminUsersEdit from "../features/admin/AdminUsersEdit";
 import NotFound from "../features/notfound/NotFound";
+import UserProfile from "../features/users/UserProfile";
 
 /**
  * COMPONENT
@@ -56,6 +57,7 @@ const AppRoutes = () => {
         {isLoggedIn ? (
           <>
             <Route to="/home" element={<Home />} />
+            <Route path="/users/profile" element={<UserProfile />} />
             <Route path="/users/:id" element={<SingleUser />} />
             <Route path="/users/:id/edit" element={<EditUser />} />
             <Route

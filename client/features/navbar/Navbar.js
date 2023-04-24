@@ -42,7 +42,7 @@ const Navbar = () => {
             {isLoggedIn ? (
               <>
                 {/* The navbar will show these links after you log in */}
-                <Link to={`/users/${id}`}>
+                <Link to={`/users/profile`}>
                   <NoBorderButton>Profile</NoBorderButton>
                 </Link>
                 <Link
@@ -63,6 +63,9 @@ const Navbar = () => {
             ) : (
               <>
                 {/* The navbar will show these links before you log in */}
+                <Link to="/signup">
+                  <NoBorderButton>Sign Up</NoBorderButton>
+                </Link>
                 <Link to="/login">
                   <NoBorderButton>Login</NoBorderButton>
                 </Link>
@@ -72,10 +75,6 @@ const Navbar = () => {
                 >
                   <NoBorderButton>Cart</NoBorderButton>
                 </Link>
-{/*                 
-                <Link to="/signup">
-                  <NoBorderButton>Sign Up</NoBorderButton>
-                </Link> */}
               </>
             )}
           </Box>
