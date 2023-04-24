@@ -2,13 +2,13 @@
 
 html, body {
     background-color: black;
-
     font-family: 'Audiowide','VT323', 'Orbitron', 'Press Start';
 }
 
 
 
 a{
+    font-family: 'Audiowide','VT323', 'Orbitron', 'Press Start';
     text-decoration: none;
 }
 
