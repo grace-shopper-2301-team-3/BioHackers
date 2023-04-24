@@ -198,6 +198,10 @@ const HeroButton = styled(Button)(({ theme }) => ({
   borderTopRightRadius: 0,
   textTransform: "uppercase",
   boxShadow: "0 0px 20px #7F00FF",
+  "&:hover": {
+    background: "linear-gradient(45deg, #7F00FF, #00bfff, #ff00ff)",
+    boxShadow: "0 0px 50px #7F00FF",
+  },
 }));
 
 const PrimaryButton = styled(Button)(({ theme }) => ({
@@ -303,6 +307,7 @@ export {
   ProductName,
   ProductDescription,
   Price,
+  HeroButton,
   PrimaryButton,
   SecondaryButton,
   TertiaryButton,

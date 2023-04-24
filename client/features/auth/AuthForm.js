@@ -1,6 +1,14 @@
-import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { authenticate } from '../../app/store';
+import React from "react";
+import biohackersTheme from "../../app/theme";
+import {
+  MainContainer,
+  StyledTextField,
+  SecondaryButton,
+} from "../style/StyleGuide";
+
+import { useSelector, useDispatch } from "react-redux";
+import { authenticate } from "../../app/store";
+import { ThemeProvider, Typography, Box } from "@mui/material";
 
 /**
   The AuthForm component can be used for Login or Sign Up.
@@ -21,48 +29,106 @@ const AuthForm = ({ name, displayName }) => {
     const lastName = evt.target.lastName.value;
     const email = evt.target.email.value;
 
-    dispatch(authenticate({ username, password, firstName, lastName, email, method: formName }));
+    dispatch(
+      authenticate({
+        username,
+        password,
+        firstName,
+        lastName,
+        email,
+        method: formName,
+      })
+    );
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit} name={name}>
-      <div>
-          <label htmlFor="firstName">
-            <small>First Name:</small>
-          </label>
-          <input name="firstName" type="text" />
-        </div>
-        <div>
-          <label htmlFor="lastName">
-            <small>Last Name:</small>
-          </label>
-          <input name="lastName" type="text" />
-        </div>
-        <div>
-          <label htmlFor="email">
-            <small>Email:</small>
-          </label>
-          <input name="email" type="email" />
-        </div>
-        <div>
-          <label htmlFor="username">
-            <small>Username</small>
-          </label>
-          <input name="username" type="text" />
-        </div>
-        <div>
-          <label htmlFor="password">
-            <small>Password</small>
-          </label>
-          <input name="password" type="password" />
-        </div>
-        <div>
-          <button type="submit">{displayName}</button>
-        </div>
-        {error && <div> {error.message} </div>}
-      </form>
-    </div>
+    <ThemeProvider theme={biohackersTheme}>
+      <MainContainer
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+          my: 2,
+        }}
+      >
+        <Typography variant="h4" sx={{ textAlign: "center", my: 4, background:
+                "-webkit-linear-gradient(45deg, #7F00FF, #ff00ff, #00bfff)",
+              "-webkit-background-clip": "text",
+              "-webkit-text-fill-color": "transparent", }}>
+          Create Your Account
+        </Typography>
+        <form
+          onSubmit={handleSubmit}
+          name={name}
+          sx={{ maxWidth: "400px", width: "100%" }}
+        >
+          <Box>
+            <StyledTextField
+              required
+              label="First Name"
+              name="firstName"
+              type="text"
+              variant="outlined"
+              sx={{ marginBottom: "16px" }}
+            />
+          </Box>
+          <Box>
+            <StyledTextField
+              required
+              label="Last Name"
+              name="lastName"
+              type="text"
+              variant="outlined"
+              sx={{ marginBottom: "16px" }}
+            />
+          </Box>
+          <Box>
+            <StyledTextField
+              required
+              label="Email"
+              name="email"
+              type="email"
+              variant="outlined"
+              sx={{ marginBottom: "16px" }}
+            />
+          </Box>
+          <Box>
+            <StyledTextField
+              required
+              label="Username"
+              name="username"
+              type="text"
+              variant="outlined"
+              sx={{ marginBottom: "16px" }}
+            />
+          </Box>
+          <Box>
+            <StyledTextField
+              required
+              label="Password"
+              name="password"
+              type="password"
+              variant="outlined"
+              sx={{ marginBottom: "16px" }}
+            />
+          </Box>
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              my: 2
+            }}
+          >
+            <SecondaryButton variant="contained" size="medium" type="submit">
+              {displayName}
+            </SecondaryButton>
+          </Box>
+          {error && <Box>{error.message}</Box>}
+        </form>
+      </MainContainer>
+    </ThemeProvider>
   );
 };
 

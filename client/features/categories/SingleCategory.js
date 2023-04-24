@@ -6,27 +6,27 @@ import { getAllCategories, selectCategory } from "./allCategoriesSlice";
 import { getAllProducts, selectProduct } from "../products/allProductsSlice";
 
 const SingleCategory = () => {
+
   const dispatch = useDispatch();
-  const { categoryId } = useParams();
+  const { id } = useParams();
   const products = useSelector(selectProduct);
   const category = useSelector(selectSingleCategory);
 
-  useEffect(() => {
-    dispatch(getSingleCategory(categoryId));
-    dispatch(getAllProducts());
-  }, [dispatch, categoryId]);
+    useEffect(() => {
+        dispatch(getSingleCategory(id))
+        dispatch(getAllProducts());
+    }, [dispatch, id])
 
-  console.log("Products:", products);
+
 
   const categoryProducts = products.length > 0
-    ? products.filter((product) => product.categoryId == categoryId)
+    ? products.filter((product) => product.categoryId == id)
     : [];
 
-  console.log("Category products:", categoryProducts);
 
   return (
     <>
-      <div key={categoryId}>
+      <div key={id}>
         <h2>{category.name}</h2>
         <img src={category.imageUrl} />
         <p>

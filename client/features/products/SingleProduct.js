@@ -23,9 +23,12 @@ const SingleProduct = () => {
 
     const handleAddToCart = async () => {
         try {
-            const addToCartAction = await dispatch(addToCartAsync(product));
-            const updatedCart = addToCartAction.payload;
-            console.log("updatedCart", updatedCart);
+        const action = await dispatch(getSingleProduct(id))
+        const product = action.payload
+        const addToCartAction = await dispatch(addToCartAsync(product))
+        const updatedCart = addToCartAction.payload;
+        console.log("updatedCart", updatedCart);
+
         } catch (err) {
             console.log("error adding to cart in single product", err);
         }

@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { updateUser } from "../auth/authSlice";
 import { useNavigate } from "react-router-dom";
 import biohackersTheme from "../../app/theme";
-import { styled } from "@mui/material/styles";
 import {
     ThemeProvider,
     Container,
