@@ -13,8 +13,8 @@ const AllCategories = () => {
             <ul>
                 {Array.isArray(categories) && categories.map((category) => {
                     return (
-                        <li key={category.categoryId}>
-                            <Link to={`/categories/${category.categoryId}`}>
+                        <li key={category.id}>
+                            <Link to={`/categories/${category.id}`}>
                                 <h2>{category.name}</h2>
                                 <img src={category.imageUrl} />
                             </Link>

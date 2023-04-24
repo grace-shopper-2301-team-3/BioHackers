@@ -18,22 +18,18 @@ import Cart from "../features/cart/Cart";
 import EditUser from "../features/users/EditUser";
 import Admin from "../features/admin/Admin";
 import AdminDiscounts from "../features/admin/AdminDiscounts";
-import AdminDiscountsEdit from "../features/admin/AdminDiscountsEdit";
 import AdminOrders from "../features/admin/AdminOrders";
-import AdminOrdersEdit from "../features/admin/AdminOrdersEdit";
 import AdminPayments from "../features/admin/AdminPayments";
-import AdminPaymentsEdit from "../features/admin/AdminPaymentsEdit";
 import AdminProducts from "../features/admin/AdminProducts";
-import AdminProductsEdit from "../features/admin/AdminProductsEdit";
 import AdminUsers from "../features/admin/AdminUsers";
-import AdminUsersEdit from "../features/admin/AdminUsersEdit";
 import NotFound from "../features/notfound/NotFound";
-import Inventory from "../features/inventory/Inventory";
+import Inventory from "../features/inventory/Inventory"
 /**
  * COMPONENT
  */
 
 const AppRoutes = () => {
+
   const isLoggedIn = useSelector((state) => !!state.auth.me.id);
   const isAdmin = useSelector((state) => state.auth.me.isAdmin);
 
@@ -52,6 +48,7 @@ const AppRoutes = () => {
         <Route path="/" element={<Home />} />
         <Route path="/home" element={<Home />} />
 
+        {/* Logged In Experience */}
         {isLoggedIn ? (
           <>
             <Route to="/home" element={<Home />} />
@@ -61,16 +58,35 @@ const AppRoutes = () => {
               path="/cart"
               element={<Cart name="cart" displayName="Cart" />}
             />
+            <Route path="/products" element={<AllProducts />} />
+            <Route path="/categories" element={<AllCategories />} />
+            <Route path="/products/:id" element={<SingleProduct />} />
+            <Route
+              path="/categories/:categoryId"
+              element={<SingleCategory />}
+            />
+
+            {/* Admin Experience */}
             {isAdmin && (
               <>
                 <Route to="/" element={<Home />} />
                 <Route to="/home" element={<Home />} />
                 <Route path="/users" element={<AllUsers />} />
                 <Route path="/inventory" element={<Inventory />} />
+                <Route
+                  path="/admin"
+                  element={<Admin name="admin" displayName="Admin" />}
+                />
+                <Route path="/admin/discounts" element={<AdminDiscounts />} />
+                <Route path="/admin/orders" element={<AdminOrders />} />
+                <Route path="/admin/payments" element={<AdminPayments />} />
+                <Route path="/admin/products" element={<AdminProducts />} />
+                <Route path="/admin/users" element={<AdminUsers />} />
               </>
             )}
           </>
         ) : (
+          // Not In Experience
           <>
             <Route
               path="/login"
@@ -84,16 +100,6 @@ const AppRoutes = () => {
               path="/cart"
               element={<Cart name="cart" displayName="Cart" />}
             />
-            <Route
-              path="/styleguide"
-              element={
-                <StyleGuide name="styleguide" displayName="Style Guide" />
-              }
-            />
-            <Route
-              path="/admin"
-              element={<Admin name="admin" displayName="Admin" />}
-            />
             <Route path="/products" element={<AllProducts />} />
             <Route path="/categories" element={<AllCategories />} />
             <Route path="/products/:id" element={<SingleProduct />} />
@@ -101,23 +107,16 @@ const AppRoutes = () => {
               path="/categories/:categoryId"
               element={<SingleCategory />}
             />
-            <Route path="/" element={<Admin />} />
-            <Route path="/admin/discounts" element={<AdminDiscounts />} />
-            <Route path="/admin/discounts/edit" element={<AdminDiscountsEdit />} />
-            <Route path="/admin/orders" element={<AdminOrders />} />
-            <Route path="/admin/orders/edit" element={<AdminOrdersEdit />} />
-            <Route path="/admin/payments" element={<AdminPayments />} />
-            <Route path="/admin/payments/edit" element={<AdminPaymentsEdit />} />
-            <Route path="/admin/products" element={<AdminProducts />} />
-            <Route path="/admin/products/edit" element={<AdminProductsEdit />} />
-            <Route path="/admin/users" element={<AdminUsers />} />
-            <Route path="/admin/users/edit" element={<AdminUsersEdit />} />
           </>
         )}
 
         {/* Fallback route for non-existing pages */}
-        <Route path="*" element={<Navigate to="/notfound" />} />
+        {/* <Route path="*" element={<Navigate to="/notfound" />} /> */}
         <Route path="/notfound" element={<NotFound />} />
+        <Route
+          path="/styleguide"
+          element={<StyleGuide name="styleguide" displayName="Style Guide" />}
+        />
       </Routes>
     </div>
   );
