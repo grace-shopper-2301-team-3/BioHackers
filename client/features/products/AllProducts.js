@@ -35,11 +35,6 @@ const AllProducts = () => {
                                 <img src={product.imageUrl} />
                             </Link>
                             <p><b>Price: $</b> {product.productPrice}</p>
-                            <p>
-                                <b>Category: </b>
-                                <br />
-                                {product.category}
-                            </p>
                             <button onClick={() => handleAddToCart(product.id)}>Add to cart</button>
                         </div>
                     );
