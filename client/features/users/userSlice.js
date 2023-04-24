@@ -26,12 +26,14 @@ export const fetchSingleUser = createAsyncThunk('users/fetchSingle', async (id) 
 //create user
 export const createUser = createAsyncThunk(
     "createUser",
-    async ({ firstName, lastName, username, password }) => {
+    async ({ firstName, lastName, username, password, email, isAdmin }) => {
       const { data } = await axios.post("/api/users", {
         firstName,
         lastName,
         username,
         password,
+        email,
+        isAdmin
       });
       return data;
     }
