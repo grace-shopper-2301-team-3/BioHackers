@@ -46,6 +46,11 @@ const Navbar = () => {
                     <TertiaryButton>Admin</TertiaryButton>
                   </Link>
                 )}
+                {isAdmin && (
+                  <Link to="/inventory">
+                    <NoBorderButton>Inventory</NoBorderButton>
+                  </Link>
+                )}
                 <Link to={`/users/${id}`}>
                   <NoBorderButton>Account</NoBorderButton>
                 </Link>

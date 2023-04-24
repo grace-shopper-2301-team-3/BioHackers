@@ -9,6 +9,7 @@ import singleCategorySliceReducer from '../features/categories/singleCategorySli
 import userSliceReducer from '../features/users/userSlice';
 import cartSlice from '../features/cart/cartSlice';
 import cartItemSlice from '../features/cart/cartItemSlice';
+import inventorySliceReducer from '../features/inventory/inventorySlice';
 
 const store = configureStore({
   reducer: {
@@ -20,6 +21,7 @@ const store = configureStore({
     users: userSliceReducer,
     cart: cartSlice,
     cartItem: cartItemSlice,
+    inventory: inventorySliceReducer,
    },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
 })

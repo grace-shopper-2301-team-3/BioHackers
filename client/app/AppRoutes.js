@@ -23,7 +23,7 @@ import AdminPayments from "../features/admin/AdminPayments";
 import AdminProducts from "../features/admin/AdminProducts";
 import AdminUsers from "../features/admin/AdminUsers";
 import NotFound from "../features/notfound/NotFound";
-
+import Inventory from "../features/inventory/Inventory"
 /**
  * COMPONENT
  */
@@ -72,6 +72,8 @@ const AppRoutes = () => {
                 <Route to="/" element={<Home />} />
                 <Route to="/home" element={<Home />} />
                 <Route path="/users" element={<AllUsers />} />
+                <Route path="/inventory" element={<Inventory />} />
+
                 <Route
                   path="/admin"
                   element={<Admin name="admin" displayName="Admin" />}

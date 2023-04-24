@@ -24,7 +24,8 @@ export const allCategoriesSlice = createSlice({
     extraReducers: (builder) => {
 		builder
 			.addCase(getAllCategories.fulfilled, (state, action) => {
-				return action.payload;
+        return action.payload;
+				state.status = "fulfilled";
 			})
             .addCase(getAllCategories.rejected, (state, action) => {
                 state.status = 'failed';
