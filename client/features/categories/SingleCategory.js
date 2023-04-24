@@ -55,6 +55,7 @@ const SingleCategory = () => {
           <Typography
             variant="h1"
             sx={{
+              color: "primary.light",
               position: "absolute",
               top: "50%",
               left: "50%",

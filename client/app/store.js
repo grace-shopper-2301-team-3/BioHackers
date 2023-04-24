@@ -10,6 +10,7 @@ import userSliceReducer from '../features/users/userSlice';
 import cartSlice from '../features/cart/cartSlice';
 import cartItemSlice from '../features/cart/cartItemSlice';
 import inventorySliceReducer from '../features/inventory/inventorySlice';
+import stripeSliceReducer from '../features/stripe/stripeSlice';
 
 const store = configureStore({
   reducer: {
@@ -22,6 +23,7 @@ const store = configureStore({
     cart: cartSlice,
     cartItem: cartItemSlice,
     inventory: inventorySliceReducer,
+    stripe: stripeSliceReducer
    },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
 })
