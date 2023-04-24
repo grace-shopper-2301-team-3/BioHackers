@@ -27,10 +27,7 @@ export const addToCartAsync = createAsyncThunk('addToCartAsync', async (product)
 
 export const changeQuantityAsync = createAsyncThunk('cartItem/changeQuantity', async ({ item, numToChangeBy }) => {
   try {
-    console.log('cartslice, item', item)
-    console.log('numtochangeby', numToChangeBy)
     const newQuantity = item.quantity + numToChangeBy
-    console.log('new quantity:' , newQuantity)
     const response = await axios.patch(`api/cart/${item.id}`, { quantity: newQuantity })
     return response.data
   } catch (err) {

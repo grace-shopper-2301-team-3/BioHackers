@@ -21,7 +21,6 @@ const CartItem = ({ cartItem }) => {
 
     const handleDecrementQuantity = async (item) => {
       try {
-        // await dispatch(fetchCart())
         if (item.quantity === 1) {
           dispatch(removeFromCartAsync(item.id))
         }
