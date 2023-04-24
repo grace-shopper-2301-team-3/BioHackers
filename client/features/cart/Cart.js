@@ -15,14 +15,6 @@ const Cart = () => {
     dispatch(fetchCart());
   }, [dispatch]);
 
-  // useEffect(() => {
-  //   if (cart.length) {
-  //     const total = cart.reduce((acc, curr) => acc + curr.itemPrice, 0);
-  //     setTotalPrice(total)
-  //   } else {
-  //     setTotalPrice(0);
-  //   }
-  // }, [cart, cartUpdated]);
 
   useEffect(() => {
     if (cart.length) {

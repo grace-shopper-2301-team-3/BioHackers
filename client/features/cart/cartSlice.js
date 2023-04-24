@@ -32,7 +32,7 @@ export const changeQuantityAsync = createAsyncThunk('cartItem/changeQuantity', a
     const newQuantity = item.quantity + numToChangeBy
     console.log('new quantity:' , newQuantity)
     const response = await axios.patch(`api/cart/${item.id}`, { quantity: newQuantity })
-    return response
+    return response.data
   } catch (err) {
     console.log('err in changequantity', err)
   }
