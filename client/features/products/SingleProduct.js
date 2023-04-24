@@ -4,7 +4,7 @@ import { Link, useParams } from "react-router-dom";
 import { changeQuantityAsync, fetchCart } from "../cart/cartSlice";
 import { selectCategory } from "../categories/allCategoriesSlice";
 import { getSingleProduct, selectSingleProduct } from "./singleProductSlice";
-
+import { getAllCategories } from "../categories/allCategoriesSlice";
 import { addToCartAsync } from "../cart/cartSlice";
 import axios from "axios";
 import {

@@ -40,7 +40,7 @@ const Cart = () => {
             <CartItem cartItem={cartItem} />
           </div>
         ))
-      ) : (
+       : (
         <p>Your cart is empty</p>
       )}
       {cart.length ? (
