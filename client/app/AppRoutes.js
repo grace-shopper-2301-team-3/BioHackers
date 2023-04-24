@@ -104,6 +104,7 @@ const AppRoutes = () => {
                 />
                 <Route path="/admin/users" element={<AdminUsers />} />
                 <Route path="/admin/users/edit" element={<AdminUsersEdit />} />
+                <Route path="/users/profile" element={<UserProfile />} />
               </>
             )}
           </>
@@ -129,6 +130,7 @@ const AppRoutes = () => {
               path="/categories/:categoryId"
               element={<SingleCategory />}
             />
+            <Route path="/users/profile" element={<UserProfile />} />
           </>
         )}
 
