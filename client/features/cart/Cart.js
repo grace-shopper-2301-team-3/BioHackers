@@ -15,15 +15,18 @@ const Cart = () => {
     dispatch(fetchCart());
   }, [dispatch]);
 
+
   useEffect(() => {
     if (cart.length) {
-      const total = cart.reduce((acc, curr) => acc + curr.itemPrice, 0);
-      setTotalPrice(total)
+      const total = cart.reduce((acc, curr) => {
+        const itemTotal = curr.itemPrice * curr.quantity;
+        return acc + itemTotal;
+      }, 0);
+      setTotalPrice(total);
     } else {
       setTotalPrice(0);
     }
   }, [cart, cartUpdated]);
-
 
   return (
     <div className='cartContainer'>

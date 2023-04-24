@@ -5,7 +5,6 @@ const CartItem = require('../db/models/CartItem')
 
 router.get('/', async (req, res, next) => {
   try {
-    console.log('api/cart was hit')
     const cart = await CartItem.findAll()
     res.json(cart)
   } catch (error) { next(error) }
@@ -32,6 +31,17 @@ router.post('/', async (req, res, next) => {
     const { itemName, itemPrice, itemImageUrl } = req.body;
     const cartItem = await CartItem.create({ itemName, itemPrice, itemImageUrl });
     res.status(201).json(cartItem);
+  } catch (error) { next(error) }
+})
+
+router.patch('/:cartItemId', async (req, res, next) => {
+  try {
+    const itemToUpdate = await CartItem.findByPk(req.params.cartItemId)
+    console.log('cart api, req.params', req.params)
+    itemToUpdate.quantity = req.body.quantity;
+    await itemToUpdate.save();
+    res.json(itemToUpdate.toJSON());
+  //  res.json(quantity)
   } catch (error) { next(error) }
 })
 

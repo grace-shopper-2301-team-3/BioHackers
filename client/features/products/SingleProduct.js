@@ -19,6 +19,7 @@ const SingleProduct = () => {
 
     const handleAddToCart = async (id) => {
         try {
+
         const action = await dispatch(getSingleProduct(id))
         const product = action.payload
         const addToCartAction = await dispatch(addToCartAsync(product))

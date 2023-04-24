@@ -25,12 +25,16 @@ export const addToCartAsync = createAsyncThunk('addToCartAsync', async (product)
   }
 })
 
-export const incrementQuantityAsync = createAsyncThunk('cartItem/incrementQuantity', async () => {
+export const changeQuantityAsync = createAsyncThunk('cartItem/changeQuantity', async ({ item, numToChangeBy }) => {
   try {
-    const response = await axios.post('/api/cart', { itemName: product.productName, itemPrice: product.productPrice, itemImageUrl: product.imageUrl})
+    console.log('cartslice, item', item)
+    console.log('numtochangeby', numToChangeBy)
+    const newQuantity = item.quantity + numToChangeBy
+    console.log('new quantity:' , newQuantity)
+    const response = await axios.patch(`api/cart/${item.id}`, { quantity: newQuantity })
     return response.data
   } catch (err) {
-    console.log('err in incrementquantity', err)
+    console.log('err in changequantity', err)
   }
 })
 
@@ -56,7 +60,7 @@ const cartSlice = createSlice({
       .addCase(addToCartAsync.fulfilled, (state, action) => {
         return action.payload
       })
-      .addCase(incrementQuantityAsync, (state, action) => {
+      .addCase(changeQuantityAsync.fulfilled, (state, action) => {
         return action.payload
       })
       .addCase(removeFromCartAsync.fulfilled, (state, action) => {
