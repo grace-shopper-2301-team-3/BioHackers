@@ -37,10 +37,11 @@ router.post('/', async (req, res, next) => {
 router.patch('/:cartItemId', async (req, res, next) => {
   try {
     const itemToUpdate = await CartItem.findByPk(req.params.cartItemId)
+    console.log('item to update:', itemToUpdate)
     console.log('cart api, req.params', req.params)
     itemToUpdate.quantity = req.body.quantity;
     await itemToUpdate.save();
-    res.json(itemToUpdate.toJSON());
+    res.status(201).json(itemToUpdate);
   //  res.json(quantity)
   } catch (error) { next(error) }
 })

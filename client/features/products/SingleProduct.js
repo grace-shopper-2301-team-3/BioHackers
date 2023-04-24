@@ -3,13 +3,13 @@ import React, { useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { getAllCategories, selectCategory } from "../categories/allCategoriesSlice";
 import { getSingleProduct, selectSingleProduct } from "./singleProductSlice";
-import { addToCartAsync } from "../cart/cartSlice";
+import { addToCartAsync, fetchCart, changeQuantityAsync } from "../cart/cartSlice";
 import axios from "axios";
 
 const SingleProduct = () => {
     const dispatch = useDispatch();
     const { id } = useParams();
-    console.log(id)
+    // console.log(id)
     const categories = useSelector(selectCategory);
     const product = useSelector(selectSingleProduct);
 
@@ -19,9 +19,18 @@ const SingleProduct = () => {
 
     const handleAddToCart = async (id) => {
         try {
-
         const action = await dispatch(getSingleProduct(id))
         const product = action.payload
+        const cart = await dispatch(fetchCart())
+        console.log('cart payload:' , cart.payload)
+        for (const item of cart.payload) {
+            if (item.itemName === product.productName) {
+                console.log('item exists already', item)
+                await dispatch(changeQuantityAsync({item, numToChangeBy:1}))
+                console.log('item in single product:', item)
+                return item
+            }
+        }
         const addToCartAction = await dispatch(addToCartAsync(product))
         const updatedCart = addToCartAction.payload;
         console.log("updatedCart", updatedCart);

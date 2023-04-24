@@ -18,7 +18,8 @@ const Cart = () => {
 
   useEffect(() => {
     if (cart.length) {
-      const total = cart.reduce((acc, curr) => {
+      const cartArray = Array.from(cart);
+      const total = cartArray.reduce((acc, curr) => {
         const itemTotal = curr.itemPrice * curr.quantity;
         return acc + itemTotal;
       }, 0);
@@ -31,7 +32,7 @@ const Cart = () => {
   return (
     <div className='cartContainer'>
       <p>Your Shopping Cart</p>
-        {cart.length ? cart.map((cartItem) => (
+        {Array.isArray(cart) && cart.length ? cart.map((cartItem) => (
           <div key={cartItem.id}>
             <CartItem cartItem={cartItem} />
           </div>
