@@ -19,22 +19,20 @@ const CartItem = ({ cartItem }) => {
     }
   }
 
-  // MAKE IT SO THAT WHEN QUANTITY = 0, ITEM IS DELETED FROM DB --------
     const handleDecrementQuantity = async (item) => {
       try {
-        if (item.quantity <= 0) {
-          dispatch(removeFromCartAsync(item))
-          dispatch(fetchCart())
+        // await dispatch(fetchCart())
+        if (item.quantity === 1) {
+          dispatch(removeFromCartAsync(item.id))
         }
         else {
-          await dispatch(changeQuantityAsync({ item, numToChangeBy: -1}))
-          dispatch(fetchCart())
+          dispatch(changeQuantityAsync({ item, numToChangeBy: -1}))
         }
+        dispatch(fetchCart())
       } catch (err) {
           console.log('error incrementing quantity in cartitem', err)
       }
   }
-  // --------------------------------------------------------------------
 
   const handleRemove = async (itemId) => {
     try {
@@ -52,8 +50,10 @@ const CartItem = ({ cartItem }) => {
       <span>{cartItem.itemName}</span>
       <button className='decrementQuantityButton' onClick={() => handleDecrementQuantity(cartItem)} >-</button>
       <span>{cartItem.quantity}</span>
-      <button className='incrementQuantityButton' onClick={() => handleIncrementQuantity(cartItem)}>+</button>
-      <button className='removeFromCartButton' onClick={() => handleRemove(cartItem.id)}>Remove</button>
+      <button className='incrementQuantityButton'
+        onClick={() => handleIncrementQuantity(cartItem)}>+</button>
+      <button className='removeFromCartButton'
+        onClick={() => handleRemove(cartItem.id)}>Remove</button>
     </div>
   )
 }
