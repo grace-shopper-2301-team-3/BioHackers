@@ -5,6 +5,13 @@ import { getAllCategories, selectCategory } from "../categories/allCategoriesSli
 import { getSingleProduct, selectSingleProduct } from "./singleProductSlice";
 import { addToCartAsync } from "../cart/cartSlice";
 import axios from "axios";
+import {
+    MainContainer,
+    NoBorderButton,
+    TertiaryButton,
+  } from "../style/StyleGuide";
+import { ThemeProvider, Container, Box } from "@mui/material";
+import biohackersTheme from "../../app/theme";
 
 const SingleProduct = () => {
     const dispatch = useDispatch();
@@ -48,7 +55,7 @@ const SingleProduct = () => {
                     <Link to={`/categories/${product.categoryId}`}>More items like this</Link>
                 }
             </h2>
-            <button onClick={handleAddToCart}>Add to cart</button>
+            <NoBorderButton onClick={handleAddToCart}>Add to cart</NoBorderButton>
         </div>
     );
 };
