@@ -12,12 +12,14 @@ const SingleProduct = () => {
 
     const product = useSelector(selectSingleProduct);
     const categoryId = product && product.categoryId;
-    const categories = useSelector((state) => state.categories.allCategories);
-    const category = categories.find((item) => item.id === categoryId);
+    console.log("categoryId", categoryId);
+  
+    
 
     useEffect(() => {
         dispatch(getSingleProduct(id));
-    }, [dispatch]);
+        dispatch(getAllCategories());
+    }, [dispatch, id]);
 
     const handleAddToCart = async () => {
         try {
@@ -38,12 +40,11 @@ const SingleProduct = () => {
                 <b>Description: </b>
                 <br/> {product.description}
             </p>
-            <p>
-                Category:{" "}
-                {category && (
-                    <Link to={`/categories/${category.id}`}>{category.name}</Link>
-                )}
-            </p>
+            <h2>
+                {
+                    <Link to={`/categories/${product.categoryId}`}>More items like this</Link>
+                }
+            </h2>
             <button onClick={handleAddToCart}>Add to cart</button>
         </div>
     );
