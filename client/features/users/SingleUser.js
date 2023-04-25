@@ -17,6 +17,7 @@ import {
     PrimaryButton,
     MainContainer,
 } from "../style/StyleGuide";
+import UserHeaderBar from "./UserHeaderBar";
 
 
 const SingleUser = () => {
@@ -39,6 +40,7 @@ const SingleUser = () => {
     return (
         <ThemeProvider theme={biohackersTheme}>
             <MainContainer>
+                <UserHeaderBar />
                 <Container>
                     <Typography variant="h2">User Profile</Typography>
                     <span>

@@ -7,45 +7,83 @@ import { styled } from "@mui/material/styles";
 import {
     ThemeProvider,
     Container,
-    Typography
+    Typography,
+    Box,
 } from "@mui/material";
-import {
-    MainContainer,
-} from "../style/StyleGuide";
+import { MainContainer } from "../style/StyleGuide";
+import UserHeaderBar from "./UserHeaderBar";
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import HelpIcon from '@mui/icons-material/Help';
+
+const containerStyle = {
+    display: "flex",
+    flexDirection: "row",
+    gap: "20px",
+};
+
+const boxStyle = {
+    width: "100%",
+    borderRadius: "20px",
+    padding: "70px 55px",
+    color: "white",
+    textAlign: "center",
+};
+
+const iconStyle = {
+    fontSize: "80px",
+    margin: "0 auto", // horizontally center the icon
+    display: "block", // make sure the margin auto works
+};
+
 
 const UserProfile = () => {
 
-    const { firstName, lastName, email, isAdmin, username, password } = useSelector((state) => state.auth.me);
+    const { firstName, username } = useSelector((state) => state.auth.me);
+
+    const handleBoxHover = (e) => {
+        e.target.style.backgroundColor = "#AC6CFF"; // change the background color on hover
+    };
+
+    const handleBoxLeave = (e) => {
+        e.target.style.backgroundColor = "#7F00FF"; // change the background color when leaving hover
+    };
 
     return (
-        <MainContainer>
-            <Container>
-                <Typography variant="h3">Welcome, {firstName}!</Typography>
-                <br />
+        <ThemeProvider theme={biohackersTheme}>
+            <MainContainer>
+                <UserHeaderBar />
+                <Container>
+                    <Typography variant="h4" component="h2">Welcome, {username}!</Typography>
+                </Container>
+                <Container style={containerStyle} sx={{ my: "35px" }}>
+                    <Box
+                        sx={{ backgroundColor: "#7F00FF" }}
+                        style={boxStyle}
+                        onMouseEnter={handleBoxHover}
+                        onMouseLeave={handleBoxLeave}
+                    >
+                        <Link>
+                            <Typography variant="body2">Wishlist</Typography>
+                            <FavoriteIcon sx={iconStyle} />
+                        </Link>
+                    </Box>
+                    <Box
+                        sx={{ backgroundColor: "#7F00FF" }}
+                        style={boxStyle}
+                        onMouseEnter={handleBoxHover}
+                        onMouseLeave={handleBoxLeave}
+                    >
+                        <Link>
+                            <Typography variant="body2">F.A.Q</Typography>
+                            <HelpIcon sx={iconStyle} />
+                        </Link>
+                    </Box>
 
-                <Typography variant="h3">Your Account</Typography>
-                <br />
-
-                <Typography variant="h4">Account Information</Typography>
-                <Typography variant="h6"><Link to="/users/:id">My Information</Link></Typography>
-                <Typography variant="h6"><Link to="/users/:id/edit" >Edit Profile</Link></Typography>
-                <br />
-
-                <Typography variant="h4">Payment</Typography>
-                <Typography variant="h6">Credit Card</Typography>
-                <br />
-
-                <Typography variant="h4">Shipping</Typography>
-                <Typography variant="h6">Address Book</Typography>
-                <br />
-
-                <Typography variant="h4">Orders</Typography>
-                <Typography variant="h6">My Orders</Typography>
-
-            </Container>
-        </MainContainer>
+                </Container>
+            </MainContainer>
+        </ThemeProvider>
     );
-
 };
 
 export default UserProfile;
+
