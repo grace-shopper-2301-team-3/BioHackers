@@ -31,16 +31,6 @@ const UserHeaderBar = () => {
             <MainContainer>
                 <Container
                     sx={{
-                        // display: "flex",
-                        // flexDirection: "column",
-                        // gap: "10px",
-                        // justifyContent: "space-evenly",
-                        // backgroundColor: "#AC6CFF",
-                        // height: "100vh",
-                        // width: "30vh",
-                        // left: 0,
-                        // top: 0,
-                        // position: "fixed",
                         display: "flex",
                         gap: "10px",
                         alignContent: "space-evenly",
