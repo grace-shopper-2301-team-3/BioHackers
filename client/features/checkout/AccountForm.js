@@ -22,7 +22,7 @@ const AccountForm = ({ handleNext }) => {
 
   return (
     <ThemeProvider theme={biohackersTheme}>
-      <Box sx={{ mb: 4, p: 4, pb: 6 }}>
+      <Box sx={{ mx: 12, p: 4 }}>
         <Typography variant="h4" sx={{ mb: 2 }}>
           Account
         </Typography>

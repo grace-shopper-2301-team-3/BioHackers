@@ -19,11 +19,11 @@ import ArrowBackRoundedIcon from "@mui/icons-material/ArrowBackRounded";
 import ShoppingCartRoundedIcon from "@mui/icons-material/ShoppingCartRounded";
 
 const Checkout = () => {
-  const steps = ["Account", "Shipping", "Payment", "Review"];
-
+  const [orderDetails, setOrderDetails] = useState({});
   const [activeStep, setActiveStep] = useState(0);
 
-  const handleNext = () => {
+  const handleNext = (data) => {
+    setOrderDetails({ ...orderDetails, ...data });
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
 
@@ -40,11 +40,19 @@ const Checkout = () => {
       case 2:
         return <PaymentForm handleNext={handleNext} handleBack={handleBack} />;
       case 3:
-        return <OrderReview handleNext={handleNext} handleBack={handleBack} />;
+        return (
+          <OrderReview
+            orderDetails={orderDetails}
+            handleNext={handleNext}
+            handleBack={handleBack}
+          />
+        );
       default:
         throw new Error("Unknown step");
     }
   };
+
+  const steps = ["Account", "Shipping", "Payment", "Review"];
 
   return (
     <ThemeProvider theme={biohackersTheme}>
@@ -68,93 +76,91 @@ const Checkout = () => {
               );
             })}
           </Stepper>
-          <Box sx={{ mt: 4 }}>
-            {activeStep === steps.length ? (
-              <Box
-                sx={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                  color: "primary.main",
-                }}
-              >
-                <Typography
-                  variant="h2"
-                  sx={{
-                    background:
-                      "-webkit-linear-gradient(15deg, #7F00FF, #ff00ff, #00bfff)",
-                    "-webkit-background-clip": "text",
-                    "-webkit-text-fill-color": "transparent",
-                    textAlign: "center",
-                  }}
-                >
-                  Congratulations! You're officially a BioHacker!
-                </Typography>
-                <Typography variant="body1" sx={{ mb: 2, textAlign: "center" }}>
-                  Thank you for choosing BioHacker for your health and wellbeing
-                  needs. We're excited to be a part of your journey towards
-                  optimal performance and longevity.
-                </Typography>
-                <Typography variant="body1" sx={{ mb: 2, textAlign: "center" }}>
-                  Your order is on its way, and we can't wait to hear about the
-                  amazing results you'll achieve with BioHacker.
-                </Typography>
-                <Typography variant="body1" sx={{ mb: 6, textAlign: "center" }}>
-                  Thank you for being a part of our community of
-                  forward-thinking health enthusiasts!
-                </Typography>
-                <ShoppingCartRoundedIcon sx={{ fontSize: 60 }} />
-                <Typography variant="body1" sx={{ mb: 2 }}>
-                  Order Number: XXXXX
-                </Typography>
-                <Typography variant="body1" sx={{ mb: 6 }}>
-                  Your receipt is in your account{" "}
-                  <NoBorderButton
-                    href="/account"
-                    sx={{ textTransform: "uppercase", color: "secondary.dark" }}
-                  >
-                    here
-                  </NoBorderButton>
-                </Typography>
-                <Typography variant="body1" sx={{ mb: 2 }}>
-                  If you have any questions, please call{" "}
-                  <NoBorderButton sx={{ color: "secondary.dark" }}>
-                    888-888-8888
-                  </NoBorderButton>{" "}
-                  or email at{" "}
-                  <NoBorderButton sx={{ color: "secondary.dark" }}>
-                    care@biohackers.com
-                  </NoBorderButton>
-                </Typography>
-              </Box>
-            ) : (
-              <Box>
-                {getStepContent(activeStep)}
-                <Box
-                  sx={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                    mt: 4,
-                    color: "primary.main",
-                  }}
-                >
-                  {activeStep !== 0 && (
-                    <Button
-                      onClick={handleBack}
-                      startIcon={<ArrowBackRoundedIcon />}
-                    >
-                      Back
-                    </Button>
-                  )}
-                  <Button variant="contained" onClick={handleNext}>
-                    {activeStep === steps.length - 1 ? "Place Order" : "Next"}
-                  </Button>
-                </Box>
-              </Box>
-            )}
-          </Box>
         </Box>
+        <Box sx={{ mt: 4 }}>{getStepContent(activeStep)}</Box>
+        {activeStep === steps.length ? (
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              color: "primary.main",
+            }}
+          >
+            <Typography
+              variant="h2"
+              sx={{
+                background:
+                  "-webkit-linear-gradient(15deg, #7F00FF, #ff00ff, #00bfff)",
+                "-webkit-background-clip": "text",
+                "-webkit-text-fill-color": "transparent",
+                textAlign: "center",
+              }}
+            >
+              Congratulations! You're officially a BioHacker!
+            </Typography>
+            <Typography variant="body1" sx={{ mb: 2, textAlign: "center" }}>
+              Thank you for choosing BioHacker for your health and wellbeing
+              needs. We're excited to be a part of your journey towards optimal
+              performance and longevity.
+            </Typography>
+            <Typography variant="body1" sx={{ mb: 2, textAlign: "center" }}>
+              Your order is on its way, and we can't wait to hear about the
+              amazing results you'll achieve with BioHacker.
+            </Typography>
+            <Typography variant="body1" sx={{ mb: 6, textAlign: "center" }}>
+              Thank you for being a part of our community of forward-thinking
+              health enthusiasts!
+            </Typography>
+            <ShoppingCartRoundedIcon sx={{ fontSize: 60 }} />
+            <Typography variant="body1" sx={{ mb: 2 }}>
+              Order Number: XXXXX
+            </Typography>
+            <Typography variant="body1" sx={{ mb: 6 }}>
+              Your receipt is in your account{" "}
+              <NoBorderButton
+                href="/account"
+                sx={{ textTransform: "uppercase", color: "secondary.dark" }}
+              >
+                here
+              </NoBorderButton>
+            </Typography>
+            <Typography variant="body1" sx={{ mb: 2 }}>
+              If you have any questions, please call{" "}
+              <NoBorderButton sx={{ color: "secondary.dark" }}>
+                888-888-8888
+              </NoBorderButton>{" "}
+              or email at{" "}
+              <NoBorderButton sx={{ color: "secondary.dark" }}>
+                care@biohackers.com
+              </NoBorderButton>
+            </Typography>
+          </Box>
+        ) : (
+          <Box>
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+                mt: 4,
+                color: "primary.main",
+              }}
+            >
+              {activeStep !== 0 && (
+                <Button
+                  onClick={handleBack}
+                  startIcon={<ArrowBackRoundedIcon />}
+                >
+                  Back
+                </Button>
+              )}
+              <Button variant="contained" onClick={handleNext}>
+                {activeStep === steps.length - 1 ? "Place Order" : "Next"}
+              </Button>
+            </Box>
+          </Box>
+        )}
       </MainContainer>
     </ThemeProvider>
   );
