@@ -25,6 +25,7 @@ import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import AccountCircleRoundedIcon from "@mui/icons-material/AccountCircleRounded";
 import LocalOfferRoundedIcon from "@mui/icons-material/LocalOfferRounded";
 import TravelExploreRoundedIcon from "@mui/icons-material/TravelExploreRounded";
+import { addToCartAsync } from "../cart/cartSlice";
 
 const SingleCategory = () => {
 
@@ -33,10 +34,10 @@ const SingleCategory = () => {
   const products = useSelector(selectProduct);
   const category = useSelector(selectSingleCategory);
 
-    useEffect(() => {
-        dispatch(getSingleCategory(categoryId))
-        dispatch(getAllProducts());
-    }, [dispatch, categoryId])
+  useEffect(() => {
+    dispatch(getSingleCategory(categoryId))
+    dispatch(getAllProducts());
+  }, [dispatch, categoryId])
 
 
 
@@ -45,98 +46,110 @@ const SingleCategory = () => {
     : [];
 
 
-    return (
-      <div key={categoryId}>
-        <Container sx={{ position: "relative", overflow: "hidden" }}>
-          <img
-            src={category.imageUrl}
-            style={{ width: "100%" }}
-          />
-          <Typography
-            variant="h1"
-            sx={{
-              color: "primary.light",
-              position: "absolute",
-              top: "50%",
-              left: "50%",
-              transform: "translate(-50%, -50%)",
-              background:
-                "-webkit-linear-gradient(45deg, #7F00FF, #ff00ff, #00bfff)",
-              "-webkit-background-clip": "text",
-              "-webkit-text-fill-color": "transparent",
-              textAlign: "center",
-            }}
-          >
-            {category.name}
-          </Typography>
-        </Container>
-        <Container maxWidth="lg" sx={{ marginTop: "50px" }}>
-          <Typography variant="h3" component="h1" align="left" gutterBottom>
-            Products in this Category:
-          </Typography>
-          <Container sx={{ display: "grid", gridTemplateColumns: "repeat(5, 2fr)", gap: "20px" }}>
-            {Array.isArray(categoryProducts) &&
-              categoryProducts.map((product) => {
-                return (
-                  <Box
-                    sx={{
-                      display: "flex",
-                      flexDirection: "row",
-                      justifyContent: "space-evenly",
-                      margin: "5px",
-                      height: "100%",
-                      position: "relative",
-                    }}
-                    key={product.id}
+  return (
+    <div key={categoryId}>
+      <Container sx={{ position: "relative", overflow: "hidden" }}>
+        <img
+          src={category.imageUrl}
+          style={{ width: "100%" }}
+        />
+        <Typography
+          variant="h1"
+          sx={{
+            color: "primary.light",
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            background:
+              "-webkit-linear-gradient(45deg, #7F00FF, #ff00ff, #00bfff)",
+            "-webkit-background-clip": "text",
+            "-webkit-text-fill-color": "transparent",
+            textAlign: "center",
+          }}
+        >
+          {category.name}
+        </Typography>
+      </Container>
+      <Container maxWidth="lg" sx={{ marginTop: "50px" }}>
+        <Typography variant="h3" component="h1" align="left" gutterBottom>
+          Products in this Category:
+        </Typography>
+        <Container sx={{ display: "grid", gridTemplateColumns: "repeat(5, 2fr)", gap: "20px" }}>
+          {Array.isArray(categoryProducts) &&
+            categoryProducts.map((product) => {
+              return (
+                <Box
+                  sx={{
+                    display: "flex",
+                    flexDirection: "row",
+                    justifyContent: "space-evenly",
+                    margin: "5px",
+                    height: "100%",
+                    position: "relative",
+                  }}
+                  key={product.id}
+                >
+                  <Link
+                    to={`/products/${product.id}`}
+                    onClick={() => window.scrollTo(0, 0)}
                   >
-                    <Link
-                      to={`/products/${product.id}`}
-                      onClick={() => window.scrollTo(0, 0)}
+                    <Card
+                      sx={{
+                        maxWidth: 600,
+                        border: "none",
+                        "&:hover": {
+                          border: "2px solid",
+                          borderImage:
+                            "linear-gradient(45deg, #7F00FF, #00bfff, #ff00ff) 1",
+                          boxShadow: "0 0px 20px #7F00FF",
+                        },
+                      }}
                     >
-                      <Card
-                        sx={{
-                          maxWidth: 600,
-                          border: "none",
-                          "&:hover": {
-                            border: "2px solid",
-                            borderImage:
-                              "linear-gradient(45deg, #7F00FF, #00bfff, #ff00ff) 1",
-                            boxShadow: "0 0px 20px #7F00FF",
-                          },
-                        }}
+                      <CardMedia
+                        component="img"
+                        image={product.imageUrl}
+                        sx={{ height: 300, objectFit: "cover" }}
+                      />
+                      <CardContent
+                        sx={{ backgroundColor: "#200040", height: 150 }}
                       >
-                        <CardMedia
-                          component="img"
-                          image={product.imageUrl}
-                          sx={{ height: 300, objectFit: "cover" }}
-                        />
-                        <CardContent
-                          sx={{ backgroundColor: "#200040", height: 150 }}
+                        <Typography
+                          gutterBottom
+                          variant="body"
+                          component="div"
+                          color="primary.light"
+                          sx={{ fontWeight: "900" }}
                         >
-                          <Typography
-                            gutterBottom
-                            variant="body"
-                            component="div"
-                            color="primary.light"
-                            sx={{ fontWeight: "900" }}
-                          >
-                            {product.productName}
-                          </Typography>
-                          <Typography variant="body2">
-                            {product.productPrice.toLocaleString("en-US", {
-                              style: "currency",
-                              currency: "USD",
-                            })}
-                          </Typography>
-                        </CardContent>
-                      </Card>
-                    </Link>
-                  </Box>
-                );
-              })}
-          </Container>
+                          {product.productName}
+                        </Typography>
+                        <Typography variant="body2">
+                          {product.productPrice.toLocaleString("en-US", {
+                            style: "currency",
+                            currency: "USD",
+                          })}
+                        </Typography>
+                        <SecondaryButton
+                          variant="contained"
+                          size="small"
+                          sx={{
+                            position: "absolute",
+                            top: "10px",
+                            right: "10px",
+                          }}
+                          onClick={() => handleAddToCart(product.id)}
+                        >
+                          <AddShoppingCartIcon />
+                        </SecondaryButton>
+                      </CardContent>
+                    </Card>
+                  </Link>
+                </Box>
+              );
+            })}
         </Container>
-      </div>
-    );
+      </Container>
+    </div>
+  );
 }
 export default SingleCategory;

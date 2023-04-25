@@ -116,6 +116,13 @@ let biohackersTheme = createTheme({
     },
   },
   components: {
+    MuiAppBar: {
+      styleOverrides: {
+        root: {
+          backgroundColor: "#000000",
+        },
+      },
+    },
     MuiContainer: {
       root:{
         styleOverrides: {
