@@ -237,7 +237,7 @@ const AdminProducts = () => {
                       />
                     </TableCell>
                     <TableCell sx={{ textAlign: "center" }}>
-                      (placeholder)
+                      {product.quantity}
                     </TableCell>
                     <TableCell sx={{ textAlign: "center" }}>
                       <img
@@ -323,7 +323,7 @@ const AdminProducts = () => {
                       BackdropProps={backdropProps}
                     >
                       <DialogTitle id="form-dialog-title">
-                        Edit User
+                        Edit Product
                       </DialogTitle>
                       <DialogContent>
                         <TextField
@@ -339,6 +339,21 @@ const AdminProducts = () => {
                             setProductToEdit({
                               ...productToEdit,
                               productName: e.target.value,
+                            })
+                          }
+                        />
+                        <TextField
+                          required
+                          fullWidth
+                          margin="dense"
+                          id="quantity"
+                          label="Quantity"
+                          type="number"
+                          value={productToEdit && productToEdit.quantity}
+                          onChange={(e) =>
+                            setProductToEdit({
+                              ...productToEdit,
+                              quantity: e.target.value,
                             })
                           }
                         />

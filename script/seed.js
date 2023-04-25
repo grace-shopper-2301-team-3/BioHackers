@@ -131,17 +131,18 @@ async function seed() {
         "This chip would augment your knowledge on the selected subject and turn you into an expert in the field of your choice.",
       categoryId: 1,
       inventory: 11,
+      quantity: 10
     }),
     Product.create({
       productName: "Memory Enhancement Chip",
       productPrice: 25000,
-
       imageUrl:
         "https://t3.ftcdn.net/jpg/03/21/70/86/360_F_321708677_B63bBdTVDWXghNqjnX4nlxOCdk0Bdzbe.jpg",
       description:
         "This chip enhances your memory by allowing you to store and recall information more efficiently. The chip also provides real-time feedback on your memory usage and give personalized tips on how to improve.",
       categoryId: 1,
       inventory: 11,
+      quantity: 10
     }),
     Product.create({
       productName: "Neural Mood Regulator",
@@ -234,6 +235,7 @@ async function seed() {
         "A supplement designed to boost the immune system could help prevent illness and promote overall health. Contain vitamin C, zinc, and echinacea.",
       categoryId: 3,
       inventory: 11,
+      quantity: 10
     }),
     Product.create({
       productName: "Limitless",
@@ -244,6 +246,7 @@ async function seed() {
         "These supplements improve long-term and short-term memory, recall speed, and learning abilities. Contains racetams, choline, and caffeine.",
       categoryId: 3,
       inventory: 11,
+      quantity: 250
     }),
     Product.create({
       productName: "Synergize",
@@ -254,6 +257,7 @@ async function seed() {
         "These supplements improve mood, reduce stress and anxiety, and help alleviate symptoms of mental health disorders such as depression and anxiety throught synapctic actiavtion of key neurotransmitters, such as serotonin and dopamine.",
       categoryId: 3,
       inventory: 11,
+      quantity: 20
     }),
   ]);
 
