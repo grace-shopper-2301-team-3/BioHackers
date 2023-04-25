@@ -127,22 +127,19 @@ let biohackersTheme = createTheme({
       styleOverrides: {
         root: {
           fontFamily: ["Orbitron", "Press Start 2P", "VT323"].join(","),
-          // ,
-          // "&:hover": {
-          //   ,
-          // },
-          // "&:active": {
-          //   ,
-          // },
-          // "&:visited": {
-          //   ,
-          // },
-          // "&:focus": {
-          //   ,
-          // },
-          // "&:hover, &:active, &:focus": {
-          //   outline: "none",
-          // },
+          
+          "&:hover": {
+            color: "#00bfff"
+          },
+          "&:active": {
+            
+          },
+          "&:visited": {
+            color: "#00bfff"
+          },
+          "&:focus": {
+            
+          }
         },
       },
     },
