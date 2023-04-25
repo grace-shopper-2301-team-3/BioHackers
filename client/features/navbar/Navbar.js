@@ -41,6 +41,7 @@ const Navbar = () => {
           <Box>
             {isLoggedIn ? (
               <>
+                {/* The navbar will show these links after you log in */}
                 {isAdmin && (
                   <Link to="/admin">
                     <TertiaryButton>Admin</TertiaryButton>
@@ -51,7 +52,7 @@ const Navbar = () => {
                     <NoBorderButton>Inventory</NoBorderButton>
                   </Link>
                 )}
-                <Link to={`/users/${id}`}>
+                <Link to={`/users/profile`}>
                   <NoBorderButton>Account</NoBorderButton>
                 </Link>
                 <NoBorderButton type="button" onClick={logoutAndRedirectHome}>
@@ -66,6 +67,8 @@ const Navbar = () => {
               </>
             ) : (
               <>
+                {/* The navbar will show these links before you log in */}
+
                 <Link to="/login">
                   <NoBorderButton>Login</NoBorderButton>
                 </Link>

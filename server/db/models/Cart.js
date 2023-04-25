@@ -18,6 +18,10 @@ const Cart = db.define('cart', {
     type: Sequelize.INTEGER,
     allowNull: false,
   },
+  fulfilled: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false,
+  }
 })
 
 module.exports = Cart

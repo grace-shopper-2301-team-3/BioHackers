@@ -9,6 +9,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { authenticate } from "../../app/store";
 import { ThemeProvider, Box, Typography, Divider } from "@mui/material";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 /**
   The AuthForm component can be used for Login or Sign Up.
@@ -19,6 +20,7 @@ import { Link } from "react-router-dom";
 const AuthForm = ({ name, displayName }) => {
   const { error } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
@@ -27,6 +29,7 @@ const AuthForm = ({ name, displayName }) => {
     const password = evt.target.password.value;
 
     dispatch(authenticate({ username, password, method: formName }));
+    navigate("/");;
   };
 
   return (

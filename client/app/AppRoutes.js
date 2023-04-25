@@ -23,7 +23,10 @@ import AdminPayments from "../features/admin/AdminPayments";
 import AdminProducts from "../features/admin/AdminProducts";
 import AdminUsers from "../features/admin/AdminUsers";
 import NotFound from "../features/notfound/NotFound";
+import UserProfile from "../features/users/UserProfile";
 import Inventory from "../features/inventory/Inventory"
+import Checkout from "../features/checkout/Checkout"
+
 /**
  * COMPONENT
  */
@@ -52,6 +55,7 @@ const AppRoutes = () => {
         {isLoggedIn ? (
           <>
             <Route to="/home" element={<Home />} />
+            <Route path="/users/profile" element={<UserProfile />} />
             <Route path="/users/:id" element={<SingleUser />} />
             <Route path="/users/:id/edit" element={<EditUser />} />
             <Route
@@ -83,6 +87,7 @@ const AppRoutes = () => {
                 <Route path="/admin/payments" element={<AdminPayments />} />
                 <Route path="/admin/products" element={<AdminProducts />} />
                 <Route path="/admin/users" element={<AdminUsers />} />
+                <Route path="/users/profile" element={<UserProfile />} />
               </>
             )}
           </>
@@ -108,6 +113,7 @@ const AppRoutes = () => {
               path="/categories/:categoryId"
               element={<SingleCategory />}
             />
+            <Route path="/users/profile" element={<UserProfile />} />
           </>
         )}
 
@@ -118,6 +124,8 @@ const AppRoutes = () => {
           path="/styleguide"
           element={<StyleGuide name="styleguide" displayName="Style Guide" />}
         />
+                <Route path="/checkout" element={<Checkout />} />
+
       </Routes>
     </div>
   );

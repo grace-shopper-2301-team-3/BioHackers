@@ -1,8 +1,10 @@
-import { useDispatch, useSelector } from "react-redux";
 import React, { useEffect } from "react";
-import { useParams, Link } from "react-router-dom";
-import { getAllCategories, selectCategory } from "../categories/allCategoriesSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useParams } from "react-router-dom";
+import { changeQuantityAsync, fetchCart } from "../cart/cartSlice";
+import { selectCategory } from "../categories/allCategoriesSlice";
 import { getSingleProduct, selectSingleProduct } from "./singleProductSlice";
+
 import { addToCartAsync } from "../cart/cartSlice";
 import axios from "axios";
 import {
@@ -13,9 +15,12 @@ import {
 import { ThemeProvider, Container, Box } from "@mui/material";
 import biohackersTheme from "../../app/theme";
 
+
 const SingleProduct = () => {
     const dispatch = useDispatch();
     const { id } = useParams();
+    // console.log(id)
+    const categories = useSelector(selectCategory);
 
     const product = useSelector(selectSingleProduct);
     const categoryId = product && product.categoryId;
@@ -32,10 +37,19 @@ const SingleProduct = () => {
         try {
         const action = await dispatch(getSingleProduct(id))
         const product = action.payload
-        const addToCartAction = await dispatch(addToCartAsync(product))
-        const updatedCart = addToCartAction.payload;
-        console.log("updatedCart", updatedCart);
-
+        // console.log('singleproduct, product:', product)
+        // const cart = await dispatch(fetchCart())
+        // console.log('cart payload:' , cart.payload)
+        // for (const item of cart.payload) {
+        //     if (item.product.id) {
+        //         console.log('item exists already', item)
+        //         await dispatch(changeQuantityAsync({ item, numToChangeBy: 1 }))
+        //         console.log("dispatched changequantity")
+        //     }
+        // }
+        const addToCartAction = await dispatch(changeQuantityAsync({product, newQuantity: 1, numToChangeBy: 1}))
+        // const updatedCart = addToCartAction.payload;
+        // console.log("updatedCart", updatedCart);
         } catch (err) {
             console.log("error adding to cart in single product", err);
         }
