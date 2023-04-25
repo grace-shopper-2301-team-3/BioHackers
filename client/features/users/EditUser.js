@@ -14,6 +14,7 @@ import {
     PrimaryButton,
     MainContainer,
 } from "../style/StyleGuide";
+import UserHeaderBar from "./UserHeaderBar";
 
 
 const EditUser = () => {
@@ -37,29 +38,8 @@ const EditUser = () => {
     return (
     
             <ThemeProvider theme={biohackersTheme}>
-                
                     <MainContainer>
-                    <Container>
-                        <Typography variant="h2">User Profile</Typography>
-                        <span>
-                            <Typography variant="h5">Username:</Typography>
-                            <Typography variant="subtitle1">{me.username}</Typography>
-                        </span>
-                        <span>
-                            <Typography variant="h5">First Name:</Typography>
-                            <Typography variant="subtitle1">{me.firstName}</Typography>
-                        </span>
-                        <span>
-                            <Typography variant="h5">Last Name:</Typography>
-                            <Typography variant="subtitle1">{me.lastName}</Typography>
-                        </span>
-                        <span>
-                            <Typography variant="h5">E-mail:</Typography>
-                            <Typography variant="subtitle1">{me.email}</Typography>
-                        </span>
-                        </Container>
-                        <br />
-                        
+                        <UserHeaderBar />
                         <Container>
                         <Typography variant="h2">Edit Information</Typography>
                         <form onSubmit={handleEdit}>
@@ -75,10 +55,7 @@ const EditUser = () => {
                         </form>
                         </Container>
                     </MainContainer>
-                
-                
             </ThemeProvider>
-        
     );
 };
 
