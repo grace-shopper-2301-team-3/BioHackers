@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { Link } from "react-router-dom"
 import CartItem from "./CartItem"
 import { fetchCart } from "./cartSlice"
+import { Button } from "@mui/material"
 
 const Cart = () => {
   const dispatch = useDispatch();
@@ -41,7 +42,12 @@ const Cart = () => {
         {cart.length ?
           <div key={cart.id} className='checkoutContainer'>
             <p>total: USD ${totalPrice}</p>
-            <button>Check Out</button>
+            <Link to="/checkout">
+            <Button variant="contained">Check Out</Button>
+            </Link>
+            <Link to="/thankyou">
+      <Button variant="contained">Thank You</Button>
+    </Link>
           </div>
         : <></>}
     </div>

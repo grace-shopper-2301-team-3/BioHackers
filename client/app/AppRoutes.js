@@ -25,6 +25,8 @@ import AdminUsers from "../features/admin/AdminUsers";
 import NotFound from "../features/notfound/NotFound";
 import UserProfile from "../features/users/UserProfile";
 import Inventory from "../features/inventory/Inventory"
+import ThankYou from "../features/checkout/ThankYou"
+import Checkout from "../features/checkout/Checkout"
 
 /**
  * COMPONENT
@@ -123,6 +125,9 @@ const AppRoutes = () => {
           path="/styleguide"
           element={<StyleGuide name="styleguide" displayName="Style Guide" />}
         />
+                <Route path="/thankyou" element={<ThankYou />} />
+                <Route path="/checkout" element={<Checkout />} />
+
       </Routes>
     </div>
   );
