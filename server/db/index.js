@@ -4,8 +4,6 @@ const CartItem = require('./models/CartItem')
 const Category = require('./models/Category')
 const Product = require('./models/Product')
 const User = require('./models/User')
-const Order = require('./models/Order')
-const OrderItem = require('./models/OrderItem')
 
 //associations could go here!
 Category.hasMany(Product)
@@ -19,10 +17,6 @@ Cart.belongsTo(User)
 
 CartItem.hasOne(Product)
 
-OrderItem.belongsTo(Order, { as: "order"})
-Order.belongsTo(User, { as: "users"})
-User.hasMany(Order, {as: "orders"})
-
 module.exports = {
   db,
   models: {
@@ -31,7 +25,5 @@ module.exports = {
     Category,
     Cart,
     CartItem,
-    Order,
-    OrderItem
   },
 }

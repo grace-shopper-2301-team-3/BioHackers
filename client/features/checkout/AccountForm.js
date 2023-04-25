@@ -3,7 +3,6 @@ import biohackersTheme from "../../app/theme";
 import { StyledTextField } from "../style/StyleGuide";
 import {
   ThemeProvider,
-  TextField,
   Box,
   Button,
   FormControl,
@@ -27,11 +26,6 @@ const AccountForm = ({ handleNext }) => {
           Account
         </Typography>
         <RadioGroup value={accountOption} onChange={handleAccountOptionChange} sx={{ flexDirection: "row"}}>
-          <FormControlLabel
-            value="guest"
-            control={<Radio />}
-            label="Guest Checkout"
-          />
           <FormControlLabel
             value="signin"
             control={<Radio />}
@@ -75,19 +69,6 @@ const AccountForm = ({ handleNext }) => {
             </FormControl>
             <Button variant="contained" onClick={handleNext}>
               Create Account
-            </Button>
-          </Box>
-        )}
-        {accountOption === "guest" && (
-          <Box sx={{ mt: 2 }}>
-            <Typography variant="h6" sx={{ mb: 1 }}>
-              Guest Checkout
-            </Typography>
-            <FormControl fullWidth sx={{ mb: 2 }}>
-              <StyledTextField label="Email" variant="outlined" required/>
-            </FormControl>
-            <Button variant="contained" onClick={handleNext}>
-              Continue as Guest
             </Button>
           </Box>
         )}
