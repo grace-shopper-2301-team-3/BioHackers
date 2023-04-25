@@ -35,3 +35,10 @@ router.get('/me', async (req, res, next) => {
     next(ex);
   }
 });
+
+
+/**
+ * User 1:1 Cart 1:many CartItem many:1 product
+ *
+ *
+ */

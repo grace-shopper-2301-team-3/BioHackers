@@ -21,6 +21,7 @@ async function seed() {
       lastName: "Codes",
       email: "codycodes@gmail.com",
       isAdmin: true,
+      cartId: 1,
     }),
     User.create({
       username: "grace",
@@ -29,7 +30,7 @@ async function seed() {
       lastName: "Hopper",
       email: "gracehopper@gmail.com",
       isAdmin: true,
-      cartId: 1,
+      cartId: 2,
     }),
     User.create({
       username: "murphy",
@@ -38,6 +39,7 @@ async function seed() {
       lastName: "Murphs",
       email: "murphymurphs@gmail.com",
       isAdmin: false,
+      cartId: 3,
     }),
     User.create({
       username: "bobby",
@@ -45,6 +47,7 @@ async function seed() {
       firstName: "Bobby",
       lastName: "Bobs",
       email: "bobbybobs@gmail.com",
+      cartId: 4,
     }),
     User.create({
       username: "jane",
@@ -53,8 +56,42 @@ async function seed() {
       lastName: "Jones",
       email: "janejones@gmail.com",
       isAdmin: false,
+      cartId: 5,
     }),
   ]);
+
+  const carts = await Promise.all([
+    Cart.create({
+      cartItems: [],
+      totalQuantity: 0,
+      totalPrice: 0,
+      userId: 1
+    }),
+    Cart.create({
+      cartItems: [],
+      totalQuantity: 0,
+      totalPrice: 0,
+      userId: 2
+    }),
+    Cart.create({
+      cartItems: [],
+      totalQuantity: 0,
+      totalPrice: 0,
+      userId: 3
+    }),
+    Cart.create({
+      cartItems: [],
+      totalQuantity: 0,
+      totalPrice: 0,
+      userId: 4
+    }),
+    Cart.create({
+      cartItems: [],
+      totalQuantity: 0,
+      totalPrice: 0,
+      userId: 5
+    }),
+  ])
   const categories = await Promise.all([
     Category.create({
       name: "Neural Augments",
@@ -222,6 +259,7 @@ async function seed() {
 
   console.log(`seeded ${products.length} products`);
   console.log(`seeded ${categories.length} categories`);
+  console.log(`seeded ${carts.length} carts`)
   console.log(`seeded successfully`);
 }
 

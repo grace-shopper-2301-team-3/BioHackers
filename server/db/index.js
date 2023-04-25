@@ -15,7 +15,9 @@ CartItem.belongsTo(Cart)
 User.hasOne(Cart)
 Cart.belongsTo(User)
 
-CartItem.hasOne(Product)
+CartItem.belongsTo(Product)
+Product.hasMany(CartItem)
+
 
 module.exports = {
   db,

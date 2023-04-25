@@ -9,18 +9,18 @@ const CartItem = db.define('cartItem', {
     allowNull: false,
     defaultValue: 1,
   },
-  itemName: {
-    type: Sequelize.STRING,
-    allowNull: false,
-  },
-  itemPrice: {
-    type: Sequelize.INTEGER,
-    allowNull: false
-  },
-  itemImageUrl: {
-    type: Sequelize.STRING,
-    allowNull: false
-  }
+  // itemName: {
+  //   type: Sequelize.STRING,
+  //   allowNull: false,
+  // },
+  // itemPrice: {
+  //   type: Sequelize.INTEGER,
+  //   allowNull: false
+  // },
+  // itemImageUrl: {
+  //   type: Sequelize.STRING,
+  //   allowNull: false
+  // }
 })
 
 module.exports = CartItem

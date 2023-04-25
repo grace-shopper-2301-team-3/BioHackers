@@ -6,20 +6,20 @@ import CartItem from "./CartItem";
 import { fetchCart } from "./cartSlice";
 import { Button } from "@mui/material";
 
+
 const Cart = () => {
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
   const [totalPrice, setTotalPrice] = useState(0);
   const [cartUpdated, setCartUpdated] = useState(false);
 
-  useEffect(() => {
-    dispatch(fetchCart());
-  }, [dispatch]);
 
   useEffect(() => {
     if (cart.length) {
-      const total = cart.reduce((acc, curr) => {
-        const itemTotal = curr.itemPrice * curr.quantity;
+      const cartArray = Array.from(cart);
+      const total = cartArray.reduce((acc, curr) => {
+        const itemTotal = curr.product.productPrice * curr.quantity;
+        console.log({itemTotal, itemPrice: curr.product.productPrice, quantity: curr.quantity})
         return acc + itemTotal;
       }, 0);
       setTotalPrice(total);
@@ -28,11 +28,14 @@ const Cart = () => {
     }
   }, [cart, cartUpdated]);
 
+  useEffect(() => {
+    dispatch(fetchCart());
+  }, [dispatch]);
+
   return (
     <div className="cartContainer">
       <p>Your Shopping Cart</p>
-      {cart.length ? (
-        cart.map((cartItem) => (
+        {Array.isArray(cart) && cart.length ? cart.map((cartItem) => (
           <div key={cartItem.id}>
             <CartItem cartItem={cartItem} />
           </div>

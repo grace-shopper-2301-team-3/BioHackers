@@ -1,27 +1,18 @@
-import React, { useState } from "react";
-import biohackersTheme from "../../app/theme";
-import {
-  MainContainer,
-  HeroButton,
-  SecondaryButton,
-} from "../style/StyleGuide";
-import {
-  ThemeProvider,
-  Typography,
-  Container,
-  Box,
-  Card,
-  CardMedia,
-  CardContent,
-  Avatar,
-} from "@mui/material";
-import FormatQuoteIcon from "@mui/icons-material/FormatQuote";
-import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import AccountCircleRoundedIcon from "@mui/icons-material/AccountCircleRounded";
+import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
+import FormatQuoteIcon from "@mui/icons-material/FormatQuote";
 import LocalOfferRoundedIcon from "@mui/icons-material/LocalOfferRounded";
 import TravelExploreRoundedIcon from "@mui/icons-material/TravelExploreRounded";
+import {
+  Avatar, Box,
+  Card, CardContent, CardMedia, Container, ThemeProvider,
+  Typography
+} from "@mui/material";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import biohackersTheme from "../../app/theme";
+import { changeQuantityAsync } from "../cart/cartSlice";
 import {
   getAllCategories,
   selectCategory,
@@ -29,6 +20,9 @@ import {
 import { getAllProducts, selectProduct } from "../products/allProductsSlice";
 import { addToCartAsync } from "../cart/cartSlice";
 import { getSingleProduct } from "../products/singleProductSlice";
+import {
+  HeroButton, MainContainer, SecondaryButton
+} from "../style/StyleGuide";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -39,7 +33,7 @@ const Home = () => {
     try {
       const action = await dispatch(getSingleProduct(id));
       const product = action.payload;
-      const addToCartAction = await dispatch(addToCartAsync(product));
+      const addToCartAction = await dispatch(changeQuantityAsync({ product, newQuantity: 1}));
       const updatedCart = addToCartAction.payload;
       console.log("updatedCart", updatedCart);
     } catch (err) {
