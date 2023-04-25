@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import { Routes, Route, Link } from "react-router-dom";
 import { getAllProducts, selectProduct } from "./allProductsSlice";
 import { getSingleProduct } from "./singleProductSlice";
-import { addToCartAsync } from "../cart/cartSlice";
+import { changeQuantityAsync } from "../cart/cartSlice";
 
 const AllProducts = () => {
     const dispatch = useDispatch();
@@ -15,9 +15,10 @@ const AllProducts = () => {
         try {
         const action = await dispatch(getSingleProduct(id))
         const product = action.payload
-        const addToCartAction = await dispatch(addToCartAsync(product))
+        // console.log({ product })
+        const addToCartAction = await dispatch(changeQuantityAsync({product, newQuantity: 1}))
         const updatedCart = addToCartAction.payload;
-        console.log("updatedCart", updatedCart);
+        // console.log("updatedCart", updatedCart);
         } catch (err) {
             console.log('error adding to cart in single product', err)
         }

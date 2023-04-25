@@ -17,8 +17,8 @@ CartItem.belongsTo(Cart)
 User.hasOne(Cart)
 Cart.belongsTo(User)
 
-CartItem.hasOne(Product)
-
+CartItem.belongsTo(Product)
+Product.hasMany(CartItem)
 // These relationships were automatically built from our dbdiagram.io
 // Ref: "product_category"."id" < "product"."category_id"
 // Ref: "product_inventory"."id" < "product"."inventory_id"

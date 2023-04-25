@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from "react-redux"
-import { Link } from "react-router-dom"
 import CartItem from "./CartItem"
 import { fetchCart } from "./cartSlice"
 
@@ -11,16 +9,14 @@ const Cart = () => {
   const [totalPrice, setTotalPrice] = useState(0);
   const [cartUpdated, setCartUpdated] = useState(false);
 
-  useEffect(() => {
-    dispatch(fetchCart());
-  }, [dispatch]);
 
 
   useEffect(() => {
     if (cart.length) {
       const cartArray = Array.from(cart);
       const total = cartArray.reduce((acc, curr) => {
-        const itemTotal = curr.itemPrice * curr.quantity;
+        const itemTotal = curr.product.productPrice * curr.quantity;
+        console.log({itemTotal, itemPrice: curr.product.productPrice, quantity: curr.quantity})
         return acc + itemTotal;
       }, 0);
       setTotalPrice(total);
@@ -28,6 +24,10 @@ const Cart = () => {
       setTotalPrice(0);
     }
   }, [cart, cartUpdated]);
+
+  useEffect(() => {
+    dispatch(fetchCart());
+  }, [dispatch]);
 
   return (
     <div className='cartContainer'>
