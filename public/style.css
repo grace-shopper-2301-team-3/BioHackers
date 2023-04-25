@@ -1,14 +1,16 @@
-@import url('https://fonts.googleapis.com/css2?family=Orbitron&family=Audiowide&family=Press+Start+2P&family=VT323&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Orbitron&family=Audiowide&family=Press+Start+2P&family=VT323&display=swap");
 
-html, body {
-    background-color: black;
-
-    font-family: 'Audiowide','VT323', 'Orbitron', 'Press Start';
+html,
+body {
+  background-color: black;
+  font-family: "Audiowide", "VT323", "Orbitron", "Press Start";
 }
 
-
-
-a{
-    text-decoration: none;
+a {
+  font-family: "Audiowide", "VT323", "Orbitron", "Press Start";
+  text-decoration: none;
 }
 
+button {
+    font-family: "Audiowide", "VT323", "Orbitron", "Press Start";
+}
