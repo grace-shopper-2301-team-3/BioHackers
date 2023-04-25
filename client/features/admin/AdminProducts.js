@@ -44,9 +44,6 @@ const AdminProducts = () => {
   const products = useSelector(selectProduct);
   const categories = useSelector(selectCategory);
 
-  console.log("products:", products);
-  console.log("categories:", categories);
-
   const [deleteOpen, setDeleteOpen] = useState(false);
   const [editOpen, setEditOpen] = useState(false);
   const [addOpen, setAddOpen] = useState(false);
@@ -54,6 +51,8 @@ const AdminProducts = () => {
   const [productToEdit, setProductToEdit] = useState(null);
   const [productToAdd, setProductToAdd] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
+
+  const [saveSuccessOpen, setSaveSuccessOpen] = useState(false);
 
   const handleDeleteClick = (product) => {
     setProductToDelete(product);
@@ -70,12 +69,17 @@ const AdminProducts = () => {
     setAddOpen(true);
   };
 
+  const handleSaveSuccessClose = () => {
+    setSaveSuccessOpen(false);
+  };
+
   const handleDeleteProduct = async () => {
     try {
       await dispatch(deleteProduct(productToDelete.id));
       setDeleteOpen(false);
       setProductToDelete(null);
       await dispatch(getAllProducts());
+      setSaveSuccessOpen(true);
     } catch (err) {
       console.log("error removing product", err);
     }
@@ -87,6 +91,7 @@ const AdminProducts = () => {
       setEditOpen(false);
       setProductToEdit({ ...productToEdit });
       await dispatch(getAllProducts());
+      setSaveSuccessOpen(true);
     } catch (err) {
       console.log("error updating product", err);
     }
@@ -98,6 +103,7 @@ const AdminProducts = () => {
       setAddOpen(false);
       setProductToAdd({ ...productToAdd });
       await dispatch(getAllProducts());
+      setSaveSuccessOpen(true);
     } catch (err) {
       console.log("error adding product", err);
     }
@@ -436,6 +442,30 @@ const AdminProducts = () => {
                           autoFocus
                         >
                           Save Changes
+                        </Button>
+                      </DialogActions>
+                    </Dialog>
+
+                    {/* Saving Success Dialog */}
+
+                    <Dialog
+                      open={saveSuccessOpen}
+                      onClose={handleSaveSuccessClose}
+                      BackdropProps={backdropProps}
+                    >
+                      <DialogTitle>{"Save Successful"}</DialogTitle>
+                      <DialogContent>
+                        <DialogContentText>
+                          Your changes have been saved successfully.
+                        </DialogContentText>
+                      </DialogContent>
+                      <DialogActions>
+                        <Button
+                          onClick={handleSaveSuccessClose}
+                          color="primary"
+                          autoFocus
+                        >
+                          OK
                         </Button>
                       </DialogActions>
                     </Dialog>

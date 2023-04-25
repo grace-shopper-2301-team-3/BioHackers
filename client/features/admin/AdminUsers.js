@@ -47,6 +47,9 @@ const AdminUsers = () => {
   const [userToEdit, setUserToEdit] = useState(null);
   const [userToAdd, setUserToAdd] = useState("");
 
+  const [saveSuccessOpen, setSaveSuccessOpen] = useState(false);
+
+
   const handleDeleteClick = (user) => {
     setUserToDelete(user);
     setDeleteOpen(true);
@@ -62,12 +65,17 @@ const AdminUsers = () => {
     setAddOpen(true);
   };
 
+  const handleSaveSuccessClose = () => {
+    setSaveSuccessOpen(false);
+  };
+
   const handleDeleteUser = async () => {
     try {
       await dispatch(deleteUser(userToDelete.id));
       setDeleteOpen(false);
       setUserToDelete(null);
       await dispatch(fetchAllUsers());
+      setSaveSuccessOpen(true);
     } catch (err) {
       console.log("error removing user", err);
     }
@@ -79,6 +87,7 @@ const AdminUsers = () => {
       setEditOpen(false);
       setUserToEdit({ ...userToEdit });
       await dispatch(fetchAllUsers());
+      setSaveSuccessOpen(true);
     } catch (err) {
       console.log("error updating user", err);
     }
@@ -90,6 +99,7 @@ const AdminUsers = () => {
       setAddOpen(false);
       setUserToAdd({ ...userToAdd });
       await dispatch(fetchAllUsers());
+      setSaveSuccessOpen(true);
     } catch (err) {
       console.log("error adding user", err);
     }
@@ -551,7 +561,31 @@ const AdminUsers = () => {
                       </DialogActions>
                     </Dialog>
 
-                    {/* End of Dialogs */}
+                    {/* Saving Success Dialog */}
+
+                    <Dialog
+                      open={saveSuccessOpen}
+                      onClose={handleSaveSuccessClose}
+                      BackdropProps={backdropProps}
+                    >
+                      <DialogTitle>{"Save Successful"}</DialogTitle>
+                      <DialogContent>
+                        <DialogContentText>
+                          Your changes have been saved successfully.
+                        </DialogContentText>
+                      </DialogContent>
+                      <DialogActions>
+                        <Button
+                          onClick={handleSaveSuccessClose}
+                          color="primary"
+                          autoFocus
+                        >
+                          OK
+                        </Button>
+                      </DialogActions>
+                    </Dialog>
+
+
                   </TableRow>
                 ))}
             </TableBody>
