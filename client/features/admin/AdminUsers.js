@@ -9,6 +9,8 @@ import {
   TableCell,
   TableHead,
   TableRow,
+  TablePagination,
+  TableFooter,
   Dialog,
   DialogActions,
   DialogContent,
@@ -46,9 +48,18 @@ const AdminUsers = () => {
   const [userToDelete, setUserToDelete] = useState(null);
   const [userToEdit, setUserToEdit] = useState(null);
   const [userToAdd, setUserToAdd] = useState("");
-
   const [saveSuccessOpen, setSaveSuccessOpen] = useState(false);
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
 
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
+  };
 
   const handleDeleteClick = (user) => {
     setUserToDelete(user);
@@ -224,7 +235,9 @@ const AdminUsers = () => {
             </TableHead>
             <TableBody>
               {Array.isArray(users) &&
-                users.map((user) => (
+                users
+                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                .map((user) => (
                   <TableRow
                     key={user.id}
                     sx={{ borderBottomColor: "1px solid primary.main" }}
@@ -589,6 +602,19 @@ const AdminUsers = () => {
                   </TableRow>
                 ))}
             </TableBody>
+            <TableFooter>
+              <TableRow>
+                <TablePagination
+                  rowsPerPageOptions={[5, 10, 25]}
+                  component="td"
+                  count={users.length}
+                  rowsPerPage={rowsPerPage}
+                  page={page}
+                  onPageChange={handleChangePage}
+                  onRowsPerPageChange={handleChangeRowsPerPage}
+                />
+              </TableRow>
+            </TableFooter>
           </Table>
         </Container>
       </MainContainer>
