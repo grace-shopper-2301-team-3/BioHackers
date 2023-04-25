@@ -96,14 +96,15 @@ async function seed() {
     Category.create({
       name: "Neural Augments",
       imageUrl:
-        "https://i.pinimg.com/736x/50/8c/26/508c263f1b458e58352f6d2248bd0f28.jpg",
+        "https://assets.newatlas.com/dims4/default/c478776/2147483647/strip/true/crop/1999x1333+0+0/resize/720x480!/quality/90/?url=http%3A%2F%2Fnewatlas-brightspot.s3.amazonaws.com%2Fe7%2F0b%2F5c982a3d445e99e3841fbea58ce2%2Fdepositphotos-205044790-l-2015.jpg",
       description:
         "Devices implanted in the brain to enhance performance and living experience for users.",
       categoryId: 1,
     }),
     Category.create({
       name: "Physical Augments",
-      imageUrl: "https://static.vecteezy.com/system/resources/previews/009/840/489/non_2x/abstract-technology-futuristic-concept-of-digital-human-body-ai-digital-interface-future-design-on-hi-tech-background-vector.jpg",
+      imageUrl:
+        "https://assets.iflscience.com/assets/articleNo/67765/aImg/66111/transhumanism-o.webp",
       description:
         "Devices worn by user or infused in muscularskeletal system to enhance physical attributes.",
       categoryId: 2,
@@ -111,7 +112,7 @@ async function seed() {
     Category.create({
       name: "Supplements",
       imageUrl:
-        "https://media.istockphoto.com/id/1368548595/photo/abstract-futuristic-pills-wireframe-and-capsule-on-glowing-blue-background-pharmacy-medical.jpg?s=612x612&w=0&k=20&c=-B-lDFAofZ9up2X4Ge8gQpMbDBnCAjNrCnys0_o-Vpc=",
+        "https://img.theepochtimes.com/assets/uploads/2021/02/22/digital-pills.jpg",
       description:
         "Consumables taken on a regular schedule to reach new heights of human performance.",
       categoryId: 3,
@@ -123,38 +124,46 @@ async function seed() {
     Product.create({
       productName: "Subject Mastery Implant",
       productPrice: 50000,
+
       imageUrl:
         "https://t4.ftcdn.net/jpg/05/46/00/47/360_F_546004711_mhXwat1NdyNvEhPDEigFH11YRPndCUvj.jpg",
       description:
         "This chip would augment your knowledge on the selected subject and turn you into an expert in the field of your choice.",
       categoryId: 1,
+      inventory: 11,
     }),
     Product.create({
       productName: "Memory Enhancement Chip",
       productPrice: 25000,
+
       imageUrl:
         "https://t3.ftcdn.net/jpg/03/21/70/86/360_F_321708677_B63bBdTVDWXghNqjnX4nlxOCdk0Bdzbe.jpg",
       description:
         "This chip enhances your memory by allowing you to store and recall information more efficiently. The chip also provides real-time feedback on your memory usage and give personalized tips on how to improve.",
       categoryId: 1,
+      inventory: 11,
     }),
     Product.create({
       productName: "Neural Mood Regulator",
       productPrice: 35000,
+
       imageUrl:
         "https://singularityhub.com/wp-content/uploads/2019/04/brain-activity-3D-illustration-future-of-health-shutterstock-622433543-900x506.jpg",
       description:
         "A neural mood regulator implant will help users regulate their emotions by stimulating or inhibiting specific parts of the brain. The implant can be controlled via our mobile app, allowing you to adjust your mood as needed.",
       categoryId: 1,
+      inventory: 11,
     }),
     Product.create({
       productName: "Telepathy Chip",
       productPrice: 60000,
+
       imageUrl:
         "https://media.licdn.com/dms/image/D4E12AQHrFJqUGME5ag/article-cover_image-shrink_720_1280/0/1676072349380?e=2147483647&v=beta&t=V5lPGb7ckFdWGfpZ24VPRJ5i_PIC9DFjfd2UrWTatcM",
       description:
         "This chip allows users to communicate with each other without ever having to speak a word. It works as a receiver and translates the transposed brain waves to nearby humans to  hear their thoughts and feelings in real-time. If another user is nearby, communication becomes two-way, allowing you to share thoughts, feelings, and ideas with the ultimate privacy.",
       categoryId: 1,
+      inventory: 11,
     }),
     Product.create({
       productName: "Brain-Computer Interface",
@@ -164,6 +173,7 @@ async function seed() {
       description:
         "A brain-computer interface (BCI) could allow people to control devices with their thoughts. This would be particularly useful for people with disabilities or those who are unable to use traditional input methods. For example, a BCI could allow someone to control a prosthetic limb or communicate with a computer using only their thoughts.",
       categoryId: 1,
+      inventory: 11,
     }),
     Product.create({
       productName: "Bionic Exoskeleton",
@@ -173,6 +183,7 @@ async function seed() {
       description:
         "This wearable device enhances the mobility of users and allows them to reach Olympic levels of athleticism. Allows users to achieve superhuman strength by augmenting their muscle fibers with synthetic fibers or nano-materials. Powered by advanced motors and sensors in combination with the latest neural network technology. Can also restore function to those who have lost mobility due to degenerative disease or traumatic injury.",
       categoryId: 2,
+      inventory: 11,
     }),
     Product.create({
       productName: "Bionic Lens",
@@ -182,15 +193,18 @@ async function seed() {
       description:
         "The Bionic Lens gives users superhuman vision capabilities. The implant works by connecting to the optic nerve and processing visual information more efficiently, granting the ability to see in low-light conditions, zoom in on objects from far away, or even see in different spectrums, like ultraviolet or infrared.",
       categoryId: 2,
+      inventory: 11,
     }),
     Product.create({
       productName: "Regenerative Healing Implant",
       productPrice: 150000,
+
       imageUrl:
         "https://lh3.googleusercontent.com/LpYGTaHL6SG39CRkGqMeyrdmkIB4DkPCReEv4wl8mhYErV6t0XM-hOWHb3joSVP-_N-xrpYgv-10xj-vxOmIup9OOAx9ZlLZuvnwm5IgjjOoisBeF3lus3pVwrdKEQYbQFsfnohc",
       description:
         "The Regenerative Healing Implant allows users to recover from injuries rapidly. The implant stimulates collagen production, accelerating the natural healing processes, encouraging the growth of new tissue and reducing inflammation.",
       categoryId: 2,
+      inventory: 11,
     }),
     Product.create({
       productName: "Rejuven-8",
@@ -200,6 +214,7 @@ async function seed() {
       description:
         "These supplements guarantee a slowing or complete reversal of the aging process by repairing or regenerating cells and tissues, extending lifespan, and improving overall health while getting to old age. Contains resveratrol, NAD+ precursors, and antioxidants like vitamin C and E.",
       categoryId: 3,
+      inventory: 11,
     }),
     Product.create({
       productName: "MorpheuX",
@@ -208,6 +223,7 @@ async function seed() {
       description:
         "These supplements improve the quality and reduce the duration of sleep, so you can spend more hours awake and improve overall health and well-being.",
       categoryId: 3,
+      inventory: 11,
     }),
     Product.create({
       productName: "Immune Booster",
@@ -217,6 +233,7 @@ async function seed() {
       description:
         "A supplement designed to boost the immune system could help prevent illness and promote overall health. Contain vitamin C, zinc, and echinacea.",
       categoryId: 3,
+      inventory: 11,
     }),
     Product.create({
       productName: "Limitless",
@@ -226,6 +243,7 @@ async function seed() {
       description:
         "These supplements improve long-term and short-term memory, recall speed, and learning abilities. Contains racetams, choline, and caffeine.",
       categoryId: 3,
+      inventory: 11,
     }),
     Product.create({
       productName: "Synergize",
@@ -235,6 +253,7 @@ async function seed() {
       description:
         "These supplements improve mood, reduce stress and anxiety, and help alleviate symptoms of mental health disorders such as depression and anxiety throught synapctic actiavtion of key neurotransmitters, such as serotonin and dopamine.",
       categoryId: 3,
+      inventory: 11,
     }),
   ]);
 

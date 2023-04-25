@@ -12,26 +12,6 @@ export const getSingleProduct = createAsyncThunk('/singleProduct', async (id) =>
   }
 });
 
-// export const addProductAsync = createAsyncThunk(
-//   "singleProduct",
-//   async ({ productName, productPrice, imageUrl, description, category }) => {
-//     try {
-//       const { data } = await axios.post(`/products`, {
-//         productName,
-//         productPrice,
-//         imageUrl,
-//         // productId,
-//         description,
-//         category
-//       });
-//       return data;
-//     } catch (err) {
-//       console.log(err);
-//       throw err;
-//     }
-//   }
-// );
-
 export const createProduct = createAsyncThunk('/createProduct', async (product) => {
   try {
     const { data } = await axios.post(`/api/products`, product);

@@ -3,8 +3,21 @@ import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router";
 import { Link, useNavigate } from "react-router-dom";
 import { logout } from "../../app/store";
-
 import { fetchSingleUser, selectSingleUser } from "./userSlice";
+import biohackersTheme from "../../app/theme";
+import { styled } from "@mui/material/styles";
+import {
+    ThemeProvider,
+    Container,
+    Typography
+} from "@mui/material";
+
+import {
+    StyledTextField,
+    PrimaryButton,
+    MainContainer,
+} from "../style/StyleGuide";
+import UserHeaderBar from "./UserHeaderBar";
 
 
 const SingleUser = () => {
@@ -24,37 +37,33 @@ const SingleUser = () => {
         navigate("/");
     };
 
-    console.log('This is the id #', id);
-
     return (
-        <div>
-            <h2>User Profile</h2>
-            <span>
-                <h4>Username:</h4>
-                <p>{username}</p>
-            </span>
-            <span>
-                <h4>First Name:</h4>
-                <p>{firstName}</p>
-            </span>
-            <span>
-                <h4>Last Name:</h4>
-                <p>{lastName}</p>
-            </span>
-            <span>
-                <h4>E-mail:</h4>
-                <p>{email}</p>
-            </span>
-            <span>
-                <Link to={`/users/${id}/edit`}><button>Edit Profile</button></Link>
-
+        <ThemeProvider theme={biohackersTheme}>
+            <MainContainer>
+                <UserHeaderBar />
+                <Container>
+                    <Typography variant="h2">User Profile</Typography>
+                    <span>
+                        <Typography variant="h5">Username:</Typography>
+                        <Typography variant="subtitle1">{username}</Typography>
+                    </span>
+                    <span>
+                        <Typography variant="h5">First Name:</Typography>
+                        <Typography variant="subtitle1">{firstName}</Typography>
+                    </span>
+                    <span>
+                        <Typography variant="h5">Last Name:</Typography>
+                        <Typography variant="subtitle1">{lastName}</Typography>
+                    </span>
+                    <span>
+                        <Typography variant="h5">E-mail:</Typography>
+                        <Typography variant="subtitle1">{email}</Typography>
+                    </span>
+                </Container>
                 <br />
-                <br />
-
-                <button type="button" onClick={logoutAndRedirectHome}>Logout</button>
-            </span>
-        </div>
+            </MainContainer>
+        </ThemeProvider>
     );
-}
+};
 
 export default SingleUser;

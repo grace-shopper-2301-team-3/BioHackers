@@ -13,8 +13,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import biohackersTheme from "../../app/theme";
 import { changeQuantityAsync } from "../cart/cartSlice";
-import { selectCategory } from "../categories/allCategoriesSlice";
-import { selectProduct } from "../products/allProductsSlice";
+import {
+  getAllCategories,
+  selectCategory,
+} from "../categories/allCategoriesSlice";
+import { getAllProducts, selectProduct } from "../products/allProductsSlice";
+import { addToCartAsync } from "../cart/cartSlice";
 import { getSingleProduct } from "../products/singleProductSlice";
 import {
   HeroButton, MainContainer, SecondaryButton
@@ -225,8 +229,8 @@ const Home = () => {
                         <CardContent
                           sx={{
                             backgroundColor: "#200040",
-                            height: 150,
-                            objectFit: "cover",
+                            height: 160,
+                            alignItems: "center",
                           }}
                         >
                           <Typography
@@ -234,10 +238,11 @@ const Home = () => {
                             variant="h5"
                             component="div"
                             color="primary.light"
+                            sx={{ textAlign: "center"}}
                           >
                             {category.name}
                           </Typography>
-                          <Typography variant="body2">
+                          <Typography variant="body2" sx={{ textAlign: "center"}}>
                             {category.description}
                           </Typography>
                         </CardContent>
@@ -316,7 +321,7 @@ const Home = () => {
                     backgroundColor: "transparent",
                     borderColor: getRandomColor(),
                     color: "primary.contrastText",
-                    borderRadius: "25px"
+                    borderRadius: "25px",
                   }}
                 >
                   <CardContent
@@ -417,18 +422,28 @@ const Home = () => {
                           sx={{ height: 200, objectFit: "cover" }}
                         />
                         <CardContent
-                          sx={{ backgroundColor: "#200040", height: 100 }}
+                          sx={{
+                            backgroundColor: "#200040",
+                            height: 125,
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            flexDirection: "column",
+                          }}
                         >
                           <Typography
                             gutterBottom
                             variant="body"
                             component="div"
                             color="primary.light"
-                            sx={{ fontWeight: "900" }}
+                            sx={{ fontWeight: "900", textAlign: "center" }}
                           >
                             {product.productName}
                           </Typography>
-                          <Typography variant="body2">
+                          <Typography
+                            variant="body2"
+                            sx={{ textAlign: "center" }}
+                          >
                             {product.productPrice.toLocaleString("en-US", {
                               style: "currency",
                               currency: "USD",
@@ -486,7 +501,7 @@ const Home = () => {
                 "-webkit-background-clip": "text",
                 "-webkit-text-fill-color": "transparent",
                 textAlign: "center",
-                py: 2
+                py: 2,
               }}
             >
               you'll love shopping with us
@@ -514,11 +529,11 @@ const Home = () => {
                       alignItems: "center",
                       justifyContent: "center",
                       backgroundImage:
-                "url(https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExOGY2YjA4ZGNhMzcwZjM1ZDg2ZTdhYjY1OGNjZmRjMmEyZGYyZTc0ZSZlcD12MV9pbnRlcm5hbF9naWZzX2dpZklkJmN0PWc/WmiRpz0Kz0nzewi9mm/giphy.gif)",
-              backgroundPosition: "center",
-              backgroundSize: "cover",
-              color: "primary.contrastText",
-              borderRadius: "25px",
+                        "url(https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExOGY2YjA4ZGNhMzcwZjM1ZDg2ZTdhYjY1OGNjZmRjMmEyZGYyZTc0ZSZlcD12MV9pbnRlcm5hbF9naWZzX2dpZklkJmN0PWc/WmiRpz0Kz0nzewi9mm/giphy.gif)",
+                      backgroundPosition: "center",
+                      backgroundSize: "cover",
+                      color: "primary.contrastText",
+                      borderRadius: "25px",
                       "&:hover": {
                         boxShadow: "0 0 15px primary.main",
                         transform: "scale(1.02)",

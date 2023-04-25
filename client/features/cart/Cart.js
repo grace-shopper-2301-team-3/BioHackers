@@ -1,14 +1,17 @@
-import React, { useEffect, useState } from "react"
-import { useDispatch, useSelector } from "react-redux"
-import CartItem from "./CartItem"
-import { fetchCart } from "./cartSlice"
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import CartItem from "./CartItem";
+import { fetchCart } from "./cartSlice";
+import { Button } from "@mui/material";
+
 
 const Cart = () => {
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
   const [totalPrice, setTotalPrice] = useState(0);
   const [cartUpdated, setCartUpdated] = useState(false);
-
 
 
   useEffect(() => {
@@ -30,23 +33,28 @@ const Cart = () => {
   }, [dispatch]);
 
   return (
-    <div className='cartContainer'>
+    <div className="cartContainer">
       <p>Your Shopping Cart</p>
         {Array.isArray(cart) && cart.length ? cart.map((cartItem) => (
           <div key={cartItem.id}>
             <CartItem cartItem={cartItem} />
           </div>
         ))
-        :
-        <p>Your cart is empty</p>}
-        {cart.length ?
-          <div key={cart.id} className='checkoutContainer'>
-            <p>total: USD ${totalPrice}</p>
-            <button>Check Out</button>
-          </div>
-        : <></>}
+      ) : (
+        <p>Your cart is empty</p>
+      )}
+      {cart.length ? (
+        <div key={cart.id} className="checkoutContainer">
+          <p>total: USD ${totalPrice}</p>
+          <Link to="/checkout">
+            <Button variant="contained">Check Out</Button>
+          </Link>
+        </div>
+      ) : (
+        <></>
+      )}
     </div>
-  )
-}
+  );
+};
 
-export default Cart
+export default Cart;
