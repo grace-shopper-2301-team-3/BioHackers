@@ -139,7 +139,7 @@ const Home = () => {
               textAlign: "center",
             }}
           >
-            Biohackers
+            BioHacker
           </Typography>
         </Container>
         <Container sx={{ my: 10 }}>

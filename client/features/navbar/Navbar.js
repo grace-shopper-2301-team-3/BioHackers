@@ -46,7 +46,7 @@ const Navbar = () => {
         <Container sx={{ display: "fixed", justifyContent: "space-between" }}>
           <Box sx={{ display: "fixed", justifyContent: "space-between" }}>
             <Link to="/home">
-              <NoBorderButton>BioHackers</NoBorderButton>
+              <NoBorderButton>BioHacker</NoBorderButton>
             </Link>
             <Link to="/products">
               <NoBorderButton>Products</NoBorderButton>
