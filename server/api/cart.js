@@ -5,35 +5,57 @@ const CartItem = require("../db/models/CartItem");
 const Product = require("../db/models/Product");
 const { isNumber } = require("@mui/x-data-grid/internals");
 const { Op } = require('sequelize')
+const jwt = require('jsonwebtoken')
+const {LocalStorage} = require('node-localstorage');
+const localStorage = new LocalStorage('./scratch');
+const uuid = require('uuid');
 
 // Add authentication middleware
-const requireToken = async (req, res, next) => {
-  try {
-    const token = req.headers.authorization;
-    const user = await User.findByToken(token);
-    req.user = user;
-    next();
-  } catch (error) {
-    next(error);
-  }
-};
+// const requireToken = async (req, res, next) => {
+//   try {
+//     const token = req.headers.authorization;
+//     console.log({token})
+//     if (!token) {
+//       return res.status(401).json({ error: 'Missing authorization token' });
+//     }
+//     const user = await User.findByToken(token);
+//     if (!user) {
+//       return res.status(401).json({ error: 'Invalid authorization token' });
+//     }
+//     req.user = user;
+//     next();
+//   } catch (error) {
+//     next(error);
+//   }
+// };
+
+
 
 router.get("/", async (req, res, next) => {
   try {
     console.log('token:', req.headers.authorization)
-    // const currentUser = await User.findByToken(req.headers.authorization);
-    const currentUser = await User.findOne({ where: {id: 1}})
-    const cart = await Cart.findOrCreate({ where: { id: currentUser.id } });
+    const currentUser = await User.findByToken(req.headers.authorization);
+
+    const [cart] = await Cart.findOrCreate({
+      where: { userId: currentUser.id },
+      defaults: {
+        cartItems: [],
+        totalQuantity: 0,
+        totalPrice: 0
+      }
+    });
     const cartItems = await CartItem.findAll({
       where: {
         quantity: {
           [Op.gt]: 0
-        }
+        },
+        cartId: cart.id
       },
       include: {
         model: Product
       }
     });
+    console.log('curruser cartitems:', cartItems)
     res.json(cartItems);
   } catch (error) {
     next(error);
@@ -64,16 +86,24 @@ router.delete("/:cartItemId", async (req, res, next) => {
 // api/cart/number
 router.patch("/", async (req, res, next) => {
   try {
+    console.log('first line============')
       const { quantity, productId, numToChangeBy } = req.body;
-      // const currentUser = await User.findByToken(req.headers.authorization);
-      const currentUser = await User.findOne({ where: {id: 1}})
-      const [cart] = await Cart.findOrCreate({ where: { userId: currentUser.id } });
+      //changed starting from here
+      const currentUser = await User.findByToken(req.headers.authorization);
+      const [cart] = await Cart.findOrCreate({
+        where: { userId: currentUser.id },
+        defaults: {
+          cartItems: [],
+          totalQuantity: 0,
+          totalPrice: 0
+        }
+      });
+
       await cart.save()
       const [cartItem] = await CartItem.findOrCreate({
         where: { productId, cartId: cart.id },
         defaults: {quantity: 0},
       });
-      console.log('cartItem:', cartItem)
       if (isNumber(quantity)) {
         cartItem.quantity = quantity
         if (cartItem.quantity === 0) {
@@ -86,9 +116,6 @@ router.patch("/", async (req, res, next) => {
       }
 
     await cartItem.save()
-    cart.cartItems.push(cartItem)
-    console.log('cart items in cart:', cart.cartItems)
-    await cart.save()
     res.status(201).json(cartItem);
   } catch (error) {
     next(error);
