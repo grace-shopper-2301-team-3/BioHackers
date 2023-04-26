@@ -4,6 +4,7 @@ import { useParams, Link } from "react-router-dom";
 import { getSingleCategory, selectSingleCategory } from "./singleCategorySlice";
 import { getAllCategories, selectCategory } from "./allCategoriesSlice";
 import { getAllProducts, selectProduct } from "../products/allProductsSlice";
+import { getSingleProduct } from "../products/singleProductSlice";
 import {
   MainContainer,
   HeroButton,
@@ -20,39 +21,45 @@ import {
   CardContent,
   Avatar,
 } from "@mui/material";
-import FormatQuoteIcon from "@mui/icons-material/FormatQuote";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
-import AccountCircleRoundedIcon from "@mui/icons-material/AccountCircleRounded";
-import LocalOfferRoundedIcon from "@mui/icons-material/LocalOfferRounded";
-import TravelExploreRoundedIcon from "@mui/icons-material/TravelExploreRounded";
-import { addToCartAsync } from "../cart/cartSlice";
+import { changeQuantityAsync } from "../cart/cartSlice";
 
 const SingleCategory = () => {
-
   const dispatch = useDispatch();
   const { categoryId } = useParams();
   const products = useSelector(selectProduct);
   const category = useSelector(selectSingleCategory);
 
   useEffect(() => {
-    dispatch(getSingleCategory(categoryId))
+    dispatch(getSingleCategory(categoryId));
     dispatch(getAllProducts());
-  }, [dispatch, categoryId])
+  }, [dispatch, categoryId]);
 
+  // const categories = useSelector(selectCategory);
+  const handleAddToCart = async (id) => {
+    try {
+      const action = await dispatch(getSingleProduct(id));
+      const product = action.payload;
+      // console.log({ product })
+      const addToCartAction = await dispatch(
+        changeQuantityAsync({ product, newQuantity: 1 })
+      );
+      const updatedCart = addToCartAction.payload;
+      // console.log("updatedCart", updatedCart);
+    } catch (err) {
+      console.log("error adding to cart in single product", err);
+    }
+  };
 
-
-  const categoryProducts = products.length > 0
-    ? products.filter((product) => product.categoryId == categoryId)
-    : [];
-
+  const categoryProducts =
+    products.length > 0
+      ? products.filter((product) => product.categoryId == categoryId)
+      : [];
 
   return (
     <div key={categoryId}>
       <Container sx={{ position: "relative", overflow: "hidden" }}>
-        <img
-          src={category.imageUrl}
-          style={{ width: "100%" }}
-        />
+        <img src={category.imageUrl} style={{ width: "100%" }} />
         <Typography
           variant="h1"
           sx={{
@@ -75,7 +82,13 @@ const SingleCategory = () => {
         <Typography variant="h3" component="h1" align="left" gutterBottom>
           Products in this Category:
         </Typography>
-        <Container sx={{ display: "grid", gridTemplateColumns: "repeat(5, 2fr)", gap: "20px" }}>
+        <Container
+          sx={{
+            display: "grid",
+            gridTemplateColumns: "repeat(5, 2fr)",
+            gap: "20px",
+          }}
+        >
           {Array.isArray(categoryProducts) &&
             categoryProducts.map((product) => {
               return (
@@ -129,21 +142,21 @@ const SingleCategory = () => {
                             currency: "USD",
                           })}
                         </Typography>
-                        <SecondaryButton
-                          variant="contained"
-                          size="small"
-                          sx={{
-                            position: "absolute",
-                            top: "10px",
-                            right: "10px",
-                          }}
-                          onClick={() => handleAddToCart(product.id)}
-                        >
-                          <AddShoppingCartIcon />
-                        </SecondaryButton>
                       </CardContent>
                     </Card>
                   </Link>
+                  <SecondaryButton
+                    variant="contained"
+                    size="small"
+                    sx={{
+                      position: "absolute",
+                      top: "10px",
+                      right: "10px",
+                    }}
+                    onClick={() => handleAddToCart(product.id)}
+                  >
+                    <AddShoppingCartIcon />
+                  </SecondaryButton>
                 </Box>
               );
             })}
@@ -151,5 +164,5 @@ const SingleCategory = () => {
       </Container>
     </div>
   );
-}
+};
 export default SingleCategory;
