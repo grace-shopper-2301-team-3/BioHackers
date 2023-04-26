@@ -40,63 +40,68 @@ const Navbar = () => {
   return (
     <ThemeProvider theme={biohackersTheme}>
       <div style={{ display: showNavbar ? "flex" : "none" }}>
-      <AppBar sx={{ height: "60px", display: showNavbar ? "flex" : "none"}}>
-        <Toolbar>
-      <MainContainer >
-        <Container sx={{ display: "fixed", justifyContent: "space-between" }}>
-          <Box sx={{ display: "fixed", justifyContent: "space-between" }}>
-            <Link to="/home">
-              <NoBorderButton>BioHacker</NoBorderButton>
-            </Link>
-            <Link to="/products">
-              <NoBorderButton>Products</NoBorderButton>
-            </Link>
-            <Link to="/categories">
-              <NoBorderButton>Categories</NoBorderButton>
-            </Link>
-          </Box>
-          <Box>
-            {isLoggedIn ? (
-              <>
-                {/* The navbar will show these links after you log in */}
-                {isAdmin && (
-                  <Link to="/admin">
-                    <TertiaryButton>Admin</TertiaryButton>
+        <AppBar sx={{ height: "60px", display: showNavbar ? "flex" : "none" }}>
+          <Toolbar>
+            <MainContainer>
+              <Container
+                sx={{ display: "fixed", justifyContent: "space-between" }}
+              >
+                <Box sx={{ display: "fixed", justifyContent: "space-between" }}>
+                  <Link to="/home">
+                    <NoBorderButton>BioHacker</NoBorderButton>
                   </Link>
-                )}
-                <Link to={`/users/profile`}>
-                  <NoBorderButton>Account</NoBorderButton>
-                </Link>
-                <NoBorderButton type="button" onClick={logoutAndRedirectHome}>
-                  Logout
-                </NoBorderButton>
-                <Link
-                  to="/cart"
-                  element={<Cart name="cart" displayName="Cart" />}
-                >
-                  <NoBorderButton>Cart (#)</NoBorderButton>
-                </Link>
-              </>
-            ) : (
-              <>
-                {/* The navbar will show these links before you log in */}
+                  <Link to="/products">
+                    <NoBorderButton>Products</NoBorderButton>
+                  </Link>
+                  <Link to="/categories">
+                    <NoBorderButton>Categories</NoBorderButton>
+                  </Link>
+                </Box>
+                <Box>
+                  {isLoggedIn ? (
+                    <>
+                      {/* The navbar will show these links after you log in */}
+                      {isAdmin && (
+                        <Link to="/admin">
+                          <TertiaryButton>Admin</TertiaryButton>
+                        </Link>
+                      )}
+                      <Link to={`/users/profile`}>
+                        <NoBorderButton>Account</NoBorderButton>
+                      </Link>
+                      <NoBorderButton
+                        type="button"
+                        onClick={logoutAndRedirectHome}
+                      >
+                        Logout
+                      </NoBorderButton>
+                      <Link
+                        to="/cart"
+                        element={<Cart name="cart" displayName="Cart" />}
+                      >
+                        <NoBorderButton>Cart (#)</NoBorderButton>
+                      </Link>
+                    </>
+                  ) : (
+                    <>
+                      {/* The navbar will show these links before you log in */}
 
-                <Link to="/login">
-                  <NoBorderButton>Login</NoBorderButton>
-                </Link>
-                <Link
-                  to="/cart"
-                  element={<Cart name="cart" displayName="Cart" />}
-                >
-                  <NoBorderButton>Cart (#)</NoBorderButton>
-                </Link>
-              </>
-            )}
-          </Box>
-        </Container>
-      </MainContainer>
-      </Toolbar>
-      </AppBar>
+                      <Link to="/login">
+                        <NoBorderButton>Login</NoBorderButton>
+                      </Link>
+                      <Link
+                        to="/cart"
+                        element={<Cart name="cart" displayName="Cart" />}
+                      >
+                        <NoBorderButton>Cart (#)</NoBorderButton>
+                      </Link>
+                    </>
+                  )}
+                </Box>
+              </Container>
+            </MainContainer>
+          </Toolbar>
+        </AppBar>
       </div>
     </ThemeProvider>
   );

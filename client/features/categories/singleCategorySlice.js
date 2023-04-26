@@ -1,16 +1,18 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import axios from 'axios';
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import axios from "axios";
 
-
-export const getSingleCategory = createAsyncThunk('/singleCategory', async (id) => {
-  try {
-    console.log("AXIOS WORKING IN SINGLE Category")
-    const { data } = await axios.get(`/api/categories/${id}`);
-    return data;
-  } catch (error) {
-    return error.message;
+export const getSingleCategory = createAsyncThunk(
+  "/singleCategory",
+  async (id) => {
+    try {
+      console.log("AXIOS WORKING IN SINGLE Category");
+      const { data } = await axios.get(`/api/categories/${id}`);
+      return data;
+    } catch (error) {
+      return error.message;
+    }
   }
-});
+);
 
 export const addCategoryAsync = createAsyncThunk(
   "singleCategory",
@@ -20,7 +22,7 @@ export const addCategoryAsync = createAsyncThunk(
         name,
         imageUrl,
         categoryId,
-        description
+        description,
       });
       return data;
     } catch (err) {
@@ -31,24 +33,24 @@ export const addCategoryAsync = createAsyncThunk(
 );
 
 export const singleCategorySlice = createSlice({
-    name: "singleCategory",
-    initialState: {
-        Category: [],
-        error: null,
-        status: 'idle'
-    },
-    reducers: {},
-    extraReducers: (builder) => {
-		builder
-			.addCase(getSingleCategory.fulfilled, (state, action) => {
-				return action.payload;
-			})
-      .addCase(getSingleCategory.rejected, (state, action) => {
-                state.status = 'failed';
-                state.error = action.error.message;
+  name: "singleCategory",
+  initialState: {
+    Category: [],
+    error: null,
+    status: "idle",
+  },
+  reducers: {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(getSingleCategory.fulfilled, (state, action) => {
+        return action.payload;
       })
-    }
-  });
+      .addCase(getSingleCategory.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message;
+      });
+  },
+});
 export const selectSingleCategory = (state) => state.singleCategory;
 
 export default singleCategorySlice.reducer;

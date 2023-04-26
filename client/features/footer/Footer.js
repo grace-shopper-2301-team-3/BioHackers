@@ -62,18 +62,18 @@ const Footer = () => {
                     maxWidth: "350px",
                     margin: "auto",
                     border: "2px solid",
-                    "&:hover": { 
+                    "&:hover": {
                       borderImage:
-                      "linear-gradient(125deg, #7F00FF, #00bfff, #ff00ff) 1",
-                    boxShadow: "0 0px 20px #7F00FF"},
+                        "linear-gradient(125deg, #7F00FF, #00bfff, #ff00ff) 1",
+                      boxShadow: "0 0px 20px #7F00FF",
+                    },
                     borderRadius: 0,
                   }}
                 />
               </Box>
             </Grid>
             <Grid item xs={12} md={2}>
-
-            <Box
+              <Box
                 sx={{
                   display: "flex",
                   flexDirection: "column",
@@ -81,19 +81,20 @@ const Footer = () => {
                   px: 2,
                   py: 1,
                   m: 1,
-                  textAlign: "center"
+                  textAlign: "center",
                 }}
               >
                 <Link to="/home">
-                <NoBorderButton><Typography variant="subtitle1">BioHackers</Typography></NoBorderButton>
-              </Link>
-              <Typography variant="caption">The BioHacker Hive</Typography>
-              <Typography variant="caption">88 Neural Nexus Road</Typography>
-              <Typography variant="caption">Cyber City, Neo Terra 4040</Typography>
+                  <NoBorderButton>
+                    <Typography variant="subtitle1">BioHackers</Typography>
+                  </NoBorderButton>
+                </Link>
+                <Typography variant="caption">The BioHacker Hive</Typography>
+                <Typography variant="caption">88 Neural Nexus Road</Typography>
+                <Typography variant="caption">
+                  Cyber City, Neo Terra 4040
+                </Typography>
               </Box>
-              
-              
-              
             </Grid>
           </Grid>
         </Container>

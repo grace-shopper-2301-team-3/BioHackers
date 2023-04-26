@@ -19,8 +19,6 @@ const AccountForm = ({ handleNext }) => {
     setAccountOption(event.target.value);
   };
 
-  //   add cart
-
   return (
     <ThemeProvider theme={biohackersTheme}>
       <Box sx={{ mx: 14, p: 4 }}>
