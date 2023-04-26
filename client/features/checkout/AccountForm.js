@@ -9,7 +9,7 @@ import {
   FormControlLabel,
   Radio,
   RadioGroup,
-  Typography
+  Typography,
 } from "@mui/material";
 
 const AccountForm = ({ handleNext }) => {
@@ -19,7 +19,7 @@ const AccountForm = ({ handleNext }) => {
     setAccountOption(event.target.value);
   };
 
-//   add cart
+  //   add cart
 
   return (
     <ThemeProvider theme={biohackersTheme}>
@@ -27,7 +27,11 @@ const AccountForm = ({ handleNext }) => {
         <Typography variant="h4" sx={{ mb: 2 }}>
           Account
         </Typography>
-        <RadioGroup value={accountOption} onChange={handleAccountOptionChange} sx={{ flexDirection: "row"}}>
+        <RadioGroup
+          value={accountOption}
+          onChange={handleAccountOptionChange}
+          sx={{ flexDirection: "row" }}
+        >
           <FormControlLabel
             value="signin"
             control={<Radio />}
@@ -48,7 +52,12 @@ const AccountForm = ({ handleNext }) => {
               <StyledTextField label="Email" variant="outlined" required />
             </FormControl>
             <FormControl fullWidth sx={{ mb: 2 }}>
-              <StyledTextField label="Password" variant="outlined" type="password" required />
+              <StyledTextField
+                label="Password"
+                variant="outlined"
+                type="password"
+                required
+              />
             </FormControl>
             <Button variant="contained" onClick={handleNext}>
               Sign In
@@ -61,13 +70,18 @@ const AccountForm = ({ handleNext }) => {
               Create an Account
             </Typography>
             <FormControl fullWidth sx={{ mb: 2 }}>
-              <StyledTextField label="Name" variant="outlined" required/>
+              <StyledTextField label="Name" variant="outlined" required />
             </FormControl>
             <FormControl fullWidth sx={{ mb: 2 }}>
-              <StyledTextField label="Email" variant="outlined" required/>
+              <StyledTextField label="Email" variant="outlined" required />
             </FormControl>
             <FormControl fullWidth sx={{ mb: 2 }}>
-              <StyledTextField label="Password" variant="outlined" type="password" required/>
+              <StyledTextField
+                label="Password"
+                variant="outlined"
+                type="password"
+                required
+              />
             </FormControl>
             <Button variant="contained" onClick={handleNext}>
               Create Account
