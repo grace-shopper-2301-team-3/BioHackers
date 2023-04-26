@@ -6,6 +6,11 @@ import axios from "axios";
 */
 const TOKEN = "token";
 
+// const initialToken=window.localStorage.getItem(TOKEN)
+// if (initialToken) {
+//   axios.defaults.headers.authorization= initialToken
+// }
+
 /*
   THUNKS
 */
@@ -13,6 +18,7 @@ export const me = createAsyncThunk("auth/me", async () => {
   const token = window.localStorage.getItem(TOKEN);
   try {
     if (token) {
+      axios.defaults.headers.authorization= token
       const res = await axios.get("/auth/me", {
         headers: {
           authorization: token,
