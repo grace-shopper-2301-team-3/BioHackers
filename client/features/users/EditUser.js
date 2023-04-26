@@ -34,7 +34,7 @@ const EditUser = () => {
 
   return (
     <ThemeProvider theme={biohackersTheme}>
-      <MainContainer>
+      <MainContainer sx={{ marginTop: 5 }}>
         <UserHeaderBar />
         <Container>
           <Typography variant="h2">Edit Information</Typography>

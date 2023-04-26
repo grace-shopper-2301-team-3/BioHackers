@@ -29,6 +29,7 @@ const UserHeaderBar = () => {
       <MainContainer>
         <Container
           sx={{
+            my: 10,
             display: "flex",
             gap: "10px",
             alignContent: "space-evenly",
