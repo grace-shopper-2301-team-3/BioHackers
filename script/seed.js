@@ -92,7 +92,7 @@ async function seed() {
       userId: 5
     }),
   ])
-  
+
   const categories = await Promise.all([
     Category.create({
       name: "Neural Augments",
@@ -178,7 +178,7 @@ async function seed() {
       productName: "Bionic Exoskeleton",
       productPrice: 200000,
       imageUrl:
-        "https://www.massdevice.com/wp-content/uploads/2022/06/Ekso-Bionics-EksoNR-exoskeleton.jpg",
+        "https://www.shutterstock.com/shutterstock/videos/1059528692/thumb/5.jpg?ip=x480",
       description:
         "This wearable device enhances the mobility of users and allows them to reach Olympic levels of athleticism. Allows users to achieve superhuman strength by augmenting their muscle fibers with synthetic fibers or nano-materials. Powered by advanced motors and sensors in combination with the latest neural network technology. Can also restore function to those who have lost mobility due to degenerative disease or traumatic injury.",
       categoryId: 2,
@@ -218,7 +218,7 @@ async function seed() {
     Product.create({
       productName: "MorpheuX",
       productPrice: 3000,
-      imageUrl: "https://f4.bcbits.com/img/a1343155371_10.jpg",
+      imageUrl: "https://media.istockphoto.com/id/989941230/vector/concept-of-health-care-technology-graphic-of-realistic-transparent-pill-with-abstract.jpg?s=612x612&w=0&k=20&c=3Pe9xihVbb55zXxUdG7YgbdFJ928bRzQuVFIFXbyr8s=",
       description:
         "These supplements improve the quality and reduce the duration of sleep, so you can spend more hours awake and improve overall health and well-being.",
       categoryId: 3,
@@ -248,7 +248,7 @@ async function seed() {
       productName: "Synergize",
       productPrice: 3000,
       imageUrl:
-        "https://pharmaphorum.com/wp-content/uploads/2016/08/Science-DNA-technology.jpg",
+        "https://ychef.files.bbci.co.uk/976x549/p01n87fj.jpg",
       description:
         "These supplements improve mood, reduce stress and anxiety, and help alleviate symptoms of mental health disorders such as depression and anxiety throught synapctic actiavtion of key neurotransmitters, such as serotonin and dopamine.",
       categoryId: 3,

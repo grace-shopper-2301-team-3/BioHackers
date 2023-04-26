@@ -14,7 +14,7 @@ const Product = db.define('product', {
   imageUrl: {
     allowNull: false,
     type: Sequelize.TEXT,
-    defaultValue: "default"
+    defaultValue: "https://as2.ftcdn.net/v2/jpg/02/24/99/75/1000_F_224997504_aIS8SXE5a3xPXpmocraop3sDTjpg8lxY.jpg"
   },
   description: {
     type: Sequelize.TEXT

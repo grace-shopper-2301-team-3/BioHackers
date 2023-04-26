@@ -460,6 +460,132 @@ const AdminProducts = () => {
                         </DialogActions>
                       </Dialog>
 
+                      {/* Add Dialog */}
+                      
+                      <Dialog
+                        open={addOpen}
+                        onClose={() => setAddOpen(false)}
+                        aria-labelledby="form-dialog-title"
+                        BackdropProps={backdropProps}
+                      >
+                        <DialogTitle id="form-dialog-title">
+                          Add Product
+                        </DialogTitle>
+                        <DialogContent>
+                          <TextField
+                            required
+                            fullWidth
+                            autoFocus
+                            margin="dense"
+                            id="productName"
+                            label="Product Name"
+                            type="text"
+                            value={productToAdd && productToAdd.productName}
+                            onChange={(e) =>
+                              setProductToAdd({
+                                ...productToAdd,
+                                productName: e.target.value,
+                              })
+                            }
+                          />
+                          <TextField
+                            required
+                            fullWidth
+                            margin="dense"
+                            id="quantity"
+                            label="Quantity"
+                            type="number"
+                            value={productToAdd && productToAdd.quantity}
+                            onChange={(e) =>
+                              setProductToAdd({
+                                ...productToAdd,
+                                quantity: e.target.value,
+                              })
+                            }
+                          />
+                          <TextField
+                            required
+                            fullWidth
+                            margin="dense"
+                            id="price"
+                            label="Price"
+                            type="number"
+                            value={productToAdd && productToAdd.productPrice}
+                            onChange={(e) =>
+                              setProductToAdd({
+                                ...productToAdd,
+                                productPrice: e.target.value,
+                              })
+                            }
+                          />
+                          <TextField
+                            required
+                            fullWidth
+                            margin="dense"
+                            id="imageUrl"
+                            label="https://as2.ftcdn.net/v2/jpg/02/24/99/75/1000_F_224997504_aIS8SXE5a3xPXpmocraop3sDTjpg8lxY.jpg"
+                            type="url"
+                            value={productToAdd && productToAdd.imageUrl}
+                            onChange={(e) =>
+                              setProductToAdd({
+                                ...productToAdd,
+                                imageUrl: e.target.value,
+                              })
+                            }
+                          />
+                          <FormControl component="fieldset" sx={{ my: 2 }}>
+                            <FormLabel
+                              component="legend"
+                              sx={{ color: "primary.main" }}
+                            >
+                              Product Category:
+                            </FormLabel>
+                            <RadioGroup
+                              aria-label="category"
+                              name="category"
+                              value={productToAdd && productToAdd.categoryId}
+                              onChange={(e) =>
+                                setProductToAdd({
+                                  ...productToAdd,
+                                  categoryId: e.target.value,
+                                })
+                              }
+                            >
+                              {Array.isArray(categories) &&
+                                categories.map((category) => (
+                                  <FormControlLabel
+                                    key={category.id}
+                                    value={category.id}
+                                    control={<Radio />}
+                                    label={category.name}
+                                    sx={{ mx: 2 }}
+                                  />
+                                ))}
+                            </RadioGroup>
+                          </FormControl>
+                        </DialogContent>
+                        <DialogActions>
+                          <Button
+                            variant="outlined"
+                            size="small"
+                            onClick={() => {
+                              setAddOpen(false);
+                              setProductToAdd(null);
+                            }}
+                          >
+                            Cancel
+                          </Button>
+                          <Button
+                            variant="contained"
+                            size="small"
+                            onClick={() => handleAddProduct()}
+                            autoFocus
+                          >
+                            Save Changes
+                          </Button>
+                        </DialogActions>
+                      </Dialog>
+
                       {/* Saving Success Dialog */}
 
                       <Dialog
