@@ -7,21 +7,19 @@ import {
   Radio,
   Typography,
   ThemeProvider,
-  Stepper,
-  Step,
-  StepButton,
-  Button,
   Box,
 } from "@mui/material";
 import { MainContainer, NoBorderButton } from "../style/StyleGuide";
-import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
-import { useDispatch, useSelector } from 'react-redux';
-import { createPaymentIntent } from '../stripe/stripeSlice';
-import { Elements } from '@stripe/react-stripe-js';
-import { loadStripe } from '@stripe/stripe-js';
-import '../../../public/style.css'
+import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
+import { useDispatch, useSelector } from "react-redux";
+import { createPaymentIntent } from "../stripe/stripeSlice";
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
+import "../../../public/style.css";
 
-const stripePromise = loadStripe('pk_test_51N0lUGBjXVRQFHi21S4Hf6GuMOaxIlvmK4o87X5CWTnov8gziEQ969azIkSsqaTwJt5blCs5C7dJg0Mm70FZmqMo00j31Z2ZL9');
+const stripePromise = loadStripe(
+  "pk_test_51N0lUGBjXVRQFHi21S4Hf6GuMOaxIlvmK4o87X5CWTnov8gziEQ969azIkSsqaTwJt5blCs5C7dJg0Mm70FZmqMo00j31Z2ZL9"
+);
 
 const PaymentForm = () => {
   const dispatch = useDispatch();
@@ -42,11 +40,14 @@ const PaymentForm = () => {
 
     const cardElement = elements.getElement(CardElement);
 
-    const { error, paymentIntent } = await stripe.confirmCardPayment(paymentIntent.client_secret, {
-      payment_method: {
-        card: cardElement,
-      },
-    });
+    const { error, paymentIntent } = await stripe.confirmCardPayment(
+      paymentIntent.client_secret,
+      {
+        payment_method: {
+          card: cardElement,
+        },
+      }
+    );
 
     setIsLoading(false);
 
@@ -82,7 +83,12 @@ const PaymentForm = () => {
                 mr: 4,
               }}
             >
-              <RadioGroup aria-label="payment-method" name="payment-method" row sx={{ mb: 2 }}>
+              <RadioGroup
+                aria-label="payment-method"
+                name="payment-method"
+                row
+                sx={{ mb: 2 }}
+              >
                 <FormControlLabel
                   value="credit-card"
                   control={<Radio />}
@@ -99,26 +105,25 @@ const PaymentForm = () => {
                           color: "#00bfff",
                           fontFamily: "Orbitron",
                           "::placeholder": {
-                            color: "#00bfff"
-                          }
+                            color: "#00bfff",
+                          },
                         },
                         invalid: {
-                          color: "#FFC7EE"
-                        }
-                      }
+                          color: "#FFC7EE",
+                        },
+                      },
                     }}
                   />
-
                 </Box>
               </FormControl>
             </Box>
           </Box>
-          <NoBorderButton type="submit">
-            Pay
-          </NoBorderButton>
+          <NoBorderButton type="submit">Pay</NoBorderButton>
         </FormControl>
         {error && <div>{error}</div>}
-        <NoBorderButton onClick={handleCreatePaymentIntent}>Create Payment Intent</NoBorderButton>
+        <NoBorderButton onClick={handleCreatePaymentIntent}>
+          Create Payment Intent
+        </NoBorderButton>
       </Box>
     </ThemeProvider>
   );

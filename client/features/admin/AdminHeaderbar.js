@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { MainContainer } from "../style/StyleGuide";
 import biohackersTheme from "../../app/theme";
 import {
@@ -17,7 +17,6 @@ import ShoppingCartRoundedIcon from "@mui/icons-material/ShoppingCartRounded";
 import ShoppingBagRoundedIcon from "@mui/icons-material/ShoppingBagRounded";
 import PaymentRoundedIcon from "@mui/icons-material/PaymentRounded";
 import DiscountRoundedIcon from "@mui/icons-material/DiscountRounded";
-
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../../app/store";
 import { fetchSingleUser, selectSingleUser } from "../users/userSlice";

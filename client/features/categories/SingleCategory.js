@@ -14,12 +14,10 @@ import {
   ThemeProvider,
   Typography,
   Container,
-  ContainerMedia,
   Box,
   Card,
   CardMedia,
   CardContent,
-  Avatar,
 } from "@mui/material";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import { changeQuantityAsync } from "../cart/cartSlice";
@@ -35,17 +33,14 @@ const SingleCategory = () => {
     dispatch(getAllProducts());
   }, [dispatch, categoryId]);
 
-  // const categories = useSelector(selectCategory);
   const handleAddToCart = async (id) => {
     try {
       const action = await dispatch(getSingleProduct(id));
       const product = action.payload;
-      // console.log({ product })
       const addToCartAction = await dispatch(
         changeQuantityAsync({ product, newQuantity: 1 })
       );
       const updatedCart = addToCartAction.payload;
-      // console.log("updatedCart", updatedCart);
     } catch (err) {
       console.log("error adding to cart in single product", err);
     }

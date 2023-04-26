@@ -1,20 +1,20 @@
-const Sequelize = require('sequelize');
-const db = require('../db');
+const Sequelize = require("sequelize");
+const db = require("../db");
 
-const Category = db.define('category', {
+const Category = db.define("category", {
   name: {
     type: Sequelize.STRING,
     unique: true,
-    allowNull: false
+    allowNull: false,
   },
   imageUrl: {
     allowNull: false,
     type: Sequelize.STRING,
-    defaultValue: "default"
+    defaultValue: "default",
   },
   description: {
-    type: Sequelize.TEXT
-  }
+    type: Sequelize.TEXT,
+  },
 });
 
 module.exports = Category;
