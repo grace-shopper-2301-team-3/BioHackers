@@ -7,7 +7,7 @@ const ShippingForm = () => {
   return (
     <ThemeProvider theme={biohackersTheme}>
       <Box sx={{ mx: 14, p: 4 }}>
-      <Typography variant="h4" sx={{ mb: 2 }}>
+        <Typography variant="h4" sx={{ mb: 2 }}>
           Shipping Information
         </Typography>
         <StyledTextField

@@ -3,8 +3,10 @@ import { Container, Box, Typography } from "@mui/material";
 
 const OrderReview = ({ orderDetails, handleNext, handleBack }) => {
   const { accountInfo } = orderDetails;
-
+  console.log( accountInfo)
+  
   return (
+
     <Container sx={{ display: "flex", alignItems: "center", justifyContent: "space-between", width: "900px" }}>
       <Box sx={{ display: "flex", flexDirection: "column", width: "50%"}}>
         <Typography>Order Details</Typography>

@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { getSingleCategory, selectSingleCategory } from "./singleCategorySlice";
 import { getAllCategories, selectCategory } from "./allCategoriesSlice";
@@ -18,15 +18,23 @@ import {
   Card,
   CardMedia,
   CardContent,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  Button,
+  TextField,
 } from "@mui/material";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import { changeQuantityAsync } from "../cart/cartSlice";
+
 
 const SingleCategory = () => {
   const dispatch = useDispatch();
   const { categoryId } = useParams();
   const products = useSelector(selectProduct);
   const category = useSelector(selectSingleCategory);
+  const { me } = useSelector((state) => state.auth);
+  const [showSignInDialog, setShowSignInDialog] = useState(false);
 
   useEffect(() => {
     dispatch(getSingleCategory(categoryId));
@@ -43,6 +51,14 @@ const SingleCategory = () => {
       const updatedCart = addToCartAction.payload;
     } catch (err) {
       console.log("error adding to cart in single product", err);
+    }
+  };
+
+  const addToCart = (productId) => {
+    if (me.id) {
+      handleAddToCart(productId);
+    } else {
+      setShowSignInDialog(true);
     }
   };
 
@@ -148,7 +164,7 @@ const SingleCategory = () => {
                       top: "10px",
                       right: "10px",
                     }}
-                    onClick={() => handleAddToCart(product.id)}
+                    onClick={() => addToCart(product.id)}
                   >
                     <AddShoppingCartIcon />
                   </SecondaryButton>
@@ -156,6 +172,40 @@ const SingleCategory = () => {
               );
             })}
         </Container>
+        {/* Dialog Management */}
+        <Dialog
+          open={showSignInDialog}
+          onClose={() => setShowSignInDialog(false)}
+        >
+          <DialogTitle sx={{ textAlign: "center" }}>
+            Please sign in to add to cart
+          </DialogTitle>
+          <DialogContent sx={{ textAlign: "center" }}>
+            <Link to="/login">
+              <Button
+                variant="contained"
+                size="medium"
+                type="submit"
+                sx={{ backgroundColor: "#AC6CFF" }}
+              >
+                Log In
+              </Button>
+            </Link>
+            <Typography variant="overline" sx={{ my: 4, display: "block" }}>
+              - or -
+            </Typography>
+            <Link to="/signup">
+              <Button
+                variant="contained"
+                size="medium"
+                type="submit"
+                sx={{ backgroundColor: "#AC6CFF" }}
+              >
+                Create An Account
+              </Button>
+            </Link>
+          </DialogContent>
+        </Dialog>
       </Container>
     </div>
   );

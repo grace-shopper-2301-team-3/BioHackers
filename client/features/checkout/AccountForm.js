@@ -1,6 +1,6 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import biohackersTheme from "../../app/theme";
-import { StyledTextField } from "../style/StyleGuide";
 import {
   ThemeProvider,
   Box,
@@ -14,80 +14,36 @@ import {
 
 const AccountForm = ({ handleNext }) => {
   const [accountOption, setAccountOption] = useState("guest");
+  const { me } = useSelector((state) => state.auth);
+  const id = useSelector((state) => state.auth.me.id);
+  const { firstName, lastName, email, isAdmin, username, password } =
+    useSelector((state) => state.auth.me);
 
   const handleAccountOptionChange = (event) => {
     setAccountOption(event.target.value);
   };
 
-  //   add cart
-
   return (
     <ThemeProvider theme={biohackersTheme}>
-      <Box sx={{ mx: 14, p: 4 }}>
-        <Typography variant="h4" sx={{ mb: 2 }}>
+      <Box sx={{ mx: 'auto', textAlign: 'center' }}>
+        <Typography variant="h4" sx={{ mb: 1 }}>
           Account
         </Typography>
-        <RadioGroup
-          value={accountOption}
-          onChange={handleAccountOptionChange}
-          sx={{ flexDirection: "row" }}
-        >
-          <FormControlLabel
-            value="signin"
-            control={<Radio />}
-            label="Sign In"
-          />
-          <FormControlLabel
-            value="signup"
-            control={<Radio />}
-            label="Create an Account"
-          />
-        </RadioGroup>
-        {accountOption === "signin" && (
-          <Box sx={{ mt: 2 }}>
+          <Box sx={{ mt: 1, display: 'inline-block', textAlign: 'left' }}>
             <Typography variant="h6" sx={{ mb: 1 }}>
-              Sign In
+              Welcome <b style={{ color: "#ff00ff" }}>{username}</b>
             </Typography>
-            <FormControl fullWidth sx={{ mb: 2 }}>
-              <StyledTextField label="Email" variant="outlined" required />
-            </FormControl>
-            <FormControl fullWidth sx={{ mb: 2 }}>
-              <StyledTextField
-                label="Password"
-                variant="outlined"
-                type="password"
-                required
-              />
-            </FormControl>
-            <Button variant="contained" onClick={handleNext}>
-              Sign In
-            </Button>
-          </Box>
-        )}
-        {accountOption === "signup" && (
-          <Box sx={{ mt: 2 }}>
-            <Typography variant="h6" sx={{ mb: 1 }}>
-              Create an Account
+            <Typography>Make sure Your Information is Correct</Typography>
+            <Typography>
+              First Name: <b style={{color: '#ff00ff'}}>{firstName}</b>
             </Typography>
-            <FormControl fullWidth sx={{ mb: 2 }}>
-              <StyledTextField label="Name" variant="outlined" required />
-            </FormControl>
-            <FormControl fullWidth sx={{ mb: 2 }}>
-              <StyledTextField label="Email" variant="outlined" required />
-            </FormControl>
-            <FormControl fullWidth sx={{ mb: 2 }}>
-              <StyledTextField
-                label="Password"
-                variant="outlined"
-                type="password"
-                required
-              />
-            </FormControl>
-            <Button variant="contained" onClick={handleNext}>
-              Create Account
-            </Button>
+            <Typography>
+              Last Name: <b style={{color: '#ff00ff'}}>{lastName}</b>
+            </Typography>
+            <Typography>
+              Email: <b style={{color: '#ff00ff'}}>{email}</b>
+            </Typography>
           </Box>
-        )}
       </Box>
     </ThemeProvider>
   );

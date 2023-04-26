@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import { changeQuantityAsync, fetchCart } from "../cart/cartSlice";
@@ -15,6 +15,11 @@ import {
   Box,
   Typography,
   Grid,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  Button,
+  TextField,
 } from "@mui/material";
 import biohackersTheme from "../../app/theme";
 import { styled } from "@mui/material/styles";
@@ -30,10 +35,10 @@ const SingleProduct = () => {
   const { id } = useParams();
   // console.log(id)
   const categories = useSelector(selectCategory);
-
   const product = useSelector(selectSingleProduct);
   const categoryId = product && product.categoryId;
-  console.log("categoryId", categoryId);
+  const { me } = useSelector((state) => state.auth);
+  const [showSignInDialog, setShowSignInDialog] = useState(false);
 
   useEffect(() => {
     dispatch(getSingleProduct(id));
@@ -50,6 +55,14 @@ const SingleProduct = () => {
       );
     } catch (err) {
       console.log("error adding to cart in single product", err);
+    }
+  };
+
+  const addToCart = (productId) => {
+    if (me.id) {
+      handleAddToCart(productId);
+    } else {
+      setShowSignInDialog(true);
     }
   };
 
@@ -83,7 +96,7 @@ const SingleProduct = () => {
                 </Typography>
               </Box>
               <Box mt={2}>
-                <NoBorderButton onClick={handleAddToCart}>
+                <NoBorderButton onClick={() => addToCart(product.id)}>
                   Add to cart
                 </NoBorderButton>
               </Box>
@@ -91,6 +104,40 @@ const SingleProduct = () => {
           </Grid>
         </Box>
       </Container>
+      {/* Dialog Management */}
+      <Dialog
+          open={showSignInDialog}
+          onClose={() => setShowSignInDialog(false)}
+        >
+          <DialogTitle sx={{ textAlign: "center" }}>
+            Please sign in to add to cart
+          </DialogTitle>
+          <DialogContent sx={{ textAlign: "center" }}>
+            <Link to="/login">
+              <Button
+                variant="contained"
+                size="medium"
+                type="submit"
+                sx={{ backgroundColor: "#AC6CFF" }}
+              >
+                Log In
+              </Button>
+            </Link>
+            <Typography variant="overline" sx={{ my: 4, display: "block" }}>
+              - or -
+            </Typography>
+            <Link to="/signup">
+              <Button
+                variant="contained"
+                size="medium"
+                type="submit"
+                sx={{ backgroundColor: "#AC6CFF" }}
+              >
+                Create An Account
+              </Button>
+            </Link>
+          </DialogContent>
+        </Dialog>
     </ThemeProvider>
   );
 };
