@@ -5,6 +5,11 @@ const db = require('../db')
 //set up associations - cart has many cart items.
 
 const Cart = db.define('cart', {
+  id: {
+    type: Sequelize.INTEGER,
+    autoIncrement: true,
+    primaryKey: true,
+  },
   cartItems: {
     type: Sequelize.ARRAY(Sequelize.JSON),
     allowNull: false,
@@ -18,7 +23,7 @@ const Cart = db.define('cart', {
     type: Sequelize.INTEGER,
     allowNull: false,
   },
-  fulfilled: {
+  isFulfilled: {
     type: Sequelize.BOOLEAN,
     defaultValue: false,
   }

@@ -9,6 +9,8 @@ import {
   TableCell,
   TableHead,
   TableRow,
+  TablePagination,
+  TableFooter,
   Dialog,
   DialogActions,
   DialogContent,
@@ -46,6 +48,18 @@ const AdminUsers = () => {
   const [userToDelete, setUserToDelete] = useState(null);
   const [userToEdit, setUserToEdit] = useState(null);
   const [userToAdd, setUserToAdd] = useState("");
+  const [saveSuccessOpen, setSaveSuccessOpen] = useState(false);
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
+
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
+  };
 
   const handleDeleteClick = (user) => {
     setUserToDelete(user);
@@ -62,12 +76,17 @@ const AdminUsers = () => {
     setAddOpen(true);
   };
 
+  const handleSaveSuccessClose = () => {
+    setSaveSuccessOpen(false);
+  };
+
   const handleDeleteUser = async () => {
     try {
       await dispatch(deleteUser(userToDelete.id));
       setDeleteOpen(false);
       setUserToDelete(null);
       await dispatch(fetchAllUsers());
+      setSaveSuccessOpen(true);
     } catch (err) {
       console.log("error removing user", err);
     }
@@ -79,6 +98,7 @@ const AdminUsers = () => {
       setEditOpen(false);
       setUserToEdit({ ...userToEdit });
       await dispatch(fetchAllUsers());
+      setSaveSuccessOpen(true);
     } catch (err) {
       console.log("error updating user", err);
     }
@@ -90,6 +110,7 @@ const AdminUsers = () => {
       setAddOpen(false);
       setUserToAdd({ ...userToAdd });
       await dispatch(fetchAllUsers());
+      setSaveSuccessOpen(true);
     } catch (err) {
       console.log("error adding user", err);
     }
@@ -214,7 +235,9 @@ const AdminUsers = () => {
             </TableHead>
             <TableBody>
               {Array.isArray(users) &&
-                users.map((user) => (
+                users
+                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                .map((user) => (
                   <TableRow
                     key={user.id}
                     sx={{ borderBottomColor: "1px solid primary.main" }}
@@ -551,10 +574,47 @@ const AdminUsers = () => {
                       </DialogActions>
                     </Dialog>
 
-                    {/* End of Dialogs */}
+                    {/* Saving Success Dialog */}
+
+                    <Dialog
+                      open={saveSuccessOpen}
+                      onClose={handleSaveSuccessClose}
+                      BackdropProps={backdropProps}
+                    >
+                      <DialogTitle>{"Save Successful"}</DialogTitle>
+                      <DialogContent>
+                        <DialogContentText>
+                          Your changes have been saved successfully.
+                        </DialogContentText>
+                      </DialogContent>
+                      <DialogActions>
+                        <Button
+                          onClick={handleSaveSuccessClose}
+                          color="primary"
+                          autoFocus
+                        >
+                          OK
+                        </Button>
+                      </DialogActions>
+                    </Dialog>
+
+
                   </TableRow>
                 ))}
             </TableBody>
+            <TableFooter>
+              <TableRow>
+                <TablePagination
+                  rowsPerPageOptions={[5, 10, 25]}
+                  component="td"
+                  count={users.length}
+                  rowsPerPage={rowsPerPage}
+                  page={page}
+                  onPageChange={handleChangePage}
+                  onRowsPerPageChange={handleChangeRowsPerPage}
+                />
+              </TableRow>
+            </TableFooter>
           </Table>
         </Container>
       </MainContainer>
