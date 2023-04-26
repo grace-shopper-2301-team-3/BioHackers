@@ -257,7 +257,7 @@ const AdminProducts = () => {
                         />
                       </TableCell>
                       <TableCell sx={{ textAlign: "center" }}>
-                        {product.quantity}
+                        {product.inventory}
                       </TableCell>
                       <TableCell sx={{ textAlign: "center" }}>
                         <img

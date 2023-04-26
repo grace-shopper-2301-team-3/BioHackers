@@ -92,6 +92,7 @@ async function seed() {
       userId: 5
     }),
   ])
+  
   const categories = await Promise.all([
     Category.create({
       name: "Neural Augments",
@@ -124,14 +125,12 @@ async function seed() {
     Product.create({
       productName: "Subject Mastery Implant",
       productPrice: 50000,
-
       imageUrl:
         "https://t4.ftcdn.net/jpg/05/46/00/47/360_F_546004711_mhXwat1NdyNvEhPDEigFH11YRPndCUvj.jpg",
       description:
         "This chip would augment your knowledge on the selected subject and turn you into an expert in the field of your choice.",
       categoryId: 1,
-      inventory: 11,
-      quantity: 10
+      inventory: 25,
     }),
     Product.create({
       productName: "Memory Enhancement Chip",
@@ -141,8 +140,7 @@ async function seed() {
       description:
         "This chip enhances your memory by allowing you to store and recall information more efficiently. The chip also provides real-time feedback on your memory usage and give personalized tips on how to improve.",
       categoryId: 1,
-      inventory: 11,
-      quantity: 10
+      inventory: 30,
     }),
     Product.create({
       productName: "Neural Mood Regulator",
@@ -153,7 +151,7 @@ async function seed() {
       description:
         "A neural mood regulator implant will help users regulate their emotions by stimulating or inhibiting specific parts of the brain. The implant can be controlled via our mobile app, allowing you to adjust your mood as needed.",
       categoryId: 1,
-      inventory: 11,
+      inventory: 15,
     }),
     Product.create({
       productName: "Telepathy Chip",
@@ -174,7 +172,7 @@ async function seed() {
       description:
         "A brain-computer interface (BCI) could allow people to control devices with their thoughts. This would be particularly useful for people with disabilities or those who are unable to use traditional input methods. For example, a BCI could allow someone to control a prosthetic limb or communicate with a computer using only their thoughts.",
       categoryId: 1,
-      inventory: 11,
+      inventory: 10,
     }),
     Product.create({
       productName: "Bionic Exoskeleton",
@@ -194,7 +192,7 @@ async function seed() {
       description:
         "The Bionic Lens gives users superhuman vision capabilities. The implant works by connecting to the optic nerve and processing visual information more efficiently, granting the ability to see in low-light conditions, zoom in on objects from far away, or even see in different spectrums, like ultraviolet or infrared.",
       categoryId: 2,
-      inventory: 11,
+      inventory: 8,
     }),
     Product.create({
       productName: "Regenerative Healing Implant",
@@ -215,7 +213,7 @@ async function seed() {
       description:
         "These supplements guarantee a slowing or complete reversal of the aging process by repairing or regenerating cells and tissues, extending lifespan, and improving overall health while getting to old age. Contains resveratrol, NAD+ precursors, and antioxidants like vitamin C and E.",
       categoryId: 3,
-      inventory: 11,
+      inventory: 20,
     }),
     Product.create({
       productName: "MorpheuX",
@@ -234,8 +232,7 @@ async function seed() {
       description:
         "A supplement designed to boost the immune system could help prevent illness and promote overall health. Contain vitamin C, zinc, and echinacea.",
       categoryId: 3,
-      inventory: 11,
-      quantity: 10
+      inventory: 15,
     }),
     Product.create({
       productName: "Limitless",
@@ -245,8 +242,7 @@ async function seed() {
       description:
         "These supplements improve long-term and short-term memory, recall speed, and learning abilities. Contains racetams, choline, and caffeine.",
       categoryId: 3,
-      inventory: 11,
-      quantity: 250
+      inventory: 14,
     }),
     Product.create({
       productName: "Synergize",
@@ -256,8 +252,7 @@ async function seed() {
       description:
         "These supplements improve mood, reduce stress and anxiety, and help alleviate symptoms of mental health disorders such as depression and anxiety throught synapctic actiavtion of key neurotransmitters, such as serotonin and dopamine.",
       categoryId: 3,
-      inventory: 11,
-      quantity: 20
+      inventory: 20,
     }),
   ]);
 

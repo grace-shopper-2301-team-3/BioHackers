@@ -14,8 +14,6 @@ const Admin = () => {
     dispatch(fetchAllUsers());
   }, [dispatch]);
 
-  console.log("users:", users);
-
   const containerStyle = {
     display: "flex",
     flexDirection: "row",

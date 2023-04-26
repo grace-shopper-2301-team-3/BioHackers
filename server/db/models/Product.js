@@ -23,7 +23,7 @@ const Product = db.define('product', {
     type: Sequelize.INTEGER,
     allowNull:false
   },
-  quantity: {
+  inventory: {
     type: Sequelize.INTEGER,
     defaultValue: "0",
   }
