@@ -1,17 +1,66 @@
 import React, { useState } from "react";
 import biohackersTheme from "../../app/theme";
 import {
-  ThemeProvider,
   FormControl,
   FormControlLabel,
   RadioGroup,
   Radio,
-  Box,
   Typography,
+  ThemeProvider,
+  Stepper,
+  Step,
+  StepButton,
+  Button,
+  Box,
 } from "@mui/material";
-import { StyledTextField } from "../style/StyleGuide";
+import { MainContainer, NoBorderButton } from "../style/StyleGuide";
+import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
+import { useDispatch, useSelector } from 'react-redux';
+import { createPaymentIntent } from '../stripe/stripeSlice';
+import { Elements } from '@stripe/react-stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
+import '../../../public/style.css'
+
+const stripePromise = loadStripe('pk_test_51N0lUGBjXVRQFHi21S4Hf6GuMOaxIlvmK4o87X5CWTnov8gziEQ969azIkSsqaTwJt5blCs5C7dJg0Mm70FZmqMo00j31Z2ZL9');
 
 const PaymentForm = () => {
+  const dispatch = useDispatch();
+  const stripe = useStripe();
+  const elements = useElements();
+  const [isLoading, setIsLoading] = useState(false);
+
+  const { paymentIntent, error } = useSelector((state) => state.stripe);
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    setIsLoading(true);
+
+    if (!stripe || !elements) {
+      return;
+    }
+
+    const cardElement = elements.getElement(CardElement);
+
+    const { error, paymentIntent } = await stripe.confirmCardPayment(paymentIntent.client_secret, {
+      payment_method: {
+        card: cardElement,
+      },
+    });
+
+    setIsLoading(false);
+
+    if (error) {
+      console.log(error);
+    } else {
+      console.log(paymentIntent);
+    }
+  };
+
+  const handleCreatePaymentIntent = () => {
+    dispatch(createPaymentIntent());
+  };
+
   return (
     <ThemeProvider theme={biohackersTheme}>
       <Box sx={{ mx: 14, p: 4, display: "flex", flexDirection: "column" }}>
@@ -22,6 +71,7 @@ const PaymentForm = () => {
           component="fieldset"
           variant="outlined"
           color="primary.main"
+          onSubmit={handleSubmit}
         >
           <Box sx={{ display: "flex", flexDirection: "row" }}>
             <Box
@@ -32,98 +82,54 @@ const PaymentForm = () => {
                 mr: 4,
               }}
             >
-              <RadioGroup aria-label="payment-method" name="payment-method" row sx={{ mb: 2}}>
+              <RadioGroup aria-label="payment-method" name="payment-method" row sx={{ mb: 2 }}>
                 <FormControlLabel
                   value="credit-card"
                   control={<Radio />}
                   label="Credit Card"
                 />
-                <FormControlLabel
-                  value="paypal"
-                  control={<Radio />}
-                  label="PayPal"
-                />
-                <FormControlLabel
-                  value="apple-pay"
-                  control={<Radio />}
-                  label="Apple Pay"
-                />
               </RadioGroup>
-              <StyledTextField
-                id="card-number"
-                label="Card Number"
-                variant="outlined"
-                fullWidth
-                required
-              />
-              <StyledTextField
-                id="card-name"
-                label="Card Name"
-                variant="outlined"
-                fullWidth
-                required
-              />
-              <StyledTextField
-                id="expiry-date"
-                label="Expiry Date"
-                variant="outlined"
-                fullWidth
-                required
-              />
-              <StyledTextField id="cvv" label="CVV" variant="outlined" fullWidth />
-            </Box>
+              <FormControl variant="outlined" fullWidth>
+                <Box sx={{ mb: 2 }}>
+                  <CardElement
+                    options={{
+                      style: {
+                        base: {
+                          backgroundColor: "#000000",
+                          color: "#00bfff",
+                          fontFamily: "Orbitron",
+                          "::placeholder": {
+                            color: "#00bfff"
+                          }
+                        },
+                        invalid: {
+                          color: "#FFC7EE"
+                        }
+                      }
+                    }}
+                  />
 
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                width: "40%",
-                mr: 2,
-              }}
-            >
-              <Typography variant="body1" sx={{ my: 2 }}>
-                Billing Address
-              </Typography>
-              <StyledTextField
-                label="Address Line 1"
-                variant="outlined"
-                margin="normal"
-                fullWidth
-                required
-              />
-              <StyledTextField
-                label="Address Line 2"
-                variant="outlined"
-                margin="normal"
-                fullWidth
-                required
-              />
-              <StyledTextField
-                label="City"
-                variant="outlined"
-                margin="normal"
-                fullWidth
-                required
-              />
-              <StyledTextField
-                label="State"
-                variant="outlined"
-                margin="normal"
-                fullWidth
-                required
-              />
-              <StyledTextField
-                label="Zip Code"
-                variant="outlined"
-                margin="normal"
-                required
-              />
+                </Box>
+              </FormControl>
             </Box>
           </Box>
+          <NoBorderButton type="submit">
+            Pay
+          </NoBorderButton>
         </FormControl>
+        {error && <div>{error}</div>}
+        <NoBorderButton onClick={handleCreatePaymentIntent}>Create Payment Intent</NoBorderButton>
       </Box>
     </ThemeProvider>
   );
 };
 
-export default PaymentForm;
+const StripeElementsWrapper = () => {
+  return (
+    <Elements stripe={stripePromise}>
+      <PaymentForm />
+    </Elements>
+  );
+};
+
+export default StripeElementsWrapper;

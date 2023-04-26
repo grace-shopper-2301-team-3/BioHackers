@@ -1,4 +1,5 @@
 import React from "react";
+import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import {
@@ -6,12 +7,14 @@ import {
   NoBorderButton,
   TertiaryButton,
 } from "../style/StyleGuide";
-import { ThemeProvider, Container, Box } from "@mui/material";
+import { ThemeProvider, Container, Box, AppBar, Toolbar } from "@mui/material";
 import biohackersTheme from "../../app/theme";
 import { logout } from "../../app/store";
 import Cart from "../cart/Cart";
 
 const Navbar = () => {
+  const [showNavbar, setShowNavbar] = useState(true);
+  const [prevScrollPos, setPrevScrollPos] = useState(window.pageYOffset);
   const dispatch = useDispatch();
   const isLoggedIn = useSelector((state) => !!state.auth.me.id);
   const isAdmin = useSelector((state) => state.auth.me.isAdmin);
@@ -23,11 +26,25 @@ const Navbar = () => {
     navigate("/login");
   };
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollPos = window.pageYOffset;
+      setShowNavbar(prevScrollPos > currentScrollPos || currentScrollPos < 10);
+      setPrevScrollPos(currentScrollPos);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [prevScrollPos]);
+
   return (
     <ThemeProvider theme={biohackersTheme}>
-      <MainContainer sx={{ py: 4 }}>
-        <Container sx={{ display: "flex", justifyContent: "space-between" }}>
-          <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+      <div style={{ display: showNavbar ? "flex" : "none" }}>
+      <AppBar sx={{ height: "60px", display: showNavbar ? "flex" : "none"}}>
+        <Toolbar>
+      <MainContainer >
+        <Container sx={{ display: "fixed", justifyContent: "space-between" }}>
+          <Box sx={{ display: "fixed", justifyContent: "space-between" }}>
             <Link to="/home">
               <NoBorderButton>BioHackers</NoBorderButton>
             </Link>
@@ -83,6 +100,9 @@ const Navbar = () => {
           </Box>
         </Container>
       </MainContainer>
+      </Toolbar>
+      </AppBar>
+      </div>
     </ThemeProvider>
   );
 };
