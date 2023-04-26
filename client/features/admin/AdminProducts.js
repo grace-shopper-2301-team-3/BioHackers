@@ -194,12 +194,22 @@ const AdminProducts = () => {
                     fontWeight: "bold",
                   }}
                 >
+                  Availability?
+                </TableCell>
+                <TableCell
+                  variant="head"
+                  sx={{
+                    textAlign: "center",
+                    textTransform: "uppercase",
+                    fontWeight: "bold",
+                  }}
+                >
                   Image
                 </TableCell>
                 <TableCell
                   variant="head"
                   sx={{
-                    textAlign: "left",
+                    textAlign: "center",
                     textTransform: "uppercase",
                     fontWeight: "bold",
                   }}
@@ -229,7 +239,7 @@ const AdminProducts = () => {
                 <TableCell
                   variant="head"
                   sx={{
-                    textAlign: "left",
+                    textAlign: "center",
                     textTransform: "uppercase",
                     fontWeight: "bold",
                   }}
@@ -258,6 +268,9 @@ const AdminProducts = () => {
                       </TableCell>
                       <TableCell sx={{ textAlign: "center" }}>
                         {product.inventory}
+                      </TableCell>
+                      <TableCell sx={{ textAlign: "center" }}>
+                        {product.inventory === 0 ? "Inactive" : "Active"}
                       </TableCell>
                       <TableCell sx={{ textAlign: "center" }}>
                         <img
@@ -461,7 +474,7 @@ const AdminProducts = () => {
                       </Dialog>
 
                       {/* Add Dialog */}
-                      
+
                       <Dialog
                         open={addOpen}
                         onClose={() => setAddOpen(false)}
