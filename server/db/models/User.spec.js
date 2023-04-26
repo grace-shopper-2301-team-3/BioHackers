@@ -1,69 +1,71 @@
 /* global describe beforeEach it */
 
-const { expect } = require('chai')
-const { db, models: { User } } = require('../index')
-const jwt = require('jsonwebtoken');
-const seed = require('../../../script/seed');
+const { expect } = require("chai");
+const {
+  db,
+  models: { User },
+} = require("../index");
+const jwt = require("jsonwebtoken");
+const seed = require("../../../script/seed");
 
-describe('User model', () => {
+describe("User model", () => {
   beforeEach(() => {
     return db.sync({ force: true });
   });
 
-  describe('User creation', () => {
+  describe("User creation", () => {
     let newUser;
     beforeEach(async () => {
       newUser = await User.create({
-        username: 'testuser',
-        password: 'testpassword',
-        firstName: 'John',
-        lastName: 'Doe',
-        email: 'testuser@example.com'
+        username: "testuser",
+        password: "testpassword",
+        firstName: "John",
+        lastName: "Doe",
+        email: "testuser@example.com",
       });
     });
 
-    it('should create a new user with valid attributes', async () => {
-      expect(newUser.id).to.be.a('number');
-      expect(newUser.username).to.equal('testuser');
-      expect(newUser.firstName).to.equal('John');
-      expect(newUser.lastName).to.equal('Doe');
-      expect(newUser.email).to.equal('testuser@example.com');
+    it("should create a new user with valid attributes", async () => {
+      expect(newUser.id).to.be.a("number");
+      expect(newUser.username).to.equal("testuser");
+      expect(newUser.firstName).to.equal("John");
+      expect(newUser.lastName).to.equal("Doe");
+      expect(newUser.email).to.equal("testuser@example.com");
       expect(newUser.isAdmin).to.equal(false);
     });
 
-    it('should encrypt the user password', async () => {
-      expect(newUser.password).to.not.equal('testpassword');
-      const match = await newUser.correctPassword('testpassword');
+    it("should encrypt the user password", async () => {
+      expect(newUser.password).to.not.equal("testpassword");
+      const match = await newUser.correctPassword("testpassword");
       expect(match).to.be.true;
     });
 
-    it('should not create a user with a duplicate username', async () => {
+    it("should not create a user with a duplicate username", async () => {
       try {
         await User.create({
-          username: 'testuser',
-          password: 'testpassword2',
-          firstName: 'Jane',
-          lastName: 'Doe',
-          email: 'testuser2@example.com'
+          username: "testuser",
+          password: "testpassword2",
+          firstName: "Jane",
+          lastName: "Doe",
+          email: "testuser2@example.com",
         });
       } catch (error) {
-        expect(error.name).to.equal('SequelizeUniqueConstraintError');
+        expect(error.name).to.equal("SequelizeUniqueConstraintError");
       }
     });
 
-    it('should not create a user with an invalid email address', async () => {
+    it("should not create a user with an invalid email address", async () => {
       try {
         await User.create({
-          username: 'testuser2',
-          password: 'testpassword',
-          firstName: 'Jane',
-          lastName: 'Doe',
-          email: 'invalidemail'
+          username: "testuser2",
+          password: "testpassword",
+          firstName: "Jane",
+          lastName: "Doe",
+          email: "invalidemail",
         });
       } catch (error) {
-        expect(error.name).to.equal('SequelizeValidationError');
+        expect(error.name).to.equal("SequelizeValidationError");
       }
     });
-
   });
 });

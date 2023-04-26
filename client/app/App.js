@@ -16,7 +16,6 @@ const App = () => {
         <AppRoutes />
         <Footer />
       </MainContainer>
-      
     </ThemeProvider>
   );
 };

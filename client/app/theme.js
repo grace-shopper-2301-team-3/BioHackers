@@ -1,9 +1,9 @@
 import { createTheme, responsiveFontSizes } from "@mui/material/styles";
-import '../../public/style.css'
+import "../../public/style.css";
 
 let biohackersTheme = createTheme({
   typography: {
-    fontFamily: ["Audiowide","Orbitron", "Press Start 2P", "VT323"].join(","),
+    fontFamily: ["Audiowide", "Orbitron", "Press Start 2P", "VT323"].join(","),
     h1: {
       fontWeight: 700,
       fontSize: "3.5rem",
@@ -124,29 +124,25 @@ let biohackersTheme = createTheme({
       },
     },
     MuiContainer: {
-      root:{
+      root: {
         styleOverrides: {
           fontFamily: ["Orbitron", "Press Start 2P", "VT323"].join(","),
-        }
-      }
+        },
+      },
     },
     MuiLink: {
       styleOverrides: {
         root: {
           fontFamily: ["Orbitron", "Press Start 2P", "VT323"].join(","),
-          
+
           "&:hover": {
-            color: "#00bfff"
+            color: "#00bfff",
           },
-          "&:active": {
-            
-          },
+          "&:active": {},
           "&:visited": {
-            color: "#00bfff"
+            color: "#00bfff",
           },
-          "&:focus": {
-            
-          }
+          "&:focus": {},
         },
       },
     },
@@ -166,7 +162,6 @@ let biohackersTheme = createTheme({
           fontFamily: ["Orbitron", "Press Start 2P", "VT323"].join(","),
           margin: 4,
           textTransform: "capitalize",
-          
         },
       },
     },
@@ -183,11 +178,11 @@ let biohackersTheme = createTheme({
             fontFamily: ["Orbitron", "Press Start 2P", "VT323"].join(","),
             "&:hover fieldset": {
               borderColor: "#7F00FF",
-              fontFamily: ["Orbitron", "Press Start 2P", "VT323"].join(",")
+              fontFamily: ["Orbitron", "Press Start 2P", "VT323"].join(","),
             },
             "&.Mui-focused fieldset": {
               borderColor: "#7F00FF",
-              fontFamily: ["Orbitron", "Press Start 2P", "VT323"].join(",")
+              fontFamily: ["Orbitron", "Press Start 2P", "VT323"].join(","),
             },
           },
           "& .MuiOutlinedInput-input": {

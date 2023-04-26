@@ -1,16 +1,15 @@
-const router = require('express').Router();
-const Category = require('../db/models/Category');
+const router = require("express").Router();
+const Category = require("../db/models/Category");
 
-
-router.get('/', async (req, res, next) => {
+router.get("/", async (req, res, next) => {
   try {
     const allCategories = await Category.findAll();
-    res.json(allCategories)
+    res.json(allCategories);
   } catch (error) {
-    next(error)
+    next(error);
   }
-})
-router.get('/:id', async (req, res, next) => {
+});
+router.get("/:id", async (req, res, next) => {
   try {
     const singleCategory = await Category.findByPk(req.params.id);
     res.json(singleCategory);
@@ -20,7 +19,7 @@ router.get('/:id', async (req, res, next) => {
 });
 
 router.post("/", async (req, res, next) => {
-  console.log(req.body)
+  console.log(req.body);
   try {
     const response = await Category.create(req.body);
     res.json(response);

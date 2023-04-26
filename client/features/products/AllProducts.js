@@ -3,7 +3,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { getAllProducts, selectProduct } from "./allProductsSlice";
 import { getSingleProduct } from "./singleProductSlice";
-import biohackersTheme from "../../app/theme";
 import { SecondaryButton } from "../style/StyleGuide";
 import {
   Typography,

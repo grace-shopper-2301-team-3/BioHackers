@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import biohackersTheme from "../../app/theme";
 import { ThemeProvider, Typography, Container, Box } from "@mui/material";
-import { MainContainer, PrimaryButton } from "../style/StyleGuide";
+import { MainContainer } from "../style/StyleGuide";
 import AdminHeaderbar from "./AdminHeaderbar";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAllUsers, selectAllUsers } from "../users/userSlice";

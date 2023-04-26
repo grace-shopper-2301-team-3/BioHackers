@@ -4,11 +4,11 @@ const User = require("../db/models/User");
 const CartItem = require("../db/models/CartItem");
 const Product = require("../db/models/Product");
 const { isNumber } = require("@mui/x-data-grid/internals");
-const { Op } = require('sequelize')
-const jwt = require('jsonwebtoken')
-const {LocalStorage} = require('node-localstorage');
-const localStorage = new LocalStorage('./scratch');
-const uuid = require('uuid');
+const { Op } = require("sequelize");
+const jwt = require("jsonwebtoken");
+const { LocalStorage } = require("node-localstorage");
+const localStorage = new LocalStorage("./scratch");
+const uuid = require("uuid");
 
 // Add authentication middleware
 // const requireToken = async (req, res, next) => {
@@ -29,11 +29,9 @@ const uuid = require('uuid');
 //   }
 // };
 
-
-
 router.get("/", async (req, res, next) => {
   try {
-    console.log('token:', req.headers.authorization)
+    console.log("token:", req.headers.authorization);
     const currentUser = await User.findByToken(req.headers.authorization);
 
     const [cart] = await Cart.findOrCreate({
@@ -42,20 +40,20 @@ router.get("/", async (req, res, next) => {
         cartItems: [],
         totalQuantity: 0,
         totalPrice: 0,
-      }
+      },
     });
     const cartItems = await CartItem.findAll({
       where: {
         quantity: {
-          [Op.gt]: 0
+          [Op.gt]: 0,
         },
-        cartId: cart.id
+        cartId: cart.id,
       },
       include: {
-        model: Product
-      }
+        model: Product,
+      },
     });
-    console.log('curruser cartitems:', cartItems)
+    console.log("curruser cartitems:", cartItems);
     res.json(cartItems);
   } catch (error) {
     next(error);
@@ -74,7 +72,7 @@ router.get("/:cartId", async (req, res, next) => {
 
 router.delete("/:cartItemId", async (req, res, next) => {
   try {
-    console.log('endpoint' ,req.params.cartItemId)
+    console.log("endpoint", req.params.cartItemId);
     const cartItem = await CartItem.findByPk(req.params.cartItemId);
     await cartItem.destroy();
     res.sendStatus(204);
@@ -86,36 +84,35 @@ router.delete("/:cartItemId", async (req, res, next) => {
 // api/cart/number
 router.patch("/", async (req, res, next) => {
   try {
-    console.log('first line============')
-      const { quantity, productId, numToChangeBy } = req.body;
-      //changed starting from here
-      const currentUser = await User.findByToken(req.headers.authorization);
-      const [cart] = await Cart.findOrCreate({
-        where: { userId: currentUser.id },
-        defaults: {
-          cartItems: [],
-          totalQuantity: 0,
-          totalPrice: 0
-        }
-      });
+    console.log("first line============");
+    const { quantity, productId, numToChangeBy } = req.body;
+    //changed starting from here
+    const currentUser = await User.findByToken(req.headers.authorization);
+    const [cart] = await Cart.findOrCreate({
+      where: { userId: currentUser.id },
+      defaults: {
+        cartItems: [],
+        totalQuantity: 0,
+        totalPrice: 0,
+      },
+    });
 
-      await cart.save()
-      const [cartItem] = await CartItem.findOrCreate({
-        where: { productId, cartId: cart.id },
-        defaults: {quantity: 0},
-      });
-      if (isNumber(quantity)) {
-        cartItem.quantity = quantity
-        if (cartItem.quantity === 0) {
-          console.log('quantity is 0')
-          cartItem.destroy()
-        }
+    await cart.save();
+    const [cartItem] = await CartItem.findOrCreate({
+      where: { productId, cartId: cart.id },
+      defaults: { quantity: 0 },
+    });
+    if (isNumber(quantity)) {
+      cartItem.quantity = quantity;
+      if (cartItem.quantity === 0) {
+        console.log("quantity is 0");
+        cartItem.destroy();
       }
-      else {
-        cartItem.quantity += numToChangeBy
-      }
+    } else {
+      cartItem.quantity += numToChangeBy;
+    }
 
-    await cartItem.save()
+    await cartItem.save();
     res.status(201).json(cartItem);
   } catch (error) {
     next(error);

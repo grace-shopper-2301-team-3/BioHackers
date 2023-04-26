@@ -1,13 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
-import React, { useEffect } from "react";
+import React from "react";
 import { Routes, Route, Link } from "react-router-dom";
 import { getAllCategories, selectCategory } from "./allCategoriesSlice";
 import biohackersTheme from "../../app/theme";
-import {
-  MainContainer,
-  HeroButton,
-  SecondaryButton,
-} from "../style/StyleGuide";
 import {
   ThemeProvider,
   Typography,
@@ -16,22 +11,15 @@ import {
   Card,
   CardMedia,
   CardContent,
-  Avatar,
 } from "@mui/material";
-import FormatQuoteIcon from "@mui/icons-material/FormatQuote";
-import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
-import AccountCircleRoundedIcon from "@mui/icons-material/AccountCircleRounded";
-import LocalOfferRoundedIcon from "@mui/icons-material/LocalOfferRounded";
-import TravelExploreRoundedIcon from "@mui/icons-material/TravelExploreRounded";
 
 const AllCategories = () => {
   const dispatch = useDispatch();
   const categories = useSelector(selectCategory);
 
   return (
-    <>
+    <ThemeProvider theme={biohackersTheme}>
       <Container maxWidth="lg" sx={{ marginTop: 10 }}>
-
         <Typography
           variant="h3"
           component="h1"
@@ -109,8 +97,8 @@ const AllCategories = () => {
             })}
         </Container>
       </Container>
-    </ >
-    )
+    </ThemeProvider>
+  );
 };
 
 export default AllCategories;
