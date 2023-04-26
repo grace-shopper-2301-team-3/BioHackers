@@ -1,12 +1,8 @@
-/* global describe beforeEach it */
-
 const { expect } = require('chai')
 const request = require('supertest')
 const { db, models: { User } } = require('../db')
 const seed = require('../../script/seed');
 const app = require('../app')
-
-//added to to be able to hash password for POST request
 const bcrypt = require('bcrypt');
 
 describe('User routes', () => {
@@ -37,7 +33,6 @@ describe('User routes', () => {
 
     it('POST /api/users', async () => {
       const user = {
-        userId: 7,
         username: 'test',
         password: 'password',
         firstName: 'John',
@@ -59,7 +54,6 @@ describe('User routes', () => {
       expect(res.body.firstName).to.equal(user.firstName);
       expect(res.body.lastName).to.equal(user.lastName);
       expect(res.body.email).to.equal(user.email);
-      expect(res.body.password).to.equal(user.password);
       expect(res.body.isAdmin).to.equal(user.isAdmin);
 
       //this will compare the hashed password with the password in the database
@@ -67,7 +61,9 @@ describe('User routes', () => {
       expect(isPasswordValid).to.be.true;
 
     });
+
     it('PUT /api/users/:id', async () => {
+      const user = await User.findOne();
       const updatedUser = {
         username: 'lucy',
         password: 'loo',
@@ -76,16 +72,15 @@ describe('User routes', () => {
         email: 'lucyloo123@gmail.com',
         isAdmin: true,
       }
-      
+
       const res = await request(app)
-      .put('/api/users/6')
-      .send(updatedUser)
-      .expect(200);
-      
+        .put(`/api/users/${user.id}`)
+        .send(updatedUser)
+        .expect(200);
+
       expect(res.body).to.be.an('object');
-      expect(res.body.id).to.equal(6);
+      expect(res.body.id).to.equal(user.id);
       expect(res.body.username).to.equal(updatedUser.username);
-      expect(res.body.password).to.equal(updatedUser.password);
       expect(res.body.firstName).to.equal(updatedUser.firstName);
       expect(res.body.lastName).to.equal(updatedUser.lastName);
       expect(res.body.email).to.equal(updatedUser.email);
@@ -93,13 +88,13 @@ describe('User routes', () => {
     });
 
     it('DELETE /api/users/:id', async () => {
+      const user = await User.findOne();
       const res = await request(app)
-      .delete('/api/users/6')
-      .expect(204);
-      const deletedUser = await User.findByPk(7);
+        .delete(`/api/users/${user.id}`)
+        .expect(204);
+      const deletedUser = await User.findByPk(user.id);
       expect(deletedUser).to.be.null;
     })
 
-
-  }) // end describe('/api/users')
-}) // end describe('User routes')
+  })
+}) 

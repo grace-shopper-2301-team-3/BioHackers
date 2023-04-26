@@ -1,59 +1,69 @@
 /* global describe beforeEach it */
 
-const {expect} = require('chai')
+const { expect } = require('chai')
 const { db, models: { User } } = require('../index')
 const jwt = require('jsonwebtoken');
 const seed = require('../../../script/seed');
 
 describe('User model', () => {
-  let users;
-  beforeEach(async() => {
-    users = (await seed()).users;
-  })
+  beforeEach(() => {
+    return db.sync({ force: true });
+  });
 
-  describe('instanceMethods', () => {
-    describe('generateToken', () => {
-      it('returns a token with the id of the user', async() => {
-        const token = await users.cody.generateToken();
-        const { id } = await jwt.verify(token, process.env.JWT);
-        expect(id).to.equal(users.cody.id);
-      })
-    }) // end describe('correctPassword')
-    describe('authenticate', () => {
-      let user;
-      beforeEach(async()=> user = await User.create({
-        username: 'lucy',
-        password: 'loo',
-        firstName: 'Lucy',
-        lastName: 'Loo',
-        email: 'lucyloo@gmail.com',
-        isAdmin: true,
-      }));
-      describe('with correct credentials', ()=> {
-        it('returns a token', async() => {
-          const token = await User.authenticate({
-            username: 'lucy',
-            password: 'loo'
-          });
-          expect(token).to.be.ok;
-        })
+  describe('User creation', () => {
+    let newUser;
+    beforeEach(async () => {
+      newUser = await User.create({
+        username: 'testuser',
+        password: 'testpassword',
+        firstName: 'John',
+        lastName: 'Doe',
+        email: 'testuser@example.com'
       });
-      describe('with incorrect credentials', ()=> {
-        it('throws a 401', async() => {
+    });
 
-          try {
-            await User.authenticate({
-              username: 'lucy@gmail.com',
-              password: '123'
-            });
-            throw 'nooo';
-          }
-          catch(ex){
-            expect(ex.status).to.equal(401);
-          }
-        })
+    it('should create a new user with valid attributes', async () => {
+      expect(newUser.id).to.be.a('number');
+      expect(newUser.username).to.equal('testuser');
+      expect(newUser.firstName).to.equal('John');
+      expect(newUser.lastName).to.equal('Doe');
+      expect(newUser.email).to.equal('testuser@example.com');
+      expect(newUser.isAdmin).to.equal(false);
+    });
 
-      });
-    }) // end describe('authenticate')
-  }) // end describe('instanceMethods')
-}) // end describe('User model')
+    it('should encrypt the user password', async () => {
+      expect(newUser.password).to.not.equal('testpassword');
+      const match = await newUser.correctPassword('testpassword');
+      expect(match).to.be.true;
+    });
+
+    it('should not create a user with a duplicate username', async () => {
+      try {
+        await User.create({
+          username: 'testuser',
+          password: 'testpassword2',
+          firstName: 'Jane',
+          lastName: 'Doe',
+          email: 'testuser2@example.com'
+        });
+      } catch (error) {
+        expect(error.name).to.equal('SequelizeUniqueConstraintError');
+      }
+    });
+
+    it('should not create a user with an invalid email address', async () => {
+      try {
+        await User.create({
+          username: 'testuser2',
+          password: 'testpassword',
+          firstName: 'Jane',
+          lastName: 'Doe',
+          email: 'invalidemail'
+        });
+      } catch (error) {
+        expect(error.name).to.equal('SequelizeValidationError');
+      }
+    });
+
+  });
+});

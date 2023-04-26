@@ -12,8 +12,17 @@ import {
     NoBorderButton,
     TertiaryButton,
   } from "../style/StyleGuide";
-import { ThemeProvider, Container, Box } from "@mui/material";
+import { ThemeProvider, Container, Box, Typography, Button, Grid } from "@mui/material";
 import biohackersTheme from "../../app/theme";
+import { styled } from "@mui/material/styles";
+
+
+
+  const ProductImage = styled("img")({
+    width: "100%",
+    height: "auto",
+    objectFit: "contain"
+  });
 
 
 const SingleProduct = () => {
@@ -56,22 +65,32 @@ const SingleProduct = () => {
     };
 
     return (
-        <div>
-            <h2>{product && product.productName}</h2>
-            <img src={product.imageUrl} />
-            <p>Price: ${product && product.productPrice}</p>
-            <p>
-                <b>Description: </b>
-                <br/> {product.description}
-            </p>
-            <h2>
-                {
-                    <Link to={`/categories/${product.categoryId}`}>More items like this</Link>
-                }
-            </h2>
-            <NoBorderButton onClick={handleAddToCart}>Add to cart</NoBorderButton>
-        </div>
-    );
+        <ThemeProvider theme={biohackersTheme}>
+          <Container maxWidth="lg">
+            <Box mt={4}>
+              <Grid container spacing={4}>
+                <Grid item xs={12} md={6}>
+                  <ProductImage src={product.imageUrl} alt={product.productName} />
+                </Grid>
+                <Grid item xs={12} md={6}>
+                  <Typography variant="h2" mb={2} sx={{ textShadow: "1px 1px #eca5e2" }}>{product && product.productName}</Typography>
+                  <Typography variant="h5" mb={2} color="#eca5e2">Price: ${product && product.productPrice}</Typography>
+                  <Typography variant="body1" mb={2} color="#dbd7f1">{product.description}</Typography>
+                  <Box mt={4}>
+                    <Typography variant="h6">
+                      <Link to={`/categories/${product.categoryId}`}>More items like this</Link>
+                    </Typography>
+                  </Box>
+                  <Box mt={2}>
+                    <NoBorderButton onClick={handleAddToCart}>Add to cart</NoBorderButton>
+                  </Box>
+                </Grid>
+              </Grid>
+            </Box>
+          </Container>
+        </ThemeProvider>
+      );
+
 };
 
 export default SingleProduct;
