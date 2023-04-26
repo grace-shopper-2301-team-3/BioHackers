@@ -9,7 +9,9 @@ import { styled } from "@mui/material/styles";
 import {
     ThemeProvider,
     Container,
-    Typography
+    Typography, 
+    Box,
+    Grid
 } from "@mui/material";
 
 import {
@@ -18,6 +20,7 @@ import {
     MainContainer,
 } from "../style/StyleGuide";
 import UserHeaderBar from "./UserHeaderBar";
+
 
 
 const SingleUser = () => {
@@ -39,31 +42,51 @@ const SingleUser = () => {
 
     return (
         <ThemeProvider theme={biohackersTheme}>
-            <MainContainer>
-                <UserHeaderBar />
-                <Container>
-                    <Typography variant="h2">User Profile</Typography>
-                    <span>
-                        <Typography variant="h5">Username:</Typography>
-                        <Typography variant="subtitle1">{username}</Typography>
-                    </span>
-                    <span>
-                        <Typography variant="h5">First Name:</Typography>
-                        <Typography variant="subtitle1">{firstName}</Typography>
-                    </span>
-                    <span>
-                        <Typography variant="h5">Last Name:</Typography>
-                        <Typography variant="subtitle1">{lastName}</Typography>
-                    </span>
-                    <span>
-                        <Typography variant="h5">E-mail:</Typography>
-                        <Typography variant="subtitle1">{email}</Typography>
-                    </span>
-                </Container>
-                <br />
-            </MainContainer>
+          <MainContainer>
+            <UserHeaderBar />
+            <Container>
+              <Typography variant="h2">User Profile</Typography>
+              <Grid container spacing={2} sx={{ mb: 2 }}>
+                <Grid item xs={3}>
+                  <Typography variant="h5" sx={{ fontWeight: 'bold' }}>
+                    Username:
+                  </Typography>
+                </Grid>
+                <Grid item xs={9}>
+                  <Typography variant="subtitle1" color="#dbd7f1" sx={{ marginTop: '25px' }}>{username}</Typography>
+                </Grid>
+                <Grid item xs={3}>
+                  <Typography variant="h5" sx={{ fontWeight: 'bold' }}>
+                    First Name:
+                  </Typography>
+                </Grid>
+                <Grid item xs={9}>
+                  <Typography variant="subtitle1" color="#dbd7f1" sx={{ marginTop: '25px' }}>{firstName}</Typography>
+                </Grid>
+                <Grid item xs={3}>
+                  <Typography variant="h5" sx={{ fontWeight: 'bold' }}>
+                    Last Name:
+                  </Typography>
+                </Grid>
+                <Grid item xs={9}>
+                  <Typography variant="subtitle1" color="#dbd7f1" sx={{ marginTop: '25px' }}>{lastName}</Typography>
+                </Grid>
+                <Grid item xs={3}>
+                  <Typography variant="h5" sx={{ fontWeight: 'bold' }}>
+                    E-mail:
+                  </Typography>
+                </Grid>
+                <Grid item xs={9}>
+                  <Typography variant="subtitle1" color="#dbd7f1" sx={{ marginTop: '25px' }}>{email}</Typography>
+                </Grid>
+              </Grid>
+            </Container>
+            <br />
+          </MainContainer>
         </ThemeProvider>
-    );
+      );
+      
+    
 };
 
 export default SingleUser;
