@@ -21,6 +21,12 @@ import ShoppingCartRoundedIcon from "@mui/icons-material/ShoppingCartRounded";
 const Checkout = () => {
   const [orderDetails, setOrderDetails] = useState({});
   const [activeStep, setActiveStep] = useState(0);
+  const [username, setUsername] = useState("")
+  const [password, setPassword] = useState("")
+
+  const handleAccountForm = (username, password) => {
+
+  }
 
   const handleNext = (data) => {
     setOrderDetails({ ...orderDetails, ...data });

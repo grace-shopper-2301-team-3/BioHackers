@@ -1,11 +1,16 @@
-import { createSlice } from '@reduxjs/toolkit';
-import Stripe from 'stripe';
-import { getSingleProduct, selectSingleProduct } from '../products/singleProductSlice';
+import { createSlice } from "@reduxjs/toolkit";
+import Stripe from "stripe";
+import {
+  getSingleProduct,
+  selectSingleProduct,
+} from "../products/singleProductSlice";
 
-const stripe = new Stripe('sk_test_51N0lUGBjXVRQFHi2ZJ8lZv7I2CInnghjHWWfDwwkPXaaF4H6MH8lgM3rfjThYj0wbGAUGYdklZV8PZt2GWvbvdGV00p6ypj2jG'); //Stripe Secret Key
+const stripe = new Stripe(
+  "sk_test_51N0lUGBjXVRQFHi2ZJ8lZv7I2CInnghjHWWfDwwkPXaaF4H6MH8lgM3rfjThYj0wbGAUGYdklZV8PZt2GWvbvdGV00p6ypj2jG"
+); //Stripe Secret Key
 
 const stripeSlice = createSlice({
-  name: 'stripe',
+  name: "stripe",
   initialState: {
     paymentIntent: null,
     error: null,
@@ -22,7 +27,8 @@ const stripeSlice = createSlice({
   },
 });
 
-export const { createPaymentIntentSuccess, createPaymentIntentFailure } = stripeSlice.actions;
+export const { createPaymentIntentSuccess, createPaymentIntentFailure } =
+  stripeSlice.actions;
 
 export const createPaymentIntent = () => {
   return async (dispatch, getState) => {
@@ -32,7 +38,7 @@ export const createPaymentIntent = () => {
 
       const paymentIntent = await stripe.paymentIntents.create({
         amount: `${price}`,
-        currency: 'USD',
+        currency: "USD",
       });
 
       dispatch(createPaymentIntentSuccess(paymentIntent));

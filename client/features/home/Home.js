@@ -4,9 +4,18 @@ import FormatQuoteIcon from "@mui/icons-material/FormatQuote";
 import LocalOfferRoundedIcon from "@mui/icons-material/LocalOfferRounded";
 import TravelExploreRoundedIcon from "@mui/icons-material/TravelExploreRounded";
 import {
-  Avatar, Box,
-  Card, CardContent, CardMedia, Container, ThemeProvider,
-  Typography
+  Avatar,
+  Box,
+  Card,
+  CardContent,
+  CardMedia,
+  Container,
+  ThemeProvider,
+  Typography,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  Button,
 } from "@mui/material";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -21,23 +30,37 @@ import { getAllProducts, selectProduct } from "../products/allProductsSlice";
 import { addToCartAsync } from "../cart/cartSlice";
 import { getSingleProduct } from "../products/singleProductSlice";
 import {
-  HeroButton, MainContainer, SecondaryButton
+  HeroButton,
+  MainContainer,
+  SecondaryButton,
 } from "../style/StyleGuide";
 
 const Home = () => {
   const dispatch = useDispatch();
   const categories = useSelector(selectCategory);
   const products = useSelector(selectProduct);
+  const { me } = useSelector((state) => state.auth);
+  const [showSignInDialog, setShowSignInDialog] = useState(false);
 
   const handleAddToCart = async (id) => {
     try {
       const action = await dispatch(getSingleProduct(id));
       const product = action.payload;
-      const addToCartAction = await dispatch(changeQuantityAsync({ product, newQuantity: 1}));
+      const addToCartAction = await dispatch(
+        changeQuantityAsync({ product, newQuantity: 1 })
+      );
       const updatedCart = addToCartAction.payload;
       console.log("updatedCart", updatedCart);
     } catch (err) {
       console.log("error adding to cart in single product", err);
+    }
+  };
+
+  const addToCart = (productId) => {
+    if (me.id) {
+      handleAddToCart(productId);
+    } else {
+      setShowSignInDialog(true);
     }
   };
 
@@ -238,11 +261,14 @@ const Home = () => {
                             variant="h5"
                             component="div"
                             color="primary.light"
-                            sx={{ textAlign: "center"}}
+                            sx={{ textAlign: "center" }}
                           >
                             {category.name}
                           </Typography>
-                          <Typography variant="body2" sx={{ textAlign: "center"}}>
+                          <Typography
+                            variant="body2"
+                            sx={{ textAlign: "center" }}
+                          >
                             {category.description}
                           </Typography>
                         </CardContent>
@@ -460,7 +486,7 @@ const Home = () => {
                         top: "10px",
                         right: "10px",
                       }}
-                      onClick={() => handleAddToCart(product.id)}
+                      onClick={() => addToCart(product.id)}
                     >
                       <AddShoppingCartIcon />
                     </SecondaryButton>
@@ -558,6 +584,40 @@ const Home = () => {
           </Container>
         </Container>
       </MainContainer>
+      {/* Dialog Management */}
+      <Dialog
+          open={showSignInDialog}
+          onClose={() => setShowSignInDialog(false)}
+        >
+          <DialogTitle sx={{ textAlign: "center" }}>
+            Please sign in to add to cart
+          </DialogTitle>
+          <DialogContent sx={{ textAlign: "center" }}>
+            <Link to="/login">
+              <Button
+                variant="contained"
+                size="medium"
+                type="submit"
+                sx={{ backgroundColor: "#AC6CFF" }}
+              >
+                Log In
+              </Button>
+            </Link>
+            <Typography variant="overline" sx={{ my: 4, display: "block" }}>
+              - or -
+            </Typography>
+            <Link to="/signup">
+              <Button
+                variant="contained"
+                size="medium"
+                type="submit"
+                sx={{ backgroundColor: "#AC6CFF" }}
+              >
+                Create An Account
+              </Button>
+            </Link>
+          </DialogContent>
+        </Dialog>
     </ThemeProvider>
   );
 };

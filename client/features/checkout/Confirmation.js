@@ -9,6 +9,7 @@ import {
   Button,
   Box,
 } from "@mui/material";
+import { Link } from "react-router-dom";
 import { MainContainer, NoBorderButton } from "../style/StyleGuide";
 import AccountForm from "./AccountForm";
 import OrderReview from "./OrderReview";
@@ -60,12 +61,13 @@ const Confirmation = () => {
         </Typography>
         <Typography variant="body1" sx={{ mb: 6 }}>
           Your receipt is in your account{" "}
-          <NoBorderButton
+          <Link to="/users/profile"><NoBorderButton
             href="/account"
             sx={{ textTransform: "uppercase", color: "secondary.dark" }}
           >
             here
           </NoBorderButton>
+          </Link>
         </Typography>
         <Typography variant="body1" sx={{ mb: 2 }}>
           If you have any questions, please call{" "}

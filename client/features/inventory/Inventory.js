@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
-import { useSelector, useDispatch } from 'react-redux';
-import { getAllProducts, selectProduct } from '../products/allProductsSlice';
+import { useSelector, useDispatch } from "react-redux";
+import { getAllProducts, selectProduct } from "../products/allProductsSlice";
 
 function Inventory() {
   const dispatch = useDispatch();
@@ -23,14 +23,15 @@ function Inventory() {
           </tr>
         </thead>
         <tbody>
-          {Array.isArray(products) && products.map((product) => (
-            <tr key={product.id}>
-              <td>{product.id}</td>
-              <td>{product.productName}</td>
-              <td>{product.productPrice}</td>
-              <td>{product.quantity}</td>
-            </tr>
-          ))}
+          {Array.isArray(products) &&
+            products.map((product) => (
+              <tr key={product.id}>
+                <td>{product.id}</td>
+                <td>{product.productName}</td>
+                <td>{product.productPrice}</td>
+                <td>{product.quantity}</td>
+              </tr>
+            ))}
         </tbody>
       </table>
     </div>
