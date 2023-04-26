@@ -26,7 +26,7 @@ const AdminOrders = () => {
   const users = useSelector(selectAllUsers);
   const [totalPrice, setTotalPrice] = useState(0);
   const [cartUpdated, setcartUpdated] = useState(false);
-  
+
   console.log("cart:", cart);
   console.log("cart length:", cart.length);
   console.log("users:", users);
@@ -196,7 +196,10 @@ const AdminOrders = () => {
                       {oneCart.totalQuantity}
                     </TableCell>
                     <TableCell sx={{ textAlign: "center" }}>
-                      {oneCart.totalPrice}
+                      {oneCart.totalPrice.toLocaleString("en-US", {
+                        style: "currency",
+                        currency: "USD",
+                      })}
                     </TableCell>
                     <TableCell sx={{ textAlign: "center" }}>
                       <DeleteRoundedIcon />
