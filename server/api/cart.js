@@ -41,7 +41,7 @@ router.get("/", async (req, res, next) => {
       defaults: {
         cartItems: [],
         totalQuantity: 0,
-        totalPrice: 0
+        totalPrice: 0,
       }
     });
     const cartItems = await CartItem.findAll({

@@ -32,11 +32,11 @@ const User = db.define('user', {
     type: Sequelize.BOOLEAN,
     defaultValue: false
   },
-  cartId: {
-    type: Sequelize.INTEGER,
-    unique: true,
-    allowNull: false
-  }
+  // cartId: {
+  //   type: Sequelize.INTEGER,
+  //   unique: true,
+  //   allowNull: false
+  // }
 })
 
 module.exports = User
