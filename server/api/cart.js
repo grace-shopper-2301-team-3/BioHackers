@@ -8,12 +8,7 @@ const { Op } = require('sequelize')
 const jwt = require('jsonwebtoken')
 const {LocalStorage} = require('node-localstorage');
 const localStorage = new LocalStorage('./scratch');
-
-// function generateToken(user) {
-//   const payload = { id: user.id, username: user.username };
-//   const token = jwt.sign(payload, secretKey);
-//   return token;
-// }
+const uuid = require('uuid');
 
 // Add authentication middleware
 // const requireToken = async (req, res, next) => {
@@ -34,18 +29,13 @@ const localStorage = new LocalStorage('./scratch');
 //   }
 // };
 
-function generateGuestId() {
-  const id = Math.random().toString(36).substring(2, 9);
-  localStorage.setItem('guestId', id);
-  return id;
-}
+
 
 router.get("/", async (req, res, next) => {
   try {
     console.log('token:', req.headers.authorization)
     const currentUser = await User.findByToken(req.headers.authorization);
-    // const currentUser = await User.findOne({ where: {id: 1}})
-    // console.log('req.user', req.user)
+
     const [cart] = await Cart.findOrCreate({
       where: { userId: currentUser.id },
       defaults: {
@@ -98,6 +88,7 @@ router.patch("/", async (req, res, next) => {
   try {
     console.log('first line============')
       const { quantity, productId, numToChangeBy } = req.body;
+      //changed starting from here
       const currentUser = await User.findByToken(req.headers.authorization);
       const [cart] = await Cart.findOrCreate({
         where: { userId: currentUser.id },
@@ -107,8 +98,6 @@ router.patch("/", async (req, res, next) => {
           totalPrice: 0
         }
       });
-
-
 
       await cart.save()
       const [cartItem] = await CartItem.findOrCreate({
