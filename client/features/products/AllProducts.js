@@ -95,10 +95,10 @@ const AllProducts = () => {
                                             <CardMedia
                                                 component="img"
                                                 image={product.imageUrl}
-                                                sx={{ height: 200, objectFit: "cover" }}
+                                                sx={{ height: 300, objectFit: "cover" }}
                                             />
                                             <CardContent
-                                                sx={{ backgroundColor: "#200040", height: 100 }}
+                                                sx={{ backgroundColor: "#200040", height: 150 }}
                                             >
                                                 <Typography
                                                     gutterBottom
