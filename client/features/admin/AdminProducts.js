@@ -31,15 +31,8 @@ import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded";
 import AddCircleRoundedIcon from "@mui/icons-material/AddCircleRounded";
 import { MainContainer, PrimaryButton } from "../style/StyleGuide";
 import { getAllProducts, selectProduct } from "../products/allProductsSlice";
-import {
-  getAllCategories,
-  selectCategory,
-} from "../categories/allCategoriesSlice";
-import {
-  createProduct,
-  updateProduct,
-  deleteProduct,
-} from "../products/singleProductSlice";
+import { getAllCategories, selectCategory } from "../categories/allCategoriesSlice";
+import { createProduct, updateProduct, deleteProduct } from "../products/singleProductSlice";
 
 const AdminProducts = () => {
   const dispatch = useDispatch();
