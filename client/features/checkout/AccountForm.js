@@ -4,11 +4,6 @@ import biohackersTheme from "../../app/theme";
 import {
   ThemeProvider,
   Box,
-  Button,
-  FormControl,
-  FormControlLabel,
-  Radio,
-  RadioGroup,
   Typography,
 } from "@mui/material";
 
@@ -27,13 +22,9 @@ const AccountForm = ({ handleNext }) => {
     <ThemeProvider theme={biohackersTheme}>
       <Box sx={{ mx: 'auto', textAlign: 'center' }}>
         <Typography variant="h4" sx={{ mb: 1 }}>
-          Account
+        Account Information
         </Typography>
           <Box sx={{ mt: 1, display: 'inline-block', textAlign: 'left' }}>
-            <Typography variant="h6" sx={{ mb: 1 }}>
-              Welcome <b style={{ color: "#ff00ff" }}>{username}</b>
-            </Typography>
-            <Typography>Make sure Your Information is Correct</Typography>
             <Typography>
               First Name: <b style={{color: '#ff00ff'}}>{firstName}</b>
             </Typography>

@@ -27,6 +27,7 @@ import UserProfile from "../features/users/UserProfile";
 import UserAddress from "../features/users/UserAddress";
 import Checkout from "../features/checkout/Checkout";
 import Inventory from "../features/inventory/Inventory"
+import Confirmation from "../features/checkout/Confirmation"
 
 /**
  * COMPONENT
@@ -101,6 +102,7 @@ const AppRoutes = () => {
         <Route path="/notfound" element={<NotFound />} />
         <Route path="/styleguide" element={<StyleGuide name="styleguide" displayName="Style Guide" />} />
         <Route path="/checkout" element={<Checkout />} />
+        <Route path="/confirmation" element={<Confirmation />} />
       </Routes>
     </div>
   );
