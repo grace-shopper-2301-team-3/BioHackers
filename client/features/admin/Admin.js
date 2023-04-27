@@ -52,7 +52,7 @@ const Admin = () => {
         <Container style={containerStyle} sx={{ my: "35px" }}>
           <Box sx={{ backgroundColor: "#7F00FF" }} style={boxStyle}>
             <Typography variant="body2">Total Orders</Typography>
-            <Typography variant="h2">1234</Typography>
+            <Typography variant="h2">12345</Typography>
           </Box>
           <Box sx={{ backgroundColor: "#ff00ff" }} style={boxStyle}>
             <Typography variant="body2">Total Revenue</Typography>
