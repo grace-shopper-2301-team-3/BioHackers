@@ -77,7 +77,7 @@ const UserHeaderBar = () => {
               </ListItemButton>
             </Link>
 
-            <Link>
+            <Link to={`/users/address`}>
               <ListItemButton sx={{ flex: "1", px: "25px" }}>
                 <ListItemIcon>
                   <AddLocationIcon />

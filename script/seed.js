@@ -6,6 +6,7 @@ const Category = require("../server/db/models/Category");
 const User = require("../server/db/models/User");
 const Cart = require("../server/db/models/Cart");
 const CartItem = require("../server/db/models/CartItem");
+const Address = require("../server/db/models/Address");
 
 async function seed() {
   await db.sync({ force: true }); // clears db and matches models to tables
@@ -59,6 +60,48 @@ async function seed() {
       cartId: 5,
     }),
   ]);
+
+  const address = await Promise.all([
+    Address.create({
+      userId: 1, 
+      addressLine1: "123 Main St", 
+      addressLine2: "Apt 2B", 
+      city: "Anytown", 
+      state: "NY", 
+      zipcode: "12345"
+    }),
+    Address.create({
+      userId: 2, 
+      addressLine1: "456 Broadway", 
+      addressLine2: "Floor 5", 
+      city: "New York", 
+      state: "NY", 
+      zipcode: "10013"
+    }),
+    Address.create({
+      userId: 3, 
+      addressLine1: "789 Oak St", 
+      addressLine2: "", 
+      city: "Smallville", 
+      state: "CA", 
+      zipcode: "90210"
+    }),
+    Address.create({
+      userId: 4, 
+      addressLine1: "10 Elm St", 
+      addressLine2: "", 
+      city: "Boston", 
+      state: "MA", 
+      zipcode: "02108"
+    }),
+    Address.create({
+      userId: 5, 
+      addressLine1: "20 Beacon St", 
+      addressLine2: "Apt 3C", 
+      city: "Boston", 
+      state: "MA", 
+      zipcode: "02108"})
+    ])
 
   const carts = await Promise.all([
     Cart.create({
@@ -256,6 +299,9 @@ async function seed() {
     }),
   ]);
 
+
+  console.log(`seeded ${users.length} products`);
+  console.log(`seeded ${address.length} addresses`)
   console.log(`seeded ${products.length} products`);
   console.log(`seeded ${categories.length} categories`);
   console.log(`seeded ${carts.length} carts`)

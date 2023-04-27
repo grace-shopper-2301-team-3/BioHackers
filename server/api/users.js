@@ -1,7 +1,5 @@
 const router = require("express").Router();
-const {
-  models: { User },
-} = require("../db");
+const { models: { User }} = require("../db");
 const bcrypt = require("bcrypt");
 
 // fetch all users - route works
