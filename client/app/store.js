@@ -10,6 +10,7 @@ import cartSlice from "../features/cart/cartSlice";
 import cartItemSlice from "../features/cart/cartItemSlice";
 import inventorySliceReducer from "../features/inventory/inventorySlice";
 import stripeSliceReducer from "../features/stripe/stripeSlice";
+import UserAddressReducer from "../features/users/UserAddressSlice";
 
 const store = configureStore({
   reducer: {
@@ -23,6 +24,7 @@ const store = configureStore({
     cartItem: cartItemSlice,
     inventory: inventorySliceReducer,
     stripe: stripeSliceReducer,
+    userAddress: UserAddressReducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
 });
@@ -30,3 +32,4 @@ const store = configureStore({
 export default store;
 export * from "../features/auth/authSlice";
 export * from "../features/cart/cartSlice";
+export * from "../features/users/UserAddressSlice";

@@ -24,8 +24,10 @@ import AdminProducts from "../features/admin/AdminProducts";
 import AdminUsers from "../features/admin/AdminUsers";
 import NotFound from "../features/notfound/NotFound";
 import UserProfile from "../features/users/UserProfile";
-import Inventory from "../features/inventory/Inventory";
+import UserAddress from "../features/users/UserAddress";
 import Checkout from "../features/checkout/Checkout";
+import Inventory from "../features/inventory/Inventory"
+import Confirmation from "../features/checkout/Confirmation"
 
 /**
  * COMPONENT
@@ -57,17 +59,12 @@ const AppRoutes = () => {
             <Route path="/users/profile" element={<UserProfile />} />
             <Route path="/users/:id" element={<SingleUser />} />
             <Route path="/users/:id/edit" element={<EditUser />} />
-            <Route
-              path="/cart"
-              element={<Cart name="cart" displayName="Cart" />}
-            />
+            <Route path="/users/address" element={<UserAddress />} />
+            <Route path="/cart" element={<Cart name="cart" displayName="Cart" />} />
             <Route path="/products" element={<AllProducts />} />
             <Route path="/categories" element={<AllCategories />} />
             <Route path="/products/:id" element={<SingleProduct />} />
-            <Route
-              path="/categories/:categoryId"
-              element={<SingleCategory />}
-            />
+            <Route path="/categories/:categoryId" element={<SingleCategory />} />
 
             {/* Admin Experience */}
             {isAdmin && (
@@ -76,11 +73,7 @@ const AppRoutes = () => {
                 <Route to="/home" element={<Home />} />
                 <Route path="/users" element={<AllUsers />} />
                 <Route path="/inventory" element={<Inventory />} />
-
-                <Route
-                  path="/admin"
-                  element={<Admin name="admin" displayName="Admin" />}
-                />
+                <Route path="/admin" element={<Admin name="admin" displayName="Admin" />} />
                 <Route path="/admin/discounts" element={<AdminDiscounts />} />
                 <Route path="/admin/orders" element={<AdminOrders />} />
                 <Route path="/admin/payments" element={<AdminPayments />} />
@@ -93,25 +86,13 @@ const AppRoutes = () => {
         ) : (
           // Not In Experience
           <>
-            <Route
-              path="/login"
-              element={<Login name="login" displayName="Login" />}
-            />
-            <Route
-              path="/signup"
-              element={<AuthForm name="signup" displayName="Sign Up" />}
-            />
-            <Route
-              path="/cart"
-              element={<Cart name="cart" displayName="Cart" />}
-            />
+            <Route path="/login" element={<Login name="login" displayName="Login" />} />
+            <Route path="/signup" element={<AuthForm name="signup" displayName="Sign Up" />} />
+            <Route path="/cart" element={<Cart name="cart" displayName="Cart" />} />
             <Route path="/products" element={<AllProducts />} />
             <Route path="/categories" element={<AllCategories />} />
             <Route path="/products/:id" element={<SingleProduct />} />
-            <Route
-              path="/categories/:categoryId"
-              element={<SingleCategory />}
-            />
+            <Route path="/categories/:categoryId" element={<SingleCategory />} />
             <Route path="/users/profile" element={<UserProfile />} />
           </>
         )}
@@ -119,11 +100,9 @@ const AppRoutes = () => {
         {/* Fallback route for non-existing pages */}
         {/* <Route path="*" element={<Navigate to="/notfound" />} /> */}
         <Route path="/notfound" element={<NotFound />} />
-        <Route
-          path="/styleguide"
-          element={<StyleGuide name="styleguide" displayName="Style Guide" />}
-        />
+        <Route path="/styleguide" element={<StyleGuide name="styleguide" displayName="Style Guide" />} />
         <Route path="/checkout" element={<Checkout />} />
+        <Route path="/confirmation" element={<Confirmation />} />
       </Routes>
     </div>
   );
