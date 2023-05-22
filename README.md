@@ -1,44 +1,27 @@
-# FS-App-Template
+# Biohacker
 
-## Setup
+## Check out our site!
+https://biohacker.onrender.com/
 
-To use this as boilerplate, you'll need to take the following steps:
+## About BioHacker
+Welcome to BioHacker, your ultimate destination for cutting-edge biohacking products and technologies. Our futuristic-themed e-commerce platform is designed to empower you in optimizing your biology and enhancing your well-being.
 
-- Don't fork or clone this repo! Instead, create a new, empty
-  directory on your machine and `git init` (or create an empty repo on
-  Github and clone it to your local machine)
+## Key Features:
+***User-Friendly Interface:*** Our sleek and intuitive interface provides a seamless shopping experience. Login and sign up to access personalized features and explore our catalog of revolutionary biohacking products.
 
-- Now you will have to add the fs-app-template as a remote and merge it into your own repository.
+***Extensive Product Catalog:***  Discover the latest advancements in health and wellness technology with our carefully curated selection of biohacking products. From smart wearables to biofeedback devices, we have everything you need to take control of your biology.
 
-```
-git remote add boilermaker git@github.com:FullstackAcademy/fs-app-template-v2.git
-git fetch boilermaker
-git merge boilermaker/main
-git branch -m master main
-```
+***Advanced Search Functionality:***  Easily find products that match your needs. Our search feature allows you to browse through different categories, apply filters, and access detailed descriptions and specifications.
 
-## Customize
+***Secure Checkout Process:***  We've integrated the Stripe API to ensure a safe and secure payment process. Your personal information and payment details are encrypted, providing you with peace of mind during checkout.
 
-Now that you've got the code, follow these steps to get acclimated:
+## Technologies Used:
+Our website is built using the following technologies:
 
-- Update project name and description in `package.json`
-- `npm install`
-- Create two postgres databases (`MY_APP_NAME` should match the `name`
-  parameter in `package.json`):
-- These commands will create both your **development** and **test** databases
+***React:***  Provides a dynamic and responsive user interface, making your shopping experience seamless.
 
-```
-createdb <YOUR APP NAME HERE FROM package.json>
-createdb <YOUR APP NAME HERE FROM package.json>-test
-```
+***Redux:***  Manages the state of your interactions, ensuring a smooth browsing and purchasing process.
 
-- By default, running `npm test` will use your test database, while
-  regular development uses development database
+***Node.js:*** Powers the server-side functionality, allowing for efficient data retrieval and processing.
 
-## Start
-
-Sync and seed your database by running `npm run seed`. Running `npm run start:dev` will make great things happen!
-
-- start:dev will both start your server and build your client side files using webpack
-- start:dev:logger is the same as start:dev, but you will see your SQL queries (can be helpful for debugging)
-- start:dev:seed will start your server and also seed your database (this is useful when you are making schema changes and you don't want to run your seed script separately)
+***PostgreSQL:*** Stores and manages the data for our extensive product catalog and user information.
